@@ -1,0 +1,67 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  color: #333;
+}
+
+.about-header h1 {
+  font-size: 2em;
+  color: #007bff;
+}
+
+.about-header p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+.programs {
+  margin-top: 30px;
+}
+
+.programs h2 {
+  font-size: 1.8em;
+  color: #0056b3;
+}
+
+.program-card {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.values h2 {
+  font-size: 1.8em;
+  color: #0056b3;
+}
+
+.values ul {
+  list-style: none;
+  padding: 0;
+}
+
+.values li {
+  font-size: 1.1em;
+  margin: 10px 0;
+}
+
+.button {
+  display: inline-block;
+  text-decoration: none;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 20px;
+}

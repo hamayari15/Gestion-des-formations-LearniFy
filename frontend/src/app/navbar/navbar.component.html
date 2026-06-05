@@ -1,0 +1,33 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn2Be</title>
+  <link rel="stylesheet" href="navbar.component.css" />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    rel="stylesheet"/>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-dark" *ngIf="!isLoggedIn">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">
+      <i class="fas fa-graduation-cap"></i> Learn2Be</a>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/">
+          <i class="fas fa-home"></i> Accueil</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/about">
+          <i class="fas fa-info-circle"></i> À Propos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/location">
+          <i class="fas fa-map-marker-alt"></i> Localisation</a>
+      </li>
+    </ul>
+    <button (click)="navigateToLogin()" class="btn btn-connexion">
+      <i class="fas fa-sign-in-alt"></i> Se Connecter
+    </button>
+  </div>
+</nav>

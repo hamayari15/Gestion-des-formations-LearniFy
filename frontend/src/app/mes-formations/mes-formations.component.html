@@ -1,0 +1,38 @@
+<div class="container">
+  <div *ngIf="formations && formations.length > 0">
+    <h3>Mes Formations</h3>
+    <ul>
+      
+      <li *ngFor="let formation of formations; let i = index">
+        <h4>{{ i + 1 }}. {{ formation.theme }}</h4>
+        <p>
+          <strong>+ Mode de Formation :</strong> {{ formation.formation.modeFormation }}
+        </p>
+        <p><strong>+ Numéro de Salle :</strong> {{ formation.numSalle }}</p>
+        <p><strong>+ Entreprise :</strong> {{ formation.entreprise }}</p>
+
+        <p>
+          <strong>Statut de Cette Formation : </strong>
+          <span *ngIf="formation.status === 'En Attente'" class="status en-attente">
+            <i class="fas fa-clock"></i> En Attente
+          </span>
+          <span *ngIf="formation.status === 'Validée'" class="status validee">
+            <i class="fas fa-check-circle"></i> Validée
+          </span>
+          <span *ngIf="formation.status === 'Refusée'" class="status refusee">
+            <i class="fas fa-times-circle"></i> Refusée
+          </span>
+        </p>        
+        
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="!formations || formations.length === 0">
+    <p class="no-formations">Vous n'avez encore aucune inscription. Découvrez nos formations disponibles et inscrivez-vous pour enrichir vos compétences !.</p>
+    <div class="action-buttons">
+      <button (click)="gotoformatioenpresentielle()" class="btn btn-primary">Formations Présentielles</button>
+      <button (click)="gotoformatioenligne()" class="btn btn-secondary">Formations en Ligne</button>
+    </div>    
+  </div>
+</div>

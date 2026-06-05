@@ -1,0 +1,46 @@
+<div *ngIf="participant">
+  <h1>Mon Profil</h1>
+  <p><strong>Nom complet:</strong> {{ participant.fullname }}</p>
+  <p><strong>Âge:</strong> {{ participant.age }}</p>
+  <p><strong>Genre:</strong> {{ participant.gender }}</p>
+  <p><strong>Email:</strong> {{ participant.email }}</p>
+  <p><strong>Profil:</strong> {{ participant.profile }}</p>
+
+  <h2>Changer votre mot de passe</h2>
+  <form (ngSubmit)="updatePassword()">
+    <label>
+      <strong>Mot de passe actuel: </strong>
+      <input
+        type="password"
+        [(ngModel)]="actualPassword"
+        name="actualPassword"
+        required
+      />
+    </label>
+
+    <label>
+      <strong>Nouveau mot de passe: </strong>
+      <input
+        type="password"
+        [(ngModel)]="newPassword"
+        name="newPassword"
+        required
+      />
+    </label>
+    
+    <label>
+      <strong>Confirmer le nouveau mot de passe: </strong>
+      <input
+        type="password"
+        [(ngModel)]="confirmNewPassword"
+        name="confirmNewPassword"
+        required
+      />
+    </label>
+
+    <p *ngIf="errormsg" class="message error">{{ errormsg }}</p>
+    <p *ngIf="successmsg" class="message success">{{ successmsg }}</p>
+
+    <button type="submit">Mettre à jour le mot de passe</button>
+  </form>
+</div>

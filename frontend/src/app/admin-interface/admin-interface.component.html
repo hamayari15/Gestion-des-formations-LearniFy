@@ -1,0 +1,38 @@
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  rel="stylesheet"
+/>
+
+<div *ngIf="showMessage" class="message-box">
+  <i class="fas fa-check-circle"></i>
+  {{ message }}
+  <button class="close-btn" (click)="closeMessage()">&times;</button>
+</div>
+
+<div class="admin-layout">
+  <div class="sidebar">
+    <div class="admin-icon">
+      <i class="fas fa-user-shield fa-3x"></i>
+
+    </div>
+    <a routerLink="mon-profile-admin" routerLinkActive="active-link" class="link">
+      <i class="fa-solid fa-user-circle"></i> Mon Profile</a>
+    <a routerLink="admin-dashboard" routerLinkActive="active-link" class="link">
+      <i class="fas fa-tachometer-alt"></i> Tableau de bord</a>
+    <a routerLink="cycle-formation" routerLinkActive="active-link" class="link">
+      <i class="fas fa-sync-alt"></i> Cycle Formation</a>
+    <a routerLink="liste-formations" routerLinkActive="active-link" class="link">
+      <i class="fas fa-book"></i> Liste des Formations</a>
+    <a routerLink="liste-participant" routerLinkActive="active-link" class="link">
+      <i class="fas fa-users"></i> Liste des Participants</a>
+    <a routerLink="liste-inscrits" routerLinkActive="active-link" class="link">
+      <i class="fas fa-users"></i> Liste des Inscrits</a>
+  </div>
+
+  <div class="main-content">
+    <div class="logout-container">
+      <button class="logout" (click)="logout()"> <i class="fas fa-sign-out-alt"></i>Logout</button>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

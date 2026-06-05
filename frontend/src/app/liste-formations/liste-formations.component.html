@@ -1,0 +1,55 @@
+<div class="container">
+  <h2 class="mt-4">Liste des Formations</h2>
+
+  <button class="btn btn-primary mb-3" (click)="navigateToAddFormation()">
+    <i class="fas fa-plus"></i> Add Formation
+  </button>
+
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th scope="col">Thème</th>
+        <th scope="col">N° Salle</th>
+        <th scope="col">Mode Formation</th>
+        <th scope="col">Période Du</th>
+        <th scope="col">Période À</th>
+        <th scope="col">Horaire Du</th>
+        <th scope="col">Horaire À</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let formation of formations">
+        <td>{{ formation.theme }}</td>
+        <td>{{ formation.numSalle=="0" ? "_" : formation.numSalle }}</td>
+        <td>{{ formation.modeFormation }}</td>
+        <td>{{ formation.periodeDu | date }}</td>
+        <td>{{ formation.periodeA | date }}</td>
+        <td>{{ formation.horaireDu }}</td>
+        <td>{{ formation.horaireA }}</td>
+        <td>
+          <div class="button-group">
+            <button
+              class="btn btn-warning btn-sm me-2"
+              (click)="editFormation(formation._id)">
+            <i class="fas fa-edit"></i> 
+
+            </button>
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="deleteFormation(formation._id)">
+            <i class="fas fa-trash-alt"></i> 
+
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>

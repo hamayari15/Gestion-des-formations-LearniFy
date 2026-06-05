@@ -1,0 +1,47 @@
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  rel="stylesheet"/>
+
+<div class="dashboard-container">
+  <h1>Admin Dashboard</h1>
+
+  <div class="summary">
+    <div class="card">
+      <div class="icon">
+      </div>
+      <h2><i class="fas fa-chalkboard-teacher"></i> Total Formations</h2>
+      <p class="total">{{ totalFormations }}</p>
+    </div>
+    <div class="card">
+      <h2><i class="fas fa-file-signature"></i> Total Inscriptions</h2>
+      <p class="totalI">{{ totalInscriptions }}</p>
+    </div>
+
+<div class="card">
+  <div class="icon">
+    </div>
+      <h2><i class="fas fa-users"></i>Total Participants</h2>
+      <p class="totalP">{{ totalParticipants }}</p>
+    </div>
+  </div>
+  
+  <div class="charts">
+    <div class="chart-container" style="width: 38%; margin-left: 30px; margin-right: 65px;" >
+      <canvas
+        baseChart
+        [data]="ageChartData"
+        [options]="barChartOptions"
+        [type]="chartType">
+      </canvas>
+    </div>
+
+    <div class="chart-container" style="width: 38%; margin-left: 20px;">
+      <canvas
+        baseChart
+        [data]="genderChartData"
+        [options]="barChartOptions"
+        [type]="chartType">
+      </canvas>
+    </div>
+  </div>
+</div>

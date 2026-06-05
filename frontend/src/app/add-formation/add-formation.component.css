@@ -1,0 +1,200 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.form-container {
+  background-color: #fff;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 30px 40px;
+  max-width: 600px;
+  width: 100%;
+  margin: auto;
+}
+
+h1 {
+  font-size: 1.8em;
+  color: black;
+  margin-bottom: 30px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.form-section {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.form-section label {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.form-section input[type="text"],
+.form-section input[type="number"] {
+  padding: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1em;
+  width: 100%;
+  color: #495057;
+}
+
+.form-section input[type="text"]:focus,
+.form-section input[type="date"]:focus,
+.form-section input[type="time"]:focus,
+.form-section input[type="number"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.mode-formation{
+  height: 40px;
+  border-radius: 6px;
+}
+
+.checkbox-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 15px;
+}
+
+.checkbox-section {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-section label {
+  margin-left: 5px;
+  font-weight: normal;
+  color: #495057;
+}
+
+.periode {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.mode{
+  height: 40px;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+} 
+
+.periode label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.periode span {
+  margin-left: 20px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.periode input[type="date"] {
+  padding: 5px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  width: auto;
+}
+
+.periode input[type="date"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.div {
+  margin-left: 60px;
+}
+
+.horaire {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.horaire label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.horaire span {
+  margin-left: 40px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.horaire input[type="time"] {
+  padding: 5px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  width: auto;
+}
+
+.horaire input[type="time"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+@media (max-width: 600px) {
+  .form-section {
+    grid-template-columns: 1fr;
+  }
+
+  .checkbox-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.logout-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.logout-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
+}
+
+.btn {
+  padding: 10px 20px;
+  width: 40%;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-left: 160px;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}

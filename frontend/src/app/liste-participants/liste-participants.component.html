@@ -1,0 +1,37 @@
+<div class="container">
+  <h2>Liste des Participants</h2>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nom complet</th>
+        <th>Âge</th>
+        <th>Genre</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let participant of participants; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ participant.fullname }}</td>
+        <td>{{ participant.age }}</td>
+        <td>{{ participant.gender }}</td>
+        <td>{{ participant.email }}</td>
+        <td>
+          <button  class="btn btn-warning btn-sm me-2" (click)="onUpdate(participant._id)">
+            <i class="fas fa-edit"></i> 
+            
+          </button>
+          <button class="btn btn-danger btn-sm" (click)="onDelete(participant._id)">            
+            <i class="fas fa-trash-alt"></i> 
+            
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>

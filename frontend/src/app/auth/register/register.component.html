@@ -1,0 +1,142 @@
+<div class="form-container">
+  <h2>Registration</h2>
+  <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
+    <div class="form-group">
+      <label for="fullname">Fullname:</label>
+      <input
+        type="text"
+        id="fullname"
+        name="fullname"
+        #fullnameInput="ngModel"
+        [(ngModel)]="fullname"
+        ngModel
+        required
+        (input)="clearError()"
+        placeholder="Enter your full name"/>
+      <div
+        *ngIf="fullnameInput.touched && fullnameInput.invalid"
+        class="alert alert-danger">
+        Fullname is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        #emailInput="ngModel"
+        ngModel
+        required
+        minlength="8"
+        [(ngModel)]="email"
+        (input)="clearError()"
+        placeholder="Enter your email"/>
+      <div
+        *ngIf="emailInput.touched && emailInput.invalid"
+        class="alert alert-danger">
+        <div *ngIf="emailInput.errors?.['required']">Email is required.</div>
+        <div *ngIf="emailInput.errors?.['minlength']">
+          Email must be at least 8 characters.
+        </div>
+        <div *ngIf="emailInput.errors?.['email']">Invalid email format.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="password"
+        #passwordInput="ngModel"
+        required
+        minlength="6"
+        (input)="clearError()"
+        placeholder="Enter your password"/>
+      <div
+        *ngIf="passwordInput.touched && passwordInput.invalid"
+        class="alert alert-danger">
+        <div *ngIf="passwordInput.errors?.['required']">
+          Password is required.
+        </div>
+        <div *ngIf="passwordInput.errors?.['minlength']">
+          Password must be at least 6 characters.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password:</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        [(ngModel)]="confirmPassword"
+        #confirmPasswordInput="ngModel"
+        required
+        (input)="clearError()"
+        placeholder="Confirm your password"/>
+      <div
+        *ngIf="confirmPasswordInput.touched && confirmPasswordInput.invalid"
+        class="alert alert-danger">
+        Confirm Password is required.
+      </div>
+      <div
+        *ngIf="confirmPasswordInput.value !== password &&confirmPasswordInput.touched"
+        class="alert alert-danger">
+        Passwords do not match.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="profile">Profile:</label>
+      <select
+        id="profile"
+        name="profile"
+        [(ngModel)]="profile"
+        required
+        (change)="clearError()">
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+      </select>
+    </div>
+
+    <div *ngIf="profile === 'user'" class="inline-group">
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input
+          type="number"
+          id="age"
+          name="age"
+          [(ngModel)]="age"
+          (input)="clearError()"
+          placeholder="Enter your age"/>
+      </div>
+      <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select
+          id="gender"
+          name="gender"
+          [(ngModel)]="gender"
+          (change)="clearError()">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="submit" class="btn" [disabled]="registrationForm.invalid">
+      Register
+    </button>
+  </form>
+
+  <div *ngIf="error" class="error-msg">{{ error }}</div>
+  <div *ngIf="success" class="success-msg">{{ success }}</div>
+
+  <div class="switch-form">
+    <p>Already have an account? <a routerLink="/login">Login here</a></p>
+  </div>
+</div>

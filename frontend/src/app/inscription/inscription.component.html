@@ -1,0 +1,58 @@
+<div class="inscription-container">
+  <h1>Inscription</h1>
+  <form (ngSubmit)="onSubmit()" #inscriptionForm="ngForm">
+    <div>
+      <label for="theme">Thème:</label>
+      <input type="text" id="theme" [value]="theme" readonly />
+    </div>
+
+    <div >
+      <label for="numSalle">Num Salle:</label>
+      <input type="text" id="numSalle" [value]="'_'" readonly />
+    </div>
+
+    <div>
+      <label for="fullname">Full Name:</label>
+      <input
+        type="text"
+        id="fullname"
+        [(ngModel)]="fullname"
+        name="fullname"
+        required
+        readonly/>
+    </div>
+
+    <div>
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        [(ngModel)]="email"
+        name="email"
+        required
+        readonly/>
+    </div>
+
+    <div>
+      <label for="entreprise">Entreprise:</label>
+      <input
+        type="text"
+        id="entreprise"
+        [(ngModel)]="entreprise"
+        name="entreprise"
+        required/>
+    </div>
+
+    <div>
+      <label for="service">Service:</label>
+      <input
+        type="text"
+        id="service"
+        [(ngModel)]="service"
+        name="service"
+        required/>
+    </div>
+
+    <button type="submit" [disabled]="inscriptionForm.invalid">Register</button>
+  </form>
+</div>

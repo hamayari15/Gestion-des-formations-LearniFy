@@ -1,0 +1,49 @@
+<div class="container">
+    <h1 class="mt-4">Modifier Participant</h1>
+  
+    <form [formGroup]="participantForm" (ngSubmit)="onSubmit()" class="mt-5">
+      <div class="form-group">
+        <label for="fullname">Nom Complet</label>
+        <input
+          type="text"
+          class="form-control"
+          id="fullname"
+          formControlName="fullname"
+          required/>
+      </div>
+  
+      <div class="form-group mt-3">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          formControlName="email"
+          required/>
+      </div>
+  
+      <div class="form-group mt-3">
+        <label for="age">Âge</label>
+        <input
+          type="number"
+          class="form-control"
+          id="age"
+          formControlName="age"
+          required/>
+      </div>
+  
+      <div>
+        <button type="button" class="btn btn-secondary mt-4" (click)="annuler()">
+          Annuler
+        </button>
+    
+        <button
+          type="submit"
+          class="btn btn-primary mt-4"
+          [disabled]="participantForm.invalid">
+          Modifier
+        </button>
+      </div>
+    </form>
+  </div>
+  

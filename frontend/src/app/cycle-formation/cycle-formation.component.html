@@ -1,0 +1,83 @@
+<div class="form-container">
+  <h1>Cycle de Formation</h1>
+
+  <div class="form-section">
+    <label>Entreprise:</label>
+    <span>Centre National de l'Informatique</span>
+  </div>
+  
+  <div class="checkbox-container">
+    <div class="checkbox-section">
+      <input
+      type="checkbox"
+      id="credit-impot"
+      [(ngModel)]="creditImpot"
+      name="creditImpot"/>
+      <label for="credit-impot">Crédit d'impôt</label>
+    </div>
+    
+    <div class="checkbox-section">
+      <input
+      type="checkbox"
+      id="droit-individuel"
+      [(ngModel)]="droitIndividuel"
+      name="droitIndividuel"/>
+      <label for="droit-individuel">Droits de tirage (individuel)</label>
+    </div>
+    
+    <div class="checkbox-section">
+      <input
+      type="checkbox"
+      id="droit-collectif"
+      [(ngModel)]="droitCollectif"
+      name="droitCollectif"/>
+      <label for="droit-collectif">Droits de tirage (collectif)</label>
+    </div>
+  </div>
+  
+  <div class="form-section">
+    <label for="theme">Thème de Formation:</label>
+    <input type="text" id="theme" [(ngModel)]="theme" name="theme" />
+  </div>
+  
+  <div class="form-section">
+    <label>Mode de <br> Formation: </label>
+    <select class="mode-formation" [(ngModel)]="modeFormation" name="modeFormation">
+      <option value="" disabled>Select Mode</option>
+      <option value="En ligne">En ligne</option>
+      <option value="Présentiel">Présentiel</option>
+    </select>
+  </div>
+  
+  <div class="form-section" *ngIf="modeFormation === 'Présentiel'">
+    <label for="num-salle">Num Salle: </label>
+    <input
+      type="number"
+      id="num-salle"
+      [(ngModel)]="numSalle"
+      name="numSalle"
+      [required]="modeFormation === 'Présentiel'"/>
+  </div>
+    
+  <div class="periode">
+    <label>Période:</label>
+    <div class="div">
+      <span>Du: </span>
+      <input type="date" [(ngModel)]="periodeDu" name="periodeDu" />
+      <span>A: </span>
+      <input type="date" [(ngModel)]="periodeA" name="periodeA" />
+    </div>
+  </div>
+
+  <div class="horaire">
+    <label>Horaire:</label>
+    <div class="div">
+      <span>Du: </span>
+      <input type="time" [(ngModel)]="horaireDu" name="horaireDu" />
+      <span>A: </span>
+      <input type="time" [(ngModel)]="horaireA" name="horaireA" />
+    </div>
+  </div>
+
+  <button class="btn" (click)="addFormation()">Enregistrer</button>
+</div>

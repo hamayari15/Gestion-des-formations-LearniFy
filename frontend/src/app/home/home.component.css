@@ -1,0 +1,40 @@
+body {
+  font-family: Arial, sans-serif;
+  background-image: url(https://www.learnthings.fr/wp-content/uploads/2024/06/atelier-en-formation.jpg);
+  background-position: center;
+  background-size: contain;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 520px;
+  color: #fff;
+}
+
+main {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  max-width: 600px;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin: 10px 0 20px;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 5px;
+  font-weight: bold;
+}

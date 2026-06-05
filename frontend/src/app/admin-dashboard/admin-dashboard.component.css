@@ -1,0 +1,97 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+}
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: 10px auto 0px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  margin-top: -10px;
+  margin-bottom: 16px;
+  font-size: 25px;
+  color: black;
+  text-align: center;
+  font-weight: bold;
+}
+
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  flex: 1;
+  min-width: 200px;
+  max-width: 250px;
+  padding: 20px;
+  text-align: center;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:nth-child(1) {
+  background-color: #1e88e5; 
+  color: #fff; 
+}
+
+.card:nth-child(2) {
+  background-color: #43a047; 
+  color: #fff; 
+}
+
+.card:nth-child(3) {
+  background-color: #ed6c44; 
+  color: #fff; 
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+  font-size: 20px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.charts {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card p {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .summary {
+    flex-direction: column;
+  }
+
+  .card {
+    margin-bottom: 20px;
+  }
+}
