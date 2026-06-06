@@ -4,9 +4,9 @@ const router = express.Router();
 const participantController = require("../controllers/participant.controller");
 
 
-router.post("/Register", participantController.register);
+router.post("/Register", participantController.Register);
 
-router.post("/Login", participantController.login);
+router.post("/Login", participantController.Login);
 
 router.get("/getParticipants", participantController.getParticipants);
 

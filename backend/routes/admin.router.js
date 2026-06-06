@@ -4,9 +4,9 @@ const router = express.Router();
 const adminController = require("../controllers/admin.controller");
 
 
-router.post("/Register", adminController.register);
+router.post("/Register", adminController.Register);
 
-router.post("/Login", adminController.login);
+router.post("/Login", adminController.Login);
 
 router.get("/getAdmin/:id", adminController.getAdminById);
 
