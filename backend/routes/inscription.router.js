@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Inscription = require("../models/inscription");
+const Inscription = require("../models/inscription.model");
 
 
 

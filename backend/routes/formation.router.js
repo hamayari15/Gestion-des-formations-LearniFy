@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const Formation = require("../models/formation");
-const Insciption = require("../models/inscription");
+const Formation = require("../models/formation.model");
+const Insciption = require("../models/inscription.model");
 
 
 

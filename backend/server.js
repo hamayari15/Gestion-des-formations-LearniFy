@@ -11,10 +11,10 @@
     app.use(cors());    
     
 
-    const AdminRoute = require("./routes/Admin");
-    const Participant = require("./routes/Participant");
-    const Formation = require("./routes/Formation");
-    const Inscription = require("./routes/Inscription");   
+    const AdminRoute = require("./routes/admin.router");
+    const Participant = require("./routes/participant.router");
+    const Formation = require("./routes/formation.router");
+    const Inscription = require("./routes/inscription.router");   
 
 
     app.use('/Admin', AdminRoute);
