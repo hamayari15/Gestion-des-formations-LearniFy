@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  error: string = '';
+  Error: string = '';
   isPasswordVisible: boolean = false; 
 
   constructor(
@@ -19,9 +19,9 @@ export class LoginComponent {
     private router: Router
   ) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.minLength(8), Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      profile: ['', [Validators.required]],
+      Email: ['', [Validators.required, Validators.minLength(8), Validators.email]],
+      Password: ['', [Validators.required, Validators.minLength(6)]],
+      Profile: ['', [Validators.required]],
     });
   }
 
@@ -31,7 +31,7 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.invalid) {
-      this.error = 'Please enter your email, password, and profile type';
+      this.Error = 'Please enter your email, password, and profile type';
       return;
     }
 
@@ -40,8 +40,9 @@ export class LoginComponent {
     this.authService.login(loginData).subscribe(
       (response) => {
         console.log(response);
-        localStorage.setItem('token', response.token);
-        if (loginData.profile === 'admin') {
+        console.log(loginData);
+        localStorage.setItem('Token', response.Token);
+        if (loginData.Profile === 'Admin') {
           localStorage.setItem('AdminLoggedIn', 'true');
           this.router.navigate(['/admin-interface/cycle-formation'], {
             state: { AdminLoggedIn: true },
@@ -55,24 +56,24 @@ export class LoginComponent {
       },
       (error) => {
         console.error('An error occurred during connection', error);
-        this.error = 'Invalid email or password';
+        this.Error = 'Invalid email or password';
       }
     );
   }
 
   onInputChange() {
-    this.error = '';
+    this.Error = '';
   }
 
   get email() {
-    return this.loginForm.get('email');
+    return this.loginForm.get('Email');
   }
 
   get password() {
-    return this.loginForm.get('password');
+    return this.loginForm.get('Password');
   }
 
   get profile() {
-    return this.loginForm.get('profile');
+    return this.loginForm.get('Profile');
   }
 }

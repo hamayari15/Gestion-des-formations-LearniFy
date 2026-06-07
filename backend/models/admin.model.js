@@ -27,8 +27,8 @@ const adminSchema = new mongoose.Schema(
 
     profile: {
       type: String,
-      enum: ["admin"],
-      default: "admin",
+      enum: ["Admin"],
+      default: "Admin",
     },
   },
   {

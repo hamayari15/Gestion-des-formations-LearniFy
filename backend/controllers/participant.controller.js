@@ -6,14 +6,22 @@ const jwt = require("jsonwebtoken");
 
 exports.Register = async (req, res) => {
   try {
-    const participant = new Participant(req.body);
+
+        console.log(req.body);
+
+    const hashedPassword = await bcrypt.hash(req.body.Password, 10);
+
+    const participant = new Participant({
+      ...req.body,
+      Password: hashedPassword
+    });
 
     const savedParticipant = await participant.save();
 
     res.status(201).json(savedParticipant);
   } catch (error) {
     res.status(500).json({
-      message: error.message,
+      message: error.message
     });
   }
 };
@@ -21,9 +29,12 @@ exports.Register = async (req, res) => {
 
 exports.Login = async (req, res) => {
   try {
-    const { email, password } = req.body;
 
-    const participant = await Participant.findOne({ email });
+    console.log(req.body);
+
+    const { Email, Password } = req.body;
+
+    const participant = await Participant.findOne({ Email });
 
     if (!participant) {
       return res.status(400).json({
@@ -32,8 +43,8 @@ exports.Login = async (req, res) => {
     }
 
     const validPassword = await bcrypt.compare(
-      password,
-      participant.password
+      Password,
+      participant.Password
     );
 
     if (!validPassword) {
@@ -42,23 +53,23 @@ exports.Login = async (req, res) => {
       });
     }
 
-    const payload = {
+    const Payload = {
       id: participant._id,
-      fullname: participant.fullname,
-      email: participant.email,
-      age: participant.age,
-      gender: participant.gender,
+      fullName: participant.fullName,
+      Email: participant.Email,
+      Age: participant.Age,
+      Gender: participant.Gender,
     };
 
-    const token = jwt.sign(
-      payload,
+    const Token = jwt.sign(
+      Payload,
       process.env.JWT_SECRET,
       {
         expiresIn: "2h",
       }
     );
 
-    res.status(200).json({ token });
+    res.status(200).json({ Token });
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -69,9 +80,9 @@ exports.Login = async (req, res) => {
 
 exports.getParticipants = async (req, res) => {
   try {
-    const participants = await Participant.find();
+    const Participants = await Participant.find();
 
-    res.status(200).json(participants);
+    res.status(200).json(Participants);
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -155,11 +166,9 @@ exports.deleteParticipant = async (req, res) => {
 
 exports.checkPassword = async (req, res) => {
   try {
-    const { participantId, actualPassword } =
-      req.body;
+    const { participantId, actualPassword } = req.body;
 
-    const participant =
-      await Participant.findById(participantId);
+    const participant = await Participant.findById(participantId);
 
     if (!participant) {
       return res.status(404).json({

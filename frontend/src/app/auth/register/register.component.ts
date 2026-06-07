@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -9,73 +9,74 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  fullname: string = '';
-  email: string = '';
-  password: string = '';
+  fullName: string = '';
+  Email: string = '';
+  Password: string = '';
   confirmPassword: string = '';
-  profile: string = 'user';
-  age: number | null = null;
-  gender: string = 'male';
-  error: string | null = null;
-  success: string | null = null;
+  Profile: string = 'User';
+  Age: number | null = null;
+  Gender: string = 'Male';
+  Error: string | null = null;
+  Success: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   clearError() {
-    this.error = null;
-    this.success = null;
+    this.Error = null;
+    this.Success = null;
   }
 
   onProfileChange(event: Event) {
     const target = event.target as HTMLSelectElement;
-    this.profile = target.value;
-    if (this.profile !== 'user') {
-      this.age = null;
-      this.gender = 'male';
+    this.Profile = target.value;
+    if (this.Profile !== 'User') {
+      this.Age = null;
+      this.Gender = 'Male';
     }
   }
 
   onSubmit(registrationForm: NgForm) {
-    this.error = null;
-    this.success = null;
+    this.Error = null;
+    this.Success = null;
 
     if (!registrationForm.valid) {
-      this.error = 'All fields are required';
+      this.Error = 'All fields are required';
       return;
     }
 
-    if (this.password !== this.confirmPassword) {
-      this.error = 'Passwords do not match';
+    if (this.Password !== this.confirmPassword) {
+      this.Error = 'Passwords do not match';
       return;
     }
 
     const registerData: any = {
-      fullname: this.fullname,
-      email: this.email,
-      password: this.password,
-      profile: this.profile,
+      fullName: this.fullName,
+      Email: this.Email,
+      Password: this.Password,
+      Profile: this.Profile,
     };
 
-    if (this.profile === 'user') {
-      if (this.age === null || this.gender === '') {
-        this.error = 'Please provide age and gender';
+    if (this.Profile === 'User') {
+      if (this.Age === null || this.Gender === '') {
+        this.Error = 'Please provide age and gender';
         return;
       }
-      registerData.age = this.age;
-      registerData.gender = this.gender;
+      registerData.Age = this.Age;
+      registerData.Gender = this.Gender;
     }
 
     this.authService.register(registerData).subscribe({
       next: () => {
-        this.success = 'Registration successful! Redirecting to login...';
+        this.Success = 'Registration successful! Redirecting to login...';
         setTimeout(() => {
           this.router.navigate(['/login']);
         }, 2000);
       },
       error: (err) => {
-        this.error =
-          'An error occurred during registration. Please try again later.';
+        this.Error =
+        'An error occurred during registration. Please try again later.';
         console.error('Registration error:', err);
+        console.log(registerData)
       },
     });
   }

@@ -10,7 +10,7 @@
         <input
           type="email"
           id="email"
-          formControlName="email"
+          formControlName="Email"
           placeholder="Enter your email"
           (input)="onInputChange()"/>
       </div>
@@ -18,7 +18,7 @@
         <div *ngIf="email?.touched && email?.invalid" class="alert alert-danger">
           <div *ngIf="email?.errors?.['required']">Email is required.</div>
           <div *ngIf="email?.errors?.['minlength']">Email must be 8 caracters.</div>
-          <div *ngIf="email?.errors?.['email']">Invalid email format.</div>
+          <div *ngIf="email?.errors?.['Email']">Invalid email format.</div>
         </div>
       </div>
 
@@ -27,9 +27,9 @@
           <label for="password">Password:</label>
           <span class="password-icon"><i class="fa-solid fa-lock"></i></span>
           <input
-            [type]="isPasswordVisible ? 'text' : 'password'"
+            [type]="isPasswordVisible ? 'text' : 'Password'"
             id="password"
-            formControlName="password"
+            formControlName="Password"
             placeholder="Enter your password"
             (input)="onInputChange()"/>
 
@@ -48,16 +48,16 @@
       
       <div>
         <label>Profile</label>
-        <select class="profile" formControlName="profile">
-          <option class="dis" value="" disabled>Select profile</option>
-          <option value="admin">Admin</option>
-          <option value="participant">Participant</option>
+        <select class="profile" formControlName="Profile">
+          <option class="dis" value="User" disabled>Select profile</option>
+          <option value="Admin">Admin</option>
+          <option value="Participant">Participant</option>
         </select>
       </div>
     
       <button type="submit" class="btn" [disabled]="loginForm.invalid">Login</button>
 
-      <p *ngIf="error" class="error-message">{{ error }}</p>
+      <p *ngIf="Error" class="error-message">{{ Error }}</p>
 
       <p class="switch-form">
         You don't have an account? <a routerLink="/register">Register</a>

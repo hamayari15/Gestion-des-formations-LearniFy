@@ -4,12 +4,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class UserService {
-  private tokenKey = 'token';
+  private tokenKey = 'Token';
 
   constructor() {}
 
-  public saveToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
+  public saveToken(Token: string): void {
+    localStorage.setItem(this.tokenKey, Token);
   }
 
   public getToken(): string | null {
@@ -21,10 +21,10 @@ export class UserService {
   }
 
   public getUser(): any {
-    const token = this.getToken();
-    if (token) {
-      const payload = token.split('.')[1];
-      return JSON.parse(atob(payload));
+    const Token = this.getToken();
+    if (Token) {
+      const Payload = Token.split('.')[1];
+      return JSON.parse(atob(Payload));
     }
     return null;
   }

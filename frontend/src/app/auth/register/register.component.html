@@ -8,7 +8,7 @@
         id="fullname"
         name="fullname"
         #fullnameInput="ngModel"
-        [(ngModel)]="fullname"
+        [(ngModel)]="fullName"
         ngModel
         required
         (input)="clearError()"
@@ -30,7 +30,7 @@
         ngModel
         required
         minlength="8"
-        [(ngModel)]="email"
+        [(ngModel)]="Email"
         (input)="clearError()"
         placeholder="Enter your email"/>
       <div
@@ -40,7 +40,7 @@
         <div *ngIf="emailInput.errors?.['minlength']">
           Email must be at least 8 characters.
         </div>
-        <div *ngIf="emailInput.errors?.['email']">Invalid email format.</div>
+        <div *ngIf="emailInput.errors?.['Email']">Invalid email format.</div>
       </div>
     </div>
 
@@ -50,7 +50,7 @@
         type="password"
         id="password"
         name="password"
-        [(ngModel)]="password"
+        [(ngModel)]="Password"
         #passwordInput="ngModel"
         required
         minlength="6"
@@ -85,7 +85,7 @@
         Confirm Password is required.
       </div>
       <div
-        *ngIf="confirmPasswordInput.value !== password &&confirmPasswordInput.touched"
+        *ngIf="confirmPasswordInput.value !== Password &&confirmPasswordInput.touched"
         class="alert alert-danger">
         Passwords do not match.
       </div>
@@ -96,22 +96,22 @@
       <select
         id="profile"
         name="profile"
-        [(ngModel)]="profile"
+        [(ngModel)]="Profile"
         required
         (change)="clearError()">
-        <option value="user">User</option>
-        <option value="admin">Admin</option>
+        <option value="User">User</option>
+        <option value="Admin">Admin</option>
       </select>
     </div>
 
-    <div *ngIf="profile === 'user'" class="inline-group">
+    <div *ngIf="Profile === 'User'" class="inline-group">
       <div class="form-group">
         <label for="age">Age:</label>
         <input
           type="number"
           id="age"
           name="age"
-          [(ngModel)]="age"
+          [(ngModel)]="Age"
           (input)="clearError()"
           placeholder="Enter your age"/>
       </div>
@@ -120,10 +120,10 @@
         <select
           id="gender"
           name="gender"
-          [(ngModel)]="gender"
+          [(ngModel)]="Gender"
           (change)="clearError()">
-          <option value="male">Male</option>
-          <option value="female">Female</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
         </select>
       </div>
     </div>
@@ -133,8 +133,8 @@
     </button>
   </form>
 
-  <div *ngIf="error" class="error-msg">{{ error }}</div>
-  <div *ngIf="success" class="success-msg">{{ success }}</div>
+  <div *ngIf="Success" class="success-msg">{{ Success }}</div>
+  <div *ngIf="Error" class="error-msg">{{ Error }}</div>
 
   <div class="switch-form">
     <p>Already have an account? <a routerLink="/login">Login here</a></p>

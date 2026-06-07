@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const participantSchema = new mongoose.Schema(
   {
-    fullname: {
+    fullName: {
       type: String,
       required: [true, "Full name is required"],
       trim: true,
@@ -10,20 +10,20 @@ const participantSchema = new mongoose.Schema(
       maxlength: 100,
     },
 
-    age: {
+    Age: {
       type: Number,
       required: [true, "Age is required"],
       min: 16,
       max: 100,
     },
 
-    gender: {
+    Gender: {
       type: String,
       required: [true, "Gender is required"],
       enum: ["Male", "Female"],
     },
 
-    email: {
+    Email: {
       type: String,
       required: [true, "Email is required"],
       unique: true,
@@ -32,16 +32,16 @@ const participantSchema = new mongoose.Schema(
       match: [/^\S+@\S+\.\S+$/, "Invalid email"],
     },
 
-    password: {
+    Password: {
       type: String,
       required: [true, "Password is required"],
       minlength: 6,
     },
 
-    profile: {
+    Profile: {
       type: String,
-      enum: ["user"],
-      default: "user",
+      enum: ["User"],
+      default: "User",
     },
   },
   {

@@ -18,19 +18,19 @@ export class AuthService {
 
   register(registerData: any): Observable<any> {
     const endpoint =
-      registerData.profile === 'admin'
-        ? 'Admin/register'
-        : 'Participant/register';
+      registerData.Profile === 'Admin'
+        ? 'Admin/Register'
+        : 'Participant/Register';
     return this.http.post(`${this.apiUrl}/${endpoint}`, registerData);
   }
 
   login(loginData: any): Observable<any> {
     const endpoint =
-      loginData.profile === 'admin' ? 'Admin/login' : 'Participant/login';
+      loginData.Profile === 'Admin' ? 'Admin/Login' : 'Participant/Login';
     return this.http.post(`${this.apiUrl}/${endpoint}`, loginData).pipe(
       tap((response: any) => {
-        if (response && response.token) {
-          this.setToken(response.token, loginData.profile);
+        if (response && response.Token) {
+          this.setToken(response.Token, loginData.Profile);
           this.loggedIn.next(true);
         }
       })
@@ -38,24 +38,24 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('profile');
+    localStorage.removeItem('Token');
+    localStorage.removeItem('Profile');
 
     this.loggedIn.next(false);
     console.log('logging out...');
   }
 
-  private setToken(token: string, profile: string): void {
-    localStorage.setItem('token', token);
-    localStorage.setItem('profile', profile);
+  private setToken(Token: string, Profile: string): void {
+    localStorage.setItem('Token', Token);
+    localStorage.setItem('Profile', Profile);
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return localStorage.getItem('Token');
   }
 
   getProfile(): string | null {
-    return localStorage.getItem('profile');
+    return localStorage.getItem('Profile');
   }
 
   isLoggedIn(): boolean {
@@ -63,10 +63,10 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    return this.getProfile() === 'admin';
+    return this.getProfile() === 'Admin';
   }
 
   isUser(): boolean {
-    return this.getProfile() === 'participant';
+    return this.getProfile() === 'Participant';
   }
 }
