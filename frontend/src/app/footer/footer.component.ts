@@ -3,12 +3,14 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../core/services/auth.service';
 import { Router } from '@angular/router';
 
+
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
+  selector: 'app-footer',
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.css']
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+
+export class FooterComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
   private authSubscription: Subscription = new Subscription();
 
@@ -34,3 +36,4 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.authSubscription.unsubscribe();
   }
 }
+

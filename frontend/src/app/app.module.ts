@@ -8,9 +8,9 @@ import { NgChartsModule } from 'ng2-charts';
 
 
 import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
-import { LocationComponent } from './location/location.component';
+import { HomeComponent } from './features/home/home.component';
+import { AboutComponent } from './features/about/about.component';
+import { LocationComponent } from './features/privacy/location.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AdminInterfaceComponent } from './admin-interface/admin-interface.component';
@@ -26,10 +26,11 @@ import { ParticipantInterfaceComponent } from './participant-interface/participa
 import { MonProfileParticipantComponent } from './mon-profile-participant/mon-profile-participant.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { MesFormationsComponent } from './mes-formations/mes-formations.component';
-import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { PagenotfoundComponent } from './features/pagenotfound/pagenotfound.component';
 import { formationsenligneComponent } from './formations-enligne/formations-enligne.component';
 import { formationspresensielComponent } from './formations-presensiel/formations-presensiel.component';
 import { ModifierParticipantComponent } from './modifier-participant/modifier-participant.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -58,7 +59,8 @@ import { ModifierParticipantComponent } from './modifier-participant/modifier-pa
     PagenotfoundComponent,
     formationsenligneComponent,
     formationspresensielComponent,
-    ModifierParticipantComponent
+    ModifierParticipantComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

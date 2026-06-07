@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormationService } from '../services/formation.service';
-import { InscriptionService } from '../services/incription.service';
-import { ParticipantService } from '../services/participant.service';
+import { FormationService } from '../core/services/formation.service';
+import { InscriptionService } from '../core/services/incription.service';
+import { ParticipantService } from '../core/services/participant.service';
 import { ChartConfiguration, ChartType } from 'chart.js';
 
 @Component({

@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AdminGuard } from './guards/auth.guard.admin';
-import { ParticipantGuard } from './guards/auth.guard.participant';
+import { AdminGuard } from './core/guards/auth.guard.admin';
+import { ParticipantGuard } from './core/guards/auth.guard.participant';
 
 
-import { AdminChildrensGuard } from './guards/admin-childrens.guard';
-import { ParticipantChildrensGuard } from './guards/participant-childrens.guard';
+import { AdminChildrensGuard } from './core/guards/admin-childrens.guard';
+import { ParticipantChildrensGuard } from './core/guards/participant-childrens.guard';
 
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
-import { LocationComponent } from './location/location.component';
+import { HomeComponent } from './features/home/home.component';
+import { AboutComponent } from './features/about/about.component';
+import { LocationComponent } from './features/privacy/location.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
+import { FooterComponent } from './footer/footer.component';
 
 import { AdminInterfaceComponent } from './admin-interface/admin-interface.component';
 import { CycleFormationComponent } from './cycle-formation/cycle-formation.component';
@@ -27,7 +28,7 @@ import { ParticipantInterfaceComponent } from './participant-interface/participa
 import { MonProfileParticipantComponent } from './mon-profile-participant/mon-profile-participant.component';
 import { choisirFormationComponent } from './choisir-formation/choisir-formation.component';
 import { InscriptionComponent } from './inscription/inscription.component';
-import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { PagenotfoundComponent } from './features/pagenotfound/pagenotfound.component';
 import { MesFormationsComponent } from './mes-formations/mes-formations.component';
 import { ListeParticipantsComponent } from './liste-participants/liste-participants.component';
 import { formationsenligneComponent } from './formations-enligne/formations-enligne.component';
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'location', component: LocationComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'footer', component: FooterComponent },
 
   {
     path: 'admin-interface',

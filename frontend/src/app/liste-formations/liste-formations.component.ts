@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormationService } from '../services/formation.service';
+import { FormationService } from '../core/services/formation.service';
 import { Router } from '@angular/router';
 
 @Component({

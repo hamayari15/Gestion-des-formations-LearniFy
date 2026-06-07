@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ParticipantService } from '../services/participant.service';
+import { ParticipantService } from '../core/services/participant.service';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../services/user.service';
+import { UserService } from '../core/services/user.service';
 import Swal from 'sweetalert2';
 
 

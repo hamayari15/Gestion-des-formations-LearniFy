@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ParticipantService } from '../services/participant.service';
+import { ParticipantService } from '../core/services/participant.service';
 
 @Component({
   selector: 'app-modifier-participant',

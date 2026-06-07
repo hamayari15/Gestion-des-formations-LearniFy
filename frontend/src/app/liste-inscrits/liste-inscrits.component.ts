@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { InscriptionService } from '../services/incription.service';
+import { InscriptionService } from '../core/services/incription.service';
 
 @Component({
   selector: 'app-liste-inscrits',

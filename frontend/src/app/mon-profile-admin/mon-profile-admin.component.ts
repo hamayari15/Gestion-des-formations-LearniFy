@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../services/admin.service';
+import { AdminService } from '../core/services/admin.service';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../services/user.service';
+import { UserService } from '../core/services/user.service';
 import Swal from 'sweetalert2';
 
 @Component({

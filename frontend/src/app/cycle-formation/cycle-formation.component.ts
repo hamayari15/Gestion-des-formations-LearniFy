@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
-import { FormationService } from '../services/formation.service';
+import { FormationService } from '../core/services/formation.service';
 import { Router } from '@angular/router';
 
 @Component({

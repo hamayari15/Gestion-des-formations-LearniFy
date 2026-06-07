@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../services/user.service';
-import { InscriptionService } from '../services/incription.service';
-import { FormationService } from '../services/formation.service';
+import { UserService } from '../core/services/user.service';
+import { InscriptionService } from '../core/services/incription.service';
+import { FormationService } from '../core/services/formation.service';
 import Swal from 'sweetalert2';
 
 @Component({

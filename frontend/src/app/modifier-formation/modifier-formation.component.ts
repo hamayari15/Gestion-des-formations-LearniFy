@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormationService } from '../services/formation.service';
+import { FormationService } from '../core/services/formation.service';
 
 @Component({
   selector: 'app-modifier-formation',

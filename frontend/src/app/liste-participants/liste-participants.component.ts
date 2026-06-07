@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ParticipantService } from '../services/participant.service';
+import { ParticipantService } from '../core/services/participant.service';
 import { Router } from '@angular/router';
 
 @Component({

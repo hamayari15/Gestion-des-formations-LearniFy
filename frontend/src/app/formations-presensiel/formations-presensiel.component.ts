@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormationService } from '../services/formation.service';
-import { InscriptionService } from '../services/incription.service';
+import { FormationService } from '../core/services/formation.service';
+import { InscriptionService } from '../core/services/incription.service';
 
 @Component({
   selector: 'app-participants',
