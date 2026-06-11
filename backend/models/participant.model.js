@@ -43,6 +43,11 @@ const participantSchema = new mongoose.Schema(
       enum: ["User"],
       default: "User",
     },
+
+    Image: {
+      type: String, 
+      default: null
+    },
   },
   {
     timestamps: true,

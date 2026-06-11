@@ -3,8 +3,10 @@ const router = express.Router();
 
 const participantController = require("../controllers/participant.controller");
 
+const upload = require('../middlewares/upload');
 
-router.post("/Register", participantController.Register);
+
+router.post('/Register', upload.single('Image'), participantController.Register);
 
 router.post("/Login", participantController.Login);
 

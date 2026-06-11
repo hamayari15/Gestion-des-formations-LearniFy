@@ -22,6 +22,7 @@
     app.use('/Formation', Formation);
     app.use('/Inscription', Inscription);
 
+    app.use('/uploads', express.static('uploads'));
 
 
     app.listen(process.env.PORT,()=>{

@@ -6,13 +6,11 @@ const jwt = require("jsonwebtoken");
 
 exports.Register = async (req, res) => {
   try {
-
-        console.log(req.body);
-
     const hashedPassword = await bcrypt.hash(req.body.Password, 10);
-
+    
     const participant = new Participant({
       ...req.body,
+      Image: req.file ? req.file.path : null,
       Password: hashedPassword
     });
 
@@ -20,6 +18,7 @@ exports.Register = async (req, res) => {
 
     res.status(201).json(savedParticipant);
   } catch (error) {
+    console.log(error)
     res.status(500).json({
       message: error.message
     });
@@ -29,9 +28,6 @@ exports.Register = async (req, res) => {
 
 exports.Login = async (req, res) => {
   try {
-
-    console.log(req.body);
-
     const { Email, Password } = req.body;
 
     const participant = await Participant.findOne({ Email });
