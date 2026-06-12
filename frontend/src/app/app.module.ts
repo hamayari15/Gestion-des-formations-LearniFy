@@ -3,7 +3,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgChartsModule } from 'ng2-charts';
 
 
@@ -31,6 +40,7 @@ import { formationsenligneComponent } from './formations-enligne/formations-enli
 import { formationspresensielComponent } from './formations-presensiel/formations-presensiel.component';
 import { ModifierParticipantComponent } from './modifier-participant/modifier-participant.component';
 import { FooterComponent } from './footer/footer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -65,10 +75,19 @@ import { FooterComponent } from './footer/footer.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
-    NgChartsModule
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatIconModule,
+    MatCardModule,
+    MatSnackBarModule,
+    NgChartsModule,
+    BrowserAnimationsModule
     
   ],
   providers: [],
