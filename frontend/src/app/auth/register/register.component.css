@@ -1,111 +1,127 @@
-body {
-  font-family: "Roboto", sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f2f5;
-}
-
-.form-container {
-  background-color: #ffffff;
+mat-card {
+  max-width: 750px;
+  margin: 40px auto;
   padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  width: 400px;
-  height: 450px;
-  margin: 50px auto;
-  overflow: auto;
-}
-
-.form-container:hover {
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 h2 {
   text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-  margin-top: 10px;
-}
-
-.form-group {
-  margin-bottom: 10px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
+  margin-bottom: 30px;
+  font-size: 32px;
   font-weight: 600;
-  color: #555;
+  color: #3f51b5;
 }
 
-.form-group input,
-.form-group select {
+mat-stepper {
+  background: transparent;
+}
+
+.w-100 {
   width: 100%;
-  height: 35px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+  margin-bottom: 15px;
 }
 
-.inline-group {
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.mt-3,
+div:last-child {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
 }
 
-.inline-group .form-group {
-  flex: 0 0 48%;
+button[mat-raised-button] {
+  min-width: 130px;
+  height: 45px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 8px;
 }
 
-.inline-group .form-group:last-child {
-  margin-right: 0;
+button[mat-button] {
+  min-width: 100px;
 }
 
-.btn {
-  width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  background-color: #007bff;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.mb-3 {
+  margin-bottom: 20px;
 }
 
-.btn:hover {
-  background-color: #0056b3;
-}
-
-.error-msg {
-  color: red;
-  text-align: center;
-  margin-top: 10px;
-}
-
-.success-msg {
-  color: green;
-  text-align: center;
-  margin-top: 10px;
-}
-
-.switch-form {
-  text-align: center;
-  margin-top: 10px;
-  font-size: 18px;
+.mb-3 label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
   color: #555;
 }
 
-.switch-form a {
-  color: #007bff;
-  text-decoration: none;
+.mb-3 input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  border: 2px dashed #c5cae9;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.switch-form a:hover {
-  text-decoration: underline;
+.mb-3 input[type="file"]:hover {
+  border-color: #3f51b5;
 }
 
-.container {
-  overflow: hidden;
+img {
+  display: block;
+  margin: 20px auto;
+  border-radius: 15px;
+  border: 4px solid #e8eaf6;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.text-danger {
+  color: #f44336;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+::ng-deep .mat-step-header .mat-step-label {
+  font-weight: 600;
+}
+
+::ng-deep .mat-step-header.mat-active {
+  background-color: rgba(63, 81, 181, 0.08);
+  border-radius: 10px;
+}
+
+::ng-deep .mat-mdc-form-field {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  mat-card {
+    margin: 15px;
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .mt-3,
+  div:last-child {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  img {
+    width: 140px;
+    height: 140px;
+  }
 }

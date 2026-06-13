@@ -42,6 +42,7 @@ export class RegisterComponent implements OnInit {
         [
           Validators.required,
           Validators.email,
+          Validators.pattern(/^\S+@\S+\.\S+$/)
         ],
       ],
     });
