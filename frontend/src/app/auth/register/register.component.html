@@ -2,7 +2,7 @@
 
   <h2>Registration</h2>
 
-  <mat-stepper linear>
+  <mat-stepper linear #stepper>
 
     <mat-step [stepControl]="personalForm">
 
@@ -74,15 +74,17 @@
 
         <div>
 
-          <button
-            mat-raised-button
-            color="primary"
-            matStepperNext
-            [disabled]="personalForm.invalid">
+         <button
+  mat-raised-button
+  color="primary"
+  (click)="checkEmailAndNext(stepper)"
+  [disabled]="personalForm.invalid || emailChecking">
 
-            Next
+  <span *ngIf="!emailChecking">Next</span>
 
-          </button>
+  <span *ngIf="emailChecking">Checking...</span>
+
+</button>
 
         </div>
 
@@ -138,19 +140,17 @@
             Confirm password is required
 
           </mat-error>
+    <mat-error
+    
+  *ngIf=" 
+  s['confirmPassword'].hasError('passwordMismatch')">
+
+  Passwords do not match
+
+</mat-error>
 
         </mat-form-field>
 
-        <div
-          class="text-danger"
-          *ngIf="
-            securityForm.hasError('passwordMismatch') &&
-            securityForm.get('confirmPassword')?.touched
-          ">
-
-          Passwords do not match
-
-        </div>
 
         <div class="mt-3">
 

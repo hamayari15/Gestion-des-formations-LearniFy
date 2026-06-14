@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../core/services/auth.service';
+import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup,
   ValidationErrors,
   Validators,
@@ -12,6 +13,7 @@ import { AbstractControl, FormBuilder, FormGroup,
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+
   personalForm!: FormGroup;
   securityForm!: FormGroup;
   profileForm!: FormGroup;
@@ -20,8 +22,11 @@ export class RegisterComponent implements OnInit {
   imagePreview: string | null = null;
   imageError: string | null = null;
 
+  emailChecking = false;
+
   constructor(
     private fb: FormBuilder,
+    private snackBar: MatSnackBar,
     private authService: AuthService,
     private router: Router
   ) {}
@@ -83,17 +88,79 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  passwordMatchValidator(
-    control: AbstractControl
-  ): ValidationErrors | null {
-    const password = control.get('Password')?.value;
-    const confirmPassword =
-      control.get('confirmPassword')?.value;
+  checkEmailAndNext(stepper: any) {
 
-    return password === confirmPassword
-      ? null
-      : { passwordMismatch: true };
+  const email = this.personalForm.value.Email;
+
+  if (this.personalForm.invalid) return;
+
+  this.emailChecking = true;
+
+  this.authService.checkEmail(email).subscribe({
+
+    next: (res) => {
+
+      this.emailChecking = false;
+
+      if (res.exists) {
+
+        this.personalForm.get('Email')?.setErrors({
+          emailExists: true
+        });
+
+        return;
+      }
+
+      stepper.next();
+
+    },
+
+    error: () => {
+
+      this.emailChecking = false;
+
+      this.snackBar.open(
+        'Server error while checking email',
+        'Close',
+        { duration: 3000 }
+      );
+
+    }
+
+    });
   }
+
+  passwordMatchValidator(control: AbstractControl) {
+
+  const password = control.get('Password');
+  const confirmPassword = control.get('confirmPassword');
+
+  if (!password || !confirmPassword) {
+    return null;
+  }
+
+  if (password.value !== confirmPassword.value) {
+
+    confirmPassword.setErrors({
+      ...confirmPassword.errors,
+      passwordMismatch: true
+    });
+
+  } else {
+
+    if (confirmPassword.hasError('passwordMismatch')) {
+
+      const errors = { ...confirmPassword.errors };
+      delete errors['passwordMismatch'];
+
+      confirmPassword.setErrors(
+        Object.keys(errors).length ? errors : null
+      );
+    }
+  }
+
+  return null;
+}
 
   onFileSelected(event: Event): void {
     this.imageError = null;
@@ -179,15 +246,40 @@ export class RegisterComponent implements OnInit {
   }
 
   this.authService.register(formData).subscribe({
-    next: () => {
-      alert('Registration successful');
-
+    next: (res) => {
+       this.snackBar.open(
+        'Account created successfully 🎉',
+        'Close',
+        { duration: 3000 }
+      );
       this.router.navigate(['/login']);
     },
 
     error: (err) => {
-      console.error(err);
-    }
+      if (err.status === 409) {
+
+        this.snackBar.open(
+          'Email already exists',
+          'Close',
+          { duration: 4000 }
+        );
+
+      } else if (err.status === 500) {
+
+        this.snackBar.open(
+          'Server error, please try again later',
+          'Close',
+          { duration: 4000 }
+        );
+
+      } else {
+
+        this.snackBar.open(
+          'Something went wrong',
+          'Close',
+          { duration: 4000 }
+        );
+    }}
   });
   }
 

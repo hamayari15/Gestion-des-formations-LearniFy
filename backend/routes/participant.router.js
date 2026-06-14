@@ -8,6 +8,8 @@ const upload = require('../middlewares/upload');
 
 router.post('/Register', upload.single('Image'), participantController.Register);
 
+router.post('/checkEmail', participantController.checkEmail);
+
 router.post("/Login", participantController.Login);
 
 router.get("/getParticipants", participantController.getParticipants);
