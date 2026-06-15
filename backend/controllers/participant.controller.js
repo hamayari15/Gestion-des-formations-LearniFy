@@ -13,7 +13,7 @@ exports.Register = async (req, res) => {
 
     if (existingUser) {
       return res.status(409).json({
-        message: 'Email already exists'
+        message: 'This email has been registered. Please use another email.'
       });
     }
 
@@ -28,14 +28,14 @@ exports.Register = async (req, res) => {
     const savedParticipant = await participant.save();
 
     res.status(201).json({
-      message: 'User registered successfully',
+      message: 'Your account has been created successfully.',
       data: savedParticipant
     });
 
   } catch (error) {
     console.log(error)
      return res.status(500).json({
-      message: 'Internal server error'
+      message: 'Something went wrong. Please try again later.'
     });
   }
 };

@@ -248,7 +248,7 @@ export class RegisterComponent implements OnInit {
   this.authService.register(formData).subscribe({
     next: (res) => {
        this.snackBar.open(
-        'Account created successfully 🎉',
+        res.message,
         'Close',
         { duration: 3000 }
       );
@@ -259,7 +259,7 @@ export class RegisterComponent implements OnInit {
       if (err.status === 409) {
 
         this.snackBar.open(
-          'Email already exists',
+          err.error?.message,
           'Close',
           { duration: 4000 }
         );
@@ -267,7 +267,7 @@ export class RegisterComponent implements OnInit {
       } else if (err.status === 500) {
 
         this.snackBar.open(
-          'Server error, please try again later',
+          err.error?.message || 'Something went wrong, Please try again later.',
           'Close',
           { duration: 4000 }
         );

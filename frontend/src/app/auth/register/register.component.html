@@ -70,6 +70,10 @@
             Email must be like example@gmail.com
           </mat-error>
 
+          <mat-error *ngIf="p['Email'].hasError('emailExists')">
+  This email already exists
+</mat-error>
+
         </mat-form-field>
 
         <div>
