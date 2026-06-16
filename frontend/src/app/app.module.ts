@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -19,7 +19,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './features/home/home.component';
 import { AboutComponent } from './features/about/about.component';
-import { LocationComponent } from './features/privacy/location.component';
+import { PrivacyComponent } from './features/privacy/privacy.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AdminInterfaceComponent } from './admin-interface/admin-interface.component';
@@ -50,7 +50,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavbarComponent,
     HomeComponent,
     AboutComponent,
-    LocationComponent,
+    PrivacyComponent,
     RegisterComponent,
     LoginComponent,
     AdminInterfaceComponent,
@@ -91,6 +91,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent], 
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

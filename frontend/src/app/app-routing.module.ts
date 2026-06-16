@@ -10,7 +10,7 @@ import { ParticipantChildrensGuard } from './core/guards/participant-childrens.g
 
 import { HomeComponent } from './features/home/home.component';
 import { AboutComponent } from './features/about/about.component';
-import { LocationComponent } from './features/privacy/location.component';
+import { PrivacyComponent } from './features/privacy/privacy.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { FooterComponent } from './footer/footer.component';
@@ -39,7 +39,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'location', component: LocationComponent },
+  { path: 'privacy', component: PrivacyComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'footer', component: FooterComponent },
