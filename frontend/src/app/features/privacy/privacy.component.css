@@ -1,0 +1,43 @@
+.privacy {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8fafc;
+  padding: 40px 15px;
+  margin-top: 10px;
+}
+
+.wrapper {
+  max-width: 900px;
+  width: 100%;
+}
+
+h1 {
+  font-size: 38px;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #64748b;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.section {
+  margin-bottom: 16px;
+}
+
+.section h2 {
+  font-size: 18px;
+  color: #1e293b;
+  margin-bottom: 5px;
+}
+
+.section p {
+  font-size: 15px;
+  color: #475569;
+  line-height: 1.6;
+}
