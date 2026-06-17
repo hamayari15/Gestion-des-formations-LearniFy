@@ -20,6 +20,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './features/home/home.component';
 import { AboutComponent } from './features/about/about.component';
 import { PrivacyComponent } from './features/privacy/privacy.component';
+import { ContactComponent } from './contact/contact.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AdminInterfaceComponent } from './admin-interface/admin-interface.component';
@@ -51,6 +52,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeComponent,
     AboutComponent,
     PrivacyComponent,
+    ContactComponent,
     RegisterComponent,
     LoginComponent,
     AdminInterfaceComponent,
@@ -70,7 +72,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     formationsenligneComponent,
     formationspresensielComponent,
     ModifierParticipantComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
