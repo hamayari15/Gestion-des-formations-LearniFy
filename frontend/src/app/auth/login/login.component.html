@@ -10,7 +10,7 @@
         <input
           type="email"
           id="email"
-          formControlName="Email"
+          formControlName="email"
           placeholder="Enter your email"
           (input)="onInputChange()"/>
       </div>
@@ -18,7 +18,7 @@
         <div *ngIf="email?.touched && email?.invalid" class="alert alert-danger">
           <div *ngIf="email?.errors?.['required']">Email is required.</div>
           <div *ngIf="email?.errors?.['minlength']">Email must be 8 caracters.</div>
-          <div *ngIf="email?.errors?.['Email']">Invalid email format.</div>
+          <div *ngIf="email?.errors?.['email']">Invalid email format.</div>
         </div>
       </div>
 
@@ -29,7 +29,7 @@
           <input
             [type]="isPasswordVisible ? 'text' : 'Password'"
             id="password"
-            formControlName="Password"
+            formControlName="password"
             placeholder="Enter your password"
             (input)="onInputChange()"/>
 
@@ -44,15 +44,6 @@
             Password must be at least 6 characters.
           </div>
         </div>
-      </div>
-      
-      <div>
-        <label>Profile</label>
-        <select class="profile" formControlName="Profile">
-          <option class="dis" value="User" disabled>Select profile</option>
-          <option value="Admin">Admin</option>
-          <option value="Participant">Participant</option>
-        </select>
       </div>
     
       <button type="submit" class="btn" [disabled]="loginForm.invalid">Login</button>

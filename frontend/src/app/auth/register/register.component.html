@@ -50,27 +50,27 @@
           <input
             matInput
             type="email"
-            formControlName="Email">
+            formControlName="email">
 
           <mat-error
-            *ngIf="p['Email'].hasError('required')">
+            *ngIf="p['email'].hasError('required')">
 
             Email is required
 
           </mat-error>
 
           <mat-error
-            *ngIf="p['Email'].hasError('email')">
+            *ngIf="p['email'].hasError('email')">
 
             Please enter a valid email address
 
           </mat-error>
 
-          <mat-error *ngIf="p['Email'].hasError('pattern')">
+          <mat-error *ngIf="p['email'].hasError('pattern')">
             Email must be like example@gmail.com
           </mat-error>
 
-          <mat-error *ngIf="p['Email'].hasError('emailExists')">
+          <mat-error *ngIf="p['email'].hasError('emailExists')">
   This email already exists
 </mat-error>
 
@@ -111,17 +111,17 @@
           <input
             matInput
             type="password"
-            formControlName="Password">
+            formControlName="password">
 
           <mat-error
-            *ngIf="s['Password'].hasError('required')">
+            *ngIf="s['password'].hasError('required')">
 
             Password is required
 
           </mat-error>
 
           <mat-error
-            *ngIf="s['Password'].hasError('minlength')">
+            *ngIf="s['password'].hasError('minlength')">
 
             Password must contain at least 6 characters
 
@@ -197,24 +197,24 @@
       <input
         matInput
         type="number"
-        formControlName="Age">
+        formControlName="age">
 
       <mat-error
-        *ngIf="pr['Age'].hasError('required')">
+        *ngIf="pr['age'].hasError('required')">
 
         Age is required
 
       </mat-error>
 
       <mat-error
-        *ngIf="pr['Age'].hasError('min')">
+        *ngIf="pr['age'].hasError('min')">
 
         Age must be at least 16
 
       </mat-error>
 
       <mat-error
-        *ngIf="pr['Age'].hasError('max')">
+        *ngIf="pr['age'].hasError('max')">
 
         Age cannot exceed 100
 
@@ -226,7 +226,7 @@
 
       <mat-label>Gender</mat-label>
 
-      <mat-select formControlName="Gender">
+      <mat-select formControlName="gender">
 
         <mat-option value="Male">
           Male
@@ -239,7 +239,7 @@
       </mat-select>
 
       <mat-error
-        *ngIf="pr['Gender'].hasError('required')">
+        *ngIf="pr['gender'].hasError('required')">
 
         Gender is required
 

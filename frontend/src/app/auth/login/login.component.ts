@@ -9,9 +9,10 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+
   loginForm: FormGroup;
   Error: string = '';
-  isPasswordVisible: boolean = false; 
+  isPasswordVisible = false;
 
   constructor(
     private fb: FormBuilder,
@@ -19,9 +20,8 @@ export class LoginComponent {
     private router: Router
   ) {
     this.loginForm = this.fb.group({
-      Email: ['', [Validators.required, Validators.minLength(8), Validators.email]],
-      Password: ['', [Validators.required, Validators.minLength(6)]],
-      Profile: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
@@ -31,34 +31,32 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.invalid) {
-      this.Error = 'Please enter your email, password, and profile type';
+      this.Error = 'Please enter valid email and password';
       return;
     }
 
-    const loginData = { ...this.loginForm.value };
+    const loginData = this.loginForm.value;
 
-    this.authService.login(loginData).subscribe(
-      (response) => {
-        console.log(response);
-        console.log(loginData);
-        localStorage.setItem('Token', response.Token);
-        if (loginData.Profile === 'Admin') {
-          localStorage.setItem('AdminLoggedIn', 'true');
-          this.router.navigate(['/admin-interface/cycle-formation'], {
-            state: { AdminLoggedIn: true },
-          });
+    this.authService.login(loginData).subscribe({
+      next: (response: any) => {
+
+        localStorage.setItem('Token', response.token);
+        localStorage.setItem('Role', response.role);
+
+        if (response.role === 'Admin') {
+          console.log('go admin');
+          this.router.navigate(['/admin-interface/cycle-formation']);
         } else {
-          localStorage.setItem('UserLoggedIn', 'true');
-          this.router.navigate(['/participant-interface/formations-presensiel'], {
-            state: { UserLoggedIn: true },
-          });
+          this.router.navigate(['/participant-interface/formations-presensiel']);
+          console.log('go user');
+          console.log(response)
         }
       },
-      (error) => {
-        console.error('An error occurred during connection', error);
+
+      error: () => {
         this.Error = 'Invalid email or password';
       }
-    );
+    });
   }
 
   onInputChange() {
@@ -66,14 +64,10 @@ export class LoginComponent {
   }
 
   get email() {
-    return this.loginForm.get('Email');
+    return this.loginForm.get('email');
   }
 
   get password() {
-    return this.loginForm.get('Password');
-  }
-
-  get profile() {
-    return this.loginForm.get('Profile');
+    return this.loginForm.get('password');
   }
 }

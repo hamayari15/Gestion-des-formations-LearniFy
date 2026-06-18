@@ -10,20 +10,20 @@ const participantSchema = new mongoose.Schema(
       maxlength: 100,
     },
 
-    Age: {
+    age: {
       type: Number,
       required: [true, "Age is required"],
       min: 16,
       max: 100,
     },
 
-    Gender: {
+    gender: {
       type: String,
       required: [true, "Gender is required"],
       enum: ["Male", "Female"],
     },
 
-    Email: {
+    email: {
       type: String,
       required: [true, "Email is required"],
       unique: true,
@@ -32,19 +32,13 @@ const participantSchema = new mongoose.Schema(
       match: [/^\S+@\S+\.\S+$/, "Invalid email"],
     },
 
-    Password: {
+    password: {
       type: String,
       required: [true, "Password is required"],
       minlength: 6,
-    },
+    },  
 
-    Profile: {
-      type: String,
-      enum: ["User"],
-      default: "User",
-    },
-
-    Image: {
+    image: {
       type: String, 
       default: null
     },

@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
         ],
       ],
 
-      Email: [
+      email: [
         '',
         [
           Validators.required,
@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
 
     this.securityForm = this.fb.group(
       {
-        Password: [
+        password: [
           '',
           [
             Validators.required,
@@ -73,7 +73,7 @@ export class RegisterComponent implements OnInit {
     );
 
      this.profileForm = this.fb.group({
-      Age: [
+      age: [
         '',
         [
           Validators.required,
@@ -81,7 +81,7 @@ export class RegisterComponent implements OnInit {
           Validators.max(100),
         ],
       ],
-      Gender: [
+      gender: [
         'Male',
         Validators.required,
       ],
@@ -90,7 +90,7 @@ export class RegisterComponent implements OnInit {
 
   checkEmailAndNext(stepper: any) {
 
-  const email = this.personalForm.value.Email;
+  const email = this.personalForm.value.email;
 
   if (this.personalForm.invalid) return;
 
@@ -104,7 +104,7 @@ export class RegisterComponent implements OnInit {
 
       if (res.exists) {
 
-        this.personalForm.get('Email')?.setErrors({
+        this.personalForm.get('email')?.setErrors({
           emailExists: true
         });
 
@@ -132,7 +132,7 @@ export class RegisterComponent implements OnInit {
 
   passwordMatchValidator(control: AbstractControl) {
 
-  const password = control.get('Password');
+  const password = control.get('password');
   const confirmPassword = control.get('confirmPassword');
 
   if (!password || !confirmPassword) {
@@ -214,33 +214,28 @@ export class RegisterComponent implements OnInit {
   );
 
   formData.append(
-    'Email',
-    this.personalForm.value.Email
+    'email',
+    this.personalForm.value.email
   );
 
   formData.append(
-    'Password',
-    this.securityForm.value.Password
+    'password',
+    this.securityForm.value.password
   );
 
   formData.append(
-    'Age',
-    this.profileForm.value.Age
+    'age',
+    this.profileForm.value.age
   );
 
   formData.append(
-    'Gender',
-    this.profileForm.value.Gender
-  );
-
-  formData.append(
-    'Profile',
-    'User'
+    'gender',
+    this.profileForm.value.gender
   );
 
   if (this.selectedImage) {
     formData.append(
-      'Image',
+      'image',
       this.selectedImage
     );
   }

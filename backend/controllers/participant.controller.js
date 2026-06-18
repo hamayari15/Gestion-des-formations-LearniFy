@@ -8,7 +8,7 @@ exports.Register = async (req, res) => {
   try {
 
      const existingUser = await Participant.findOne({
-      Email: req.body.Email
+      email: req.body.email
     });
 
     if (existingUser) {
@@ -17,12 +17,12 @@ exports.Register = async (req, res) => {
       });
     }
 
-    const hashedPassword = await bcrypt.hash(req.body.Password, 10);
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
     
     const participant = new Participant({
       ...req.body,
-      Image: req.file ? req.file.path : null,
-      Password: hashedPassword
+      image: req.file ? req.file.path : null,
+      password: hashedPassword
     });
 
     const savedParticipant = await participant.save();
@@ -44,7 +44,7 @@ exports.Register = async (req, res) => {
 exports.checkEmail = async (req, res) => {
 
   const user = await Participant.findOne({
-    Email: req.body.Email
+    email: req.body.email
   });
 
   return res.json({
@@ -55,9 +55,10 @@ exports.checkEmail = async (req, res) => {
 
 exports.Login = async (req, res) => {
   try {
-    const { Email, Password } = req.body;
 
-    const participant = await Participant.findOne({ Email });
+    const { email, password } = req.body;
+
+    const participant = await Participant.findOne({ email });
 
     if (!participant) {
       return res.status(400).json({
@@ -66,8 +67,8 @@ exports.Login = async (req, res) => {
     }
 
     const validPassword = await bcrypt.compare(
-      Password,
-      participant.Password
+      password,
+      participant.password
     );
 
     if (!validPassword) {
@@ -76,25 +77,24 @@ exports.Login = async (req, res) => {
       });
     }
 
-    const Payload = {
+    const payload = {
       id: participant._id,
-      fullName: participant.fullName,
-      Email: participant.Email,
-      Age: participant.Age,
-      Gender: participant.Gender,
+      role: "User"
     };
 
-    const Token = jwt.sign(
-      Payload,
+    const token = jwt.sign(
+      payload,
       process.env.JWT_SECRET,
-      {
-        expiresIn: "2h",
-      }
+      { expiresIn: "2h" }
     );
 
-    res.status(200).json({ Token });
+    return res.status(200).json({
+      token,
+      role: "User"
+    });
+
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: error.message,
     });
   }

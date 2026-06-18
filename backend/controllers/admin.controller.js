@@ -50,8 +50,7 @@ exports.Login = async (req, res) => {
 
     const payload = {
       _id: adm._id,
-      fullname: adm.fullname,
-      email: adm.email
+      role: 'Admin'
     };
 
     const token = jwt.sign(
@@ -60,7 +59,7 @@ exports.Login = async (req, res) => {
       { expiresIn: "2h" }
     );
 
-    res.status(200).json({ token });
+    res.status(200).json({ token, role: "Admin" });
 
   } catch (err) {
     res.status(500).json({

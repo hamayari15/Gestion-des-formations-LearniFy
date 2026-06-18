@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const adminSchema = new mongoose.Schema(
   {
-    fullname: {
+    fullName: {
       type: String,
       required: [true, "Full name is required"],
       trim: true,
@@ -23,12 +23,6 @@ const adminSchema = new mongoose.Schema(
       type: String,
       required: [true, "Password is required"],
       minlength: 6,
-    },
-
-    profile: {
-      type: String,
-      enum: ["Admin"],
-      default: "Admin",
     },
   },
   {
