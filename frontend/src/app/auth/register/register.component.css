@@ -1,14 +1,14 @@
 mat-card {
   max-width: 680px;
-  margin: 32px auto;
-  padding: 24px;
+  margin: 40px auto;
+  padding: 20px;
   border-radius: 1rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   font-size: 28px;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -35,7 +35,37 @@ div:last-child {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 16px;
+}
+
+.first-step-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.login-text,
+.login-link {
+  letter-spacing: 0.5px;
+}
+
+.login-text {
+  margin: 0;
+  font-size: 15px;
+  color: #666;
+}
+
+.login-link {
+  text-decoration: none;
+  font-weight: 600;
+  color: rgb(131, 143, 211);
+  margin-left: 4px;
+  transition: 0.3s;
+}
+
+.login-link:hover {
+  text-decoration: underline;
 }
 
 button[mat-raised-button] {
@@ -116,6 +146,19 @@ img {
   div:last-child {
     flex-direction: column;
     gap: 10px;
+  }
+
+   .first-step-footer {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .login-text {
+    text-align: center;
+  }
+
+  .first-step-footer button {
+    width: 100%;
   }
 
   button {

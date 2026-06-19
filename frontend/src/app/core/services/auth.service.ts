@@ -24,7 +24,7 @@ export class AuthService {
   checkEmail(email: string): Observable<{ exists: boolean }> {
     return this.http.post<{ exists: boolean }>(
       `${this.apiUrl}/Participant/CheckEmail`,
-      { Email: email }
+      { email: email }
     );
   }
 

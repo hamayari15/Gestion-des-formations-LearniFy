@@ -76,21 +76,41 @@
 
         </mat-form-field>
 
-        <div>
+        <div class="first-step-footer">
 
-         <button
-  mat-raised-button
-  color="primary"
-  (click)="checkEmailAndNext(stepper)"
-  [disabled]="personalForm.invalid || emailChecking">
+  <p class="login-text">
 
-  <span *ngIf="!emailChecking">Next</span>
+    Already have an account?
 
-  <span *ngIf="emailChecking">Checking...</span>
+    <a routerLink="/login" class="login-link">
 
-</button>
+      Login
 
-        </div>
+    </a>
+
+  </p>
+
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="checkEmailAndNext(stepper)"
+    [disabled]="personalForm.invalid || emailChecking">
+
+    <span *ngIf="!emailChecking">
+
+      Next
+
+    </span>
+
+    <span *ngIf="emailChecking">
+
+      Checking...
+
+    </span>
+
+  </button>
+
+</div>
 
       </form>
 

@@ -6,7 +6,7 @@ const participantController = require("../controllers/participant.controller");
 const upload = require('../middlewares/upload');
 
 
-router.post('/Register', upload.single('Image'), participantController.Register);
+router.post('/Register', upload.single('image'), participantController.Register);
 
 router.post('/checkEmail', participantController.checkEmail);
 
