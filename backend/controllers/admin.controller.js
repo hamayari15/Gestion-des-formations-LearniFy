@@ -4,25 +4,25 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 
-exports.Register = async (req, res) => {
-  try {
-    const data = req.body;
+// exports.Register = async (req, res) => {
+//   try {
+//     const data = req.body;
 
-    const adm = new Admin(data);
+//     const adm = new Admin(data);
 
-    const salt = await bcrypt.genSalt(10);
-    const cryptedPassword = await bcrypt.hash(data.password, salt);
+//     const salt = await bcrypt.genSalt(10);
+//     const cryptedPassword = await bcrypt.hash(data.password, salt);
 
-    adm.password = cryptedPassword;
+//     adm.password = cryptedPassword;
 
-    const savedAdmin = await adm.save();
+//     const savedAdmin = await adm.save();
 
-    res.status(201).json(savedAdmin);
+//     res.status(201).json(savedAdmin);
 
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// };
 
 
 exports.Login = async (req, res) => {
