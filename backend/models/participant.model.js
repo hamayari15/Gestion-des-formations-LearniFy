@@ -29,7 +29,7 @@ const participantSchema = new mongoose.Schema(
       unique: true,
       trim: true,
       lowercase: true,
-      match: [/^\S+@\S+\.\S+$/, "Invalid email"],
+      match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email"],
     },
 
     password: {

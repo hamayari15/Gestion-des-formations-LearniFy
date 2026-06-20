@@ -1,58 +1,84 @@
-<div class="container">
-  <div class="form-container">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <h2 class="icon">Login</h2>
-      
-      <div class="form-group">
-        <div class="email-container">
-        <label for="email">Email:</label>
-        <span class="email-icon"><i class="fa-solid fa-user"></i> </span>
-        <input
-          type="email"
-          id="email"
-          formControlName="email"
-          placeholder="Enter your email"
-          (input)="onInputChange()"/>
-      </div>
+<mat-card class="login-card">
 
-        <div *ngIf="email?.touched && email?.invalid" class="alert alert-danger">
-          <div *ngIf="email?.errors?.['required']">Email is required.</div>
-          <div *ngIf="email?.errors?.['minlength']">Email must be 8 caracters.</div>
-          <div *ngIf="email?.errors?.['email']">Invalid email format.</div>
-        </div>
-      </div>
+  <h2 class="title">🔐 Access Your Account</h2>
 
-      <div class="form-group">
-        <div class="password-container">
-          <label for="password">Password:</label>
-          <span class="password-icon"><i class="fa-solid fa-lock"></i></span>
-          <input
-            [type]="isPasswordVisible ? 'text' : 'Password'"
-            id="password"
-            formControlName="password"
-            placeholder="Enter your password"
-            (input)="onInputChange()"/>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-          <i class="fa"
-            [ngClass]="isPasswordVisible ? 'fa-eye-slash' : 'fa-eye'"
-            (click)="togglePasswordVisibility()"></i>
-        </div>
-        
-        <div *ngIf="password?.touched && password?.invalid" class="alert alert-danger">
-          <div *ngIf="password?.errors?.['required']">Password is required.</div>
-          <div *ngIf="password?.errors?.['minlength']">
-            Password must be at least 6 characters.
-          </div>
-        </div>
-      </div>
-    
-      <button type="submit" class="btn" [disabled]="loginForm.invalid">Login</button>
+    <!-- EMAIL -->
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Email</mat-label>
 
-      <p *ngIf="Error" class="error-message">{{ Error }}</p>
+      <input
+        matInput
+        type="email"
+        formControlName="email"
+        (input)="onInputChange()"
+      />
 
-      <p class="switch-form">
-        You don't have an account? <a routerLink="/register">Register</a>
-      </p>
-    </form>
-  </div>
-</div>
+      <mat-error *ngIf="email?.hasError('required')">
+        Email is required
+      </mat-error>
+
+      <mat-error *ngIf="email?.hasError('pattern')">
+        Please enter a valid email address
+      </mat-error>
+
+    </mat-form-field>
+
+    <!-- PASSWORD -->
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Password</mat-label>
+
+      <input
+        matInput
+        [type]="isPasswordVisible ? 'text' : 'password'"
+        formControlName="password"
+        (input)="onInputChange()"
+      />
+
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="togglePasswordVisibility()"
+      >
+        <mat-icon>
+          {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
+      </button>
+
+      <mat-error *ngIf="password?.hasError('required')">
+        Password is required
+      </mat-error>
+
+      <mat-error *ngIf="password?.hasError('minlength')">
+        Password must be at least 6 characters
+      </mat-error>
+
+    </mat-form-field>
+
+    <!-- ERROR MESSAGE -->
+    <p class="error" *ngIf="Error">
+      {{ Error }}
+    </p>
+
+    <!-- BUTTON -->
+    <button
+      mat-raised-button
+      color="primary"
+      class="login-btn"
+      [disabled]="loginForm.invalid"
+      type="submit"
+    >
+      Login
+    </button>
+
+    <!-- REGISTER LINK -->
+    <p class="switch">
+      You don't have an account?
+      <a routerLink="/register">Register</a>
+    </p>
+
+  </form>
+
+</mat-card>
