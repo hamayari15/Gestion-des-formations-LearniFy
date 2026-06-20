@@ -9,15 +9,13 @@ export class ParticipantGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(): boolean {
-    console.log('Userguard: Checking user access...');
+    console.log('UserGuard: Checking user access...');
 
     if (this.authService.isLoggedIn() && this.authService.isUser()) {
-      console.log('Userguard: User access granted.');
       return true;
-    } else {
-      console.log('Userguard: Access denied, redirecting to login...');
-      this.router.navigate(['/login']);
-      return false;
     }
+
+    this.router.navigate(['/login']);
+    return false;
   }
 }

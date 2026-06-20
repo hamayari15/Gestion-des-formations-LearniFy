@@ -53,8 +53,8 @@ const routes: Routes = [
     canActivateChild: [AdminChildrensGuard],
     children: [
       {
-        path: 'admin-interface',
-        redirectTo: 'admin-interface/cycle-formation',
+        path: '',
+        redirectTo: 'cycle-formation',
         pathMatch: 'full',
       },
       { path: 'mon-profile-admin', component: MonProfileAdminComponent },
@@ -76,8 +76,8 @@ const routes: Routes = [
     canActivateChild: [ParticipantChildrensGuard],
     children: [
       {
-        path: 'participant-interface',
-        redirectTo: 'participant-interface/mon-profile-participant/:id',
+        path: '',
+        redirectTo: 'mon-profile-participant/:id',
         pathMatch: 'full',
       },
       { path: 'mon-profile-participant', component: MonProfileParticipantComponent },

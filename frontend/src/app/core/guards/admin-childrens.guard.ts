@@ -19,11 +19,9 @@ export class AdminChildrensGuard implements CanActivateChild {
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authService.isAdmin()) {
-      console.log('Admin access granted to', state.url);
+    if (this.authService.isLoggedIn() && this.authService.isAdmin()) {
       return true;
     } else {
-      console.log('Admin access denied, redirecting to login');
       this.router.navigate(['/login']);
       return false;
     }

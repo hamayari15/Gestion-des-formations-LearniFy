@@ -12,12 +12,10 @@ export class AdminGuard implements CanActivate {
     console.log('AdminGuard: Checking admin access...');
 
     if (this.authService.isLoggedIn() && this.authService.isAdmin()) {
-      console.log('AdminGuard: Admin access granted.');
       return true;
-    } else {
-      console.log('AdminGuard: Access denied, redirecting to login...');
-      this.router.navigate(['/login']);
-      return false;
     }
+
+    this.router.navigate(['/login']);
+    return false;
   }
 }
