@@ -62,8 +62,8 @@ exports.Login = async (req, res) => {
     res.status(200).json({ token, role: "Admin" });
 
   } catch (err) {
-    res.status(500).json({
-      message: err.message
+    return res.status(500).json({
+      message: 'Something went wrong. Please try again later.'
     });
   }
 };

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +12,12 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class LoginComponent {
 
   loginForm: FormGroup;
-  Error: string = '';
   isPasswordVisible = false;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private snackBar: MatSnackBar,
     private router: Router
   ) {
     this.loginForm = this.fb.group({
@@ -30,37 +31,79 @@ export class LoginComponent {
   }
 
   onSubmit() {
+
     if (this.loginForm.invalid) {
-      this.Error = 'Please enter valid email and password';
+
+      this.snackBar.open(
+        'Please enter valid email and password',
+        'Close',
+        { duration: 3000 }
+      );
+
       return;
     }
 
     const loginData = this.loginForm.value;
 
     this.authService.login(loginData).subscribe({
+
       next: (response: any) => {
 
-        localStorage.setItem('Token', response.token);
-        localStorage.setItem('Role', response.role);
-
         if (response.role === 'Admin') {
-          console.log('go admin');
-          this.router.navigate(['/admin-interface/cycle-formation']);
+
+          this.router.navigate([
+            '/admin-interface/cycle-formation'
+          ]);
+
         } else {
-          this.router.navigate(['/participant-interface/formations-presensiel']);
-          console.log('go user');
-          console.log(response)
+
+          this.router.navigate([
+            '/participant-interface/formations-presensiel'
+          ]);
         }
+
       },
 
-      error: () => {
-        this.Error = 'Invalid email or password';
-      }
-    });
-  }
+      error: (err) => {
 
-  onInputChange() {
-    this.Error = '';
+        if (
+          err.status === 400 ||
+          err.status === 401
+        ) {
+
+          this.snackBar.open(
+            err.error?.message,
+            'Close',
+            { duration: 4000 }
+          );
+
+        }
+
+        else if (err.status === 500) {
+
+          this.snackBar.open(
+            err.error?.message ||
+            'Something went wrong. Please try again later.',
+            'Close',
+            { duration: 4000 }
+          );
+
+        }
+
+        else {
+
+          this.snackBar.open(
+            'Something went wrong',
+            'Close',
+            { duration: 4000 }
+          );
+
+        }
+
+      }
+
+    });
+
   }
 
   get email() {
@@ -70,4 +113,5 @@ export class LoginComponent {
   get password() {
     return this.loginForm.get('password');
   }
-}
+
+};

@@ -4,7 +4,6 @@
 
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-    <!-- EMAIL -->
     <mat-form-field appearance="outline" class="w-100">
       <mat-label>Email</mat-label>
 
@@ -12,7 +11,6 @@
         matInput
         type="email"
         formControlName="email"
-        (input)="onInputChange()"
       />
 
       <mat-error *ngIf="email?.hasError('required')">
@@ -25,7 +23,6 @@
 
     </mat-form-field>
 
-    <!-- PASSWORD -->
     <mat-form-field appearance="outline" class="w-100">
       <mat-label>Password</mat-label>
 
@@ -33,7 +30,6 @@
         matInput
         [type]="isPasswordVisible ? 'text' : 'password'"
         formControlName="password"
-        (input)="onInputChange()"
       />
 
       <button
@@ -57,12 +53,6 @@
 
     </mat-form-field>
 
-    <!-- ERROR MESSAGE -->
-    <p class="error" *ngIf="Error">
-      {{ Error }}
-    </p>
-
-    <!-- BUTTON -->
     <button
       mat-raised-button
       color="primary"
@@ -73,7 +63,6 @@
       Login
     </button>
 
-    <!-- REGISTER LINK -->
     <p class="switch">
       You don't have an account?
       <a routerLink="/register">Register</a>
