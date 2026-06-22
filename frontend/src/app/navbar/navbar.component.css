@@ -1,47 +1,151 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 .navbar {
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 10px;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  height: 64px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .navbar-brand {
-  color: #ffffff;
-  font-size: 1.5em;
-  font-weight: bold;
-  cursor: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+
+  font-family:
+    "Inter",
+    "Poppins",
+    "Segoe UI",
+    sans-serif;
+
+  color: #111;
 }
 
-.navbar-nav .nav-link {
-  color: #ffffff;
-  margin-right: 15px;
-  transition: color 0.3s;
+.brand-name {
+  line-height: 1;
+  font-style: italic;
 }
 
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-  color: #007bff;
-  font-weight: bold;
+.brand-accent,
+.navbar-brand i,
+.nav-link i {
+  color: #4F46E5;
 }
 
-.navbar-nav .nav-link {
-  color: #ffffff;
-  margin-right: 15px;
-  transition: color 0.3s;
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.navbar-nav.nav-link.nav-link.active {
-  text-decoration: underline;
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: #f5f5f5;
+  color: #111;
 }
 
 .btn-connexion {
-  background-color: #007bff;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: #4F46E5;
   color: #fff;
-  font-weight: bold;
   border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+  border-radius: 9px;
+  padding: 9px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
 }
 
 .btn-connexion:hover {
-  background-color: #0056b3;
+  background: #4338CA;
+}
+
+.btn-connexion:active {
+  transform: scale(0.97);
+}
+
+.navbar-toggler {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  color: #111;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+
+  .navbar {
+    justify-content: space-between;
+  }
+
+  .navbar-nav {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+
+    flex-direction: column;
+    align-items: center;
+
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    padding: 15px;
+
+    display: none;
+    gap: 10px;
+  }
+
+  .navbar-nav.open {
+    display: flex;
+  }
+
+  .navbar-toggler {
+    display: block;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .btn-connexion {
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .navbar-nav {
+    gap: 5px;
+  }
 }

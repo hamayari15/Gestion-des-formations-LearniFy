@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
+  menuOpen = false;
   private authSubscription: Subscription = new Subscription();
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -22,7 +23,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
     );
   }
 
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+  }
+
   navigateToLogin(): void {
+    this.menuOpen = false;
     this.router.navigate(['login']);
   }
 
@@ -33,4 +39,5 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.authSubscription.unsubscribe();
   }
-}
+
+};
