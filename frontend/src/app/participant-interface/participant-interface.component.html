@@ -1,38 +1,26 @@
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-  rel="stylesheet"
-/>
-
 <div class="participant-layout">
-  <div *ngIf="showMessage" class="message-box">
-    <i class="fas fa-check-circle"></i>
-    {{ message }}
-    <button class="close-btn" (click)="closeMessage()">&times;</button>
-  </div>
   
   <div class="sidebar">
     <div class="participant-icon">
       <i class="fas fa-users fa-3x"></i>
 
         </div>
-          <a routerLink="mon-profile-participant" class="link">
-            <i class="fas fa-user"></i> Mon Profile</a>
+          <a routerLink="mon-profile-participant" routerLinkActive="active-link" class="link">
+            <i class="fas fa-profile"></i> Mon Profile</a>
 
-            <a routerLink="formations-presensiel" class="link"><i class="fas fa-building">
+            <a routerLink="formations-presensiel" routerLinkActive="active-link" class="link"><i class="fas fa-building">
             </i> Formations en présentielle</a>
 
-            <a routerLink="formations-enligne" class="link"><i class="fas fa-laptop">
+            <a routerLink="formations-enligne" routerLinkActive="active-link" class="link"><i class="fas fa-laptop">
             </i> Formations en ligne</a>
 
-          <a routerLink="mes-formations" class="link">
+          <a routerLink="mes-formations" routerLinkActive="active-link" class="link">
             <i class="fas fa-chalkboard-teacher"></i> Mes formations</a>
+
+            <button class="logout" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
 
-    <div class="main-content">
-      <div class="logout-container">
-        <button class="logout" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
-      </div>
 
     <router-outlet></router-outlet>
-  </div>
 </div>
+

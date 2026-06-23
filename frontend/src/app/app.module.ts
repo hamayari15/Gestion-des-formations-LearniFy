@@ -42,6 +42,7 @@ import { formationspresensielComponent } from './formations-presensiel/formation
 import { ModifierParticipantComponent } from './modifier-participant/modifier-participant.component';
 import { FooterComponent } from './footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UsersGrowthComponent } from './users-growth/users-growth.component';
 
 
 
@@ -73,6 +74,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     formationspresensielComponent,
     ModifierParticipantComponent,
     FooterComponent,
+    UsersGrowthComponent,
   ],
   imports: [
     BrowserModule,

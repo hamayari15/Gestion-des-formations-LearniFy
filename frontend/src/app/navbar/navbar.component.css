@@ -46,7 +46,7 @@
 .navbar-nav {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
   list-style: none;
   margin: 0;
   padding: 0;

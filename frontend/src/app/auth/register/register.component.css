@@ -9,11 +9,11 @@ mat-card {
 h2 {
   text-align: center;
   margin-bottom: 24px;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
   letter-spacing: 0.5px;
   font-style: italic;
-  color: rgb(103, 103, 103);
+  color: rgb(100, 100, 100);
 }
 
 mat-stepper {
