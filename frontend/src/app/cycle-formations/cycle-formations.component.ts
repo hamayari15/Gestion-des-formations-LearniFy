@@ -1,19 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FormationService } from '../core/services/formation.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+
+import { AddFormationDialogComponent }
+from '../add-formation-dialog/add-formation-dialog.component';
 
 @Component({
-  selector: 'app-liste-formations',
-  templateUrl: './liste-formations.component.html',
-  styleUrls: ['./liste-formations.component.css'],
+  selector: 'app-cycle-formations',
+  templateUrl: './cycle-formations.component.html',
+  styleUrls: ['./cycle-formations.component.css'],
 })
-export class ListeFormationsComponent implements OnInit {
+export class CycleFormationsComponent implements OnInit {
   formations: any[] = [];
   errorMessage: string = '';
 
   constructor(
     private formationService: FormationService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -49,11 +54,42 @@ export class ListeFormationsComponent implements OnInit {
     }
   }
 
-  editFormation(id: string): void {
-    this.router.navigate(['admin-interface/modifier-formation', id]);
+  navigateToAddFormation(): void {
+
+    this.dialog.open(
+
+      AddFormationDialogComponent,
+
+      {
+
+        width: '500px',
+
+        disableClose: true
+
+      }
+
+    );
+
+    }
+
+  editFormation(formation: any): void {
+
+    this.dialog.open(
+
+      AddFormationDialogComponent,
+
+      {
+
+        width: '500px',
+
+        disableClose: true,
+
+        data: formation
+
+      }
+
+    );
+
   }
 
-  navigateToAddFormation(): void {
-    this.router.navigate(['admin-interface/add-formation']);
-  }
 }

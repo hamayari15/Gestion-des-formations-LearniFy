@@ -1,0 +1,236 @@
+    .dialog {
+      background: #ffffff;
+      width: 500px;
+      max-width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 60px -12px rgba(0,0,0,0.35);
+      scrollbar-width: thin;
+      scrollbar-color: #e2e8f0 transparent;
+    }
+    .dialog::-webkit-scrollbar { width: 5px; }
+    .dialog::-webkit-scrollbar-track { background: transparent; }
+    .dialog::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 99px; }
+
+    .dialog-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 24px 18px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .header-left { display: flex; align-items: center; gap: 12px; }
+    .header-icon {
+      width: 38px; height: 38px;
+      background: #eef2ff;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: #4f46e5;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .dialog-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+    .dialog-subtitle {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+    .close-btn {
+      width: 34px; height: 34px;
+      border: 1px solid #fca5a5;
+      background: #fee2e2;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: #dc2626;
+      font-size: 17px;
+      transition: background 0.3s, border-color 0.3s, color 0.3s;
+      flex-shrink: 0;
+    }
+    .close-btn:hover { background: #f7cbcb; border-color: #d95b5b; color: #c71414; }
+
+    .dialog-body { padding: 18px 24px; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+      user-select: none;
+    }
+    .checkbox-item:hover { background: #f8fafc; border-color: #c7d2fe; }
+    .checkbox-item input[type="checkbox"] { display: none; }
+    .checkbox-box {
+      width: 18px; height: 18px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 5px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s, border-color 0.15s;
+      background: #fff;
+    }
+    .checkbox-box .ti { font-size: 12px; color: #fff; display: none; }
+    .checkbox-item.checked .checkbox-box { background: #4f46e5; border-color: #4f46e5; }
+    .checkbox-item.checked .checkbox-box .ti { display: block; }
+    .checkbox-item.checked { background: #eef2ff; border-color: #c7d2fe; }
+    .checkbox-text { font-size: 13px; font-weight: 500; color: #334155; }
+
+    .divider { height: 1px; background: #f1f5f9; margin: 18px 0; }
+
+    .field { margin-bottom: 16px; }
+    .field-label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748b;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .field-label .ti { font-size: 13px; }
+    .required-dot {
+      width: 5px; height: 5px;
+      background: #f43f5e;
+      border-radius: 50%;
+      margin-left: 2px;
+    }
+
+    .f-input, .f-select {
+      width: 100%;
+      height: 42px;
+      padding: 0 14px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      background: #ffffff;
+      color: #1e293b;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .f-input::placeholder { color: #cbd5e1; }
+    .f-input:hover, .f-select:hover { border-color: #a5b4fc; }
+    .f-input:focus, .f-select:focus {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+    .f-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+    .f-select option { color: #1e293b; }
+
+    .input-wrap { position: relative; }
+    .input-wrap .ti {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: #94a3b8;
+      pointer-events: none;
+    }
+    .input-wrap .f-input { padding-left: 38px; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .sub-label {
+      font-size: 11px;
+      color: #94a3b8;
+      font-weight: 500;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .sub-label .ti { font-size: 12px; }
+
+    #salle-field { display: none; }
+
+    .dialog-footer {
+      position: sticky;
+      bottom: 0;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      border-top: 1px solid #f1f5f9;
+    }
+    .footer-hint {
+      font-size: 12px;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .footer-hint .ti { font-size: 13px; }
+    .footer-actions { display: flex; align-items: center; gap: 8px; }
+
+    .btn-cancel {
+      height: 38px;
+      padding: 0 16px;
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 9px;
+      color: #64748b;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      transition: background 0.3s, border-color 0.3s, color 0.3s;
+    }
+    .btn-cancel:hover { background: #f1f5f9; border-color: #cbd5e1; color: #475569; }
+    .btn-cancel .ti { font-size: 14px; }
+
+    .btn-save {
+      height: 38px;
+      padding: 0 20px;
+      background: #4f46e5;
+      border: none;
+      border-radius: 9px;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 7px;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .btn-save:hover { background: #4338ca; }
+    .btn-save:active { transform: scale(0.97); }
+    .btn-save .ti { font-size: 15px; }

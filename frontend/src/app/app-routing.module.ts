@@ -17,13 +17,13 @@ import { LoginComponent } from './auth/login/login.component';
 import { FooterComponent } from './footer/footer.component';
 
 import { AdminInterfaceComponent } from './admin-interface/admin-interface.component';
-import { CycleFormationComponent } from './cycle-formation/cycle-formation.component';
-import { ListeFormationsComponent } from './liste-formations/liste-formations.component';
-import { AddFormationComponent } from './add-formation/add-formation.component';
+import { CycleFormationsComponent } from './cycle-formations/cycle-formations.component';
+import { AddFormationDialogComponent } from './add-formation-dialog/add-formation-dialog.component';
 import { ModifierFormationComponent } from './modifier-formation/modifier-formation.component';
 import { ListeInscritsComponent } from './liste-inscrits/liste-inscrits.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { MonProfileAdminComponent } from './mon-profile-admin/mon-profile-admin.component';
+import { UsersGrowthComponent } from './users-growth/users-growth.component';
 
 import { ParticipantInterfaceComponent } from './participant-interface/participant-interface.component';
 import { MonProfileParticipantComponent } from './mon-profile-participant/mon-profile-participant.component';
@@ -59,13 +59,13 @@ const routes: Routes = [
       },
       { path: 'mon-profile-admin', component: MonProfileAdminComponent },
       { path: 'admin-dashboard', component: AdminDashboardComponent },
-      { path: 'cycle-formation', component: CycleFormationComponent },
-      { path: 'liste-formations', component: ListeFormationsComponent },
+      { path: 'add-formation-dialog', component: AddFormationDialogComponent },
+      { path: 'cycle-formations', component: CycleFormationsComponent },
       { path: 'modifier-formation/:id', component: ModifierFormationComponent },
-      { path: 'add-formation', component: AddFormationComponent },
       { path: 'liste-participant', component: ListeParticipantsComponent},
       { path: 'modifier-participant/:id', component: ModifierParticipantComponent},
       { path: 'liste-inscrits', component: ListeInscritsComponent },
+      { path: 'users-growth', component: UsersGrowthComponent },
     ],
   },
 

@@ -13,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 import { NgChartsModule } from 'ng2-charts';
 
 
@@ -25,10 +26,9 @@ import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AdminInterfaceComponent } from './admin-interface/admin-interface.component';
 import { MonProfileAdminComponent } from './mon-profile-admin/mon-profile-admin.component';
-import { CycleFormationComponent } from './cycle-formation/cycle-formation.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { ListeFormationsComponent } from './liste-formations/liste-formations.component';
-import { AddFormationComponent } from './add-formation/add-formation.component';
+import { CycleFormationsComponent } from './cycle-formations/cycle-formations.component';
+import { AddFormationDialogComponent } from './add-formation-dialog/add-formation-dialog.component';
 import { ModifierFormationComponent } from './modifier-formation/modifier-formation.component';
 import { ListeParticipantsComponent } from './liste-participants/liste-participants.component';
 import { ListeInscritsComponent } from './liste-inscrits/liste-inscrits.component';
@@ -59,11 +59,9 @@ import { UsersGrowthComponent } from './users-growth/users-growth.component';
     AdminInterfaceComponent,
     AdminDashboardComponent,
     MonProfileAdminComponent,
-    CycleFormationComponent,
+    CycleFormationsComponent,
     ListeParticipantsComponent,
     ListeInscritsComponent,
-    ListeFormationsComponent,
-    AddFormationComponent,
     ModifierFormationComponent,
     ParticipantInterfaceComponent,
     MonProfileParticipantComponent,
@@ -75,6 +73,8 @@ import { UsersGrowthComponent } from './users-growth/users-growth.component';
     ModifierParticipantComponent,
     FooterComponent,
     UsersGrowthComponent,
+    AddFormationDialogComponent,
+    CycleFormationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,6 +90,7 @@ import { UsersGrowthComponent } from './users-growth/users-growth.component';
     MatIconModule,
     MatCardModule,
     MatSnackBarModule,
+    MatDialogModule,
     NgChartsModule,
     BrowserAnimationsModule
     

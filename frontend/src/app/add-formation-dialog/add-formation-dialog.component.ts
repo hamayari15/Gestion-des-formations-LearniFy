@@ -2,13 +2,16 @@ import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
 import { FormationService } from '../core/services/formation.service';
 import { Router } from '@angular/router';
+import { MatDialogRef } from '@angular/material/dialog';
+
 
 @Component({
-  selector: 'app-cycle-formation',
-  templateUrl: './cycle-formation.component.html',
-  styleUrls: ['./cycle-formation.component.css'],
+  selector: 'app-add-formation-dialog',
+  templateUrl: './add-formation-dialog.component.html',
+  styleUrls: ['./add-formation-dialog.component.css'],
 })
-export class CycleFormationComponent {
+
+export class AddFormationDialogComponent {
   theme: string = '';
   modeFormation: string = '';
   numSalle: number = 0;
@@ -22,7 +25,8 @@ export class CycleFormationComponent {
 
   constructor(
     private formationService: FormationService,
-    private router: Router
+    private router: Router,
+    private dialogRef: MatDialogRef<AddFormationDialogComponent>
   ) {}
 
   addFormation() {
@@ -46,7 +50,8 @@ export class CycleFormationComponent {
           title: 'Success',
           text: 'Formation ajoutée avec succées!',
         });
-        this.router.navigate(['admin-interface/liste-formations']);
+        this.dialogRef.close();
+        this.router.navigate(['admin-interface/cycle-formations']);
         console.log('Formation added:', response);
       },
       (error) => {
@@ -58,5 +63,9 @@ export class CycleFormationComponent {
         console.error('Error:', error);
       }
     );
+  }
+
+  closeDialog(){
+    this.dialogRef.close();
   }
 }
