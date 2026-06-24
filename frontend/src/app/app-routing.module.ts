@@ -20,7 +20,6 @@ import { AdminInterfaceComponent } from './admin-interface/admin-interface.compo
 import { CycleFormationsComponent } from './cycle-formations/cycle-formations.component';
 import { AddFormationDialogComponent } from './add-formation-dialog/add-formation-dialog.component';
 import { EditFormationDialogComponent } from './edit-formation-dialog/edit-formation-dialog.component';
-import { ModifierFormationComponent } from './modifier-formation/modifier-formation.component';
 import { ListeInscritsComponent } from './liste-inscrits/liste-inscrits.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { MonProfileAdminComponent } from './mon-profile-admin/mon-profile-admin.component';
@@ -63,7 +62,6 @@ const routes: Routes = [
       { path: 'cycle-formations', component: CycleFormationsComponent },
       { path: 'add-formation-dialog', component: AddFormationDialogComponent },
       { path: 'edit-formation-dialog', component: EditFormationDialogComponent },
-      { path: 'modifier-formation/:id', component: ModifierFormationComponent },
       { path: 'liste-participant', component: ListeParticipantsComponent},
       { path: 'modifier-participant/:id', component: ModifierParticipantComponent},
       { path: 'liste-inscrits', component: ListeInscritsComponent },

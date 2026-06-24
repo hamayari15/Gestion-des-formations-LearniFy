@@ -128,15 +128,30 @@ exports.updateFormation = async (req, res) => {
 
     if (!updatedFormation) {
       return res.status(404).json({
-        message: "Formation not found",
+        success: false,
+        message: "Cycle de formation introuvable.",
       });
     }
 
-    res.status(200).json(updatedFormation);
-  } catch (error) {
-    res.status(400).json({
-      message: error.message,
+    return res.status(200).json({
+      success: true,
+      message: "Cycle de formation modifié avec succès.",
+      formation: updatedFormation
     });
+
+    } catch (error) {
+
+    if (error.name === "ValidationError") {
+      return res.status(400).json({
+        message: error.message
+      });
+    }
+    
+    return res.status(500).json({
+      success: false,
+      message: "Une erreur serveur est survenue."
+    });
+
   }
 };
 

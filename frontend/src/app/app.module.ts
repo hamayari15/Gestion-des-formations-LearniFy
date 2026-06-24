@@ -29,7 +29,6 @@ import { MonProfileAdminComponent } from './mon-profile-admin/mon-profile-admin.
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { CycleFormationsComponent } from './cycle-formations/cycle-formations.component';
 import { AddFormationDialogComponent } from './add-formation-dialog/add-formation-dialog.component';
-import { ModifierFormationComponent } from './modifier-formation/modifier-formation.component';
 import { ListeParticipantsComponent } from './liste-participants/liste-participants.component';
 import { ListeInscritsComponent } from './liste-inscrits/liste-inscrits.component';
 import { ParticipantInterfaceComponent } from './participant-interface/participant-interface.component';
@@ -63,7 +62,6 @@ import { EditFormationDialogComponent } from './edit-formation-dialog/edit-forma
     CycleFormationsComponent,
     ListeParticipantsComponent,
     ListeInscritsComponent,
-    ModifierFormationComponent,
     ParticipantInterfaceComponent,
     MonProfileParticipantComponent,
     InscriptionComponent,
