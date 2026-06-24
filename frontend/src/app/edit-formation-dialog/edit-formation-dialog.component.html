@@ -1,0 +1,163 @@
+
+
+    <div class="dialog">
+    <div class="dialog-header">
+        <div class="header-left">
+          <div class="header-icon"><i class="ti ti-school" aria-hidden="true"></i></div>
+          <div>
+            <div class="dialog-title" id="dialog-title">Cycle de Formation</div>
+            <div class="dialog-subtitle">Modifier un cycle de formation</div>
+          </div>
+        </div>
+        <button class="close-btn" aria-label="Fermer" (click)="closeDialog()">
+          <i class="ti ti-x" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="dialog-body">
+
+      <div class="section-label">
+        Mode de financement <span class="required-dot"></span>
+      </div>
+
+<div class="checkbox-group">
+
+  <label
+    class="checkbox-item"
+    [class.checked]="creditImpot"
+    (click)="selectMode('creditImpot')">
+
+    <div class="checkbox-box">
+      <i class="ti ti-check"></i>
+    </div>
+
+    <span class="checkbox-text">
+      Crédit d'impôt
+    </span>
+
+  </label>
+
+  <label
+    class="checkbox-item"
+    [class.checked]="droitIndividuel"
+    (click)="selectMode('droitIndividuel')">
+
+    <div class="checkbox-box">
+      <i class="ti ti-check"></i>
+    </div>
+
+    <span class="checkbox-text">
+      Droits de tirage (individuel)
+    </span>
+
+  </label>
+
+  <label
+    class="checkbox-item"
+    [class.checked]="droitCollectif"
+    (click)="selectMode('droitCollectif')">
+
+    <div class="checkbox-box">
+      <i class="ti ti-check"></i>
+    </div>
+
+    <span class="checkbox-text">
+      Droits de tirage (collectif)
+    </span>
+
+  </label>
+
+</div>
+
+        <div class="divider"></div>
+
+        <div class="field">
+          <div class="field-label">
+            <i class="ti ti-book" aria-hidden="true"></i>
+            Thème de formation
+            <span class="required-dot" title="Requis"></span>
+          </div>
+          <div class="input-wrap">
+            <i class="ti ti-search" aria-hidden="true"></i>
+            <input class="f-input" type="text" name="theme"   [(ngModel)]="theme" placeholder="Ex: Développement web, Cybersécurité…" />
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-label">
+            <i class="ti ti-layout-board" aria-hidden="true"></i>
+            Mode de formation
+            <span class="required-dot" title="Requis"></span>
+          </div>
+          <select class="f-select" name="modeFormation" [(ngModel)]="modeFormation">
+            <option value="">Sélectionner un mode…</option>
+            <option value="En ligne">En ligne</option>
+            <option value="Présentiel">Présentiel</option>
+          </select>
+        </div>
+
+        <div class="field" id="salle-field" *ngIf="modeFormation === 'Présentiel'">
+          <div class="field-label">
+            <i class="ti ti-door" aria-hidden="true"></i>
+            Numéro de salle
+            <span class="required-dot" title="Requis"></span>
+          </div>
+          <div class="input-wrap">
+            <i class="ti ti-hash" aria-hidden="true"></i>
+            <input class="f-input" type="number" name="numSalle" [(ngModel)]="numSalle" placeholder="Ex: 12" min="1" />
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="field">
+          <div class="field-label">
+            <i class="ti ti-calendar-event" aria-hidden="true"></i>
+            Période <span class="required-dot" title="Requis"></span>
+          </div>
+          <div class="two-col">
+            <div>
+              <div class="sub-label"><i class="ti ti-arrow-right"></i> Date de début</div>
+              <input class="f-input" type="date" name="periodeDu" [(ngModel)]="periodeDu"/>
+            </div>
+            <div>
+              <div class="sub-label"><i class="ti ti-flag"></i> Date de fin</div>
+              <input class="f-input" type="date" name="periodeA" [(ngModel)]="periodeA" [min]="periodeDu"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-label">
+            <i class="ti ti-clock" aria-hidden="true"></i>
+            Horaire <span class="required-dot" title="Requis"></span>
+          </div>
+          <div class="two-col">
+            <div>
+              <div class="sub-label"><i class="ti ti-arrow-right"></i> Heure de début</div>
+              <input class="f-input" type="time" name="horaireDu" [(ngModel)]="horaireDu"/>
+            </div>
+            <div>
+              <div class="sub-label"><i class="ti ti-flag"></i> Heure de fin </div>
+              <input class="f-input" type="time" name="horaireA" [(ngModel)]="horaireA" [min]="horaireDu"/>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="dialog-footer">
+        <span class="footer-hint">
+          <i class="ti ti-info-circle" aria-hidden="true"></i>
+          Les champs <span style="color:#f43f5e;margin:0 2px;">•</span> sont obligatoires
+        </span>
+        <div class="footer-actions">
+          <button class="btn-cancel" (click)="closeDialog()">
+            <i class="ti ti-x" aria-hidden="true"></i> Annuler
+          </button>
+          <button class="btn-save" (click)="updateFormation()" [disabled]="!isFormValid()">
+            <i class="ti ti-device-floppy" aria-hidden="true"></i> Modifier
+          </button>
+        </div>
+      </div>
+    </div>

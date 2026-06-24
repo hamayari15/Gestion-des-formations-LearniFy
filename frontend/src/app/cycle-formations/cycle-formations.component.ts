@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { AddFormationDialogComponent }
 from '../add-formation-dialog/add-formation-dialog.component';
+import { EditFormationDialogComponent } from '../edit-formation-dialog/edit-formation-dialog.component';
 
 @Component({
   selector: 'app-cycle-formations',
@@ -76,7 +77,7 @@ export class CycleFormationsComponent implements OnInit {
 
     this.dialog.open(
 
-      AddFormationDialogComponent,
+      EditFormationDialogComponent,
 
       {
 

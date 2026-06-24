@@ -43,6 +43,7 @@ import { ModifierParticipantComponent } from './modifier-participant/modifier-pa
 import { FooterComponent } from './footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsersGrowthComponent } from './users-growth/users-growth.component';
+import { EditFormationDialogComponent } from './edit-formation-dialog/edit-formation-dialog.component';
 
 
 
@@ -75,6 +76,7 @@ import { UsersGrowthComponent } from './users-growth/users-growth.component';
     UsersGrowthComponent,
     AddFormationDialogComponent,
     CycleFormationsComponent,
+    EditFormationDialogComponent,
   ],
   imports: [
     BrowserModule,
