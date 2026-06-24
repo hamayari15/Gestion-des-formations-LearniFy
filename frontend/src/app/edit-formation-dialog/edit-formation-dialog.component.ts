@@ -12,6 +12,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 export class EditFormationDialogComponent implements OnInit {
 
+  originalFormation: any;
+
   id!: string;
 
   theme: string = '';
@@ -40,65 +42,45 @@ export class EditFormationDialogComponent implements OnInit {
 
   ) {}
 
-  ngOnInit(): void {
+ ngOnInit(): void {
 
-    const formation = this.data;
+  const formation = this.data;
 
-    this.id = formation._id;
+  this.originalFormation = JSON.parse(JSON.stringify(formation));
 
-    this.theme = formation.theme;
+  this.id = formation._id;
 
-    this.modeFormation = formation.modeFormation;
+  this.theme = formation.theme;
+  this.modeFormation = formation.modeFormation;
+  this.numSalle = formation.numSalle;
 
-    this.numSalle = formation.numSalle;
+  this.creditImpot = formation.creditImpot;
+  this.droitIndividuel = formation.droitIndividuel;
+  this.droitCollectif = formation.droitCollectif;
 
-    this.creditImpot = formation.creditImpot;
+  this.periodeDu = formation.periodeDu;
+  this.periodeA = formation.periodeA;
 
-    this.droitIndividuel = formation.droitIndividuel;
+  this.horaireDu = formation.horaireDu;
+  this.horaireA = formation.horaireA;
+}
 
-    this.droitCollectif = formation.droitCollectif;
+  hasChanges(): boolean {
 
-    this.periodeDu = formation.periodeDu;
+  return (
+    this.theme !== this.originalFormation.theme ||
+    this.modeFormation !== this.originalFormation.modeFormation ||
+    this.numSalle !== this.originalFormation.numSalle ||
+    this.creditImpot !== this.originalFormation.creditImpot ||
+    this.droitIndividuel !== this.originalFormation.droitIndividuel ||
+    this.droitCollectif !== this.originalFormation.droitCollectif ||
+    this.periodeDu !== this.originalFormation.periodeDu ||
+    this.periodeA !== this.originalFormation.periodeA ||
+    this.horaireDu !== this.originalFormation.horaireDu ||
+    this.horaireA !== this.originalFormation.horaireA
+  );
 
-    this.periodeA = formation.periodeA;
-
-    this.horaireDu = formation.horaireDu;
-
-    this.horaireA = formation.horaireA;
-
-  }
-
-  selectMode(mode: string) {
-
-    this.creditImpot = false;
-
-    this.droitIndividuel = false;
-
-    this.droitCollectif = false;
-
-    switch (mode) {
-
-      case 'creditImpot':
-
-        this.creditImpot = true;
-
-        break;
-
-      case 'droitIndividuel':
-
-        this.droitIndividuel = true;
-
-        break;
-
-      case 'droitCollectif':
-
-        this.droitCollectif = true;
-
-        break;
-
-    }
-
-  }
+}
 
   isFormValid(): boolean {
 
@@ -138,6 +120,38 @@ export class EditFormationDialogComponent implements OnInit {
 
   }
 
+  selectMode(mode: string) {
+
+    this.creditImpot = false;
+
+    this.droitIndividuel = false;
+
+    this.droitCollectif = false;
+
+    switch (mode) {
+
+      case 'creditImpot':
+
+        this.creditImpot = true;
+
+        break;
+
+      case 'droitIndividuel':
+
+        this.droitIndividuel = true;
+
+        break;
+
+      case 'droitCollectif':
+
+        this.droitCollectif = true;
+
+        break;
+
+    }
+
+  }
+
   updateFormation() {
 
     const formation = {
@@ -164,6 +178,9 @@ export class EditFormationDialogComponent implements OnInit {
 
     };
 
+    console.log('ID:', this.id);
+    console.log('Formation:', formation);
+
     this.formationService.updateFormation(this.id, formation)
 
       .subscribe(
@@ -173,22 +190,15 @@ export class EditFormationDialogComponent implements OnInit {
         Swal.fire({
 
           icon: 'success',
-
           title: 'Succès',
-          width: 550,
-
           text: response.message,
-
+          width: 550,
           timer: 3000,
-
           timerProgressBar: true
-
         });
 
         this.dialogRef.close(true);
-
         this.router.navigate(['admin-interface/cycle-formations']);
-
       },
 
       (error) => {

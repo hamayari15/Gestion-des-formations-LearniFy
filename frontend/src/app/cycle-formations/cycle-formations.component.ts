@@ -19,7 +19,7 @@ export class CycleFormationsComponent implements OnInit {
   constructor(
     private formationService: FormationService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -56,41 +56,30 @@ export class CycleFormationsComponent implements OnInit {
   }
 
   navigateToAddFormation(): void {
+    const dialogRef = this.dialog.open(AddFormationDialogComponent, {
+      width: '500px',
+      disableClose: true
+    });
 
-    this.dialog.open(
-
-      AddFormationDialogComponent,
-
-      {
-
-        width: '500px',
-
-        disableClose: true
-
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getFormations();
       }
-
-    );
-
-    }
+    });
+  }
 
   editFormation(formation: any): void {
+    const dialogRef = this.dialog.open(EditFormationDialogComponent, {
+      width: '500px',
+      disableClose: true,
+      data: formation
+    });
 
-    this.dialog.open(
-
-      EditFormationDialogComponent,
-
-      {
-
-        width: '500px',
-
-        disableClose: true,
-
-        data: formation
-
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getFormations(); // refresh list
       }
-
-    );
-
+    });
   }
 
 }

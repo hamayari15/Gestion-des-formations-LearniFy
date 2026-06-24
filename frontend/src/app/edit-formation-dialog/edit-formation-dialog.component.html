@@ -155,7 +155,7 @@
           <button class="btn-cancel" (click)="closeDialog()">
             <i class="ti ti-x" aria-hidden="true"></i> Annuler
           </button>
-          <button class="btn-save" (click)="updateFormation()" [disabled]="!isFormValid()">
+          <button class="btn-save" (click)="updateFormation()" [disabled]="!isFormValid() || !hasChanges()">
             <i class="ti ti-device-floppy" aria-hidden="true"></i> Modifier
           </button>
         </div>

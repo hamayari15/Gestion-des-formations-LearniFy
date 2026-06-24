@@ -31,7 +31,7 @@ exports.addFormation = async (req, res) => {
     }
 
     return res.status(500).json({
-      message: "Une erreur est survenue lors de l'ajout du cycle de formation."
+      message: "Une erreur serveur est survenue."
     });
   }
 };
@@ -116,6 +116,10 @@ exports.getMyFormations = async (req, res) => {
 
 exports.updateFormation = async (req, res) => {
   try {
+
+    console.log("BODY:", req.body);
+console.log("ID:", req.params.id);
+
     const updatedFormation =
       await Formation.findByIdAndUpdate(
         req.params.id,
