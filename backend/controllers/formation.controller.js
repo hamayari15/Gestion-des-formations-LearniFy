@@ -6,12 +6,32 @@ exports.addFormation = async (req, res) => {
   try {
     const formation = new Formation(req.body);
 
+    if (!req.body.creditImpot && !req.body.droitIndividuel && !req.body.droitCollectif) {
+      return res.status(400).json({
+        message: "Veuillez sélectionner un mode de financement."
+      });
+    }
+
     const savedFormation = await formation.save();
 
-    res.status(201).json(savedFormation);
+    res.status(201).json({
+
+      message:
+      'Cycle de formation ajouté avec succès.',
+
+      formation: savedFormation
+
+    });
   } catch (error) {
-    res.status(400).json({
-      message: error.message,
+
+     if (error.name === "ValidationError") {
+      return res.status(400).json({
+        message: error.message
+      });
+    }
+
+    return res.status(500).json({
+      message: "Une erreur est survenue lors de l'ajout du cycle de formation."
     });
   }
 };

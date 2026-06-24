@@ -14,7 +14,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class AddFormationDialogComponent {
   theme: string = '';
   modeFormation: string = '';
-  numSalle: number = 0;
+  numSalle: number | null = null;
   creditImpot: boolean = false;
   droitIndividuel: boolean = false;
   droitCollectif: boolean = false;
@@ -28,6 +28,60 @@ export class AddFormationDialogComponent {
     private router: Router,
     private dialogRef: MatDialogRef<AddFormationDialogComponent>
   ) {}
+
+  selectMode(mode: string) {
+
+    this.creditImpot = false;
+    this.droitIndividuel = false;
+    this.droitCollectif = false;
+
+    switch (mode) {
+
+      case 'creditImpot':
+        this.creditImpot = true;
+        break;
+
+      case 'droitIndividuel':
+        this.droitIndividuel = true;
+        break;
+
+      case 'droitCollectif':
+        this.droitCollectif = true;
+        break;
+    }
+
+  }
+
+  isFormValid(): boolean {
+
+    return (
+
+      this.theme.trim() !== '' &&
+
+      this.modeFormation !== '' &&
+
+      (this.creditImpot ||
+      this.droitIndividuel ||
+      this.droitCollectif) &&
+
+      this.periodeDu !== '' &&
+
+      this.periodeA !== '' &&
+
+      this.horaireDu !== '' &&
+
+      this.horaireA !== '' 
+      &&
+
+      (
+        this.modeFormation !== 'Présentiel'
+        ||
+        (!this.numSalle || this.numSalle > 0)
+      )
+
+    );
+
+  }
 
   addFormation() {
     const formation = {
@@ -48,17 +102,19 @@ export class AddFormationDialogComponent {
         Swal.fire({
           icon: 'success',
           title: 'Success',
-          text: 'Formation ajoutée avec succées!',
+          text: response.message,
+          width: 550,
+          timer: 3000,
+          timerProgressBar: true,
         });
         this.dialogRef.close();
         this.router.navigate(['admin-interface/cycle-formations']);
-        console.log('Formation added:', response);
       },
       (error) => {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: "Erreur lors de l'ajout la formation!",
+          text: error?.error.message || 'Une erreur est survenue.',
         });
         console.error('Error:', error);
       }
