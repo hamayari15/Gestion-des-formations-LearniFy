@@ -1,1 +1,23 @@
-<p>users-growth works!</p>
+<div class="dashboard-container">
+
+  <h2>Statistiques des participants</h2>
+
+  <div *ngIf="isLoading">
+    Chargement des données...
+  </div>
+
+  <div
+    *ngIf="errorMessage"
+    class="error-message"
+  >
+    {{ errorMessage }}
+  </div>
+
+  <div
+    class="chart-wrapper"
+    *ngIf="!isLoading"
+  >
+    <canvas id="growthChart"></canvas>
+  </div>
+
+</div>
