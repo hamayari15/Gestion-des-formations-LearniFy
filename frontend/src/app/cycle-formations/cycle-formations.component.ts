@@ -38,8 +38,8 @@ export class CycleFormationsComponent implements OnInit {
 
     this.formationService.getFormations().subscribe({
       next: (response: any) => {
-        this.formations = response;
-        this.filteredFormations = response;
+        this.formations = response.data;
+        this.filteredFormations = response.data;
         this.loading = false;
       },
 
@@ -79,6 +79,12 @@ export class CycleFormationsComponent implements OnInit {
       f.theme.toLowerCase().includes(search)
     );
 
+    this.applyFilters();
+  }
+
+  clearFilters(): void {
+    this.searchTerm = '';
+    this.selectedMode = '';
     this.applyFilters();
   }
 
