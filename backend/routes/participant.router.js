@@ -14,6 +14,8 @@ router.post("/Login", participantController.Login);
 
 router.get("/getParticipants", participantController.getParticipants);
 
+router.get("/getParticipantsGrowth", participantController.getParticipantsGrowth);
+
 router.get("/getParticipant/:id", participantController.getParticipantById);
 
 router.put("/updateParticipant/:id", participantController.updateParticipant);

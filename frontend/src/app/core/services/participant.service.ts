@@ -14,6 +14,10 @@ export class ParticipantService {
     return this.http.get<any[]>(`${this.apiUrl}/getparticipants`);
   }
 
+  getParticipantsGrowth(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/getparticipantsGrowth`);
+  }
+
   getParticipantById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/getparticipant/${id}`);
   }

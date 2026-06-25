@@ -77,24 +77,20 @@
     *ngIf="loading"
     class="text-center py-5">
 
-    <div
-      class="spinner-border text-primary"
-      role="status">
-
-    </div>
+   <div *ngIf="loading" class="spinner-wrap">
+  <div class="spinner"></div>
+  <span class="spinner-label">Loading formations…</span>
+</div>
 
   </div>
 
   <!-- Empty State -->
 
-  <div
-    *ngIf="!loading && filteredFormations.length === 0"
-    class="alert alert-info">
-
-    <i class="fas fa-info-circle"></i>
-    No formations found.
-
-  </div>
+ <div *ngIf="!loading && filteredFormations.length === 0" class="empty-state">
+  <i class="ti ti-search-off"></i>
+  <p>No formations found</p>
+  <span>Try adjusting your search or filter</span>
+</div>
 
   <!-- Table -->
 
@@ -133,9 +129,10 @@
 
             <td>
 
-              <span class="badge bg-primary">
-                {{ formation.modeFormation }}
-              </span>
+              <span class="badge" [class.badge-presentiel]="formation.modeFormation === 'Présentiel'"
+      [class.badge-enligne]="formation.modeFormation === 'En ligne'">
+  {{ formation.modeFormation }}
+</span>
 
             </td>
 

@@ -114,6 +114,45 @@ exports.getParticipants = async (req, res) => {
 };
 
 
+exports.getParticipantsGrowth = async (req, res) => {
+  try {
+    const growth = await Participant.aggregate([
+      {
+        $group: {
+          _id: {
+            $dateToString: {
+              format: "%Y-%m-%d",
+              date: "$createdAt",
+            },
+          },
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $sort: { _id: 1 },
+      },
+    ]);
+
+   return res.status(200).json({
+    success: true,
+    message:
+      growth.length > 0
+        ? "Statistiques de croissance des participants récupérées avec succès."
+        : "Aucun participant n'a encore été enregistré.",
+    totalDays: growth.length,
+    data: growth,
+  });
+  } catch (error) {
+
+    return res.status(500).json({
+      success: false,
+      message: "Une erreur est survenue lors de la récupération des statistiques de croissance des participants.",
+      error: error.message,
+    });
+  }
+};
+
+
 exports.getParticipantById = async (req, res) => {
   try {
     const participant = await Participant.findById(req.params.id);
