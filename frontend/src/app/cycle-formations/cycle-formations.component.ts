@@ -17,6 +17,11 @@ export class CycleFormationsComponent implements OnInit {
   formations: any[] = [];
   filteredFormations: any[] = [];
 
+  page: number = 1;
+  limit: number = 5;
+  totalPages: number = 0;
+  totalItems: number = 0;
+
   searchTerm = '';
   selectedMode: string = '';
 
@@ -36,10 +41,19 @@ export class CycleFormationsComponent implements OnInit {
     this.loading = true;
     this.errorMessage = '';
 
-    this.formationService.getFormations().subscribe({
+    this.formationService.getFormations(
+      this.page,
+      this.limit,
+      this.searchTerm,
+      this.selectedMode
+    ).subscribe({
       next: (response: any) => {
-        this.formations = response.data;
-        this.filteredFormations = response.data;
+        this.formations = response.data.formations;
+        this.filteredFormations = response.data.formations;
+
+        this.totalPages = response.data.totalPages;
+        this.totalItems = response.data.totalItems;
+
         this.loading = false;
       },
 
@@ -54,6 +68,7 @@ export class CycleFormationsComponent implements OnInit {
 
   applyFilters(): void {
     let result = [...this.formations];
+    this.page = 1
 
     if (this.searchTerm) {
       result = result.filter(f =>
@@ -85,12 +100,25 @@ export class CycleFormationsComponent implements OnInit {
   clearFilters(): void {
     this.searchTerm = '';
     this.selectedMode = '';
+    this.page = 1
     this.applyFilters();
+  }
+
+  nextPage(): void {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.getFormations();
+    }
+  }
+
+  goToPage(p: number): void {
+    this.page = p;
+    this.getFormations();
   }
 
   navigateToAddFormation(): void {
     const dialogRef = this.dialog.open(AddFormationDialogComponent, {
-      width: '550px',
+      width: '520px',
       disableClose: true
     });
 
@@ -103,7 +131,7 @@ export class CycleFormationsComponent implements OnInit {
 
   editFormation(formation: any): void {
     const dialogRef = this.dialog.open(EditFormationDialogComponent, {
-      width: '550px',
+      width: '520px',
       disableClose: true,
       data: formation
     });

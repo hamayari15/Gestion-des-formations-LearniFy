@@ -15,8 +15,18 @@ export class FormationService {
     return this.http.post(`${this.apiUrl}/Formation/add`, formation);
   }
 
-  getFormations(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/Formation/getall`);
+ getFormations(page: number = 1, limit: number = 5, search: string = '', mode: string = ''): Observable<any> {
+    return this.http.get(
+      `${this.apiUrl}/Formation/getall`,
+      {
+        params: {
+          page,
+          limit,
+          search,
+          mode
+        }
+      }
+    );
   }
   
   getFormationsbyParId(participanrId: string): Observable<any> {
