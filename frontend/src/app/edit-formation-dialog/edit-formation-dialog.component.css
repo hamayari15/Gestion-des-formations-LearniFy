@@ -178,7 +178,7 @@
     }
     .sub-label .ti { font-size: 12px; }
 
-    #salle-field { display: none; }
+    #salle-field { display: block; }
 
     .dialog-footer {
       position: sticky;

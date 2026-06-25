@@ -12,6 +12,15 @@ exports.addFormation = async (req, res) => {
       });
     }
 
+    if (
+      req.body.modeFormation === "Présentiel" &&
+      !req.body.numSalle
+    ) {
+      return res.status(400).json({
+        message: "Le numéro de salle est obligatoire pour une formation présentielle."
+      });
+    }
+
     const savedFormation = await formation.save();
 
     res.status(201).json({

@@ -106,14 +106,10 @@ export class EditFormationDialogComponent implements OnInit {
 
       this.horaireA !== '' &&
 
-      (
-
+     (
         this.modeFormation !== 'Présentiel'
-
         ||
-
         (this.numSalle !== null && this.numSalle > 0)
-
       )
 
     );

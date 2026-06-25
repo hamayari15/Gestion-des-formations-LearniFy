@@ -90,7 +90,7 @@ export class CycleFormationsComponent implements OnInit {
 
   navigateToAddFormation(): void {
     const dialogRef = this.dialog.open(AddFormationDialogComponent, {
-      width: '500px',
+      width: '550px',
       disableClose: true
     });
 
@@ -103,7 +103,7 @@ export class CycleFormationsComponent implements OnInit {
 
   editFormation(formation: any): void {
     const dialogRef = this.dialog.open(EditFormationDialogComponent, {
-      width: '500px',
+      width: '550px',
       disableClose: true,
       data: formation
     });
@@ -121,7 +121,7 @@ export class CycleFormationsComponent implements OnInit {
     title: 'Delete formation ?',
     text: 'This action cannot be undone',
     icon: 'warning',
-    width: 500,
+    width: 550,
     showCancelButton: true,
     confirmButtonText: 'Delete',
     cancelButtonText: 'Cancel'

@@ -92,7 +92,13 @@
           <td class="theme-cell">{{ formation.theme }}</td>
 
           <td class="salle-cell">
-            {{ formation.numSalle === '0' ? '—' : formation.numSalle }}
+            <span *ngIf="formation.numSalle !== null">
+              {{ formation.numSalle }}
+            </span>
+
+            <span *ngIf="formation.numSalle === null" class="badge-na">
+              N/A
+            </span>
           </td>
 
           <td>
