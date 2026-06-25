@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormationService } from '../core/services/formation.service';
-import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 import { AddFormationDialogComponent }
 from '../add-formation-dialog/add-formation-dialog.component';
@@ -13,12 +13,18 @@ import { EditFormationDialogComponent } from '../edit-formation-dialog/edit-form
   styleUrls: ['./cycle-formations.component.css'],
 })
 export class CycleFormationsComponent implements OnInit {
+
   formations: any[] = [];
+  filteredFormations: any[] = [];
+
+  searchTerm = '';
+  selectedMode: string = '';
+
+  loading: boolean = false;
   errorMessage: string = '';
 
   constructor(
     private formationService: FormationService,
-    private router: Router,
     private dialog: MatDialog,
   ) {}
 
@@ -27,32 +33,53 @@ export class CycleFormationsComponent implements OnInit {
   }
 
   getFormations(): void {
-    this.formationService.getFormations().subscribe(
-      (data) => {
-        this.formations = data;
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.formationService.getFormations().subscribe({
+      next: (response: any) => {
+        this.formations = response;
+        this.filteredFormations = response;
+        this.loading = false;
       },
-      (error) => {
-        this.errorMessage = 'Erreur lors de la récupération des formations';
-        console.error('Erreur:', error);
+
+      error: (error) => {
+        this.loading = false;
+        this.errorMessage =
+          error.error?.message ||
+          'Erreur lors de la récupération des formations';
       }
-    );
+    });
   }
 
-  deleteFormation(id: string): void {
-    const confirmDelete = confirm(
-      'Êtes-vous sûr de vouloir supprimer cette formation ?'
-    );
-    if (confirmDelete) {
-      this.formationService.deleteFormation(id).subscribe(
-        () => {
-          this.formations = this.formations.filter((f) => f._id !== id);
-        },
-        (error) => {
-          this.errorMessage = 'Erreur lors de la suppression de la formation';
-          console.error('Erreur:', error);
-        }
+  applyFilters(): void {
+    let result = [...this.formations];
+
+    if (this.searchTerm) {
+      result = result.filter(f =>
+        f.theme
+          .toLowerCase()
+          .includes(this.searchTerm.toLowerCase())
       );
     }
+
+    if (this.selectedMode) {
+      result = result.filter(
+        f => f.modeFormation === this.selectedMode
+      );
+    }
+
+    this.filteredFormations = result;
+  }
+
+  searchFormation(): void {
+    const search = this.searchTerm.toLowerCase();
+
+    this.filteredFormations = this.formations.filter(f =>
+      f.theme.toLowerCase().includes(search)
+    );
+
+    this.applyFilters();
   }
 
   navigateToAddFormation(): void {
@@ -77,9 +104,58 @@ export class CycleFormationsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.getFormations(); // refresh list
+        this.getFormations();
       }
     });
   }
 
-}
+  deleteFormation(id: string): void {
+
+  Swal.fire({
+    title: 'Delete formation ?',
+    text: 'This action cannot be undone',
+    icon: 'warning',
+    width: 500,
+    showCancelButton: true,
+    confirmButtonText: 'Delete',
+    cancelButtonText: 'Cancel'
+  }).then((result) => {
+
+    if (result.isConfirmed) {
+
+      this.formationService.deleteFormation(id).subscribe({
+
+        next: () => {
+
+          this.filteredFormations =
+              this.filteredFormations.filter(
+                f => f._id !== id
+              );
+
+            this.formations =
+              this.formations.filter(
+                f => f._id !== id
+              );
+
+            Swal.fire(
+              'Deleted!',
+              'Formation deleted successfully',
+              'success'
+            );
+          },
+
+          error: (error) => {
+
+            Swal.fire(
+              'Error',
+              error.error?.message ||
+              'Failed to delete formation',
+              'error'
+            );
+          }
+        });
+      }
+    });
+  }
+
+};

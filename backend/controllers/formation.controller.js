@@ -39,12 +39,23 @@ exports.addFormation = async (req, res) => {
 
 exports.getAllFormations = async (req, res) => {
   try {
-    const formations = await Formation.find();
+    const formations = await Formation.find().sort({ createdAt: -1 });
 
-    res.status(200).json(formations);
+    return res.status(200).json({
+      success: true,
+      message:
+        formations.length > 0
+          ? "Formations récupérées avec succès"
+          : "Aucune formation trouvée",
+      count: formations.length,
+      data: formations,
+    });
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Erreur lors de la récupération des formations",
     });
   }
 };
@@ -162,23 +173,23 @@ console.log("ID:", req.params.id);
 
 exports.deleteFormation = async (req, res) => {
   try {
-    const deletedFormation =
-      await Formation.findByIdAndDelete(
-        req.params.id
-      );
+    const formation = await Formation.findByIdAndDelete(req.params.id);
 
-    if (!deletedFormation) {
+    if (!formation) {
       return res.status(404).json({
-        message: "Formation not found",
+        success: false,
+        message: "Formation introuvable",
       });
     }
 
-    res.status(200).json({
-      message: "Formation deleted successfully",
+    return res.status(200).json({
+      success: true,
+      message: "Formation supprimée avec succès",
     });
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
+    return res.status(500).json({
+      success: false,
+      message: "Erreur lors de la suppression",
     });
   }
 };

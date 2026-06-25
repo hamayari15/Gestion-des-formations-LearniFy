@@ -1,55 +1,188 @@
-<div class="container">
-  <h2 class="mt-4">Liste des Formations</h2>
+<div class="container mt-4">
 
-  <button class="btn btn-primary mb-3" (click)="navigateToAddFormation()">
-    <i class="fas fa-plus"></i> Add Formation
-  </button>
+  <div class="d-flex justify-content-between align-items-center mb-4">
 
-  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-    {{ errorMessage }}
+    <h2>Liste des Formations</h2>
+
+    <button
+      class="btn btn-primary"
+      (click)="navigateToAddFormation()">
+
+      <i class="fas fa-plus"></i>
+      Add Formation
+
+    </button>
+
   </div>
 
-  <table class="table mt-4">
-    <thead>
-      <tr>
-        <th scope="col">Thème</th>
-        <th scope="col">N° Salle</th>
-        <th scope="col">Mode Formation</th>
-        <th scope="col">Période Du</th>
-        <th scope="col">Période À</th>
-        <th scope="col">Horaire Du</th>
-        <th scope="col">Horaire À</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
+  <!-- Error Message -->
 
-    <tbody>
-      <tr *ngFor="let formation of formations">
-        <td>{{ formation.theme }}</td>
-        <td>{{ formation.numSalle=="0" ? "_" : formation.numSalle }}</td>
-        <td>{{ formation.modeFormation }}</td>
-        <td>{{ formation.periodeDu | date }}</td>
-        <td>{{ formation.periodeA | date }}</td>
-        <td>{{ formation.horaireDu }}</td>
-        <td>{{ formation.horaireA }}</td>
-        <td>
-          <div class="button-group">
-            <button
-              class="btn btn-warning btn-sm me-2"
-              (click)="editFormation(formation)">
-            <i class="fas fa-edit"></i> 
+  <div
+    *ngIf="errorMessage"
+    class="alert alert-danger">
 
-            </button>
-            <button
-              class="btn btn-danger btn-sm"
-              (click)="deleteFormation(formation._id)">
-            <i class="fas fa-trash-alt"></i> 
+    {{ errorMessage }}
 
-            </button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  
+  </div>
+
+  <!-- Search & Filter -->
+
+  <div class="card shadow-sm mb-4">
+
+    <div class="card-body">
+
+      <div class="row g-3">
+
+        <div class="col-md-8">
+
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search by theme..."
+            [(ngModel)]="searchTerm"
+            (input)="applyFilters()">
+
+        </div>
+
+        <div class="col-md-4">
+
+          <select
+            class="form-select"
+            [(ngModel)]="selectedMode"
+            (change)="applyFilters()">
+
+            <option value="">All Modes</option>
+
+            <option value="Présentiel">
+              Présentiel
+            </option>
+
+            <option value="En ligne">
+              En ligne
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Loading -->
+
+  <div
+    *ngIf="loading"
+    class="text-center py-5">
+
+    <div
+      class="spinner-border text-primary"
+      role="status">
+
+    </div>
+
+  </div>
+
+  <!-- Empty State -->
+
+  <div
+    *ngIf="!loading && filteredFormations.length === 0"
+    class="alert alert-info">
+
+    <i class="fas fa-info-circle"></i>
+    No formations found.
+
+  </div>
+
+  <!-- Table -->
+
+  <div
+    class="card shadow-sm"
+    *ngIf="!loading && filteredFormations.length > 0">
+
+    <div class="card-body p-0">
+
+      <table class="table table-hover mb-0">
+
+        <thead class="table-light">
+
+          <tr>
+            <th>Thème</th>
+            <th>N° Salle</th>
+            <th>Mode Formation</th>
+            <th>Période Du</th>
+            <th>Période À</th>
+            <th>Horaire Du</th>
+            <th>Horaire À</th>
+            <th class="text-center">Actions</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let formation of filteredFormations">
+
+            <td>{{ formation.theme }}</td>
+
+            <td>
+              {{ formation.numSalle === '0' ? '_' : formation.numSalle }}
+            </td>
+
+            <td>
+
+              <span class="badge bg-primary">
+                {{ formation.modeFormation }}
+              </span>
+
+            </td>
+
+            <td>
+              {{ formation.periodeDu | date:'dd/MM/yyyy' }}
+            </td>
+
+            <td>
+              {{ formation.periodeA | date:'dd/MM/yyyy' }}
+            </td>
+
+            <td>
+              {{ formation.horaireDu }}
+            </td>
+
+            <td>
+              {{ formation.horaireA }}
+            </td>
+
+            <td class="text-center">
+
+              <button
+                class="btn btn-warning btn-sm me-2"
+                (click)="editFormation(formation)">
+
+                <i class="fas fa-edit"></i>
+
+              </button>
+
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="deleteFormation(formation._id)">
+
+                <i class="fas fa-trash-alt"></i>
+
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
 </div>
