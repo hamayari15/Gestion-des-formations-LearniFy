@@ -48,23 +48,54 @@ exports.addFormation = async (req, res) => {
 
 exports.getAllFormations = async (req, res) => {
   try {
-    const formations = await Formation.find().sort({ createdAt: -1 });
+
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+
+    const search = req.query.search || "";
+    const mode = req.query.mode || "";
+
+    const skip = (page - 1) * limit;
+
+    let query = {};
+
+    if (search) {
+      query.theme = {
+        $regex: search,
+        $options: "i"
+      };
+    }
+
+    if (mode) {
+      query.modeFormation = mode;
+    }
+
+    const totalItems = await Formation.countDocuments(query);
+
+    const formations = await Formation.find(query)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
 
     return res.status(200).json({
       success: true,
-      message:
-        formations.length > 0
-          ? "Formations récupérées avec succès"
-          : "Aucune formation trouvée",
-      count: formations.length,
-      data: formations,
+      message: "Formations récupérées avec succès",
+
+      data: {
+        formations,
+        currentPage: page,
+        totalPages: Math.ceil(totalItems / limit),
+        totalItems
+      }
     });
+
   } catch (error) {
+
     console.error(error);
 
     return res.status(500).json({
       success: false,
-      message: "Erreur lors de la récupération des formations",
+      message: "Erreur lors de la récupération des formations"
     });
   }
 };
@@ -137,9 +168,6 @@ exports.getMyFormations = async (req, res) => {
 exports.updateFormation = async (req, res) => {
   try {
 
-    console.log("BODY:", req.body);
-console.log("ID:", req.params.id);
-
     const updatedFormation =
       await Formation.findByIdAndUpdate(
         req.params.id,
@@ -154,6 +182,15 @@ console.log("ID:", req.params.id);
       return res.status(404).json({
         success: false,
         message: "Cycle de formation introuvable.",
+      });
+    }
+    
+    if (
+      req.body.modeFormation === "Présentiel" &&
+      !req.body.numSalle
+    ) {
+      return res.status(400).json({
+        message: "Le numéro de salle est obligatoire pour une formation présentielle."
       });
     }
 

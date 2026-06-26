@@ -194,7 +194,6 @@ export class EditFormationDialogComponent implements OnInit {
         });
 
         this.dialogRef.close(true);
-        this.router.navigate(['admin-interface/cycle-formations']);
       },
 
       (error) => {

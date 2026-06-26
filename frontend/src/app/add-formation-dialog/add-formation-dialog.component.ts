@@ -105,8 +105,7 @@ export class AddFormationDialogComponent {
           timer: 3000,
           timerProgressBar: true,
         });
-        this.dialogRef.close();
-        this.router.navigate(['admin-interface/cycle-formations']);
+        this.dialogRef.close(true);
       },
       (error) => {
         Swal.fire({

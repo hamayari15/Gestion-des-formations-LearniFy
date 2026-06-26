@@ -35,7 +35,7 @@
 }
 
 .btn-add:hover {
-  background: #0c447c;
+  background: #144a80;
   color: #e6f1fb;
 }
 
@@ -280,6 +280,57 @@
 .btn-delete:hover {
   background: #fcebeb;
   border-color: #f7c1c1;
+}
+
+.pagination {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+  margin-top: 20px;
+}
+
+.btn-page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 10px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #374151;
+  background: #fff;
+  border: 0.5px solid #d1d5db;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.btn-page:hover:not(:disabled):not(.active) {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.btn-page.active {
+  background: #185fa5; 
+  color: #fff;
+  border-color: #185fa5;
+}
+
+.btn-page.active:hover {
+  background: #144a80;
+  border-color: #144a80;
+}
+
+.btn-page:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-info {
+    font-size:14px;
+    color:#555;
 }
 
 .spinner-wrap {

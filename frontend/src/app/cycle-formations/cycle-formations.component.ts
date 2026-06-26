@@ -38,7 +38,6 @@ export class CycleFormationsComponent implements OnInit {
   }
 
   getFormations(): void {
-    this.loading = true;
     this.errorMessage = '';
 
     this.formationService.getFormations(
@@ -67,41 +66,22 @@ export class CycleFormationsComponent implements OnInit {
   }
 
   applyFilters(): void {
-    let result = [...this.formations];
-    this.page = 1
-
-    if (this.searchTerm) {
-      result = result.filter(f =>
-        f.theme
-          .toLowerCase()
-          .includes(this.searchTerm.toLowerCase())
-      );
-    }
-
-    if (this.selectedMode) {
-      result = result.filter(
-        f => f.modeFormation === this.selectedMode
-      );
-    }
-
-    this.filteredFormations = result;
-  }
-
-  searchFormation(): void {
-    const search = this.searchTerm.toLowerCase();
-
-    this.filteredFormations = this.formations.filter(f =>
-      f.theme.toLowerCase().includes(search)
-    );
-
-    this.applyFilters();
+    this.page = 1;
+    this.getFormations();
   }
 
   clearFilters(): void {
     this.searchTerm = '';
     this.selectedMode = '';
     this.page = 1
-    this.applyFilters();
+    this.getFormations();
+  }
+
+  prevPage(): void {
+    if (this.page > 1) {
+      this.page--;
+      this.getFormations();
+    }
   }
 
   nextPage(): void {
@@ -123,7 +103,7 @@ export class CycleFormationsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
+      if (result === true) {
         this.getFormations();
       }
     });
@@ -137,7 +117,7 @@ export class CycleFormationsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
+      if (result === true) {
         this.getFormations();
       }
     });
@@ -161,21 +141,12 @@ export class CycleFormationsComponent implements OnInit {
 
         next: () => {
 
-          this.filteredFormations =
-              this.filteredFormations.filter(
-                f => f._id !== id
-              );
-
-            this.formations =
-              this.formations.filter(
-                f => f._id !== id
-              );
-
             Swal.fire(
               'Deleted!',
               'Formation deleted successfully',
               'success'
             );
+            this.getFormations();
           },
 
           error: (error) => {

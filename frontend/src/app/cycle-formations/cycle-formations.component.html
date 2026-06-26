@@ -1,6 +1,5 @@
 <div class="container mt-4">
 
-  <!-- Header -->
   <div class="page-header">
     <div>
       <h2 class="page-title">Liste des Formations</h2>
@@ -12,13 +11,11 @@
     </button>
   </div>
 
-  <!-- Error Message -->
   <div *ngIf="errorMessage" class="alert-error">
     <i class="fas fa-exclamation-circle"></i>
     {{ errorMessage }}
   </div>
 
-  <!-- Search & Filter -->
   <div class="filter-row">
     <div class="search-wrap">
       <i class="fas fa-search search-icon"></i>
@@ -42,7 +39,7 @@
   <!-- Count bar -->
   <div class="count-bar">
     <span class="count-label">
-      {{ filteredFormations.length }} formation{{ filteredFormations.length !== 1 ? 's' : '' }}
+      {{ totalItems }} formation{{ totalItems !== 1 ? 's' : '' }}
     </span>
     <button
       class="clear-btn"
@@ -141,5 +138,31 @@
     </table>
 
   </div>
+
+  <div class="pagination" *ngIf="totalPages > 1">
+
+  <button
+    class="btn-page"
+    (click)="prevPage()"
+    [disabled]="page === 1">
+    Previous
+  </button>
+
+    <button
+    *ngFor="let p of [].constructor(totalPages); let i = index"
+    class="btn-page"
+    [class.active]="page === i + 1"
+    (click)="goToPage(i + 1)">
+    {{ i + 1 }}
+  </button>
+
+  <button
+    class="btn-page"
+    (click)="nextPage()"
+    [disabled]="page === totalPages">
+    Next
+  </button>
+
+</div>
 
 </div>
