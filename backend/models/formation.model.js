@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 
 const formationSchema = new mongoose.Schema(
   {
-    theme: {
-      type: String,
-      required: [true, "Theme is required"],
-      trim: true,
+      theme: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
     },
 
     modeFormation: {
