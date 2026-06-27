@@ -18,6 +18,10 @@ export class ParticipantService {
     return this.http.get<any[]>(`${this.apiUrl}/getparticipantsGrowth`);
   }
 
+  getActiveInactiveStats(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/stats/active-inactive`);
+  }
+
   getParticipantById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/getparticipant/${id}`);
   }

@@ -20,4 +20,46 @@
     <canvas id="growthChart"></canvas>
   </div>
 
+  <div class="charts">
+
+  <div class="chart-container">
+
+    <canvas
+      baseChart
+      [data]="ageChartData"
+      [options]="chartOptions"
+      [type]="chartType">
+    </canvas>
+
+  </div>
+
+  <div class="chart-container">
+
+    <canvas
+      baseChart
+      [data]="genderChartData"
+      [options]="chartOptions"
+      [type]="chartType">
+    </canvas>
+
+  </div>
+
+</div>  
+
+<div class="chart-wrapper">
+
+    <canvas id="growthLineChart"></canvas>
+
+</div>
+
+<div class="chart-container">
+
+  <canvas
+    baseChart
+    [data]="doughnutChartData"
+    [type]="doughnutChartType">
+  </canvas>
+
+</div>
+
 </div>

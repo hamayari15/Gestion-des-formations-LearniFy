@@ -77,6 +77,9 @@ exports.Login = async (req, res) => {
       });
     }
 
+    participant.lastLogin = new Date();
+    await participant.save();
+
     const payload = {
       id: participant._id,
       role: "User"
@@ -148,6 +151,44 @@ exports.getParticipantsGrowth = async (req, res) => {
       success: false,
       message: "Une erreur est survenue lors de la récupération des statistiques de croissance des participants.",
       error: error.message,
+    });
+  }
+};
+
+
+exports.getActiveInactiveStats = async (req, res) => {
+  try {
+
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - 7);
+
+    const active = await Participant.countDocuments({
+      lastLogin: { $gte: cutoff }
+    });
+
+    const inactive = await Participant.countDocuments({
+      $or: [
+        { lastLogin: null },
+        { lastLogin: { $lt: cutoff } }
+      ]
+    });
+
+    const total = active + inactive;
+
+    return res.status(200).json({
+      success: true,
+      total,
+      active,
+      inactive,
+      activePercent: total ? (active / total) * 100 : 0,
+      inactivePercent: total ? (inactive / total) * 100 : 0
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Error fetching active/inactive stats",
+      error: error.message
     });
   }
 };

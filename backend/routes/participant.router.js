@@ -16,6 +16,8 @@ router.get("/getParticipants", participantController.getParticipants);
 
 router.get("/getParticipantsGrowth", participantController.getParticipantsGrowth);
 
+router.get("/stats/active-inactive", participantController.getActiveInactiveStats);
+
 router.get("/getParticipant/:id", participantController.getParticipantById);
 
 router.put("/updateParticipant/:id", participantController.updateParticipant);
