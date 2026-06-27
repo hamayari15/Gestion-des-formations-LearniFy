@@ -1,9 +1,9 @@
-const Inscription = require("../models/Inscription");
-const Formation = require("../models/Formation");
-const Participant = require("../models/Participant");
+const Inscription = require("../models/Inscription.model");
+const Formation = require("../models/Formation.model");
+const Participant = require("../models/Participant.model");
 
 
-const getInscriptionsPerTheme = async (req, res) => {
+exports.getInscriptionsPerTheme = async (req, res) => {
   try {
     const data = await Inscription.aggregate([
       {
@@ -33,7 +33,7 @@ const getInscriptionsPerTheme = async (req, res) => {
 };
 
 
-const getFormationModeDistribution = async (req, res) => {
+exports.getFormationModeDistribution = async (req, res) => {
   try {
     const data = await Formation.aggregate([
       {
@@ -51,7 +51,7 @@ const getFormationModeDistribution = async (req, res) => {
 };
 
 
-const getInscriptionsOverTime = async (req, res) => {
+exports.getInscriptionsOverTime = async (req, res) => {
   try {
     const data = await Inscription.aggregate([
       {

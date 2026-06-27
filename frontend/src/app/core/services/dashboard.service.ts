@@ -12,7 +12,7 @@ export class DashboardService {
   constructor(private http: HttpClient) { }
 
   getInscriptionsPerTheme() {
-    return this.http.get(`${this.baseUrl}/dashboard/inscriptions-per-theme`);
+    return this.http.get(`${this.baseUrl}/Dashboard/inscriptions-per-theme`);
   }
 
   getFormationModeDistribution() {
