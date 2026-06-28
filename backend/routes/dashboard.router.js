@@ -4,7 +4,7 @@ const router = express.Router();
 const dashboardController = require("../controllers/dashboard.controller");
 
 
-router.get("/inscriptions-per-theme", dashboardController.getInscriptionsPerTheme);
+router.get("/inscriptions-by-status", dashboardController.getInscriptionsByStatus);
 
 router.get("/formation-mode", dashboardController.getFormationModeDistribution);
 

@@ -33,6 +33,7 @@
       <option value="">All Modes</option>
       <option value="Présentiel">Présentiel</option>
       <option value="En ligne">En ligne</option>
+      <option value="Hybride">Hybride</option>
     </select>
   </div>
 
@@ -102,7 +103,8 @@
             <span
               class="badge"
               [class.badge-presentiel]="formation.modeFormation === 'Présentiel'"
-              [class.badge-enligne]="formation.modeFormation === 'En ligne'">
+              [class.badge-enligne]="formation.modeFormation === 'En ligne'"
+              [class.badge-hybride]="formation.modeFormation === 'Hybride'">
               {{ formation.modeFormation }}
             </span>
           </td>

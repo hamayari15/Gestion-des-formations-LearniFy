@@ -3,30 +3,28 @@ const Formation = require("../models/Formation.model");
 const Participant = require("../models/Participant.model");
 
 
-exports.getInscriptionsPerTheme = async (req, res) => {
+exports.getInscriptionsByStatus = async (req, res) => {
   try {
-    const data = await Inscription.aggregate([
-      {
-        $lookup: {
-          from: "formations",
-          localField: "formationId",
-          foreignField: "_id",
-          as: "formation",
-        },
-      },
-      { $unwind: "$formation" },
+    const raw = await Inscription.aggregate([
       {
         $group: {
-          _id: "$formation.theme",
-          count: { $sum: 1 },
-        },
-      },
-      {
-        $sort: { count: -1 },
-      },
+          _id: "$status",
+          count: { $sum: 1 }
+        }
+      }
     ]);
 
-    res.json(data);
+    const defaults = ["Validée", "Refusée", "En Attente"];
+
+    const result = defaults.map(status => {
+      const found = raw.find(r => r._id === status);
+      return {
+        _id: status,
+        count: found ? found.count : 0
+      };
+    });
+
+    res.json(result);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

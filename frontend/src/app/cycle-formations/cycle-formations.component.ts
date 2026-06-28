@@ -35,6 +35,7 @@ export class CycleFormationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFormations();
+    this.loading = true
   }
 
   getFormations(): void {
@@ -47,13 +48,14 @@ export class CycleFormationsComponent implements OnInit {
       this.selectedMode
     ).subscribe({
       next: (response: any) => {
+        console.log(response)
         this.formations = response.data.formations;
         this.filteredFormations = response.data.formations;
 
         this.totalPages = response.data.totalPages;
         this.totalItems = response.data.totalItems;
 
-        this.loading = false;
+        this.loading = false; 
       },
 
       error: (error) => {

@@ -6,16 +6,30 @@
     <div class="card">
       <h2><i class="fas fa-chalkboard-teacher"></i> Total Formations</h2>
       <p class="total">{{ totalFormations }}</p>
+        <div class="mt-2">
+    <p>En ligne: {{ onlinePercent }}%</p>
+    <p>Hybrid: {{ hybridPercent }}%</p>
+    <p>Présentiel: {{ offlinePercent }}%</p>
+  </div>
     </div>
 
     <div class="card">
       <h2><i class="fas fa-file-signature"></i> Total Inscriptions</h2>
       <p class="totalI">{{ totalInscriptions }}</p>
+       <div class="mt-2">
+    <p>Pending: {{ pendingPercent }}%</p>
+    <p>Approved: {{ approvedPercent }}%</p>
+    <p>Rejected: {{ rejectedPercent }}%</p>
+  </div>
     </div>
 
     <div class="card">
       <h2><i class="fas fa-users"></i> Total Participants</h2>
       <p class="totalP">{{ totalParticipants }}</p>
+       <div class="mt-2">
+    <p>Active: {{ activePercent }}%</p>
+    <p>Inactive: {{ inactivePercent }}%</p>
+  </div>
     </div>
   </div>
 
@@ -25,6 +39,22 @@
         baseChart
         [data]="barChartData"
         [type]="barChartType">
+      </canvas>
+    </div>
+
+    <div class="chart-container">
+      <canvas
+        baseChart
+        [data]="pieChartData"
+        [type]="pieChartType">
+      </canvas>
+    </div>
+
+    <div class="chart-container">
+      <canvas
+        baseChart
+        [data]="lineChartData"
+        [type]="lineChartType">
       </canvas>
     </div>
   </div>

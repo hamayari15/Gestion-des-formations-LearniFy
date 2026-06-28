@@ -2,15 +2,14 @@ const mongoose = require("mongoose");
 
 const formationSchema = new mongoose.Schema(
   {
-      theme: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
+    theme: {
+      type: 'String',
       required: true,
     },
 
     modeFormation: {
       type: String,
-      enum: ["En ligne", "Présentiel"],
+      enum: ["En ligne", "Présentiel", "Hybride"],
       required: [true, "Mode de formation is required"],
     },
 
@@ -55,12 +54,7 @@ const formationSchema = new mongoose.Schema(
       type: String,
       required: [true, "End time is required"],
     },
-
-    status: {
-      type: String,
-      enum: ["Validée", "Refusée", "En Attente"],
-      default: "En Attente",
-    },
+    
   },
   {
     timestamps: true,

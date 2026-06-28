@@ -242,6 +242,11 @@
   color: #0c447c;
 }
 
+.badge-hybride {
+  background: #fff4e5;
+  color: #8a4b08;
+}
+
 .actions {
   display: flex;
   align-items: center;

@@ -11,8 +11,8 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-  getInscriptionsPerTheme() {
-    return this.http.get(`${this.baseUrl}/Dashboard/inscriptions-per-theme`);
+  getInscriptionsByStatus() {
+    return this.http.get(`${this.baseUrl}/Dashboard/inscriptions-by-status`);
   }
 
   getFormationModeDistribution() {
