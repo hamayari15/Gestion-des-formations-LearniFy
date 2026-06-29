@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { FormationService } from '../core/services/formation.service';
-import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -33,8 +32,6 @@ export class EditFormationDialogComponent implements OnInit {
   constructor(
 
     private formationService: FormationService,
-
-    private router: Router,
 
     private dialogRef: MatDialogRef<EditFormationDialogComponent>,
 

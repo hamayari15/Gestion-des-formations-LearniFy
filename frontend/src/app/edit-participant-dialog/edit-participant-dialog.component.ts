@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ParticipantService } from '../core/services/participant.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-participant-dialog',
@@ -17,7 +18,8 @@ export class EditParticipantDialogComponent implements OnInit {
     private fb: FormBuilder,
     private participantService: ParticipantService,
     private route: ActivatedRoute,
-    private router: Router
+    private dialogRef: MatDialogRef<EditParticipantDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +56,6 @@ export class EditParticipantDialogComponent implements OnInit {
         .updateParticipant(this.participantId, this.participantForm.value)
         .subscribe({
           next: () => {
-            this.router.navigate(['admin-interface/liste-participant']);
           },
           error: (err) => {
             console.error('Erreur lors de la mise à jour du participant:', err);
@@ -64,7 +65,8 @@ export class EditParticipantDialogComponent implements OnInit {
     }
   }
 
-  annuler(): void {
-    this.router.navigate(['admin-interface/liste-participant']);
+   closeDialog() {
+    this.dialogRef.close();
   }
-}
+
+};

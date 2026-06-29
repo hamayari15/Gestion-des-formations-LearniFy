@@ -110,30 +110,30 @@ exports.getInscriptions = async (req, res) => {
 };
 
 
-exports.getInscriptionById = async (
-  req,
-  res
-) => {
-  try {
-    const inscription =
-      await Inscription.findById(
-        req.params.id
-      );
+// exports.getInscriptionById = async (
+//   req,
+//   res
+// ) => {
+//   try {
+//     const inscription =
+//       await Inscription.findById(
+//         req.params.id
+//       );
 
-    if (!inscription) {
-      return res.status(404).json({
-        message: "Inscription not found.",
-      });
-    }
+//     if (!inscription) {
+//       return res.status(404).json({
+//         message: "Inscription not found.",
+//       });
+//     }
 
-    res.status(200).json(inscription);
+//     res.status(200).json(inscription);
 
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
-  }
-};
+//   } catch (error) {
+//     res.status(500).json({
+//       message: error.message,
+//     });
+//   }
+// };
 
 
 exports.updateInscription = async (

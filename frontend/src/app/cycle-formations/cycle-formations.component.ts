@@ -100,7 +100,7 @@ export class CycleFormationsComponent implements OnInit {
 
   navigateToAddFormation(): void {
     const dialogRef = this.dialog.open(AddFormationDialogComponent, {
-      width: '520px',
+      width: '500',
       disableClose: true
     });
 

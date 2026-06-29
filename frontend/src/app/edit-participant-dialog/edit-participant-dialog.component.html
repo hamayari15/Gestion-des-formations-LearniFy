@@ -1,49 +1,115 @@
-<div class="container">
-    <h1 class="mt-4">Modifier Participant</h1>
-  
-    <form [formGroup]="participantForm" (ngSubmit)="onSubmit()" class="mt-5">
-      <div class="form-group">
-        <label for="fullname">Nom Complet</label>
-        <input
-          type="text"
-          class="form-control"
-          id="fullname"
-          formControlName="fullname"
-          required/>
+<div class="dialog">
+
+  <!-- HEADER -->
+  <div class="dialog-header">
+
+    <div class="header-left">
+
+      <div class="header-icon">
+        <i class="ti ti-user" aria-hidden="true"></i>
       </div>
-  
-      <div class="form-group mt-3">
-        <label for="email">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          formControlName="email"
-          required/>
-      </div>
-  
-      <div class="form-group mt-3">
-        <label for="age">Âge</label>
-        <input
-          type="number"
-          class="form-control"
-          id="age"
-          formControlName="age"
-          required/>
-      </div>
-  
+
       <div>
-        <button type="button" class="btn btn-secondary mt-4" (click)="annuler()">
-          Annuler
-        </button>
-    
-        <button
-          type="submit"
-          class="btn btn-primary mt-4"
-          [disabled]="participantForm.invalid">
-          Modifier
-        </button>
+        <div class="dialog-title">Participant</div>
+        <div class="dialog-subtitle">Modifier les informations du participant</div>
       </div>
-    </form>
+
+    </div>
+
+    <button class="close-btn" aria-label="Fermer" (click)="closeDialog()">
+      <i class="ti ti-x"></i>
+    </button>
+
   </div>
-  
+
+  <!-- BODY -->
+  <div class="dialog-body">
+
+    <!-- FULL NAME -->
+    <div class="field">
+      <div class="field-label">
+        <i class="ti ti-user"></i>
+        Nom complet
+        <span class="required-dot"></span>
+      </div>
+
+      <div class="input-wrap">
+        <i class="ti ti-user"></i>
+        <input
+          class="f-input"
+          type="text"
+          formControlName="fullname"
+          placeholder="Ex: Mohamed Ayari">
+      </div>
+    </div>
+
+    <!-- EMAIL -->
+    <div class="field">
+      <div class="field-label">
+        <i class="ti ti-mail"></i>
+        Email
+        <span class="required-dot"></span>
+      </div>
+
+      <div class="input-wrap">
+        <i class="ti ti-mail"></i>
+        <input
+          class="f-input"
+          type="email"
+          formControlName="email"
+          placeholder="exemple@mail.com">
+      </div>
+    </div>
+
+    <!-- AGE -->
+    <div class="field">
+      <div class="field-label">
+        <i class="ti ti-cake"></i>
+        Âge
+        <span class="required-dot"></span>
+      </div>
+
+      <div class="input-wrap">
+        <i class="ti ti-hash"></i>
+        <input
+          class="f-input"
+          type="number"
+          formControlName="age"
+          placeholder="Ex: 23"
+          min="16"
+          max="100">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="dialog-footer">
+
+    <span class="footer-hint">
+      <i class="ti ti-info-circle"></i>
+      Modifier uniquement les champs nécessaires
+    </span>
+
+    <div class="footer-actions">
+
+      <button type="button" class="btn-cancel" (click)="closeDialog()">
+        <i class="ti ti-x"></i>
+        Annuler
+      </button>
+
+      <button
+        type="submit"
+        class="btn-save"
+        (click)="onSubmit()"
+        [disabled]="participantForm.invalid">
+
+        <i class="ti ti-device-floppy"></i>
+        Modifier
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
