@@ -105,13 +105,15 @@ export class UsersGrowthComponent implements OnInit {
 
     this.participantService.getParticipants().subscribe({
 
-      next: (participants) => {
+      next: (res) => {
 
-        this.participants = participants;
+        this.participants = res.data.participants
 
         this.calculateAgeDistribution();
         this.calculateGenderDistribution();
 
+        this.ageChartData = { ...this.ageChartData };
+        this.genderChartData = { ...this.genderChartData };
       },
 
       error: (err) => {
