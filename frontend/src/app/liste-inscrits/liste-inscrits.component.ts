@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { InscriptionService } from '../core/services/incription.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-liste-inscrits',
@@ -8,70 +8,113 @@ import { InscriptionService } from '../core/services/incription.service';
   styleUrls: ['./liste-inscrits.component.css'],
 })
 export class ListeInscritsComponent implements OnInit {
-  inscriptions: any[] = [];
-  filteredInscriptions: any[] = [];
-  searchTheme: string = '';
-  searchNumSalle: string = '';
 
-  constructor(
-    private inscriptionService: InscriptionService,
-    private router: Router
-  ) {}
+  inscriptions: any[] = [];
+
+  page: number = 1;
+  limit: number = 5;
+  totalPages: number = 0;
+  totalItems: number = 0;
+
+  search: string = '';
+  sort: string = 'desc';
+
+  loading: boolean = false;
+  errorMessage: string = '';
+
+  constructor(private inscriptionService: InscriptionService) {}
 
   ngOnInit(): void {
     this.getInscriptions();
+    this.loading = true;
   }
 
-  getInscriptions() {
-    this.inscriptionService.getInscriptions().subscribe(
-      (data) => {
-        this.inscriptions = data;
-        this.filteredInscriptions = data;
-        console.log('Inscriptions récupérées avec succès', data);
+  getInscriptions(): void {
+
+    this.errorMessage = '';
+
+    this.inscriptionService.getInscriptions(
+      this.page,
+      this.limit,
+      this.search,
+      this.sort
+    ).subscribe({
+
+      next: (res: any) => {
+
+        this.inscriptions = res.data.inscriptions;
+
+        this.totalPages = res.data.totalPages;
+        this.totalItems = res.data.totalItems;
+
+        this.loading = false;
+
       },
-      (error) => {
-        console.error('Erreur lors de la récupération des inscriptions', error);
+
+      error: () => {
+
+        this.loading = false;
+        this.errorMessage = 'Erreur lors du chargement des inscriptions';
+
       }
-    );
+
+    });
+
+  }
+
+  applyFilters(): void {
+    this.page = 1;
+    this.getInscriptions();
+  }
+
+  clearFilters(): void {
+    this.search = '';
+    this.page = 1;
+    this.getInscriptions();
+  }
+
+  toggleSort(): void {
+    this.sort = this.sort === 'desc' ? 'asc' : 'desc';
+    this.getInscriptions();
+    this.loading = false;
+  }
+
+  nextPage(): void {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.getInscriptions();
+    }
+  }
+
+  prevPage(): void {
+    if (this.page > 1) {
+      this.page--;
+      this.getInscriptions();
+    }
+  }
+
+  goToPage(p: number): void {
+    this.page = p;
+    this.getInscriptions();
   }
 
   updateStatus(inscription: any, status: string): void {
-    this.inscriptionService
-      .updateInscriptionStatus(inscription._id, status)
-      .subscribe(
-        (response) => {
-          console.log('Statut mis à jour:', response);
-          this.getInscriptions();
-        },
-        (error) => {
-          console.error('Erreur lors de la mise à jour du statut', error);
-        }
-      );
-  }
 
-  search() {
-    this.filteredInscriptions = this.inscriptions.filter((inscription) => {
-      const matchesTheme =
-        !this.searchTheme ||
-        inscription.theme
-          .toLowerCase()
-          .includes(this.searchTheme.toLowerCase());
-      const matchesNumSalle =
-        !this.searchNumSalle ||
-        inscription.numSalle.toString().includes(this.searchNumSalle);
-      return matchesTheme && matchesNumSalle;
+    this.inscriptionService.updateInscriptionStatus(
+      inscription._id,
+      status
+    ).subscribe({
+
+      next: () => {
+        this.getInscriptions();
+      },
+
+      error: () => {
+        Swal.fire('Error', 'Status update failed', 'error');
+      }
+
     });
+
   }
 
-  searchByTheme() {
-    this.filteredInscriptions = this.inscriptions.filter((inscription) =>
-      inscription.theme.toLowerCase().includes(this.searchTheme.toLowerCase())
-    );
-  }
-
-  resetSearch() {
-    this.searchTheme = '';
-    this.searchNumSalle = '';
-    this.filteredInscriptions = this.inscriptions;
-  }
 }

@@ -60,7 +60,7 @@ export class InscriptionService {
     return this.http.put(`${this.apiUrl}/Inscription/inscriptions/${id}`, {status,});
   }
 
-  patchInscriptionStatus(id: string, status: string): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/Inscription/updatestatus/${id}`, {status});
-  }
+  // patchInscriptionStatus(id: string, status: string): Observable<any> {
+  //   return this.http.patch(`${this.apiUrl}/Inscription/updatestatus/${id}`, {status});
+  // }
 }
