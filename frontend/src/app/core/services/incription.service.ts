@@ -31,13 +31,30 @@ export class InscriptionService {
       `${this.apiUrl}/Inscription/addinscription/${participanrId}/${formationid}`, inscriptionData);
   }
 
-  getInscriptions(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/Inscription/getinscriptions`);
+  getInscriptions(
+    page: number = 1,
+    limit: number = 5,
+    search: string = '',
+    sort: string = 'desc'
+  ): Observable<any> {
+
+    return this.http.get<any>(
+      `${this.apiUrl}/Inscription/getinscriptions`,
+      {
+        params: {
+          page,
+          limit,
+          search,
+          sort
+        }
+      }
+    );
+
   }
 
-  getInscriptionById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/Inscription/getinscription/${id}`);
-  }
+  // getInscriptionById(id: string): Observable<any> {
+  //   return this.http.get<any>(`${this.apiUrl}/Inscription/getinscription/${id}`);
+  // }
 
   updateInscriptionStatus(id: string, status: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/Inscription/inscriptions/${id}`, {status,});
