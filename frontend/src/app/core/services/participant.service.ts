@@ -10,8 +10,25 @@ export class ParticipantService {
 
   constructor(private http: HttpClient) {}
 
-  getParticipants(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/getparticipants`);
+  getParticipants(
+    page: number = 1,
+    limit: number = 5,
+    search: string = '',
+    status: string = ''
+  ): Observable<any> {
+
+    return this.http.get(
+      `${this.apiUrl}/getparticipants`,
+      {
+        params: {
+          page,
+          limit,
+          search,
+          status
+        }
+      }
+    );
+
   }
 
   getParticipantsGrowth(): Observable<any[]> {

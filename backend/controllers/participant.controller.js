@@ -106,13 +106,54 @@ exports.Login = async (req, res) => {
 
 exports.getParticipants = async (req, res) => {
   try {
-    const Participants = await Participant.find();
 
-    res.status(200).json(Participants);
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+
+    const search = req.query.search || "";
+    const status = req.query.status || "";
+
+    const skip = (page - 1) * limit;
+
+    let query = {};
+
+    if (search) {
+      query.fullname = {
+        $regex: search,
+        $options: "i"
+      };
+    }
+
+    if (status) {
+      query.status = status;
+    }
+
+    const totalItems = await Participant.countDocuments(query);
+
+    const participants = await Participant.find(query)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    return res.status(200).json({
+      success: true,
+      data: {
+        participants,
+        currentPage: page,
+        totalPages: Math.ceil(totalItems / limit),
+        totalItems
+      }
     });
+
+  } catch (error) {
+
+    console.log(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Erreur lors de la récupération des participants"
+    });
+
   }
 };
 
