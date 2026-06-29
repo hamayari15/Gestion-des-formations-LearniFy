@@ -20,6 +20,8 @@ import { AdminInterfaceComponent } from './admin-interface/admin-interface.compo
 import { CycleFormationsComponent } from './cycle-formations/cycle-formations.component';
 import { AddFormationDialogComponent } from './add-formation-dialog/add-formation-dialog.component';
 import { EditFormationDialogComponent } from './edit-formation-dialog/edit-formation-dialog.component';
+import { ListeParticipantsComponent } from './liste-participants/liste-participants.component';
+import { EditParticipantDialogComponent } from './edit-participant-dialog/edit-participant-dialog.component';
 import { ListeInscritsComponent } from './liste-inscrits/liste-inscrits.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { MonProfileAdminComponent } from './mon-profile-admin/mon-profile-admin.component';
@@ -31,10 +33,8 @@ import { choisirFormationComponent } from './choisir-formation/choisir-formation
 import { InscriptionComponent } from './inscription/inscription.component';
 import { PagenotfoundComponent } from './features/pagenotfound/pagenotfound.component';
 import { MesFormationsComponent } from './mes-formations/mes-formations.component';
-import { ListeParticipantsComponent } from './liste-participants/liste-participants.component';
 import { formationsenligneComponent } from './formations-enligne/formations-enligne.component';
 import { formationspresensielComponent } from './formations-presensiel/formations-presensiel.component';
-import { ModifierParticipantComponent } from './modifier-participant/modifier-participant.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -63,7 +63,7 @@ const routes: Routes = [
       { path: 'add-formation-dialog', component: AddFormationDialogComponent },
       { path: 'edit-formation-dialog', component: EditFormationDialogComponent },
       { path: 'liste-participant', component: ListeParticipantsComponent},
-      { path: 'modifier-participant/:id', component: ModifierParticipantComponent},
+      { path: 'edit-participant-dialog', component: EditParticipantDialogComponent},
       { path: 'liste-inscrits', component: ListeInscritsComponent },
       { path: 'users-growth', component: UsersGrowthComponent },
     ],

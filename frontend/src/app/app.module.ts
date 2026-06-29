@@ -30,6 +30,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { CycleFormationsComponent } from './cycle-formations/cycle-formations.component';
 import { AddFormationDialogComponent } from './add-formation-dialog/add-formation-dialog.component';
 import { ListeParticipantsComponent } from './liste-participants/liste-participants.component';
+import { EditParticipantDialogComponent } from './edit-participant-dialog/edit-participant-dialog.component';
 import { ListeInscritsComponent } from './liste-inscrits/liste-inscrits.component';
 import { ParticipantInterfaceComponent } from './participant-interface/participant-interface.component';
 import { MonProfileParticipantComponent } from './mon-profile-participant/mon-profile-participant.component';
@@ -38,7 +39,6 @@ import { MesFormationsComponent } from './mes-formations/mes-formations.componen
 import { PagenotfoundComponent } from './features/pagenotfound/pagenotfound.component';
 import { formationsenligneComponent } from './formations-enligne/formations-enligne.component';
 import { formationspresensielComponent } from './formations-presensiel/formations-presensiel.component';
-import { ModifierParticipantComponent } from './modifier-participant/modifier-participant.component';
 import { FooterComponent } from './footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsersGrowthComponent } from './users-growth/users-growth.component';
@@ -69,7 +69,7 @@ import { EditFormationDialogComponent } from './edit-formation-dialog/edit-forma
     PagenotfoundComponent,
     formationsenligneComponent,
     formationspresensielComponent,
-    ModifierParticipantComponent,
+    EditParticipantDialogComponent,
     FooterComponent,
     UsersGrowthComponent,
     AddFormationDialogComponent,

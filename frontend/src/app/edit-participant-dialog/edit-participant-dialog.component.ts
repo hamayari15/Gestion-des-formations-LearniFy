@@ -4,11 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ParticipantService } from '../core/services/participant.service';
 
 @Component({
-  selector: 'app-modifier-participant',
-  templateUrl: './modifier-participant.component.html',
-  styleUrls: ['./modifier-participant.component.css'],
+  selector: 'app-edit-participant-dialog',
+  templateUrl: './edit-participant-dialog.component.html',
+  styleUrls: ['./edit-participant-dialog.component.css'],
 })
-export class ModifierParticipantComponent implements OnInit {
+export class EditParticipantDialogComponent implements OnInit {
+  
   participantForm!: FormGroup;
   participantId!: string;
 

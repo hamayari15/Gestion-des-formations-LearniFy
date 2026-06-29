@@ -6,56 +6,52 @@ const jwt = require("jsonwebtoken");
 
 exports.Register = async (req, res) => {
   try {
-
-     const existingUser = await Participant.findOne({
-      email: req.body.email
+    const existingUser = await Participant.findOne({
+      email: req.body.email,
     });
 
     if (existingUser) {
       return res.status(409).json({
-        message: 'This email has been registered. Please use another email.'
+        message: "This email has been registered. Please use another email.",
       });
     }
 
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    
+
     const participant = new Participant({
       ...req.body,
       image: req.file ? req.file.path : null,
-      password: hashedPassword
+      password: hashedPassword,
     });
 
     const savedParticipant = await participant.save();
 
     res.status(201).json({
-      message: 'Your account has been created successfully.',
-      data: savedParticipant
+      message: "Your account has been created successfully.",
+      data: savedParticipant,
     });
-
   } catch (error) {
-    console.log(error)
-     return res.status(500).json({
-      message: 'Something went wrong. Please try again later.'
+    console.log(error);
+    return res.status(500).json({
+      message: "Something went wrong. Please try again later.",
     });
   }
 };
 
 
 exports.checkEmail = async (req, res) => {
-
   const user = await Participant.findOne({
-    email: req.body.email
+    email: req.body.email,
   });
 
   return res.json({
-    exists: !!user
+    exists: !!user,
   });
 };
 
 
 exports.Login = async (req, res) => {
   try {
-
     const { email, password } = req.body;
 
     const participant = await Participant.findOne({ email });
@@ -66,10 +62,7 @@ exports.Login = async (req, res) => {
       });
     }
 
-    const validPassword = await bcrypt.compare(
-      password,
-      participant.password
-    );
+    const validPassword = await bcrypt.compare(password, participant.password);
 
     if (!validPassword) {
       return res.status(401).json({
@@ -82,23 +75,20 @@ exports.Login = async (req, res) => {
 
     const payload = {
       id: participant._id,
-      role: "User"
+      role: "User",
     };
 
-    const token = jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      { expiresIn: "2h" }
-    );
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "2h",
+    });
 
     return res.status(200).json({
       token,
-      role: "User"
+      role: "User",
     });
-
   } catch (error) {
     return res.status(500).json({
-      message: 'Something went wrong. Please try again later.'
+      message: "Something went wrong. Please try again later.",
     });
   }
 };
@@ -106,7 +96,6 @@ exports.Login = async (req, res) => {
 
 exports.getParticipants = async (req, res) => {
   try {
-
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 5;
 
@@ -115,17 +104,24 @@ exports.getParticipants = async (req, res) => {
 
     const skip = (page - 1) * limit;
 
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - 7);
+
     let query = {};
 
     if (search) {
-      query.fullname = {
+      query.fullName = {
         $regex: search,
-        $options: "i"
+        $options: "i",
       };
     }
 
-    if (status) {
-      query.status = status;
+    if (status === "Actif") {
+      query.lastLogin = { $gte: cutoff };
+    }
+
+    if (status === "Inactif") {
+      query.$or = [{ lastLogin: null }, { lastLogin: { $lt: cutoff } }];
     }
 
     const totalItems = await Participant.countDocuments(query);
@@ -135,25 +131,30 @@ exports.getParticipants = async (req, res) => {
       .skip(skip)
       .limit(limit);
 
-    return res.status(200).json({
+    const formattedParticipants = participants.map((p) => ({
+      ...p.toObject(),
+
+      status: p.lastLogin && p.lastLogin >= cutoff ? "Actif" : "Inactif",
+    }));
+
+    res.status(200).json({
       success: true,
+
       data: {
-        participants,
+        participants: formattedParticipants,
+
         currentPage: page,
+
         totalPages: Math.ceil(totalItems / limit),
-        totalItems
-      }
+
+        totalItems,
+      },
     });
-
-  } catch (error) {
-
-    console.log(error);
-
-    return res.status(500).json({
+  } catch (err) {
+    res.status(500).json({
       success: false,
-      message: "Erreur lors de la récupération des participants"
+      message: err.message,
     });
-
   }
 };
 
@@ -177,20 +178,20 @@ exports.getParticipantsGrowth = async (req, res) => {
       },
     ]);
 
-   return res.status(200).json({
-    success: true,
-    message:
-      growth.length > 0
-        ? "Statistiques de croissance des participants récupérées avec succès."
-        : "Aucun participant n'a encore été enregistré.",
-    totalDays: growth.length,
-    data: growth,
-  });
+    return res.status(200).json({
+      success: true,
+      message:
+        growth.length > 0
+          ? "Statistiques de croissance des participants récupérées avec succès."
+          : "Aucun participant n'a encore été enregistré.",
+      totalDays: growth.length,
+      data: growth,
+    });
   } catch (error) {
-
     return res.status(500).json({
       success: false,
-      message: "Une erreur est survenue lors de la récupération des statistiques de croissance des participants.",
+      message:
+        "Une erreur est survenue lors de la récupération des statistiques de croissance des participants.",
       error: error.message,
     });
   }
@@ -199,19 +200,15 @@ exports.getParticipantsGrowth = async (req, res) => {
 
 exports.getActiveInactiveStats = async (req, res) => {
   try {
-
     const cutoff = new Date();
     cutoff.setDate(cutoff.getDate() - 7);
 
     const active = await Participant.countDocuments({
-      lastLogin: { $gte: cutoff }
+      lastLogin: { $gte: cutoff },
     });
 
     const inactive = await Participant.countDocuments({
-      $or: [
-        { lastLogin: null },
-        { lastLogin: { $lt: cutoff } }
-      ]
+      $or: [{ lastLogin: null }, { lastLogin: { $lt: cutoff } }],
     });
 
     const total = active + inactive;
@@ -222,14 +219,13 @@ exports.getActiveInactiveStats = async (req, res) => {
       active,
       inactive,
       activePercent: total ? (active / total) * 100 : 0,
-      inactivePercent: total ? (inactive / total) * 100 : 0
+      inactivePercent: total ? (inactive / total) * 100 : 0,
     });
-
   } catch (error) {
     return res.status(500).json({
       success: false,
       message: "Error fetching active/inactive stats",
-      error: error.message
+      error: error.message,
     });
   }
 };
@@ -256,15 +252,14 @@ exports.getParticipantById = async (req, res) => {
 
 exports.updateParticipant = async (req, res) => {
   try {
-    const updatedParticipant =
-      await Participant.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        {
-          new: true,
-          runValidators: true,
-        }
-      );
+    const updatedParticipant = await Participant.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
 
     if (!updatedParticipant) {
       return res.status(404).json({
@@ -286,10 +281,9 @@ exports.updateParticipant = async (req, res) => {
 
 exports.deleteParticipant = async (req, res) => {
   try {
-    const deletedParticipant =
-      await Participant.findByIdAndDelete(
-        req.params.id
-      );
+    const deletedParticipant = await Participant.findByIdAndDelete(
+      req.params.id,
+    );
 
     if (!deletedParticipant) {
       return res.status(404).json({
@@ -320,10 +314,7 @@ exports.checkPassword = async (req, res) => {
       });
     }
 
-    const isMatch = await bcrypt.compare(
-      actualPassword,
-      participant.password
-    );
+    const isMatch = await bcrypt.compare(actualPassword, participant.password);
 
     res.status(200).json(isMatch);
   } catch (error) {
@@ -336,11 +327,9 @@ exports.checkPassword = async (req, res) => {
 
 exports.updatePassword = async (req, res) => {
   try {
-    const { actualPassword, newPassword } =
-      req.body;
+    const { actualPassword, newPassword } = req.body;
 
-    const participant =
-      await Participant.findById(req.params.id);
+    const participant = await Participant.findById(req.params.id);
 
     if (!participant) {
       return res.status(404).json({
@@ -348,10 +337,7 @@ exports.updatePassword = async (req, res) => {
       });
     }
 
-    const isMatch = await bcrypt.compare(
-      actualPassword,
-      participant.password
-    );
+    const isMatch = await bcrypt.compare(actualPassword, participant.password);
 
     if (!isMatch) {
       return res.status(400).json({
@@ -359,8 +345,7 @@ exports.updatePassword = async (req, res) => {
       });
     }
 
-    participant.password =
-      await bcrypt.hash(newPassword, 10);
+    participant.password = await bcrypt.hash(newPassword, 10);
 
     await participant.save();
 

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModifierParticipantComponent } from './modifier-participant.component';
+import { ModifierParticipantComponent } from './edit-participant-dialog.component';
 
 describe('ModifierParticipantComponent', () => {
   let component: ModifierParticipantComponent;

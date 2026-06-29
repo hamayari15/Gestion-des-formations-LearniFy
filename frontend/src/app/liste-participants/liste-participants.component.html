@@ -1,37 +1,264 @@
-<div class="container">
-  <h2>Liste des Participants</h2>
+<div class="container mt-4">
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Nom complet</th>
-        <th>Âge</th>
-        <th>Genre</th>
-        <th>Email</th>
-        <th>Actions</th>
+  <!-- Page Header -->
+  <div class="page-header">
+
+    <div>
+      <h2 class="page-title">Liste des Participants</h2>
+      <p class="page-subtitle">
+        Manage registered participants
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="errorMessage" class="alert-error">
+    <i class="fas fa-exclamation-circle"></i>
+    {{ errorMessage }}
+  </div>
+
+  <!-- Search & Filter -->
+  <div class="filter-row">
+
+    <div class="search-wrap">
+
+      <i class="fas fa-search search-icon"></i>
+
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search by participant name..."
+        [(ngModel)]="searchTerm"
+        (input)="applyFilters()">
+
+    </div>
+
+    <select
+      class="status-select"
+      [(ngModel)]="selectedStatus"
+      (change)="applyFilters()">
+
+      <option value="">All Status</option>
+      <option value="Actif">Actif</option>
+      <option value="Inactif">Inactif</option>
+
+    </select>
+
+  </div>
+
+  <!-- Count -->
+  <div class="count-bar">
+
+    <span class="count-label">
+      <i class="fas fa-users"></i>
+      {{ totalItems }}
+      participant{{ totalItems !== 1 ? 's' : '' }}
+    </span>
+
+    <button
+      *ngIf="searchTerm || selectedStatus"
+      class="clear-btn"
+      (click)="clearFilters()">
+
+      Clear filters
+
+    </button>
+
+  </div>
+
+  <!-- Table Card -->
+  <div class="table-card">
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="spinner-wrap">
+
+      <div class="spinner"></div>
+
+      <span class="spinner-label">
+        Loading participants...
+      </span>
+
+    </div>
+
+    <!-- Empty -->
+    <div
+      *ngIf="!loading && filteredParticipants.length === 0"
+      class="empty-state">
+
+      <i class="fas fa-users empty-icon"></i>
+
+      <p class="empty-title">
+        No participants found
+      </p>
+
+      <span class="empty-sub">
+        Try adjusting your search or filter
+      </span>
+
+    </div>
+
+    <!-- Table -->
+    <table
+      *ngIf="!loading && filteredParticipants.length > 0"
+      class="participants-table">
+
+      <thead>
+
+       <tr>
+
+        <th style="width:6%">#</th>
+
+        <th style="width:8%">Image</th>
+
+        <th style="width:20%">Full Name</th>
+
+        <th style="width:10%">Age</th>
+
+        <th style="width:12%">Gender</th>
+
+        <th style="width:12%">Status</th>
+
+        <th style="width:20%">Email</th>
+
+        <th style="width:12%" class="text-center">
+          Actions
+        </th>
+
       </tr>
-    </thead>
 
-    <tbody>
-      <tr *ngFor="let participant of participants; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ participant.fullname }}</td>
-        <td>{{ participant.age }}</td>
-        <td>{{ participant.gender }}</td>
-        <td>{{ participant.email }}</td>
-        <td>
-          <button  class="btn btn-warning btn-sm me-2" (click)="onUpdate(participant._id)">
-            <i class="fas fa-edit"></i> 
-            
-          </button>
-          <button class="btn btn-danger btn-sm" (click)="onDelete(participant._id)">            
-            <i class="fas fa-trash-alt"></i> 
-            
-          </button>
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let participant of filteredParticipants; let i = index">
+
+          <td>
+            {{ ((page - 1) * limit) + i + 1 }}
+          </td>
+
+          <td class="image-cell">
+
+          <img
+            *ngIf="participant.Image"
+            [src]="participant.Image"
+            class="participant-image"
+            alt="Participant">
+
+          <div
+            *ngIf="!participant.image"
+            class="image-placeholder">
+
+            <i class="fas fa-user"></i>
+
+          </div>
+
         </td>
-      </tr>
-    </tbody>
-  </table>
+
+          <td class="name-cell">
+
+            {{ participant.fullName }}
+
+          </td>
+
+          <td>
+
+            {{ participant.age }}
+
+          </td>
+
+          <td>
+
+            {{ participant.gender }}
+
+          </td>
+
+          
+          <td>
+            
+            <span
+              class="badge"
+              [class.badge-active]="participant.status === 'Actif'"
+              [class.badge-inactive]="participant.status === 'Inactif'">
+              
+              {{ participant.status }}
+              
+            </span>
+            
+          </td>
+            <td class="email-cell">
   
+              {{ participant.email }}
+  
+            </td>
+
+          <td class="text-center">
+
+            <div class="actions">
+
+              <button
+                class="btn-icon btn-edit"
+                (click)="editParticipant(participant)"
+                aria-label="Edit">
+
+                <i class="fas fa-pencil-alt"></i>
+
+              </button>
+
+              <button
+                class="btn-icon btn-delete"
+                (click)="deleteParticipant(participant._id)"
+                aria-label="Delete">
+
+                <i class="fas fa-trash-alt"></i>
+
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- Pagination -->
+  <div
+    class="pagination"
+    *ngIf="totalPages > 1">
+
+    <button
+      class="btn-page"
+      (click)="prevPage()"
+      [disabled]="page === 1">
+
+      Previous
+
+    </button>
+
+    <button
+      *ngFor="let p of [].constructor(totalPages); let i = index"
+      class="btn-page"
+      [class.active]="page === i + 1"
+      (click)="goToPage(i + 1)">
+
+      {{ i + 1 }}
+
+    </button>
+
+    <button
+      class="btn-page"
+      (click)="nextPage()"
+      [disabled]="page === totalPages">
+
+      Next
+
+    </button>
+
+  </div>
+
 </div>
