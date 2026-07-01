@@ -167,38 +167,24 @@ exports.getMyFormations = async (req, res) => {
 
 exports.updateFormation = async (req, res) => {
   try {
-
-    const updatedFormation =
-      await Formation.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        {
-          new: true,
-          runValidators: true,
-        }
-      );
-
-    if (!updatedFormation) {
-      return res.status(404).json({
-        success: false,
-        message: "Cycle de formation introuvable.",
-      });
-    }
-    
-    if (
+      if (
       req.body.modeFormation === "Présentiel" &&
       !req.body.numSalle
-    ) {
+  ) {
       return res.status(400).json({
-        message: "Le numéro de salle est obligatoire pour une formation présentielle."
+          success: false,
+          message: "Le numéro de salle est obligatoire pour une formation présentielle."
       });
-    }
+  }
 
-    return res.status(200).json({
-      success: true,
-      message: "Cycle de formation modifié avec succès.",
-      formation: updatedFormation
-    });
+  const updatedFormation = await Formation.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+          new: true,
+          runValidators: true
+      }
+  );
 
     } catch (error) {
 

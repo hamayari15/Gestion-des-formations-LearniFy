@@ -147,6 +147,10 @@ export class EditFormationDialogComponent implements OnInit {
 
   updateFormation() {
 
+    if (this.modeFormation !== 'Présentiel') {
+      this.numSalle = null;
+    }
+
     const formation = {
 
       theme: this.theme,

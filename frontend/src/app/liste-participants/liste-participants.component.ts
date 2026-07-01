@@ -127,7 +127,7 @@ export class ListeParticipantsComponent implements OnInit {
 
   editParticipant(participant: any): void {
     const dialogRef = this.dialog.open(EditParticipantDialogComponent, {
-      width: '520px',
+      width: '450',
       disableClose: true,
       data: participant
     });

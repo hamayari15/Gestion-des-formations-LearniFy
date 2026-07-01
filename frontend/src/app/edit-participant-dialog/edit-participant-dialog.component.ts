@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 import { ParticipantService } from '../core/services/participant.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
@@ -10,63 +10,93 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./edit-participant-dialog.component.css'],
 })
 export class EditParticipantDialogComponent implements OnInit {
-  
+
   participantForm!: FormGroup;
   participantId!: string;
+
+  originalParticipant: any;
 
   constructor(
     private fb: FormBuilder,
     private participantService: ParticipantService,
-    private route: ActivatedRoute,
     private dialogRef: MatDialogRef<EditParticipantDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
-    this.participantId = this.route.snapshot.paramMap.get('id') || '';
-    this.initForm();
-    this.loadParticipantData();
-  }
 
-  initForm(): void {
+    const participant = this.data;
+
+    this.participantId = participant._id;
+
+    // init form
     this.participantForm = this.fb.group({
-      fullname: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      age: ['', [Validators.required, Validators.min(1)]],
+      fullName: [
+        participant.fullName,
+        [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+      ],
+      email: [
+        participant.email,
+        [Validators.required, Validators.email]
+      ],
+      age: [
+        participant.age,
+        [Validators.required, Validators.min(16), Validators.max(100)]
+      ]
     });
+
+    // keep original for change detection
+    this.originalParticipant = JSON.parse(JSON.stringify(this.participantForm.value));
   }
 
-  loadParticipantData(): void {
-    this.participantService.getParticipantById(this.participantId).subscribe({
-      next: (participant) => {
-        this.participantForm.patchValue(participant); 
-      },
-      error: (err) => {
-        console.error(
-          'Erreur lors du chargement des données du participant:',
-          err
-        );
-      },
-    });
+  hasChanges(): boolean {
+    return JSON.stringify(this.participantForm.value) !== JSON.stringify(this.originalParticipant);
+  }
+
+  isFormValid(): boolean {
+    return this.participantForm.valid;
   }
 
   onSubmit(): void {
-    if (this.participantForm.valid) {
-      this.participantService
-        .updateParticipant(this.participantId, this.participantForm.value)
-        .subscribe({
-          next: () => {
-          },
-          error: (err) => {
-            console.error('Erreur lors de la mise à jour du participant:', err);
-            alert('Erreur lors de la mise à jour.');
-          },
-        });
-    }
+
+    if (!this.participantForm.valid) return;
+
+    this.participantService
+      .updateParticipant(this.participantId, this.participantForm.value)
+      .subscribe(
+
+        (response: any) => {
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Succès',
+            text: response.message,
+            timer: 3000,
+            timerProgressBar: true
+          });
+
+          this.dialogRef.close(true);
+        },
+
+        (error) => {
+
+          if (error.status === 409) {
+            this.participantForm.get('email')?.setErrors({ emailTaken: true });
+            return;
+          }
+
+          Swal.fire({
+            icon: 'error',
+            title: 'Erreur',
+            text: error?.error?.message || 'Une erreur est survenue.'
+          });
+
+        }
+
+      );
   }
 
-   closeDialog() {
+  closeDialog() {
     this.dialogRef.close();
   }
-
-};
+}

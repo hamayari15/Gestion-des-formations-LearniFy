@@ -1,12 +1,11 @@
-<div class="dialog">
+<div class="dialog" [formGroup]="participantForm">
 
-  <!-- HEADER -->
   <div class="dialog-header">
 
     <div class="header-left">
 
       <div class="header-icon">
-        <i class="ti ti-user" aria-hidden="true"></i>
+        <i class="ti ti-user"></i>
       </div>
 
       <div>
@@ -16,96 +15,116 @@
 
     </div>
 
-    <button class="close-btn" aria-label="Fermer" (click)="closeDialog()">
+    <button class="close-btn" (click)="closeDialog()">
       <i class="ti ti-x"></i>
     </button>
 
   </div>
 
-  <!-- BODY -->
   <div class="dialog-body">
 
-    <!-- FULL NAME -->
     <div class="field">
+
       <div class="field-label">
-        <i class="ti ti-user"></i>
         Nom complet
         <span class="required-dot"></span>
       </div>
 
-      <div class="input-wrap">
-        <i class="ti ti-user"></i>
-        <input
-          class="f-input"
-          type="text"
-          formControlName="fullname"
-          placeholder="Ex: Mohamed Ayari">
-      </div>
+      <input
+        class="f-input"
+        type="text"
+        formControlName="fullName"
+        placeholder="Ex: Mohamed Ayari">
+   <small class="error"
+  *ngIf="participantForm.get('fullName')?.touched && participantForm.get('fullName')?.errors?.['required']">
+  Nom requis
+</small>
+
+<small class="error"
+  *ngIf="participantForm.get('fullName')?.errors?.['minlength']">
+  Minimum 3 caractères
+</small>
     </div>
 
-    <!-- EMAIL -->
-    <div class="field">
-      <div class="field-label">
-        <i class="ti ti-mail"></i>
-        Email
-        <span class="required-dot"></span>
-      </div>
+   <div class="field">
 
-      <div class="input-wrap">
-        <i class="ti ti-mail"></i>
-        <input
-          class="f-input"
-          type="email"
-          formControlName="email"
-          placeholder="exemple@mail.com">
-      </div>
-    </div>
+  <div class="field-label">
+    Email
+    <span class="required-dot"></span>
+  </div>
 
-    <!-- AGE -->
+  <input
+    class="f-input"
+    type="email"
+    formControlName="email"
+    placeholder="exemple@mail.com">
+
+  <small class="error"
+    *ngIf="participantForm.get('email')?.touched && participantForm.get('email')?.errors?.['required']">
+    L’adresse email est obligatoire
+  </small>
+
+  <small class="error"
+    *ngIf="participantForm.get('email')?.touched && participantForm.get('email')?.errors?.['email']">
+    Format email invalide
+  </small>
+
+  <small class="error"
+    *ngIf="participantForm.get('email')?.errors?.['emailTaken']">
+    Cet email est déjà utilisé
+  </small>
+
+</div>
+
     <div class="field">
+
       <div class="field-label">
-        <i class="ti ti-cake"></i>
         Âge
         <span class="required-dot"></span>
       </div>
 
-      <div class="input-wrap">
-        <i class="ti ti-hash"></i>
-        <input
-          class="f-input"
-          type="number"
-          formControlName="age"
-          placeholder="Ex: 23"
-          min="16"
-          max="100">
-      </div>
+      <input
+        class="f-input"
+        type="number"
+        formControlName="age"
+        placeholder="Ex: 23">
+<small class="error"
+  *ngIf="participantForm.get('age')?.touched && participantForm.get('age')?.errors?.['required']">
+  Âge requis
+</small>
+
+<small class="error"
+  *ngIf="participantForm.get('age')?.errors?.['min']">
+  L'âge minimum est 16 ans
+</small>
+
+<small class="error"
+  *ngIf="participantForm.get('age')?.errors?.['max']">
+  L'âge maximum est 100 ans
+</small>
     </div>
 
   </div>
 
-  <!-- FOOTER -->
   <div class="dialog-footer">
 
     <span class="footer-hint">
-      <i class="ti ti-info-circle"></i>
       Modifier uniquement les champs nécessaires
     </span>
 
     <div class="footer-actions">
 
-      <button type="button" class="btn-cancel" (click)="closeDialog()">
-        <i class="ti ti-x"></i>
+      <button class="btn-cancel" (click)="closeDialog()">
         Annuler
       </button>
 
       <button
-        type="submit"
         class="btn-save"
         (click)="onSubmit()"
-        [disabled]="participantForm.invalid">
+        [disabled]="!isFormValid() || !hasChanges()">
 
-        <i class="ti ti-device-floppy"></i>
         Modifier
+
       </button>
 
     </div>

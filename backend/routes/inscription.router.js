@@ -8,7 +8,7 @@ router.post("/addInscription/:participantId/:formationId", inscriptionController
 
 router.get("/getInscriptions", inscriptionController.getInscriptions);
 
-router.get("/getInscription/:id", inscriptionController.getInscriptionById);
+// router.get("/getInscription/:id", inscriptionController.getInscriptionById);
 
 router.put("/Inscriptions/:id", inscriptionController.updateInscription);
 

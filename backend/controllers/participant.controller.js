@@ -252,28 +252,55 @@ exports.getParticipantById = async (req, res) => {
 
 exports.updateParticipant = async (req, res) => {
   try {
+
+    if (req.body.email) {
+      const existingParticipant = await Participant.findOne({
+        email: req.body.email,
+        _id: { $ne: req.params.id }
+      });
+
+      if (existingParticipant) {
+        return res.status(409).json({
+          success: false,
+          message: "Cet email est déjà utilisé."
+        });
+      }
+    }
+
     const updatedParticipant = await Participant.findByIdAndUpdate(
       req.params.id,
       req.body,
       {
         new: true,
         runValidators: true,
-      },
+      }
     );
 
     if (!updatedParticipant) {
       return res.status(404).json({
-        message: "Participant not found",
+        success: false,
+        message: "Participant not found"
       });
     }
 
-    res.status(200).json({
+    return res.status(200).json({
+      success: true,
       message: "Participant updated successfully",
       data: updatedParticipant,
     });
+
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
+
+    if (error.name === "ValidationError") {
+      return res.status(400).json({
+        success: false,
+        message: error.message
+      });
+    }
+
+    return res.status(500).json({
+      success: false,
+      message: "Une erreur serveur est survenue."
     });
   }
 };

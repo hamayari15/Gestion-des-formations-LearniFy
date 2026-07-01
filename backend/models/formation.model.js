@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const formationSchema = new mongoose.Schema(
   {
     theme: {
-      type: 'String',
+      type: String,
       required: true,
     },
 
