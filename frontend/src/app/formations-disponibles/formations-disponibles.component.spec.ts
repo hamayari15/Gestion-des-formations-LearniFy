@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormationsPresensielComponent } from './formations-presensiel.component';
+import { FormationsPresensielComponent } from './formations-disponibles.component';
 
 describe('FormationsPresensielComponent', () => {
   let component: FormationsPresensielComponent;

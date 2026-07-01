@@ -37,12 +37,11 @@ import { MonProfileParticipantComponent } from './mon-profile-participant/mon-pr
 import { InscriptionComponent } from './inscription/inscription.component';
 import { MesFormationsComponent } from './mes-formations/mes-formations.component';
 import { PagenotfoundComponent } from './features/pagenotfound/pagenotfound.component';
-import { formationsenligneComponent } from './formations-enligne/formations-enligne.component';
-import { formationspresensielComponent } from './formations-presensiel/formations-presensiel.component';
 import { FooterComponent } from './footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsersGrowthComponent } from './users-growth/users-growth.component';
 import { EditFormationDialogComponent } from './edit-formation-dialog/edit-formation-dialog.component';
+import { FormationsDisponiblesComponent } from './formations-disponibles/formations-disponibles.component';
 
 
 
@@ -67,8 +66,7 @@ import { EditFormationDialogComponent } from './edit-formation-dialog/edit-forma
     InscriptionComponent,
     MesFormationsComponent,
     PagenotfoundComponent,
-    formationsenligneComponent,
-    formationspresensielComponent,
+    FormationsDisponiblesComponent,
     EditParticipantDialogComponent,
     FooterComponent,
     UsersGrowthComponent,

@@ -29,12 +29,10 @@ import { UsersGrowthComponent } from './users-growth/users-growth.component';
 
 import { ParticipantInterfaceComponent } from './participant-interface/participant-interface.component';
 import { MonProfileParticipantComponent } from './mon-profile-participant/mon-profile-participant.component';
-import { choisirFormationComponent } from './choisir-formation/choisir-formation.component';
+import { FormationsDisponiblesComponent } from './formations-disponibles/formations-disponibles.component';
 import { InscriptionComponent } from './inscription/inscription.component';
-import { PagenotfoundComponent } from './features/pagenotfound/pagenotfound.component';
 import { MesFormationsComponent } from './mes-formations/mes-formations.component';
-import { formationsenligneComponent } from './formations-enligne/formations-enligne.component';
-import { formationspresensielComponent } from './formations-presensiel/formations-presensiel.component';
+import { PagenotfoundComponent } from './features/pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -81,10 +79,8 @@ const routes: Routes = [
         pathMatch: 'full',
       },
       { path: 'mon-profile-participant', component: MonProfileParticipantComponent },
+      { path: 'formations-disponibles', component: FormationsDisponiblesComponent},
       { path: 'inscription/:theme/:numSalle/:id', component: InscriptionComponent },
-      { path: 'choisir-formation', component: choisirFormationComponent },
-      { path: 'formations-presensiel', component: formationspresensielComponent},
-      { path: 'formations-enligne', component: formationsenligneComponent},
       { path: 'mes-formations', component: MesFormationsComponent},
     ],
   },

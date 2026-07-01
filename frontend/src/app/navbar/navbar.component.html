@@ -1,27 +1,17 @@
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Learn2Be</title>
-  <link rel="stylesheet" href="navbar.component.css" />
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    rel="stylesheet"/>
-</head>
-
-<nav class="navbar navbar-expand-lg navbar-dark" *ngIf="!isLoggedIn">
+<nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container">
     <a class="navbar-brand" routerLink="/">
       <i class="fas fa-graduation-cap"></i>
-      <span class="brand-name">
-        Learni<span class="brand-accent">Fy</span>
-      </span>
+      <span class="brand-name">Learni<span class="brand-accent">Fy</span></span>
     </a>
-    <!-- Toggle button -->
-<button class="navbar-toggler" (click)="toggleMenu()">
-  <i class="fas fa-bars"></i>
-</button>
-<ul class="navbar-nav" [class.open]="menuOpen">
-        <li class="nav-item">
+
+    <button class="navbar-toggler" (click)="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <ul class="navbar-nav" [class.open]="menuOpen">
+
+      <li class="nav-item">
         <a class="nav-link" routerLink="/" (click)="toggleMenu()">
           <i class="fas fa-home"></i> Home</a>
       </li>
@@ -31,17 +21,43 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/privacy" (click)="toggleMenu()">
-          <i class="fas fa-shield-alt"></i> Privacy</a>
+          <i class="fas fa-info-circle"></i> Privacy</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/contact" (click)="toggleMenu()">
           <i class="fas fa-envelope"></i> Contact Us</a>
       </li>
+
+      <ng-container *ngIf="isLoggedIn">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/participant-interface/mon-profile-participant" routerLinkActive="active-link" (click)="toggleMenu()">
+            <i class="fas fa-user"></i> Mon Profil</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <button class="nav-link" (click)="moreOpen = !moreOpen">
+            Plus <i class="fas fa-chevron-down"></i>
+          </button>
+          <ul class="dropdown-menu" *ngIf="moreOpen">
+            <li>
+              <a routerLink="/participant-interface/formations-disponibles" routerLinkActive="active-link" (click)="moreOpen = false; toggleMenu()">
+                Formations</a>
+            </li>
+            <li>
+              <a routerLink="/participant-interface/mes-formations" routerLinkActive="active-link" (click)="moreOpen = false; toggleMenu()">
+                Mes formations</a>
+            </li>
+          </ul>
+        </li>
+      </ng-container>
+
       <li class="nav-item mobile-login">
-        <button (click)="navigateToLogin()" class="btn-connexion">
-          <i class="fas fa-sign-in-alt"></i> Get Started
-    </button>
-  </li>
-</ul>
+        <button *ngIf="!isLoggedIn" (click)="navigateToLogin()" class="btn-connexion">
+          <i class="fas fa-sign-in-alt"></i> Get Started</button>
+        <button *ngIf="isLoggedIn" (click)="logout()" class="btn-connexion">
+          <i class="fas fa-sign-out-alt"></i> Déconnexion</button>
+      </li>
+
+    </ul>
   </div>
 </nav>

@@ -4,11 +4,11 @@ import { FormationService } from '../core/services/formation.service';
 import { InscriptionService } from '../core/services/incription.service';
 
 @Component({
-  selector: 'app-participants',
-  templateUrl: './formations-enligne.component.html',
-  styleUrls: ['./formations-enligne.component.css'],
+  selector: 'app-formations-disponibles',
+  templateUrl: './formations-disponibles.component.html',
+  styleUrls: ['./formations-disponibles.component.css'],
 })
-export class formationsenligneComponent implements OnInit {
+export class FormationsDisponiblesComponent implements OnInit {
   formations: any[] = [];
 
   constructor(

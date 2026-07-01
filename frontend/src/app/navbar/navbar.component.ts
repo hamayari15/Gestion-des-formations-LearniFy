@@ -9,8 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
+
   isLoggedIn: boolean = false;
   menuOpen = false;
+  moreOpen = false;
+
   private authSubscription: Subscription = new Subscription();
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -34,10 +37,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   logout(): void {
     this.authService.logout();
+    this.router.navigate(['login']);
   }
 
   ngOnDestroy(): void {
     this.authSubscription.unsubscribe();
   }
-
-};
+}

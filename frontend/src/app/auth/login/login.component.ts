@@ -58,7 +58,7 @@ export class LoginComponent {
         } else {
 
           this.router.navigate([
-            '/participant-interface/formations-presensiel'
+            '/participant-interface/formations-disponibles'
           ]);
         }
 
