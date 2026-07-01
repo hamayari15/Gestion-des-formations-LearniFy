@@ -62,7 +62,6 @@ export class AuthService {
     localStorage.removeItem('Role');
 
     this.loggedIn.next(false);
-    console.log('logging out...');
   }
 
   getToken(): string | null {

@@ -77,7 +77,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'mon-profile-participant/:id',
+        redirectTo: 'mon-profile-participant',
         pathMatch: 'full',
       },
       { path: 'mon-profile-participant', component: MonProfileParticipantComponent },

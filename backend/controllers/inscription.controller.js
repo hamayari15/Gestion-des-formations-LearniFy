@@ -110,6 +110,78 @@ exports.getInscriptions = async (req, res) => {
 };
 
 
+exports.getInscriptionsByParticipant = async (req, res) => {
+  try {
+    const { participantId } = req.params;
+
+    if (!participantId) {
+      return res.status(400).json({
+        success: false,
+        message: "participantId is required",
+      });
+    }
+
+    const inscriptions = await Inscription.find({ participantId });
+
+    if (!inscriptions.length) {
+      return res.status(404).json({
+        success: false,
+        message: "No inscriptions found for this participant",
+        data: {
+          inscriptions: [],
+          stats: {
+            total: 0,
+            valide: 0,
+            refuse: 0,
+            enAttente: 0,
+          },
+        },
+      });
+    }
+
+    const stats = await Inscription.aggregate([
+      { $match: { participantId } },
+      {
+        $group: {
+          _id: "$status",
+          count: { $sum: 1 }
+        }
+      }
+    ]);
+
+    inscriptions.forEach((insc) => {
+      switch (insc.status) {
+        case "Validée":
+          stats.valide++;
+          break;
+        case "Refusée":
+          stats.refuse++;
+          break;
+        case "En Attente":
+          stats.enAttente++;
+          break;
+      }
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Participant inscriptions fetched successfully",
+      data: {
+        inscriptions,
+        stats,
+      },
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: process.env.NODE_ENV === "development" ? error.message : undefined,
+    });
+  }
+};
+
+
 // exports.getInscriptionById = async (
 //   req,
 //   res

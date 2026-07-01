@@ -52,6 +52,12 @@ export class InscriptionService {
 
   }
 
+  getInscriptionsByParticipant(participantId: string): Observable<any> {
+    return this.http.get<any>(
+      `${this.apiUrl}/Inscription/participant/${participantId}`
+    );
+  }
+
   // getInscriptionById(id: string): Observable<any> {
   //   return this.http.get<any>(`${this.apiUrl}/Inscription/getinscription/${id}`);
   // }
