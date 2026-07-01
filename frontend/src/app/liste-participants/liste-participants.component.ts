@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ParticipantService } from '../core/services/participant.service';
-import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 
@@ -12,6 +12,8 @@ import { EditParticipantDialogComponent } from '../edit-participant-dialog/edit-
   styleUrls: ['./liste-participants.component.css'],
 })
 export class ListeParticipantsComponent implements OnInit {
+
+  environment = environment;
 
   participants: any[] = [];
   filteredParticipants: any[] = [];

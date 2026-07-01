@@ -1,6 +1,5 @@
 <div class="container mt-4">
 
-  <!-- Page Header -->
   <div class="page-header">
 
     <div>
@@ -12,13 +11,11 @@
 
   </div>
 
-  <!-- Error -->
   <div *ngIf="errorMessage" class="alert-error">
     <i class="fas fa-exclamation-circle"></i>
     {{ errorMessage }}
   </div>
 
-  <!-- Search & Filter -->
   <div class="filter-row">
 
     <div class="search-wrap">
@@ -47,7 +44,6 @@
 
   </div>
 
-  <!-- Count -->
   <div class="count-bar">
 
     <span class="count-label">
@@ -67,10 +63,8 @@
 
   </div>
 
-  <!-- Table Card -->
   <div class="table-card">
 
-    <!-- Loading -->
     <div *ngIf="loading" class="spinner-wrap">
 
       <div class="spinner"></div>
@@ -81,7 +75,6 @@
 
     </div>
 
-    <!-- Empty -->
     <div
       *ngIf="!loading && filteredParticipants.length === 0"
       class="empty-state">
@@ -98,7 +91,6 @@
 
     </div>
 
-    <!-- Table -->
     <table
       *ngIf="!loading && filteredParticipants.length > 0"
       class="participants-table">
@@ -139,11 +131,12 @@
 
           <td class="image-cell">
 
-          <img
-            *ngIf="participant.Image"
-            [src]="participant.Image"
-            class="participant-image"
-            alt="Participant">
+         <img
+         
+          *ngIf="participant.image"
+          class="participant-image"
+          [src]="environment.apiUrl + '/uploads/participants/' + participant.image"
+          alt="Participant">
 
           <div
             *ngIf="!participant.image"
@@ -226,7 +219,6 @@
 
   </div>
 
-  <!-- Pagination -->
   <div
     class="pagination"
     *ngIf="totalPages > 1">

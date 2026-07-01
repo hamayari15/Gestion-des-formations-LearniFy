@@ -20,7 +20,7 @@ exports.Register = async (req, res) => {
 
     const participant = new Participant({
       ...req.body,
-      image: req.file ? req.file.path : null,
+      image: req.file ? req.file.filename : null,
       password: hashedPassword,
     });
 
