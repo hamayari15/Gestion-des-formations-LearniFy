@@ -1,46 +1,123 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { FormationService } from '../core/services/formation.service';
 import { InscriptionService } from '../core/services/incription.service';
+import { InscriptionDialogComponent } from '../inscription-dialog/inscription-dialog.component';
 
 @Component({
   selector: 'app-formations-disponibles',
   templateUrl: './formations-disponibles.component.html',
-  styleUrls: ['./formations-disponibles.component.css'],
+  styleUrls: ['./formations-disponibles.component.css']
 })
 export class FormationsDisponiblesComponent implements OnInit {
+
   formations: any[] = [];
+  filteredFormations: any[] = [];
+
+  page = 1;
+  limit = 5;
+  totalPages = 0;
+  totalItems = 0;
+
+  searchTerm = '';
+  selectedMode = '';
+
+  loading = false;
+  errorMessage = '';
 
   constructor(
     private formationService: FormationService,
-    private router: Router,
-    private incriptionService: InscriptionService
+    private inscriptionService: InscriptionService,
+    private dialog: MatDialog
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.loading = true;
     this.getFormations();
   }
 
-  getFormations() {
-    this.formationService.getFormations().subscribe(
-      (response: any) => {
-        this.formations = response;
-        console.log('Formations:', response);
+  getFormations(): void {
+
+    this.errorMessage = '';
+
+    this.formationService.getFormations(
+      this.page,
+      this.limit,
+      this.searchTerm,
+      this.selectedMode
+    ).subscribe({
+
+      next: (response: any) => {
+
+        this.formations = response.data.formations;
+        this.filteredFormations = response.data.formations;
+
+        this.totalPages = response.data.totalPages;
+        this.totalItems = response.data.totalItems;
+
+        this.loading = false;
       },
-      (error: any) => {
-        console.error('Error getting formations:', error);
+
+      error: (error) => {
+
+        this.loading = false;
+
+        this.errorMessage =
+          error.error?.message ||
+          'Erreur lors de la récupération des formations';
       }
-    );
+
+    });
+
   }
 
-  inscrire(formation: any) {
-    console.log(formation);
-    this.incriptionService.setformation(formation);
-    this.router.navigate([
-      'participant-interface/inscription/',
-      formation.theme,
-      formation.numSalle,
-      formation._id,
-    ]);
+  applyFilters(): void {
+    this.page = 1;
+    this.getFormations();
   }
+
+  clearFilters(): void {
+    this.searchTerm = '';
+    this.selectedMode = '';
+    this.page = 1;
+    this.getFormations();
+  }
+
+  prevPage(): void {
+    if (this.page > 1) {
+      this.page--;
+      this.getFormations();
+    }
+  }
+
+  nextPage(): void {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.getFormations();
+    }
+  }
+
+  goToPage(page: number): void {
+    this.page = page;
+    this.getFormations();
+  }
+
+  inscrire(formation: any): void {
+
+    this.inscriptionService.setformation(formation);
+
+    const dialogRef = this.dialog.open(InscriptionDialogComponent, {
+      width: '550px',
+      disableClose: true,
+      data: formation
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.getFormations();
+      }
+    });
+
+  }
+
 }

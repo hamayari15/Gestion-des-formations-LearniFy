@@ -26,7 +26,7 @@ export class InscriptionService {
     );
   }
 
-  addInscriptions(inscriptionData: any, participanrId: string, formationid: string | null): Observable<any> {
+  addInscription(inscriptionData: any, participanrId: string, formationid: string | null): Observable<any> {
     return this.http.post(
       `${this.apiUrl}/Inscription/addinscription/${participanrId}/${formationid}`, inscriptionData);
   }

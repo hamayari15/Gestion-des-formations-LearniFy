@@ -30,7 +30,7 @@ import { UsersGrowthComponent } from './users-growth/users-growth.component';
 import { ParticipantInterfaceComponent } from './participant-interface/participant-interface.component';
 import { MonProfileParticipantComponent } from './mon-profile-participant/mon-profile-participant.component';
 import { FormationsDisponiblesComponent } from './formations-disponibles/formations-disponibles.component';
-import { InscriptionComponent } from './inscription/inscription.component';
+import { InscriptionDialogComponent } from './inscription-dialog/inscription-dialog.component';
 import { MesFormationsComponent } from './mes-formations/mes-formations.component';
 import { PagenotfoundComponent } from './features/pagenotfound/pagenotfound.component';
 
@@ -80,7 +80,7 @@ const routes: Routes = [
       },
       { path: 'mon-profile-participant', component: MonProfileParticipantComponent },
       { path: 'formations-disponibles', component: FormationsDisponiblesComponent},
-      { path: 'inscription/:theme/:numSalle/:id', component: InscriptionComponent },
+      { path: 'inscription-dialog/:theme/:numSalle/:id', component: InscriptionDialogComponent },
       { path: 'mes-formations', component: MesFormationsComponent},
     ],
   },

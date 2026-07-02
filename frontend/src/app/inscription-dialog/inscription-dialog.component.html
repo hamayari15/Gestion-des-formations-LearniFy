@@ -1,0 +1,202 @@
+<div class="dialog">
+
+  <div class="dialog-header">
+
+    <div class="header-left">
+
+      <div class="header-icon">
+        <i class="ti ti-user-plus"></i>
+      </div>
+
+      <div>
+        <div class="dialog-title">Inscription à une formation</div>
+        <div class="dialog-subtitle">
+          Complétez les informations ci-dessous
+        </div>
+      </div>
+
+    </div>
+
+    <button class="close-btn" (click)="closeDialog()">
+      <i class="ti ti-x"></i>
+    </button>
+
+  </div>
+
+  <div class="dialog-body">
+
+    <div class="section-label">
+      Informations de la formation
+    </div>
+
+    <div class="field">
+
+      <div class="field-label">
+        <i class="ti ti-book"></i>
+        Thème
+      </div>
+
+      <input
+        class="f-input"
+        type="text"
+        [(ngModel)]="theme"
+        readonly>
+
+    </div>
+
+    <div class="field">
+
+      <div class="field-label">
+        <i class="ti ti-layout-board"></i>
+        Mode de formation
+      </div>
+
+      <input
+        class="f-input"
+        type="text"
+        [(ngModel)]="modeFormation"
+        readonly>
+
+    </div>
+
+    <div
+      class="field"
+      *ngIf="modeFormation === 'Présentiel'">
+
+      <div class="field-label">
+        <i class="ti ti-door"></i>
+        Numéro de salle
+      </div>
+
+      <input
+        class="f-input"
+        type="text"
+        [(ngModel)]="numSalle"
+        readonly>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-label">
+      Informations du participant
+    </div>
+
+    <div class="field">
+
+      <div class="field-label">
+        <i class="ti ti-user"></i>
+        Nom complet
+        <span class="required-dot"></span>
+      </div>
+
+      <div class="input-wrap">
+        <i class="ti ti-user"></i>
+
+        <input
+          class="f-input"
+          type="text"
+          [(ngModel)]="fullname"
+          placeholder="Nom complet">
+      </div>
+
+    </div>
+
+    <div class="field">
+
+      <div class="field-label">
+        <i class="ti ti-mail"></i>
+        Email
+        <span class="required-dot"></span>
+      </div>
+
+      <div class="input-wrap">
+        <i class="ti ti-mail"></i>
+
+        <input
+          class="f-input"
+          type="email"
+          [(ngModel)]="email"
+          placeholder="Email">
+      </div>
+
+    </div>
+
+    <div class="field">
+
+      <div class="field-label">
+        <i class="ti ti-building"></i>
+        Entreprise
+        <span class="required-dot"></span>
+      </div>
+
+      <div class="input-wrap">
+        <i class="ti ti-building"></i>
+
+        <input
+          class="f-input"
+          type="text"
+          [(ngModel)]="entreprise"
+          placeholder="Entreprise">
+      </div>
+
+    </div>
+
+    <div class="field">
+
+      <div class="field-label">
+        <i class="ti ti-briefcase"></i>
+        Service
+        <span class="required-dot"></span>
+      </div>
+
+      <div class="input-wrap">
+        <i class="ti ti-briefcase"></i>
+
+        <input
+          class="f-input"
+          type="text"
+          [(ngModel)]="service"
+          placeholder="Service">
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="dialog-footer">
+
+    <span class="footer-hint">
+      <i class="ti ti-info-circle"></i>
+      Les champs
+      <span style="color:#f43f5e;">•</span>
+      sont obligatoires
+    </span>
+
+    <div class="footer-actions">
+
+      <button
+        class="btn-cancel"
+        (click)="closeDialog()">
+
+        <i class="ti ti-x"></i>
+        Annuler
+
+      </button>
+
+      <button
+        class="btn-save"
+        [disabled]="!isFormValid() || loading"
+        (click)="addInscription()">
+
+        <i class="ti ti-device-floppy"></i>
+
+        {{ loading ? 'Enregistrement...' : "S'inscrire" }}
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

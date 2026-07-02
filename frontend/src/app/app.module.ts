@@ -29,19 +29,19 @@ import { MonProfileAdminComponent } from './mon-profile-admin/mon-profile-admin.
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { CycleFormationsComponent } from './cycle-formations/cycle-formations.component';
 import { AddFormationDialogComponent } from './add-formation-dialog/add-formation-dialog.component';
+import { EditFormationDialogComponent } from './edit-formation-dialog/edit-formation-dialog.component';
 import { ListeParticipantsComponent } from './liste-participants/liste-participants.component';
 import { EditParticipantDialogComponent } from './edit-participant-dialog/edit-participant-dialog.component';
 import { ListeInscritsComponent } from './liste-inscrits/liste-inscrits.component';
 import { ParticipantInterfaceComponent } from './participant-interface/participant-interface.component';
 import { MonProfileParticipantComponent } from './mon-profile-participant/mon-profile-participant.component';
-import { InscriptionComponent } from './inscription/inscription.component';
+import { FormationsDisponiblesComponent } from './formations-disponibles/formations-disponibles.component';
+import { InscriptionDialogComponent } from './inscription-dialog/inscription-dialog.component';
 import { MesFormationsComponent } from './mes-formations/mes-formations.component';
 import { PagenotfoundComponent } from './features/pagenotfound/pagenotfound.component';
 import { FooterComponent } from './footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsersGrowthComponent } from './users-growth/users-growth.component';
-import { EditFormationDialogComponent } from './edit-formation-dialog/edit-formation-dialog.component';
-import { FormationsDisponiblesComponent } from './formations-disponibles/formations-disponibles.component';
 
 
 
@@ -59,20 +59,20 @@ import { FormationsDisponiblesComponent } from './formations-disponibles/formati
     AdminDashboardComponent,
     MonProfileAdminComponent,
     CycleFormationsComponent,
+    AddFormationDialogComponent,
+    EditFormationDialogComponent,
     ListeParticipantsComponent,
+    EditParticipantDialogComponent,
     ListeInscritsComponent,
     ParticipantInterfaceComponent,
     MonProfileParticipantComponent,
-    InscriptionComponent,
+    FormationsDisponiblesComponent,
+    InscriptionDialogComponent,
     MesFormationsComponent,
     PagenotfoundComponent,
-    FormationsDisponiblesComponent,
-    EditParticipantDialogComponent,
     FooterComponent,
     UsersGrowthComponent,
-    AddFormationDialogComponent,
     CycleFormationsComponent,
-    EditFormationDialogComponent,
   ],
   imports: [
     BrowserModule,

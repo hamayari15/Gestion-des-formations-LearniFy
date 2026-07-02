@@ -100,7 +100,7 @@ export class CycleFormationsComponent implements OnInit {
 
   navigateToAddFormation(): void {
     const dialogRef = this.dialog.open(AddFormationDialogComponent, {
-      width: '500',
+      width: '550px',
       disableClose: true
     });
 
@@ -113,7 +113,7 @@ export class CycleFormationsComponent implements OnInit {
 
   editFormation(formation: any): void {
     const dialogRef = this.dialog.open(EditFormationDialogComponent, {
-      width: '520px',
+      width: '550px',
       disableClose: true,
       data: formation
     });

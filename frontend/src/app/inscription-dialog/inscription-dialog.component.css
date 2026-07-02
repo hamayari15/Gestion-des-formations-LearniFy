@@ -240,3 +240,33 @@
     .btn-save:hover { background: #4338ca; }
     .btn-save:active { transform: scale(0.97); }
     .btn-save .ti { font-size: 15px; }
+
+.f-input[readonly] {
+  background: #f8fafc;
+  color: #475569;
+  border-color: #e2e8f0;
+  cursor: default;
+}
+
+.f-input[readonly]:focus {
+  box-shadow: none;
+  border-color: #e2e8f0;
+}
+
+.f-input[readonly]:hover {
+  border-color: #e2e8f0;
+}
+
+.section-label {
+  margin-top: 4px;
+}
+
+.dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}

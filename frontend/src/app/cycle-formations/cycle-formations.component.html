@@ -37,7 +37,6 @@
     </select>
   </div>
 
-  <!-- Count bar -->
   <div class="count-bar">
     <span class="count-label">
       <i class="fas fa-graduation-cap"></i>
@@ -51,23 +50,19 @@
     </button>
   </div>
 
-  <!-- Table card -->
   <div class="table-card">
 
-    <!-- Loading -->
     <div *ngIf="loading" class="spinner-wrap">
       <div class="spinner"></div>
       <span class="spinner-label">Loading formations…</span>
     </div>
 
-    <!-- Empty State -->
     <div *ngIf="!loading && filteredFormations.length === 0" class="empty-state">
       <i class="fas fa-search empty-icon"></i>
       <p class="empty-title">No formations found</p>
       <span class="empty-sub">Try adjusting your search or filter</span>
     </div>
 
-    <!-- Table -->
     <table
       class="formations-table"
       *ngIf="!loading && filteredFormations.length > 0">

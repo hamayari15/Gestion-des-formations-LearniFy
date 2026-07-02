@@ -1,67 +1,417 @@
-.formations-table-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: "Arial", sans-serif;
-  background-color: #f9f9f9;
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
-h1 {
-  text-align: center;
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 30px;
+.page-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #111;
+  margin: 0 0 2px;
+}
+
+.page-subtitle {
+  font-size: 0.8125rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.btn-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  background: #185fa5;
+  color: #e6f1fb;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  text-decoration: none;
+}
+
+.btn-add:hover {
+  background: #144a80;
+  color: #e6f1fb;
+}
+
+.btn-add i,
+.btn-add fa-icon {
+  font-size: 0.9375rem;
+}
+
+.filter-row {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 10px;
+  margin-bottom: 0.75rem;
+}
+
+.search-wrap {
+  position: relative;
+}
+
+.search-wrap .search-icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 9px 12px 9px 36px;
+  font-size: 0.8125rem;
+  background: #fff;
+  border: 0.5px solid #d1d5db;
+  border-radius: 8px;
+  color: #111;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.search-input:focus {
+  border-color: #378add;
+  box-shadow: 0 0 0 3px rgba(55, 138, 221, 0.12);
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
+}
+
+.mode-select {
+  padding: 9px 12px;
+  font-size: 0.8125rem;
+  background: #fff;
+  border: 0.5px solid #d1d5db;
+  border-radius: 8px;
+  color: #111;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  appearance: auto;
+}
+
+.mode-select:focus {
+  border-color: #378add;
+  box-shadow: 0 0 0 3px rgba(55, 138, 221, 0.12);
+}
+
+.count-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.count-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.count-label i {
+  color: #185fa5;
+  font-size: 0.85rem;
+}
+
+.clear-btn {
+  font-size: 0.75rem;
+  color: #185fa5;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.clear-btn:hover {
+  text-decoration: underline;
+}
+
+.table-card {
+  background: #fff;
+  border: 0.5px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .formations-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
-  font-size: 1rem;
-  min-width: 400px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  table-layout: fixed;
 }
 
-.formations-table thead tr {
-  background-color: #007bff;
-  color: white;
+.formations-table thead th {
+  padding: 11px 14px;
   text-align: left;
-  font-weight: bold;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #6b7280;
+  background: #f9fafb;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.formations-table th,
-.formations-table td {
-  padding: 12px 15px;
-  border: 1px solid #ddd;
+.formations-table thead th.text-center {
+  text-align: center;
 }
 
 .formations-table tbody tr {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.06);
+  transition: background 0.1s ease;
 }
 
-.formations-table tbody tr:nth-of-type(even) {
-  background-color: #f3f3f3;
-}
-
-.formations-table tbody tr:last-of-type {
-  border-bottom: 2px solid #007bff;
+.formations-table tbody tr:last-child {
+  border-bottom: none;
 }
 
 .formations-table tbody tr:hover {
-  background-color: #f1f1f1;
+  background: #f9fafb;
 }
 
-button {
-  background-color: rgb(14, 148, 14);
-  color: white;
-  border: none;
+.formations-table tbody td {
+  padding: 12px 14px;
+  font-size: 0.8125rem;
+  color: #111;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.formations-table tbody td.text-center {
+  text-align: center;
+}
+
+.theme-cell {
+  font-weight: 500;
+  color: #111;
+}
+
+.salle-cell {
+  color: #6b7280;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.badge-na {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  background: #f3f4f6;
+  border-radius: 999px;
+}
+
+.date-cell {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-variant-numeric: tabular-nums;
+}
+
+.time-cell {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-family: monospace;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.badge-presentiel {
+  background: #e1f5ee;
+  color: #085041;
+}
+
+.badge-enligne {
+  background: #e6f1fb;
+  color: #0c447c;
+}
+
+.badge-hybride {
+  background: #fff4e5;
+  color: #8a4b08;
+}
+
+.btn-inscrire {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 8px 16px;
-  font-size: 0.9rem;
-  border-radius: 5px;
+  border: none;
+  border-radius: 8px;
+  background: #185fa5;
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background .15s ease;
 }
 
-button:hover {
-  background-color: #0056b3;
+.btn-inscrire:hover {
+  background: #144a80;
+}
+
+.pagination {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+  margin-top: 20px;
+}
+
+.btn-page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 10px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #374151;
+  background: #fff;
+  border: 0.5px solid #d1d5db;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.btn-page:hover:not(:disabled):not(.active) {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.btn-page.active {
+  background: #185fa5; 
+  color: #fff;
+  border-color: #185fa5;
+}
+
+.btn-page.active:hover {
+  background: #144a80;
+  border-color: #144a80;
+}
+
+.btn-page:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-info {
+    font-size:14px;
+    color:#555;
+}
+
+.spinner-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 24px;
+  gap: 14px;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 2px solid #e5e7eb;
+  border-top-color: #378add;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner-label {
+  font-size: 0.8125rem;
+  color: #6b7280;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 24px;
+  gap: 10px;
+  text-align: center;
+}
+
+.empty-state .empty-icon {
+  font-size: 2.25rem;
+  color: #d1d5db;
+  margin-bottom: 4px;
+}
+
+.empty-state .empty-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #111;
+  margin: 0;
+}
+
+.empty-state .empty-sub {
+  font-size: 0.8125rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.alert-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 0.5px solid #f7c1c1;
+  background: #fcebeb;
+  color: #791f1f;
+  font-size: 0.8125rem;
+  margin-bottom: 1rem;
+}
+
+.alert-error i {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .filter-row {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .formations-table thead th,
+  .formations-table tbody td {
+    padding: 10px 10px;
+  }
 }

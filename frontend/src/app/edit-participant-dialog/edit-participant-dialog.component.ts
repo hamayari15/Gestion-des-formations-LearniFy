@@ -70,6 +70,7 @@ export class EditParticipantDialogComponent implements OnInit {
           Swal.fire({
             icon: 'success',
             title: 'Succès',
+            width: '500',
             text: response.message,
             timer: 3000,
             timerProgressBar: true
