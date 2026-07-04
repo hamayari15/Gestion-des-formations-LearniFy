@@ -111,6 +111,8 @@ exports.getInscriptions = async (req, res) => {
 };
 
 
+const mongoose = require("mongoose");
+
 exports.getInscriptionsByParticipant = async (req, res) => {
   try {
     const { participantId } = req.params;
@@ -122,51 +124,54 @@ exports.getInscriptionsByParticipant = async (req, res) => {
       });
     }
 
-    const inscriptions = await Inscription.find({ participantId });
-
-    if (!inscriptions.length) {
-      return res.status(404).json({
+    if (!mongoose.Types.ObjectId.isValid(participantId)) {
+      return res.status(400).json({
         success: false,
-        message: "No inscriptions found for this participant",
-        data: {
-          inscriptions: [],
-          stats: {
-            total: 0,
-            valide: 0,
-            refuse: 0,
-            enAttente: 0,
-          },
-        },
+        message: "participantId invalide",
       });
     }
 
-    const stats = await Inscription.aggregate([
-      { $match: { participantId } },
+    const objectId = new mongoose.Types.ObjectId(participantId);
+
+    const inscriptions = await Inscription.find({ participantId: objectId })
+      .sort({ createdAt: -1 });
+
+    const statsAgg = await Inscription.aggregate([
+      { $match: { participantId: objectId } },
       {
         $group: {
           _id: "$status",
-          count: { $sum: 1 }
-        }
-      }
+          count: { $sum: 1 },
+        },
+      },
     ]);
 
-    inscriptions.forEach((insc) => {
-      switch (insc.status) {
+    const stats = {
+      total: inscriptions.length,
+      valide: 0,
+      refuse: 0,
+      enAttente: 0,
+    };
+
+    statsAgg.forEach((item) => {
+      switch (item._id) {
         case "Validée":
-          stats.valide++;
+          stats.valide = item.count;
           break;
         case "Refusée":
-          stats.refuse++;
+          stats.refuse = item.count;
           break;
         case "En Attente":
-          stats.enAttente++;
+          stats.enAttente = item.count;
           break;
       }
     });
 
     return res.status(200).json({
       success: true,
-      message: "Participant inscriptions fetched successfully",
+      message: inscriptions.length
+        ? "Participant inscriptions fetched successfully"
+        : "Aucune inscription trouvée pour ce participant",
       data: {
         inscriptions,
         stats,
@@ -174,6 +179,7 @@ exports.getInscriptionsByParticipant = async (req, res) => {
     });
 
   } catch (error) {
+    console.error(error);
     return res.status(500).json({
       success: false,
       message: "Server error",
