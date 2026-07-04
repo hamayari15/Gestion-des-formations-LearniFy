@@ -11,24 +11,20 @@ export class InscriptionService {
 
   constructor(private http: HttpClient) {}
 
-  setformation(formation: any) {
-    this.Formation = formation;
-  }
-
-  getformation() {
-    return this.Formation;
-  }
-
-  register(inscriptionData: any): Observable<any> {
+  addInscription(
+    inscriptionData: {
+      fullName: string;
+      email: string;
+      entreprise: string;
+      service: string;
+    },
+    participantId: string,
+    formationId: string
+  ): Observable<any> {
     return this.http.post(
-      `${this.apiUrl}/participants/register`,
+      `${this.apiUrl}/Inscription/addInscription/${participantId}/${formationId}`,
       inscriptionData
     );
-  }
-
-  addInscription(inscriptionData: any, participanrId: string, formationid: string | null): Observable<any> {
-    return this.http.post(
-      `${this.apiUrl}/Inscription/addinscription/${participanrId}/${formationid}`, inscriptionData);
   }
 
   getInscriptions(
@@ -39,7 +35,7 @@ export class InscriptionService {
   ): Observable<any> {
 
     return this.http.get<any>(
-      `${this.apiUrl}/Inscription/getinscriptions`,
+      `${this.apiUrl}/Inscription/getInscriptions`,
       {
         params: {
           page,
@@ -57,10 +53,6 @@ export class InscriptionService {
       `${this.apiUrl}/Inscription/participant/${participantId}`
     );
   }
-
-  // getInscriptionById(id: string): Observable<any> {
-  //   return this.http.get<any>(`${this.apiUrl}/Inscription/getinscription/${id}`);
-  // }
 
   updateInscriptionStatus(id: string, status: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/Inscription/inscriptions/${id}`, {status,});

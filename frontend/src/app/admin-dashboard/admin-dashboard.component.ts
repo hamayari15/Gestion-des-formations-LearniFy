@@ -134,7 +134,7 @@ export class AdminDashboardComponent implements OnInit {
         const total = values.reduce((a: number, b: number) => a + b, 0);
 
         this.onlinePercent = this.getPercent(res, 'En ligne', total);
-        this.hybridPercent = this.getPercent(res, 'Hybrid', total);
+        this.hybridPercent = this.getPercent(res, 'Hybride', total);
         this.offlinePercent = this.getPercent(res, 'Présentiel', total);
 
         this.pieChartData = {

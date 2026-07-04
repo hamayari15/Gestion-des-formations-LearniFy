@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormationService } from '../core/services/formation.service';
-import { InscriptionService } from '../core/services/incription.service';
+import { UserService } from '../core/services/user.service';
+import { ParticipantService } from '../core/services/participant.service';
 import { InscriptionDialogComponent } from '../inscription-dialog/inscription-dialog.component';
 
 @Component({
@@ -27,7 +28,8 @@ export class FormationsDisponiblesComponent implements OnInit {
 
   constructor(
     private formationService: FormationService,
-    private inscriptionService: InscriptionService,
+    private userService: UserService,
+    private participantService: ParticipantService,
     private dialog: MatDialog
   ) {}
 
@@ -104,20 +106,27 @@ export class FormationsDisponiblesComponent implements OnInit {
 
   inscrire(formation: any): void {
 
-    this.inscriptionService.setformation(formation);
+    const payload = this.userService.getUser();
 
-    const dialogRef = this.dialog.open(InscriptionDialogComponent, {
-      width: '550px',
-      disableClose: true,
-      data: formation
-    });
+    this.participantService.getParticipantById(payload.id).subscribe({
+      next: (participant) => {
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === true) {
-        this.getFormations();
+        this.dialog.open(InscriptionDialogComponent, {
+          width: '550px',
+          disableClose: true,
+          data: {
+            formation,
+            participant
+          }
+        });
+
       }
     });
 
+  }
+
+  isExpired(periodeDu: string | Date): boolean {
+    return new Date() > new Date(periodeDu);
   }
 
 }

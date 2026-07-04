@@ -8,14 +8,11 @@ router.post("/addInscription/:participantId/:formationId", inscriptionController
 
 router.get("/getInscriptions", inscriptionController.getInscriptions);
 
-console.log("Inscription routes loaded");
-
 router.get("/participant/:participantId", inscriptionController.getInscriptionsByParticipant);
-// router.get("/getInscription/:id", inscriptionController.getInscriptionById);
 
 router.put("/Inscriptions/:id", inscriptionController.updateInscription);
 
-router.patch("/updateStatus/:id", inscriptionController.updateStatus);
+// router.patch("/updateStatus/:id", inscriptionController.updateStatus);
 
 
 module.exports = router;

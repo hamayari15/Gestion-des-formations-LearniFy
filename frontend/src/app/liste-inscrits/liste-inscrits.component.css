@@ -124,14 +124,18 @@ table {
 }
 
 thead th {
-  padding: 11px 14px;
-  background: #f9fafb;
-  font-size: 0.6875rem;
-  color: #6b7280;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border-bottom: 0.5px solid rgba(0,0,0,0.08);
+   padding: 11px 14px;
   text-align: left;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #6b7280;
+  background: #f9fafb;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 tbody tr {
@@ -150,6 +154,22 @@ tbody td {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.salle-cell {
+  color: #6b7280;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.badge-na {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  background: #f3f4f6;
+  border-radius: 999px;
 }
 
 .badge {
@@ -210,30 +230,43 @@ tbody td {
 
 .pagination {
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
   gap: 4px;
   margin-top: 20px;
 }
 
 .btn-page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-width: 34px;
   height: 34px;
   padding: 0 10px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #374151;
+  background: #fff;
   border: 0.5px solid #d1d5db;
   border-radius: 8px;
-  background: #fff;
-  font-size: 0.8125rem;
   cursor: pointer;
-  transition: 0.15s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
 
 .btn-page:hover:not(:disabled):not(.active) {
   background: #f3f4f6;
+  border-color: #9ca3af;
 }
 
 .btn-page.active {
-  background: #185fa5;
+  background: #185fa5; 
   color: #fff;
   border-color: #185fa5;
+}
+
+.btn-page.active:hover {
+  background: #144a80;
+  border-color: #144a80;
 }
 
 .btn-page:disabled {

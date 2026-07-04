@@ -6,21 +6,20 @@ import { InscriptionService } from '../core/services/incription.service';
 @Component({
   selector: 'app-inscription-dialog',
   templateUrl: './inscription-dialog.component.html',
-  styleUrls: ['./inscription-dialog.component.css']
+  styleUrls: ['./inscription-dialog.component.css'],
 })
 export class InscriptionDialogComponent implements OnInit {
-
   formation: any;
   participant: any;
 
-  theme: string = '';
-  modeFormation: string = '';
-  numSalle: string = '';
+  theme = '';
+  modeFormation = '';
+  numSalle = '';
 
-  fullname: string = '';
-  email: string = '';
-  entreprise: string = '';
-  service: string = '';
+  fullName = '';
+  email = '';
+  entreprise = '';
+  service = '';
 
   loading = false;
 
@@ -31,21 +30,33 @@ export class InscriptionDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.formation = this.data?.formation;
+    this.participant = this.data?.participant;
 
-    this.formation = this.data.formation;
-    this.participant = this.data.participant;
+    console.log('Formation:', this.formation);
+    console.log('Part:', this.participant);
+
+    // Garde-fou : si les données essentielles manquent, on ferme le dialog
+    // plutôt que de laisser l'utilisateur soumettre un formulaire cassé.
+    if (!this.formation?._id || !this.participant?._id) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur',
+        text: 'Données de formation ou de participant manquantes.',
+        confirmButtonColor: '#dc2626',
+      });
+      this.dialogRef.close();
+      return;
+    }
 
     this.theme = this.formation.theme;
     this.modeFormation = this.formation.modeFormation;
     this.numSalle = this.formation.numSalle;
 
-    if (this.participant) {
-      this.fullname = this.participant.fullname || '';
-      this.email = this.participant.email || '';
-      this.entreprise = this.participant.entreprise || '';
-      this.service = this.participant.service || '';
-    }
-
+    this.fullName = this.participant.fullName || '';
+    this.email = this.participant.email || '';
+    this.entreprise = this.participant.entreprise || '';
+    this.service = this.participant.service || '';
   }
 
   closeDialog(): void {
@@ -53,69 +64,54 @@ export class InscriptionDialogComponent implements OnInit {
   }
 
   isFormValid(): boolean {
-
+    const emailPattern = /^\S+@\S+\.\S+$/;
     return (
-      this.fullname.trim() !== '' &&
-      this.email.trim() !== '' &&
+      this.fullName.trim().length >= 2 &&
+      emailPattern.test(this.email.trim()) &&
       this.entreprise.trim() !== '' &&
       this.service.trim() !== ''
     );
-
   }
 
   addInscription(): void {
-
-    if (!this.isFormValid()) {
+    if (!this.isFormValid() || this.loading) {
       return;
     }
 
     this.loading = true;
 
     const body = {
-      theme: this.theme,
-      numSalle: this.numSalle,
-      fullname: this.fullname,
-      email: this.email,
-      entreprise: this.entreprise,
-      service: this.service
+      fullName: this.fullName.trim(),
+      email: this.email.trim(),
+      entreprise: this.entreprise.trim(),
+      service: this.service.trim(),
     };
 
-    this.inscriptionService.addInscription(
-      body,
-      this.participant._id,
-      this.formation._id
-    ).subscribe({
+    this.inscriptionService
+      .addInscription(body, this.participant._id, this.formation._id)
+      .subscribe({
+        next: () => {
+          this.loading = false;
 
-      next: () => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Succès',
+            text: 'Votre inscription a été enregistrée.',
+            confirmButtonColor: '#4f46e5',
+          });
 
-        this.loading = false;
+          this.dialogRef.close(true);
+        },
+        error: (error) => {
+          this.loading = false;
 
-        Swal.fire({
-          icon: 'success',
-          title: 'Succès',
-          text: 'Votre inscription a été enregistrée.',
-          confirmButtonColor: '#4f46e5'
-        });
-
-        this.dialogRef.close(true);
-
-      },
-
-      error: (error) => {
-
-        this.loading = false;
-
-        Swal.fire({
-          icon: 'error',
-          title: 'Erreur',
-          text: error.error?.message || 'Une erreur est survenue.',
-          confirmButtonColor: '#dc2626'
-        });
-
-      }
-
-    });
-
+          Swal.fire({
+            icon: 'error',
+            title: 'Erreur',
+            text: error.error?.message || 'Une erreur est survenue.',
+            confirmButtonColor: '#dc2626',
+          });
+        },
+      });
   }
-
 }

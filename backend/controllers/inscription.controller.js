@@ -1,36 +1,38 @@
 const Inscription = require("../models/Inscription.model");
+const Formation = require("../models/Formation.model");
+const Participant = require("../models/Participant.model");
 
 
 exports.addInscription = async (req, res) => {
-  const {
-    theme,
-    fullname,
-    email,
-    entreprise,
-    service,
-    numSalle,
-  } = req.body;
 
+  const { fullName, email, entreprise, service } = req.body;
   const { participantId, formationId } = req.params;
 
-  if (
-    !theme ||
-    !fullname ||
-    !email ||
-    !entreprise ||
-    !service ||
-    !numSalle
-  ) {
+  if (!fullName || !email || !entreprise || !service) {
     return res.status(400).json({
       message: "All fields are required.",
     });
   }
 
   try {
+    const participant = await Participant.findById(participantId);
+    if (!participant) {
+      return res.status(404).json({ message: "Participant introuvable." });
+    }
+
+    const formation = await Formation.findById(formationId);
+    if (!formation) {
+      return res.status(404).json({ message: "Formation introuvable." });
+    }
+
+    if (new Date() > new Date(formation.periodeDu)) {
+      return res.status(400).json({
+        message: "La période d'inscription pour cette formation est terminée.",
+      });
+    }
+
     const inscription = new Inscription({
-      numSalle,
-      theme,
-      fullname,
+      fullName,
       email,
       entreprise,
       service,
@@ -38,27 +40,24 @@ exports.addInscription = async (req, res) => {
       formationId,
     });
 
-    const savedInscription =
-      await inscription.save();
+    const saved = await inscription.save();
 
-    res.status(201).json(savedInscription);
+    res.status(201).json(saved);
 
   } catch (error) {
-    console.error(error);
+
+    if (error.name === "ValidationError") {
+      return res.status(400).json({ message: error.message });
+    }
 
     if (error.code === 11000) {
-      const duplicatedField =
-        error.keyValue.fullname
-          ? "fullname"
-          : "email";
-
-      return res.status(400).json({
-        message: `${duplicatedField} already exists.`,
+      return res.status(409).json({
+        message: "Vous êtes déjà inscrit à cette formation.",
       });
     }
 
     res.status(500).json({
-      message: error.message,
+      message: "Une erreur est survenue lors de l'inscription.",
     });
   }
 };
@@ -87,9 +86,11 @@ exports.getInscriptions = async (req, res) => {
     const totalItems = await Inscription.countDocuments(query);
 
     const inscriptions = await Inscription.find(query)
-      .sort({ createdAt: sort === 'asc' ? 1 : -1 })
-      .skip(skip)
-      .limit(limit);
+      .populate("participantId")
+      .populate("formationId")
+        .sort({ createdAt: sort === 'asc' ? 1 : -1 })
+        .skip(skip)
+        .limit(limit);
 
     return res.status(200).json({
       success: true,
@@ -182,32 +183,6 @@ exports.getInscriptionsByParticipant = async (req, res) => {
 };
 
 
-// exports.getInscriptionById = async (
-//   req,
-//   res
-// ) => {
-//   try {
-//     const inscription =
-//       await Inscription.findById(
-//         req.params.id
-//       );
-
-//     if (!inscription) {
-//       return res.status(404).json({
-//         message: "Inscription not found.",
-//       });
-//     }
-
-//     res.status(200).json(inscription);
-
-//   } catch (error) {
-//     res.status(500).json({
-//       message: error.message,
-//     });
-//   }
-// };
-
-
 exports.updateInscription = async (
   req,
   res
@@ -236,50 +211,6 @@ exports.updateInscription = async (
   } catch (error) {
     res.status(500).json({
       message: "Server error",
-    });
-  }
-};
-
-
-exports.updateStatus = async (
-  req,
-  res
-) => {
-  const { status } = req.body;
-
-  if (
-    !["Validée", "Refusée", "En Attente"].includes(
-      status
-    )
-  ) {
-    return res.status(400).json({
-      message: "Invalid status",
-    });
-  }
-
-  try {
-    const inscription =
-      await Inscription.findByIdAndUpdate(
-        req.params.id,
-        { status },
-        { new: true }
-      );
-
-    if (!inscription) {
-      return res.status(404).json({
-        message: "Inscription not found",
-      });
-    }
-
-    res.status(200).json({
-      message:
-        "Status updated successfully",
-      inscription,
-    });
-
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
     });
   }
 };

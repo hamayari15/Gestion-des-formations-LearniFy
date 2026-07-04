@@ -80,7 +80,7 @@ const routes: Routes = [
       },
       { path: 'mon-profile-participant', component: MonProfileParticipantComponent },
       { path: 'formations-disponibles', component: FormationsDisponiblesComponent},
-      { path: 'inscription-dialog/:theme/:numSalle/:id', component: InscriptionDialogComponent },
+      { path: 'inscription-dialog', component: InscriptionDialogComponent },
       { path: 'mes-formations', component: MesFormationsComponent},
     ],
   },

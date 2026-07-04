@@ -2,18 +2,7 @@ const mongoose = require("mongoose");
 
 const inscriptionSchema = new mongoose.Schema(
   {
-    theme: {
-      type: String,
-      required: [true, "Theme is required"],
-      trim: true,
-    },
-
-    numSalle: {
-      type: String,
-      required: [true, "Room number is required"],
-    },
-
-    fullname: {
+    fullName: {
       type: String,
       required: [true, "Full name is required"],
       trim: true,
@@ -40,12 +29,14 @@ const inscriptionSchema = new mongoose.Schema(
     },
 
     participantId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Participant",
       required: true,
     },
 
     formationId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Formation",
       required: true,
     },
 
@@ -61,6 +52,9 @@ const inscriptionSchema = new mongoose.Schema(
   }
 );
 
-const inscriptionModel = mongoose.model("Inscription", inscriptionSchema);
+inscriptionSchema.index(
+  { participantId: 1, formationId: 1 },
+  { unique: true }
+);
 
-module.exports = inscriptionModel;
+module.exports = mongoose.model("Inscription", inscriptionSchema);
