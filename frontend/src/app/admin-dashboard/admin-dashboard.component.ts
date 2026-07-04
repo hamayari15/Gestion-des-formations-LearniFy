@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormationService } from '../core/services/formation.service';
 import { InscriptionService } from '../core/services/incription.service';
 import { ParticipantService } from '../core/services/participant.service';
-import { ChartType } from 'chart.js';
+import { ChartType, ChartOptions } from 'chart.js';
 import { DashboardService } from '../core/services/dashboard.service';
 
 @Component({
@@ -40,6 +40,29 @@ export class AdminDashboardComponent implements OnInit {
 
   lineChartData: any;
   public lineChartType: ChartType = 'line';
+
+  public chartOptions: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: { boxWidth: 10, font: { size: 11 } },
+      },
+    },
+  };
+
+  private statusColorMap: Record<string, string> = {
+    'En Attente': '#f59e0b', 
+    'Validée': '#22c55e',    
+    'Refusée': '#ef4444',    
+  };
+
+  private modeColorMap: Record<string, string> = {
+    'En ligne': '#3b82f6',   
+    'Hybride': '#8b5cf6',    
+    'Présentiel': '#f59e0b', 
+  };
 
   constructor(
     private inscriptionService: InscriptionService,
@@ -106,17 +129,16 @@ export class AdminDashboardComponent implements OnInit {
     const labels = this.inscriptionByStatusData.map((item: any) => item._id);
     const values = this.inscriptionByStatusData.map((item: any) => item.count);
 
+    const colors = labels.map((label: string) => this.statusColorMap[label] || '#94a3b8');
+
     this.barChartData = {
       labels: labels,
       datasets: [
         {
-          label: 'Inscriptions by Status',
+          label: 'Inscriptions par statut',
           data: values,
-          backgroundColor: [
-            '#36A2EB',  
-            '#4BC0C0',
-            '#FF6384'   
-          ],
+          backgroundColor: colors,
+          borderRadius: 6,
         }
       ]
     };
@@ -137,16 +159,15 @@ export class AdminDashboardComponent implements OnInit {
         this.hybridPercent = this.getPercent(res, 'Hybride', total);
         this.offlinePercent = this.getPercent(res, 'Présentiel', total);
 
+        const colors = labels.map((label: string) => this.modeColorMap[label] || '#94a3b8');
+
         this.pieChartData = {
           labels: labels,
           datasets: [
             {
               data: values,
-              backgroundColor: [
-                '#36A2EB',
-                '#FF9F40',
-                '#155665'
-              ]
+              backgroundColor: colors,
+              borderWidth: 0,
             }
           ]
         };
@@ -164,11 +185,13 @@ export class AdminDashboardComponent implements OnInit {
           labels,
           datasets: [
             {
-              label: 'Inscriptions Over Time',
+              label: 'Inscriptions dans le temps',
               data: values,
-              fill: false,
-              borderColor: '#36A2EB',
+              fill: true,
+              borderColor: '#4f46e5',
+              backgroundColor: 'rgba(79, 70, 229, 0.08)',
               tension: 0.3,
+              pointBackgroundColor: '#4f46e5',
             },
           ],
         };
