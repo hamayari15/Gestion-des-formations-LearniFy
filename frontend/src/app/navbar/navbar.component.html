@@ -35,17 +35,19 @@
         </li>
 
         <li class="nav-item dropdown">
-          <button class="nav-link" (click)="moreOpen = !moreOpen">
-            Plus <i class="fas fa-chevron-down"></i>
+          <button class="nav-link dropdown-toggle-btn" (click)="moreOpen = !moreOpen" [attr.aria-expanded]="moreOpen">
+            Plus <i class="fas fa-chevron-down" [class.rotated]="moreOpen"></i>
           </button>
-          <ul class="dropdown-menu" *ngIf="moreOpen">
+          <ul class="more-menu" *ngIf="moreOpen">
             <li>
               <a routerLink="/participant-interface/formations-disponibles" routerLinkActive="active-link" (click)="moreOpen = false; toggleMenu()">
-                Formations</a>
+                Formations
+              </a>
             </li>
             <li>
               <a routerLink="/participant-interface/mes-formations" routerLinkActive="active-link" (click)="moreOpen = false; toggleMenu()">
-                Mes formations</a>
+                Mes formations
+              </a>
             </li>
           </ul>
         </li>
