@@ -2,6 +2,8 @@ const Inscription = require("../models/Inscription.model");
 const Formation = require("../models/Formation.model");
 const Participant = require("../models/Participant.model");
 
+const mongoose = require("mongoose");
+
 
 exports.addInscription = async (req, res) => {
 
@@ -111,9 +113,7 @@ exports.getInscriptions = async (req, res) => {
 };
 
 
-const mongoose = require("mongoose");
-
-exports.getInscriptionsByParticipant = async (req, res) => {
+exports.getInscriptionStatsByParticipant = async (req, res) => {
   try {
     const { participantId } = req.params;
 
@@ -133,49 +133,56 @@ exports.getInscriptionsByParticipant = async (req, res) => {
 
     const objectId = new mongoose.Types.ObjectId(participantId);
 
-    const inscriptions = await Inscription.find({ participantId: objectId })
-      .sort({ createdAt: -1 });
-
     const statsAgg = await Inscription.aggregate([
       { $match: { participantId: objectId } },
-      {
-        $group: {
-          _id: "$status",
-          count: { $sum: 1 },
-        },
-      },
+      { $group: { _id: "$status", count: { $sum: 1 } } },
     ]);
 
-    const stats = {
-      total: inscriptions.length,
-      valide: 0,
-      refuse: 0,
-      enAttente: 0,
-    };
+    const stats = { total: 0, valide: 0, refuse: 0, enAttente: 0 };
 
     statsAgg.forEach((item) => {
+      stats.total += item.count;
       switch (item._id) {
-        case "Validée":
-          stats.valide = item.count;
-          break;
-        case "Refusée":
-          stats.refuse = item.count;
-          break;
-        case "En Attente":
-          stats.enAttente = item.count;
-          break;
+        case "Validée": stats.valide = item.count; break;
+        case "Refusée": stats.refuse = item.count; break;
+        case "En Attente": stats.enAttente = item.count; break;
       }
     });
+
+    return res.status(200).json({ success: true, data: { stats } });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: process.env.NODE_ENV === "development" ? error.message : undefined,
+    });
+  }
+};
+
+
+exports.getInscriptionsByParticipant = async (req, res) => {
+  try {
+    const { participantId } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(participantId)) {
+      return res.status(400).json({
+        success: false,
+        message: "participantId invalide",
+      });
+    }
+
+    const inscriptions = await Inscription.find({ participantId })
+      .populate("formationId", "theme modeFormation periodeDu periodeA horaireDu horaireA numSalle")
+      .sort({ createdAt: -1 });
 
     return res.status(200).json({
       success: true,
       message: inscriptions.length
-        ? "Participant inscriptions fetched successfully"
-        : "Aucune inscription trouvée pour ce participant",
-      data: {
-        inscriptions,
-        stats,
-      },
+        ? "Inscriptions fetched successfully"
+        : "Aucune inscription trouvée",
+      data: { inscriptions },
     });
 
   } catch (error) {

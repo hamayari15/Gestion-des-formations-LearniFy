@@ -52,21 +52,28 @@
       </mat-error>
 
     </mat-form-field>
+<button
+  mat-raised-button
+  color="primary"
+  class="login-btn"
+  [disabled]="loginForm.invalid"
+  type="submit"
+>
+  Login
+</button>
 
-    <button
-      mat-raised-button
-      color="primary"
-      class="login-btn"
-      [disabled]="loginForm.invalid"
-      type="submit"
-    >
-      Login
-    </button>
+<div class="divider">
+  <span>or</span>
+</div>
 
-    <p class="switch">
-      You don't have an account?
-      <a routerLink="/register">Register</a>
-    </p>
+<button
+  mat-stroked-button
+  class="register-btn"
+  type="button"
+  routerLink="/register"
+>
+  Create an account
+</button>
 
   </form>
 

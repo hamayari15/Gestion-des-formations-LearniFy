@@ -6,13 +6,13 @@ const inscriptionController = require("../controllers/inscription.controller");
 
 router.post("/addInscription/:participantId/:formationId", inscriptionController.addInscription);
 
-router.get("/getInscriptions", inscriptionController.getInscriptions);
+router.get("/getAllInscriptions", inscriptionController.getInscriptions);
 
-router.get("/participant/:participantId", inscriptionController.getInscriptionsByParticipant);
+router.get("/Inscription/stats/:participantId", inscriptionController.getInscriptionStatsByParticipant);
+
+router.get("/Inscription/getInscriptionsByParticipant/:participantId", inscriptionController.getInscriptionsByParticipant);
 
 router.put("/Inscriptions/:id", inscriptionController.updateInscription);
-
-// router.patch("/updateStatus/:id", inscriptionController.updateStatus);
 
 
 module.exports = router;

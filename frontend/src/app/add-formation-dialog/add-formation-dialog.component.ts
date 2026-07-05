@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
 import { FormationService } from '../core/services/formation.service';
-import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
 
 
@@ -25,7 +24,6 @@ export class AddFormationDialogComponent {
 
   constructor(
     private formationService: FormationService,
-    private router: Router,
     private dialogRef: MatDialogRef<AddFormationDialogComponent>
   ) {}
 

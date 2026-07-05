@@ -35,7 +35,7 @@ export class InscriptionService {
   ): Observable<any> {
 
     return this.http.get<any>(
-      `${this.apiUrl}/Inscription/getInscriptions`,
+      `${this.apiUrl}/Inscription/getAllInscriptions`,
       {
         params: {
           page,
@@ -48,9 +48,15 @@ export class InscriptionService {
 
   }
 
+  getInscriptionStats(participantId: string): Observable<any> {
+    return this.http.get<any>(
+      `${this.apiUrl}/Inscription/Inscription/stats/${participantId}`
+    );
+  }
+
   getInscriptionsByParticipant(participantId: string): Observable<any> {
     return this.http.get<any>(
-      `${this.apiUrl}/Inscription/participant/${participantId}`
+      `${this.apiUrl}/Inscription/getInscriptionsByParticipant/${participantId}`
     );
   }
 
@@ -58,7 +64,4 @@ export class InscriptionService {
     return this.http.put(`${this.apiUrl}/Inscription/inscriptions/${id}`, {status,});
   }
 
-  // patchInscriptionStatus(id: string, status: string): Observable<any> {
-  //   return this.http.patch(`${this.apiUrl}/Inscription/updatestatus/${id}`, {status});
-  // }
 }
