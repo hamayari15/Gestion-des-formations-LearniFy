@@ -61,40 +61,33 @@ export class EditParticipantDialogComponent implements OnInit {
 
     if (!this.participantForm.valid) return;
 
-    this.participantService
-      .updateParticipant(this.participantId, this.participantForm.value)
-      .subscribe(
-
-        (response: any) => {
-
-          Swal.fire({
-            icon: 'success',
-            title: 'Succès',
-            width: '500',
-            text: response.message,
-            timer: 3000,
-            timerProgressBar: true
-          });
-
+    this.participantService.updateParticipant(this.participantId, this.participantForm.value).subscribe({
+      next: (response: any) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Succès',
+          text: response.message,
+          width: 500,
+          timer: 2500,
+          timerProgressBar: true,
+        }).then(() => {
           this.dialogRef.close(true);
-        },
-
-        (error) => {
-
-          if (error.status === 409) {
-            this.participantForm.get('email')?.setErrors({ emailTaken: true });
-            return;
-          }
-
-          Swal.fire({
-            icon: 'error',
-            title: 'Erreur',
-            text: error?.error?.message || 'Une erreur est survenue.'
-          });
-
+        });
+      },
+      error: (error) => {
+        if (error.status === 409) {
+          this.participantForm.get('email')?.setErrors({ emailTaken: true });
+          return;
         }
 
-      );
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: error?.error?.message || 'Une erreur est survenue.',
+          width: 500,
+        });
+      },
+    });
   }
 
   closeDialog() {

@@ -270,26 +270,30 @@ exports.updateParticipant = async (req, res) => {
     const updatedParticipant = await Participant.findByIdAndUpdate(
       req.params.id,
       req.body,
-      {
-        new: true,
-        runValidators: true,
-      }
+      { new: true, runValidators: true }
     );
 
     if (!updatedParticipant) {
       return res.status(404).json({
         success: false,
-        message: "Participant not found"
+        message: "Participant introuvable."
       });
     }
 
     return res.status(200).json({
       success: true,
-      message: "Participant updated successfully",
+      message: "Participant modifié avec succès.",
       data: updatedParticipant,
     });
 
   } catch (error) {
+
+    if (error.name === "CastError") {
+      return res.status(400).json({
+        success: false,
+        message: "Identifiant de participant invalide."
+      });
+    }
 
     if (error.name === "ValidationError") {
       return res.status(400).json({
@@ -308,22 +312,31 @@ exports.updateParticipant = async (req, res) => {
 
 exports.deleteParticipant = async (req, res) => {
   try {
-    const deletedParticipant = await Participant.findByIdAndDelete(
-      req.params.id,
-    );
+    const deletedParticipant = await Participant.findByIdAndDelete(req.params.id);
 
     if (!deletedParticipant) {
       return res.status(404).json({
-        message: "Participant not found",
+        success: false,
+        message: "Participant introuvable.",
       });
     }
 
-    res.status(200).json({
-      message: "Participant deleted successfully",
+    return res.status(200).json({
+      success: true,
+      message: "Participant supprimé avec succès.",
     });
+
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
+    if (error.name === "CastError") {
+      return res.status(400).json({
+        success: false,
+        message: "Identifiant de participant invalide.",
+      });
+    }
+
+    return res.status(500).json({
+      success: false,
+      message: "Une erreur est survenue lors de la suppression.",
     });
   }
 };

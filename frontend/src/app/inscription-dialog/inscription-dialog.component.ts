@@ -87,31 +87,33 @@ export class InscriptionDialogComponent implements OnInit {
       service: this.service.trim(),
     };
 
-    this.inscriptionService
-      .addInscription(body, this.participant._id, this.formation._id)
-      .subscribe({
-        next: () => {
-          this.loading = false;
+   this.inscriptionService
+    .addInscription(body, this.participant._id, this.formation._id)
+    .subscribe({
+      next: (response) => {
+        this.loading = false;
 
-          Swal.fire({
-            icon: 'success',
-            title: 'Succès',
-            text: 'Votre inscription a été enregistrée.',
-            confirmButtonColor: '#4f46e5',
-          });
-
+        Swal.fire({
+          icon: 'success',
+          title: 'Succès',
+          text: response.message,
+          width: 500,
+          timer: 2500,
+          timerProgressBar: true,
+        }).then(() => {
           this.dialogRef.close(true);
-        },
-        error: (error) => {
-          this.loading = false;
+        });
+      },
+      error: (error) => {
+        this.loading = false;
 
-          Swal.fire({
-            icon: 'error',
-            title: 'Erreur',
-            text: error.error?.message || 'Une erreur est survenue.',
-            confirmButtonColor: '#dc2626',
-          });
-        },
-      });
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: error.error?.message || 'Une erreur est survenue.',
+          width: 500,
+        });
+      },
+    });
   }
 }

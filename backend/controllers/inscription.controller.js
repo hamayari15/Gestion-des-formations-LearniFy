@@ -12,7 +12,7 @@ exports.addInscription = async (req, res) => {
 
   if (!fullName || !email || !entreprise || !service) {
     return res.status(400).json({
-      message: "All fields are required.",
+      message: "Tous les champs sont obligatoires.",
     });
   }
 
@@ -27,7 +27,7 @@ exports.addInscription = async (req, res) => {
       return res.status(404).json({ message: "Formation introuvable." });
     }
 
-    if (new Date() > new Date(formation.periodeDu)) {
+    if (new Date() > new Date(formation.periodeA)) {
       return res.status(400).json({
         message: "La période d'inscription pour cette formation est terminée.",
       });
@@ -44,12 +44,22 @@ exports.addInscription = async (req, res) => {
 
     const saved = await inscription.save();
 
-    res.status(201).json(saved);
+    res.status(201).json({
+      message: "Votre inscription a été enregistrée.",
+      inscription: saved,
+    });
 
   } catch (error) {
 
+    if (error.name === "CastError") {
+      return res.status(400).json({ message: "Identifiant invalide." });
+    }
+
     if (error.name === "ValidationError") {
-      return res.status(400).json({ message: error.message });
+      const firstError = Object.values(error.errors)[0]?.message;
+      return res.status(400).json({
+        message: firstError || "Certaines informations saisies sont invalides.",
+      });
     }
 
     if (error.code === 11000) {

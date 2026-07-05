@@ -167,38 +167,59 @@ exports.getMyFormations = async (req, res) => {
 
 exports.updateFormation = async (req, res) => {
   try {
-      if (
-      req.body.modeFormation === "Présentiel" &&
-      !req.body.numSalle
-  ) {
+    if (!req.body.creditImpot && !req.body.droitIndividuel && !req.body.droitCollectif) {
       return res.status(400).json({
-          success: false,
-          message: "Le numéro de salle est obligatoire pour une formation présentielle."
+        success: false,
+        message: "Veuillez sélectionner un mode de financement."
       });
-  }
+    }
 
-  const updatedFormation = await Formation.findByIdAndUpdate(
+    if (req.body.modeFormation === "Présentiel" && !req.body.numSalle) {
+      return res.status(400).json({
+        success: false,
+        message: "Le numéro de salle est obligatoire pour une formation présentielle."
+      });
+    }
+
+    const updatedFormation = await Formation.findByIdAndUpdate(
       req.params.id,
       req.body,
-      {
-          new: true,
-          runValidators: true
-      }
-  );
+      { new: true, runValidators: true }
+    );
 
-    } catch (error) {
+    if (!updatedFormation) {
+      return res.status(404).json({
+        success: false,
+        message: "Formation introuvable."
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Cycle de formation modifié avec succès.",
+      data: updatedFormation,
+    });
+
+  } catch (error) {
+
+    if (error.name === "CastError") {
+      return res.status(400).json({
+        success: false,
+        message: "Identifiant de formation invalide."
+      });
+    }
 
     if (error.name === "ValidationError") {
       return res.status(400).json({
+        success: false,
         message: error.message
       });
     }
-    
+
     return res.status(500).json({
       success: false,
       message: "Une erreur serveur est survenue."
     });
-
   }
 };
 
@@ -210,18 +231,26 @@ exports.deleteFormation = async (req, res) => {
     if (!formation) {
       return res.status(404).json({
         success: false,
-        message: "Formation introuvable",
+        message: "Formation introuvable.",
       });
     }
 
     return res.status(200).json({
       success: true,
-      message: "Formation supprimée avec succès",
+      message: "Formation supprimée avec succès.",
     });
+
   } catch (error) {
+    if (error.name === "CastError") {
+      return res.status(400).json({
+        success: false,
+        message: "Identifiant de formation invalide.",
+      });
+    }
+
     return res.status(500).json({
       success: false,
-      message: "Erreur lors de la suppression",
+      message: "Une erreur est survenue lors de la suppression.",
     });
   }
 };

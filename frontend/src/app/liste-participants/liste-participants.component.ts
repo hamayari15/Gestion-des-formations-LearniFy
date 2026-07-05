@@ -142,59 +142,44 @@ export class ListeParticipantsComponent implements OnInit {
   }
 
   deleteParticipant(id: string): void {
-
     Swal.fire({
-
-      title: 'Delete participant?',
-      text: 'This action cannot be undone.',
       icon: 'warning',
+      title: 'Supprimer ce participant ?',
+      text: 'Cette action est irréversible.',
       width: 550,
       showCancelButton: true,
-      confirmButtonText: 'Delete',
-      cancelButtonText: 'Cancel'
-
+      confirmButtonText: 'Supprimer',
+      cancelButtonText: 'Annuler',
+      confirmButtonColor: '#dc2626',
     }).then((result) => {
+      if (!result.isConfirmed) return;
 
-      if (result.isConfirmed) {
-
-        this.participantService.deleteParticipant(id).subscribe({
-
-          next: () => {
-
-            Swal.fire(
-              'Deleted!',
-              'Participant deleted successfully.',
-              'success'
-            );
-
-            if (
-              this.filteredParticipants.length === 1 &&
-              this.page > 1
-            ) {
+      this.participantService.deleteParticipant(id).subscribe({
+        next: (response: any) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Succès',
+            text: response.message,
+            width: 500,
+            timer: 2000,
+            timerProgressBar: true,
+          }).then(() => {
+            if (this.filteredParticipants.length === 1 && this.page > 1) {
               this.page--;
             }
-
             this.getParticipants();
-
-          },
-
-          error: (error) => {
-
-            Swal.fire(
-              'Error',
-              error.error?.message ||
-              'Failed to delete participant.',
-              'error'
-            );
-
-          }
-
-        });
-
-      }
-
+          });
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Erreur',
+            text: error?.error.message || 'Une erreur est survenue lors de la suppression.',
+            width: 500,
+          });
+        },
+      });
     });
-
   }
 
 }

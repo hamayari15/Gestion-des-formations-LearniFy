@@ -178,40 +178,28 @@ export class EditFormationDialogComponent implements OnInit {
     console.log('ID:', this.id);
     console.log('Formation:', formation);
 
-    this.formationService.updateFormation(this.id, formation)
-
-      .subscribe(
-
-      (response: any) => {
-
+    this.formationService.updateFormation(this.id, formation).subscribe({
+      next: (response: any) => {
         Swal.fire({
-
           icon: 'success',
           title: 'Succès',
           text: response.message,
-          width: 550,
-          timer: 3000,
-          timerProgressBar: true
+          width: 500,
+          timer: 2500,
+          timerProgressBar: true,
+        }).then(() => {
+          this.dialogRef.close(true);
         });
-
-        this.dialogRef.close(true);
       },
-
-      (error) => {
-
+      error: (error) => {
         Swal.fire({
-
           icon: 'error',
-
           title: 'Erreur',
-
-          text: error?.error?.message || 'Une erreur est survenue.'
-
+          text: error?.error.message || 'Une erreur est survenue.',
+          width: 500,
         });
-
-      }
-
-    );
+      },
+    });
 
   }
 

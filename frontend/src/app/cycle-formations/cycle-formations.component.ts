@@ -126,42 +126,40 @@ export class CycleFormationsComponent implements OnInit {
   }
 
   deleteFormation(id: string): void {
-
-  Swal.fire({
-    title: 'Delete formation ?',
-    text: 'This action cannot be undone',
-    icon: 'warning',
-    width: 550,
-    showCancelButton: true,
-    confirmButtonText: 'Delete',
-    cancelButtonText: 'Cancel'
-  }).then((result) => {
-
-    if (result.isConfirmed) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Supprimer cette formation ?',
+      text: 'Cette action est irréversible.',
+      width: 550,
+      showCancelButton: true,
+      confirmButtonText: 'Supprimer',
+      cancelButtonText: 'Annuler',
+      confirmButtonColor: '#dc2626',
+    }).then((result) => {
+      if (!result.isConfirmed) return;
 
       this.formationService.deleteFormation(id).subscribe({
-
-        next: () => {
-
-            Swal.fire(
-              'Deleted!',
-              'Formation deleted successfully',
-              'success'
-            );
+        next: (response: any) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Succès',
+            text: response.message,
+            width: 500,
+            timer: 2000,
+            timerProgressBar: true,
+          }).then(() => {
             this.getFormations();
-          },
-
-          error: (error) => {
-
-            Swal.fire(
-              'Error',
-              error.error?.message ||
-              'Failed to delete formation',
-              'error'
-            );
-          }
-        });
-      }
+          });
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Erreur',
+            text: error?.error?.message || 'Une erreur est survenue lors de la suppression.',
+            width: 500,
+          });
+        },
+      });
     });
   }
 

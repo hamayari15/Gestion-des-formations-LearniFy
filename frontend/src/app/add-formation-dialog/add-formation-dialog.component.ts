@@ -97,19 +97,21 @@ export class AddFormationDialogComponent {
       (response) => {
         Swal.fire({
           icon: 'success',
-          title: 'Success',
+          title: 'Succès',
           text: response.message,
-          width: 550,
-          timer: 3000,
+          width: 500,
+          timer: 2500,
           timerProgressBar: true,
+        }).then(() => {
+          this.dialogRef.close(true);
         });
-        this.dialogRef.close(true);
       },
       (error) => {
         Swal.fire({
           icon: 'error',
-          title: 'Error',
-          text: error?.error.message || 'Une erreur est survenue.',
+          title: 'Erreur',
+          text: error?.error.message || 'Une erreur est survenue. Veuillez réessayer.',
+          width: 500,
         });
         console.error('Error:', error);
       }
