@@ -1,6 +1,5 @@
 <div class="profile-container">
 
-  <!-- ===== LOADING STATE ===== -->
   <div *ngIf="loadingParticipant" class="loading-wrap">
     <div class="spinner"></div>
     <span>Chargement du profil...</span>
@@ -8,7 +7,6 @@
 
   <div *ngIf="!loadingParticipant && participant">
 
-    <!-- ===== PERSONAL INFO CARD ===== -->
     <div class="info-card">
 
       <div class="avatar-wrap">
@@ -59,7 +57,6 @@
 
     </div>
 
-    <!-- ===== STATS CARDS ===== -->
     <div class="section-label">Mes inscriptions</div>
 
     <div class="stats-grid" *ngIf="!loadingStats">

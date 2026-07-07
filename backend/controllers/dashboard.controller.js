@@ -55,7 +55,7 @@ exports.getInscriptionsOverTime = async (req, res) => {
       {
         $group: {
           _id: {
-            $dateToString: { format: "%Y-%m", date: "$createdAt" },
+            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
           },
           count: { $sum: 1 },
         },

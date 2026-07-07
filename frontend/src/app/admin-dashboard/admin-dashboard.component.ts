@@ -60,8 +60,8 @@ export class AdminDashboardComponent implements OnInit {
 
   private modeColorMap: Record<string, string> = {
     'En ligne': '#3b82f6',   
-    'Hybride': '#8b5cf6',    
-    'Présentiel': '#f59e0b', 
+    'Hybride': '#f59e0b',    
+    'Présentiel': '#22c55e', 
   };
 
   constructor(
@@ -87,8 +87,8 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   fetchTotalInscriptions(): void {
-    this.inscriptionService.getInscriptions().subscribe((inscriptions) => {
-      this.totalInscriptions = inscriptions.length;
+    this.inscriptionService.getInscriptions().subscribe((res: any) => {
+      this.totalInscriptions = res.data.totalItems;
     });
   }
 
