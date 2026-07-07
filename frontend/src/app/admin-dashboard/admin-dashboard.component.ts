@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { FormationService } from '../core/services/formation.service';
 import { InscriptionService } from '../core/services/incription.service';
 import { ParticipantService } from '../core/services/participant.service';
@@ -11,6 +12,10 @@ import { DashboardService } from '../core/services/dashboard.service';
   styleUrls: ['./admin-dashboard.component.css'],
 })
 export class AdminDashboardComponent implements OnInit {
+
+  isLoading: boolean = true;
+  hasData: boolean = false;
+  errorMessage: string = '';
 
   totalFormations: number = 0;
   totalInscriptions: number = 0;
@@ -53,15 +58,15 @@ export class AdminDashboardComponent implements OnInit {
   };
 
   private statusColorMap: Record<string, string> = {
-    'En Attente': '#f59e0b', 
-    'Validée': '#22c55e',    
-    'Refusée': '#ef4444',    
+    'En Attente': '#f59e0b',
+    'Validée': '#22c55e',
+    'Refusée': '#ef4444',
   };
 
   private modeColorMap: Record<string, string> = {
-    'En ligne': '#3b82f6',   
-    'Hybride': '#f59e0b',    
-    'Présentiel': '#22c55e', 
+    'En ligne': '#3b82f6',
+    'Hybride': '#f59e0b',
+    'Présentiel': '#22c55e',
   };
 
   constructor(
@@ -72,57 +77,66 @@ export class AdminDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.fetchTotalFormations();
-    this.fetchTotalInscriptions();
-    this.fetchParticipantStats();
-    this.getInscriptionsByStatus();
-    this.fetchFormationModeDistribution();
-    this.fetchInscriptionsOverTime();
+    this.loadDashboard();
   }
 
-  fetchTotalFormations(): void {
-    this.formationService.getFormations().subscribe((res: any) => {
-      this.totalFormations = res.data.totalItems;
+  loadDashboard(): void {
+    this.isLoading = true;
+    this.errorMessage = '';
+
+    forkJoin({
+      formations: this.formationService.getFormations(),
+      inscriptions: this.inscriptionService.getInscriptions(),
+      participants: this.participantService.getActiveInactiveStats(),
+      inscriptionsByStatus: this.dashboardService.getInscriptionsByStatus(),
+      formationModes: this.dashboardService.getFormationModeDistribution(),
+      inscriptionsOverTime: this.dashboardService.getInscriptionsOverTime(),
+    }).subscribe({
+      next: (res: any) => {
+        this.totalFormations = res.formations.data.totalItems;
+        this.totalInscriptions = res.inscriptions.data.totalItems;
+
+        this.setParticipantStats(res.participants);
+        this.setInscriptionsByStatus(res.inscriptionsByStatus);
+        this.setFormationModeDistribution(res.formationModes);
+        this.setInscriptionsOverTime(res.inscriptionsOverTime);
+
+        this.hasData =
+          this.totalFormations > 0 ||
+          this.totalInscriptions > 0 ||
+          this.totalParticipants > 0;
+
+        this.isLoading = false;
+      },
+      error: () => {
+        this.errorMessage = 'Impossible de charger les données du tableau de bord.';
+        this.isLoading = false;
+      },
     });
   }
 
-  fetchTotalInscriptions(): void {
-    this.inscriptionService.getInscriptions().subscribe((res: any) => {
-      this.totalInscriptions = res.data.totalItems;
-    });
+  private setParticipantStats(res: any): void {
+    this.totalParticipants = res.total;
+    this.activePercent = res.activePercent;
+    this.inactivePercent = res.inactivePercent;
+
+    this.participantStats = [
+      { _id: 'active', count: res.active },
+      { _id: 'inactive', count: res.inactive },
+    ];
   }
 
-  fetchParticipantStats(): void {
-    this.participantService.getActiveInactiveStats()
-      .subscribe((res: any) => {
+  private setInscriptionsByStatus(res: any[]): void {
+    this.inscriptionStatusStats = res;
 
-        this.totalParticipants = res.total;
+    const total = res.reduce((sum: number, item: any) => sum + item.count, 0);
 
-        this.activePercent = res.activePercent;
-        this.inactivePercent = res.inactivePercent;
+    this.pendingPercent = this.getStatusPercent(res, 'En Attente', total);
+    this.approvedPercent = this.getStatusPercent(res, 'Validée', total);
+    this.rejectedPercent = this.getStatusPercent(res, 'Refusée', total);
 
-        this.participantStats = [
-          { _id: 'active', count: res.active },
-          { _id: 'inactive', count: res.inactive }
-        ];
-      });
-  }
-
-  getInscriptionsByStatus(): void {
-    this.dashboardService.getInscriptionsByStatus()
-      .subscribe((res: any) => {
-
-        this.inscriptionStatusStats = res;
-
-        const total = res.reduce((sum: number, item: any) => sum + item.count, 0);
-
-        this.pendingPercent = this.getStatusPercent(res, 'En Attente', total);
-        this.approvedPercent = this.getStatusPercent(res, 'Validée', total);
-        this.rejectedPercent = this.getStatusPercent(res, 'Refusée', total);
-
-        this.inscriptionByStatusData = res;
-        this.buildBarChart();
-      });
+    this.inscriptionByStatusData = res;
+    this.buildBarChart();
   }
 
   buildBarChart(): void {
@@ -139,67 +153,59 @@ export class AdminDashboardComponent implements OnInit {
           data: values,
           backgroundColor: colors,
           borderRadius: 6,
-        }
-      ]
+        },
+      ],
     };
   }
 
-  fetchFormationModeDistribution(): void {
-    this.dashboardService.getFormationModeDistribution()
-      .subscribe((res: any) => {
+  private setFormationModeDistribution(res: any[]): void {
+    const labels = res.map((item: any) => item._id);
+    const values = res.map((item: any) => item.count);
 
-        const labels = res.map((item: any) => item._id);
-        const values = res.map((item: any) => item.count);
+    this.formationModeStats = res;
 
-        this.formationModeStats = res;
+    const total = values.reduce((a: number, b: number) => a + b, 0);
 
-        const total = values.reduce((a: number, b: number) => a + b, 0);
+    this.onlinePercent = this.getPercent(res, 'En ligne', total);
+    this.hybridPercent = this.getPercent(res, 'Hybride', total);
+    this.offlinePercent = this.getPercent(res, 'Présentiel', total);
 
-        this.onlinePercent = this.getPercent(res, 'En ligne', total);
-        this.hybridPercent = this.getPercent(res, 'Hybride', total);
-        this.offlinePercent = this.getPercent(res, 'Présentiel', total);
+    const colors = labels.map((label: string) => this.modeColorMap[label] || '#94a3b8');
 
-        const colors = labels.map((label: string) => this.modeColorMap[label] || '#94a3b8');
-
-        this.pieChartData = {
-          labels: labels,
-          datasets: [
-            {
-              data: values,
-              backgroundColor: colors,
-              borderWidth: 0,
-            }
-          ]
-        };
-      });
+    this.pieChartData = {
+      labels: labels,
+      datasets: [
+        {
+          data: values,
+          backgroundColor: colors,
+          borderWidth: 0,
+        },
+      ],
+    };
   }
 
-  fetchInscriptionsOverTime(): void {
-    this.dashboardService.getInscriptionsOverTime()
-      .subscribe((res: any) => {
+  private setInscriptionsOverTime(res: any[]): void {
+    const labels = res.map((item: any) => item._id);
+    const values = res.map((item: any) => item.count);
 
-        const labels = res.map((item: any) => item._id);
-        const values = res.map((item: any) => item.count);
-
-        this.lineChartData = {
-          labels,
-          datasets: [
-            {
-              label: 'Inscriptions dans le temps',
-              data: values,
-              fill: true,
-              borderColor: '#4f46e5',
-              backgroundColor: 'rgba(79, 70, 229, 0.08)',
-              tension: 0.3,
-              pointBackgroundColor: '#4f46e5',
-            },
-          ],
-        };
-      });
+    this.lineChartData = {
+      labels,
+      datasets: [
+        {
+          label: 'Inscriptions dans le temps',
+          data: values,
+          fill: true,
+          borderColor: '#4f46e5',
+          backgroundColor: 'rgba(79, 70, 229, 0.08)',
+          tension: 0.3,
+          pointBackgroundColor: '#4f46e5',
+        },
+      ],
+    };
   }
 
   private getStatusPercent(data: any[], status: string, total: number): number {
-    const item = data.find(x => x._id === status);
+    const item = data.find((x) => x._id === status);
     return item ? Math.round((item.count / total) * 100) : 0;
   }
 
