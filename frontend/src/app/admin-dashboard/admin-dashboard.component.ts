@@ -58,7 +58,7 @@ export class AdminDashboardComponent implements OnInit {
   };
 
   private statusColorMap: Record<string, string> = {
-    'En Attente': '#f59e0b',
+    'En Attente': '#3b82f6',
     'Validée': '#22c55e',
     'Refusée': '#ef4444',
   };

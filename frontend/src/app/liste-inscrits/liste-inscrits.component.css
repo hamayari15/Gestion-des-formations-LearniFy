@@ -181,12 +181,17 @@ tbody td {
   font-weight: 500;
 }
 
-.badge-presentiel {
+.badge-en-attente {
+  background: #e6f1fb;
+  color: #0c447c;
+}
+
+.badge-validee {
   background: #e1f5ee;
   color: #085041;
 }
 
-.badge-enligne {
+.badge-refusee {
   background: #fcebeb;
   color: #8b1e1e;
 }

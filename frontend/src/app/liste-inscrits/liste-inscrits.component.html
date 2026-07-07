@@ -9,13 +9,11 @@
     </div>
   </div>
 
-   <!-- ERROR -->
     <div *ngIf="errorMessage" class="alert-error">
       <i class="fas fa-exclamation-circle"></i>
       {{ errorMessage }}
     </div>
 
-  <!-- SEARCH -->
   <div class="filter-row">
 
     <div class="search-wrap">
@@ -37,7 +35,6 @@
 
   </div>
 
-  <!-- COUNT -->
   <div class="count-bar">
 
     <span class="count-label">
@@ -56,35 +53,31 @@
 
   </div>
 
-  <!-- CARD -->
   <div class="table-card">
 
-    <!-- LOADING -->
     <div *ngIf="loading" class="spinner-wrap">
       <div class="spinner"></div>
       <span class="spinner-label">Loading formations…</span>
     </div>
 
-    <!-- EMPTY -->
     <div *ngIf="!loading && inscriptions.length === 0" class="empty-state">
       <i class="fas fa-inbox empty-icon"></i>
       <p class="empty-title">No inscriptions found</p>
       <span class="empty-sub">Try adjusting your search or filter</span>
     </div>
 
-    <!-- TABLE -->
     <table *ngIf="!loading && inscriptions.length > 0">
 
       <thead>
         <tr>
-          <th>Thème</th>
-          <th>N° Salle</th>
-          <th>Full Name</th>  
-          <th>Email</th>
-          <th>Company</th>
-          <th>Service</th>
-          <th>Status</th>
-          <th>Actions</th>
+          <th style="width:16%">Thème</th>
+          <th style="width:10%">N° Salle</th>
+          <th style="width:15%">Full Name</th>
+          <th style="width:18%">Email</th>
+          <th style="width:11%">Company</th>
+          <th style="width:11%">Service</th>
+          <th style="width:12%">Status</th>
+          <th style="width:10%" class="text-center">Actions</th>
         </tr>
       </thead>
 
@@ -115,8 +108,9 @@
           <td>
             <span
               class="badge"
-              [class.badge-presentiel]="i.status === 'Validée'"
-              [class.badge-enligne]="i.status === 'Refusée'">
+              [class.badge-en-attente]="i.status === 'En Attente'"
+              [class.badge-validee]="i.status === 'Validée'"
+              [class.badge-refusee]="i.status === 'Refusée'">
 
               {{ i.status }}
 

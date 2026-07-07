@@ -5,17 +5,27 @@
     <p class="dashboard-subtitle">Analyse démographique et évolution des inscriptions</p>
   </div>
 
-  <div *ngIf="isLoading" class="loading-state">
+  <div class="state-panel" *ngIf="isLoading">
     <div class="spinner"></div>
     <span>Chargement des données...</span>
   </div>
 
-  <div *ngIf="errorMessage" class="error-message">
+  <div class="state-panel error-panel" *ngIf="!isLoading && errorMessage">
     <i class="fas fa-triangle-exclamation"></i>
     <span>{{ errorMessage }}</span>
   </div>
 
-  <div class="stats-grid" *ngIf="!isLoading">
+  <div class="state-panel empty-panel" *ngIf="!isLoading && !errorMessage && !hasData">
+    <i class="fas fa-inbox"></i>
+    <h3>Aucune donnée pour le moment</h3>
+    <p>
+      Les statistiques des participants apparaîtront ici dès
+      qu'un participant sera ajouté à la plateforme.
+    </p>
+  </div>
+
+  <!-- Real content -->
+  <div class="stats-grid" *ngIf="!isLoading && !errorMessage && hasData">
 
     <div class="chart-container chart-growth">
       <div class="chart-header">
@@ -32,7 +42,7 @@
         <i class="fas fa-users-viewfinder"></i>
         <span>Répartition par âge</span>
       </div>
-      <div class="chart-canvas-wrap">
+      <div class="chart-canvas-wrap pie-wrap">
         <canvas
           baseChart
           [data]="ageChartData"
@@ -47,12 +57,26 @@
         <i class="fas fa-venus-mars"></i>
         <span>Répartition par genre</span>
       </div>
-      <div class="chart-canvas-wrap">
+      <div class="chart-canvas-wrap pie-wrap">
         <canvas
           baseChart
           [data]="genderChartData"
           [options]="chartOptions"
           [type]="chartType">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="chart-container chart-doughnut">
+      <div class="chart-header">
+        <i class="fas fa-circle-notch"></i>
+        <span>Distribution globale</span>
+      </div>
+      <div class="chart-canvas-wrap pie-wrap">
+        <canvas
+          baseChart
+          [data]="doughnutChartData"
+          [type]="doughnutChartType">
         </canvas>
       </div>
     </div>
@@ -64,20 +88,6 @@
       </div>
       <div class="chart-canvas-wrap">
         <canvas id="growthLineChart"></canvas>
-      </div>
-    </div>
-
-    <div class="chart-container chart-doughnut">
-      <div class="chart-header">
-        <i class="fas fa-circle-notch"></i>
-        <span>Distribution globale</span>
-      </div>
-      <div class="chart-canvas-wrap doughnut-wrap">
-        <canvas
-          baseChart
-          [data]="doughnutChartData"
-          [type]="doughnutChartType">
-        </canvas>
       </div>
     </div>
 

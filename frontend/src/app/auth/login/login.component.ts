@@ -52,7 +52,7 @@ export class LoginComponent {
         if (response.role === 'Admin') {
 
           this.router.navigate([
-            '/admin-interface/cycle-formations'
+            '/admin-interface/admin-dashboard'
           ]);
 
         } else {
