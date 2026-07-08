@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -6,7 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ParticipantService {
-  private apiUrl = 'http://localhost:3000/Participant';
+
+  private apiUrl = `${environment.apiUrl}/Participant`;
 
   constructor(private http: HttpClient) {}
 
@@ -18,7 +20,7 @@ export class ParticipantService {
   ): Observable<any> {
 
     return this.http.get(
-      `${this.apiUrl}/getparticipants`,
+      `${this.apiUrl}/getParticipants`,
       {
         params: {
           page,
@@ -32,7 +34,7 @@ export class ParticipantService {
   }
 
   getParticipantsGrowth(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/getparticipantsGrowth`);
+    return this.http.get<any[]>(`${this.apiUrl}/getParticipantsGrowth`);
   }
 
   getActiveInactiveStats(): Observable<any> {
@@ -40,22 +42,22 @@ export class ParticipantService {
   }
 
   getParticipantById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/getparticipant/${id}`);
+    return this.http.get<any>(`${this.apiUrl}/getParticipant/${id}`);
   }
 
   updateParticipant(id: string, updatedData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/updateparticipant/${id}`, updatedData);
+    return this.http.put(`${this.apiUrl}/updateParticipant/${id}`, updatedData);
   }
 
   deleteParticipant(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/deleteparticipant/${id}`);
+    return this.http.delete(`${this.apiUrl}/deleteParticipant/${id}`);
   }
   
   checkCurrentPassword(participantId: string, actualPassword: string): Observable<boolean> {
-    return this.http.post<boolean>(`${this.apiUrl}/participant/check-password`, { participantId, actualPassword });
+    return this.http.post<boolean>(`${this.apiUrl}/check-password`, { participantId, actualPassword });
   }
 
   updatePassword(participantId: string, passwordData: { actualPassword: string; newPassword: string }): Observable<any> {
-    return this.http.put(`${this.apiUrl}/participant/${participantId}/update-password`, passwordData);
+    return this.http.put(`${this.apiUrl}/${participantId}/update-password`, passwordData);
   }
 }

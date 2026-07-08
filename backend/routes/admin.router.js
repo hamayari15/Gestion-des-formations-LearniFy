@@ -10,9 +10,9 @@ router.post("/Login", adminController.Login);
 
 router.get("/getAdmin/:id", adminController.getAdminById);
 
-router.post("/Admin/Check-Password", adminController.checkPassword);
+router.post("/Check-Password", adminController.checkPassword);
 
-router.put("/Admin/:id/update-password", adminController.updatePassword);
+router.put("/:id/update-password", adminController.updatePassword);
 
 
 module.exports = router;

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
@@ -6,8 +7,9 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class InscriptionService {
+
   private Formation: any;
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = `${environment.apiUrl}/Inscription`;
 
   constructor(private http: HttpClient) {}
 
@@ -22,7 +24,7 @@ export class InscriptionService {
     formationId: string
   ): Observable<any> {
     return this.http.post(
-      `${this.apiUrl}/Inscription/addInscription/${participantId}/${formationId}`,
+      `${this.apiUrl}/addInscription/${participantId}/${formationId}`,
       inscriptionData
     );
   }
@@ -35,7 +37,7 @@ export class InscriptionService {
   ): Observable<any> {
 
     return this.http.get<any>(
-      `${this.apiUrl}/Inscription/getAllInscriptions`,
+      `${this.apiUrl}/getAllInscriptions`,
       {
         params: {
           page,
@@ -50,18 +52,18 @@ export class InscriptionService {
 
   getInscriptionStats(participantId: string): Observable<any> {
     return this.http.get<any>(
-      `${this.apiUrl}/Inscription/Inscription/stats/${participantId}`
+      `${this.apiUrl}/stats/${participantId}`
     );
   }
 
   getInscriptionsByParticipant(participantId: string): Observable<any> {
     return this.http.get<any>(
-      `${this.apiUrl}/Inscription/getInscriptionsByParticipant/${participantId}`
+      `${this.apiUrl}/getInscriptionsByParticipant/${participantId}`
     );
   }
 
   updateInscriptionStatus(id: string, status: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/Inscription/inscriptions/${id}`, {status,});
+    return this.http.put(`${this.apiUrl}/Update/${id}`, {status,});
   }
 
 }

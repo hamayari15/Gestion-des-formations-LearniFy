@@ -1,5 +1,6 @@
 <div class="profile-container">
 
+  <!-- Loading -->
   <div *ngIf="loadingParticipant" class="loading-wrap">
     <div class="spinner"></div>
     <span>Chargement du profil...</span>
@@ -7,111 +8,92 @@
 
   <div *ngIf="!loadingParticipant && participant">
 
-    <div class="info-card">
+    <!-- ================= PROFILE ================= -->
 
-      <div class="avatar-wrap">
+    <div class="profile-card">
+
+      <div class="profile-image">
+
         <img
           *ngIf="participant.image"
-          class="avatar-img"
           [src]="environment.apiUrl + '/uploads/participants/' + participant.image"
+          class="avatar-img"
           alt="Participant">
 
         <div *ngIf="!participant.image" class="avatar-fallback">
           {{ getInitials(participant.fullName) }}
         </div>
+
       </div>
 
-      <div class="info-content">
+      <div class="profile-info">
 
-        <h1 class="participant-name">{{ participant.fullName }}</h1>
+        <h2>{{ participant.fullName }}</h2>
 
-        <div class="info-grid">
-
-          <div class="info-item">
-            <span class="info-label">
-              <i class="fas fa-envelope"></i>
-              Email
-            </span>
-            <span class="info-value">{{ participant.email }}</span>
+        <div class="info-row">
+          <i class="fas fa-envelope"></i>
+          <div>
+            <span>Email</span>
+            <p>{{ participant.email }}</p>
           </div>
+        </div>
 
-          <div class="info-item">
-            <span class="info-label">
-              <i class="fas fa-cake-candles"></i>
-              Âge
-            </span>
-            <span class="info-value">{{ participant.age }} ans</span>
+        <div class="info-row">
+          <i class="fas fa-cake-candles"></i>
+          <div>
+            <span>Âge</span>
+            <p>{{ participant.age }} ans</p>
           </div>
+        </div>
 
-          <div class="info-item">
-            <span class="info-label">
-              <i class="fas fa-venus-mars"></i>
-              Genre
-            </span>
-            <span class="info-value">{{ participant.gender }}</span>
+        <div class="info-row">
+          <i class="fas fa-venus-mars"></i>
+          <div>
+            <span>Genre</span>
+            <p>{{ participant.gender }}</p>
           </div>
-
         </div>
 
       </div>
 
     </div>
 
-    <div class="section-label">Mes inscriptions</div>
+    <!-- ================= STATS ================= -->
+
+    <h3 class="section-title">Mes inscriptions</h3>
 
     <div class="stats-grid" *ngIf="!loadingStats">
 
-      <div class="stat-card stat-total">
-        <div class="stat-icon">
-          <i class="fas fa-layer-group"></i>
-        </div>
-        <div class="stat-info">
-          <span class="stat-number">{{ stats.total }}</span>
-          <span class="stat-label">Total inscriptions</span>
-        </div>
+      <div class="stat-card">
+        <i class="fas fa-layer-group stat-blue"></i>
+        <h2>{{ stats.total }}</h2>
+        <span>Total</span>
       </div>
 
-      <div class="stat-card stat-pending">
-        <div class="stat-icon">
-          <i class="fas fa-clock"></i>
-        </div>
-        <div class="stat-info">
-          <span class="stat-number">{{ stats.enAttente }}</span>
-          <span class="stat-label">En attente</span>
-        </div>
+      <div class="stat-card">
+        <i class="fas fa-clock stat-orange"></i>
+        <h2>{{ stats.enAttente }}</h2>
+        <span>En attente</span>
       </div>
 
-      <div class="stat-card stat-approved">
-        <div class="stat-icon">
-          <i class="fas fa-circle-check"></i>
-        </div>
-        <div class="stat-info">
-          <span class="stat-number">{{ stats.valide }}</span>
-          <span class="stat-label">Validées</span>
-        </div>
+      <div class="stat-card">
+        <i class="fas fa-circle-check stat-green"></i>
+        <h2>{{ stats.valide }}</h2>
+        <span>Validées</span>
       </div>
 
-      <div class="stat-card stat-rejected">
-        <div class="stat-icon">
-          <i class="fas fa-circle-xmark"></i>
-        </div>
-        <div class="stat-info">
-          <span class="stat-number">{{ stats.refuse }}</span>
-          <span class="stat-label">Refusées</span>
-        </div>
+      <div class="stat-card">
+        <i class="fas fa-circle-xmark stat-red"></i>
+        <h2>{{ stats.refuse }}</h2>
+        <span>Refusées</span>
       </div>
 
-    </div>
-
-    <div *ngIf="loadingStats" class="stats-loading">
-      <div class="spinner small"></div>
     </div>
 
   </div>
 
   <div *ngIf="!loadingParticipant && !participant" class="empty-state">
-    <i class="fas fa-user-slash empty-icon"></i>
-    <p>Impossible de charger le profil.</p>
+    Impossible de charger le profil.
   </div>
 
 </div>
