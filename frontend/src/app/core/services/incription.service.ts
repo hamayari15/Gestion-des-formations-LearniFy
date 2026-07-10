@@ -63,7 +63,7 @@ export class InscriptionService {
   }
 
   updateInscriptionStatus(id: string, status: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/Update/${id}`, {status,});
+    return this.http.patch(`${this.apiUrl}/updateStatus/${id}`, {status,});
   }
 
 }

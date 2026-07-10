@@ -1,38 +1,83 @@
-<div class="container">
-  <div *ngIf="formations && formations.length > 0">
-    <h3>Mes Formations</h3>
-    <ul>
-      
-      <li *ngFor="let formation of formations; let i = index">
-        <h4>{{ i + 1 }}. {{ formation.theme }}</h4>
-        <p>
-          <strong>+ Mode de Formation :</strong> {{ formation.formation.modeFormation }}
-        </p>
-        <p><strong>+ Numéro de Salle :</strong> {{ formation.numSalle }}</p>
-        <p><strong>+ Entreprise :</strong> {{ formation.entreprise }}</p>
+<div class="container mt-4">
 
-        <p>
-          <strong>Statut de Cette Formation : </strong>
-          <span *ngIf="formation.status === 'En Attente'" class="status en-attente">
-            <i class="fas fa-clock"></i> En Attente
-          </span>
-          <span *ngIf="formation.status === 'Validée'" class="status validee">
-            <i class="fas fa-check-circle"></i> Validée
-          </span>
-          <span *ngIf="formation.status === 'Refusée'" class="status refusee">
-            <i class="fas fa-times-circle"></i> Refusée
-          </span>
-        </p>        
-        
-      </li>
-    </ul>
+  <div class="page-header">
+    <div>
+      <h2 class="page-title">Mes Formations</h2>
+      <p class="page-subtitle">Consultez vos inscriptions et leur statut</p>
+    </div>
   </div>
 
-  <div *ngIf="!formations || formations.length === 0">
-    <p class="no-formations">Vous n'avez encore aucune inscription. Découvrez nos formations disponibles et inscrivez-vous pour enrichir vos compétences !.</p>
-    <div class="action-buttons">
-      <button (click)="gotoformatioenpresentielle()" class="btn btn-primary">Formations Présentielles</button>
-      <button (click)="gotoformatioenligne()" class="btn btn-secondary">Formations en Ligne</button>
-    </div>    
+  <div *ngIf="errorMessage" class="alert-error">
+    <i class="fas fa-exclamation-circle"></i>
+    {{ errorMessage }}
   </div>
+
+  <div *ngIf="loading" class="spinner-wrap">
+    <div class="spinner"></div>
+    <span class="spinner-label">Chargement de vos formations…</span>
+  </div>
+
+  <div *ngIf="!loading && !errorMessage && inscriptions.length === 0" class="empty-state">
+    <i class="fas fa-graduation-cap empty-icon"></i>
+    <p class="empty-title">Aucune inscription pour le moment</p>
+    <span class="empty-sub">Vos formations inscrites apparaîtront ici.</span>
+  </div>
+
+  <div *ngIf="!loading && !errorMessage && inscriptions.length > 0" class="inscriptions-grid">
+
+    <div class="inscription-card" *ngFor="let inscription of inscriptions">
+
+      <div class="card-top">
+        <h3 class="formation-theme">
+          {{ inscription.formationId?.theme }}
+        </h3>
+
+        <span
+          class="badge status-badge"
+          [class.badge-en-attente]="inscription.Status === 'En attente'"
+          [class.badge-validee]="inscription.Status === 'Validée'"
+          [class.badge-refusee]="inscription.Status === 'Refusée'">
+          {{ inscription.Status }}
+        </span>
+      </div>
+
+      <div class="card-mode">
+        <span
+          class="badge mode-badge"
+          [class.badge-presentiel]="inscription.formationId?.modeFormation === 'Présentiel'"
+          [class.badge-enligne]="inscription.formationId?.modeFormation === 'En ligne'"
+          [class.badge-hybride]="inscription.formationId?.modeFormation === 'Hybride'">
+          {{ inscription.formationId?.modeFormation }}
+        </span>
+      </div>
+
+      <div class="card-details">
+
+        <div class="detail-row">
+          <i class="fas fa-calendar-alt detail-icon"></i>
+          <span>
+            {{ inscription.formationId?.periodeDu | date:'dd/MM/yyyy' }}
+            —
+            {{ inscription.formationId?.periodeA | date:'dd/MM/yyyy' }}
+          </span>
+        </div>
+
+        <div class="detail-row">
+          <i class="fas fa-clock detail-icon"></i>
+          <span>
+            {{ inscription.formationId?.horaireDu }} - {{ inscription.formationId?.horaireA }}
+          </span>
+        </div>
+
+        <div class="detail-row" *ngIf="inscription.formationId?.numSalle">
+          <i class="fas fa-door-open detail-icon"></i>
+          <span>Salle {{ inscription.formationId?.numSalle }}</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>

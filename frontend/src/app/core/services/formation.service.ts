@@ -29,14 +29,6 @@ export class FormationService {
       }
     );
   }
-  
-  getFormationsbyParId(participanrId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/getMyFormation/${participanrId}`);
-  }
-
-  getFormationById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/getFormation/${id}`);
-  }
 
   updateFormation(id: string, formation: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/update/${id}`, formation);
@@ -44,9 +36,5 @@ export class FormationService {
 
   deleteFormation(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/delete/${id}`);
-  }
-
-  updateFormationStatus(id: string, status: string): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/updateStatus/${id}`, { status });
   }
 }

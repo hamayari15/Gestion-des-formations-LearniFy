@@ -1,11 +1,20 @@
 body {
     background-color: #f8f9fa;
     font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .error-container {
     padding: 40px 15px;
     text-align: center;
+    width: 100%;
 }
 
 lottie-player {

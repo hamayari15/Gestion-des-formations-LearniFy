@@ -12,7 +12,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   isLoggedIn: boolean = false;
   menuOpen = false;
-  moreOpen = false;
 
   private authSubscription: Subscription = new Subscription();
 

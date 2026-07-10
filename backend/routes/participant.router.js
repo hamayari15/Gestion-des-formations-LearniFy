@@ -24,9 +24,5 @@ router.put("/updateParticipant/:id", participantController.updateParticipant);
 
 router.delete("/deleteParticipant/:id", participantController.deleteParticipant);
 
-router.post("/check-password", participantController.checkPassword);
-
-router.put("/:id/update-password", participantController.updatePassword);
-
 
 module.exports = router;

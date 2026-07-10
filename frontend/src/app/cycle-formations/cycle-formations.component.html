@@ -24,11 +24,13 @@
         class="search-input"
         placeholder="Search by theme..."
         [(ngModel)]="searchTerm"
+        [disabled]="!!errorMessage || !hasAnyFormations"
         (input)="applyFilters()">
     </div>
     <select
       class="mode-select"
       [(ngModel)]="selectedMode"
+      [disabled]="!!errorMessage || !hasAnyFormations"
       (change)="applyFilters()">
       <option value="">All Modes</option>
       <option value="Présentiel">Présentiel</option>
@@ -57,7 +59,7 @@
       <span class="spinner-label">Loading formations…</span>
     </div>
 
-    <div *ngIf="!loading && filteredFormations.length === 0" class="empty-state">
+    <div *ngIf="!loading && !errorMessage && filteredFormations.length === 0" class="empty-state">
       <i class="fas fa-search empty-icon"></i>
       <p class="empty-title">No formations found</p>
       <span class="empty-sub">Try adjusting your search or filter</span>

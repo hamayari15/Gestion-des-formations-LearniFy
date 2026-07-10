@@ -12,7 +12,7 @@ router.get("/stats/:participantId", inscriptionController.getInscriptionStatsByP
 
 router.get("/getInscriptionsByParticipant/:participantId", inscriptionController.getInscriptionsByParticipant);
 
-router.put("/Update/:id", inscriptionController.updateInscription);
+router.patch("/updateStatus/:id", inscriptionController.updateInscriptionStatus);
 
 
 module.exports = router;

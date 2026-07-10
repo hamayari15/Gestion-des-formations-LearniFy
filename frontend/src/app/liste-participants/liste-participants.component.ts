@@ -28,6 +28,7 @@ export class ListeParticipantsComponent implements OnInit {
 
   loading: boolean = false;
   errorMessage: string = '';
+  hasAnyParticipants: boolean = true;
 
   constructor(
     private participantService: ParticipantService,
@@ -36,11 +37,11 @@ export class ListeParticipantsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getParticipants();
-    this.loading = true;
   }
 
   getParticipants(): void {
-
+    
+    this.loading = true;
     this.errorMessage = '';
 
     this.participantService.getParticipants(
@@ -58,6 +59,10 @@ export class ListeParticipantsComponent implements OnInit {
 
         this.totalPages = response.data.totalPages;
         this.totalItems = response.data.totalItems;
+
+        if (!this.searchTerm && !this.selectedStatus) {
+          this.hasAnyParticipants = this.totalItems > 0;
+        }
 
         this.loading = false;
 

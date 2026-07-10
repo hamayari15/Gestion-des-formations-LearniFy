@@ -1,19 +1,137 @@
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
-    <link rel="stylesheet" href="home.component.css" />
-  </head>
-  <body>
-    <main>
-      <h1>Bienvenue dans le Système de Gestion des Formations</h1>
-      <p>
-        Gérez facilement l'inscription et le suivi des participants aux
-        formations.
+<div class="home">
+
+<section class="hero-section">
+  <div class="hero">
+
+    <div class="hero-copy">
+      <span class="hero-eyebrow">Formation Center</span>
+      <h1 class="hero-title">
+        Your learning path,<br>
+        <span class="hero-title-accent">mapped out.</span>
+      </h1>
+      <p class="hero-sub">
+        Browse structured training programs, register in a few clicks, and track
+        every step — from enrollment to validation — in one place.
       </p>
-      <a routerLink="/about" class="button">À Propos</a>
-    </main>
-  </body>
-</html>
+
+      <div class="hero-actions">
+        <a [routerLink]="isAuthenticated ? '/participant-interface/mes-formations' : '/login'" class="btn-solid btn-lg">
+          <i class="fas fa-compass"></i>
+          {{ isAuthenticated ? 'View My Formations' : 'Start Learning' }}
+        </a>
+        <a [routerLink]="isAuthenticated ? '/participant-interface/formations-disponibles' : '/login'" class="btn-outline btn-lg">
+          Browse Catalog
+        </a>
+      </div>
+
+      <div class="hero-modes">
+        <span class="badge badge-presentiel">Présentiel</span>
+        <span class="badge badge-enligne">En ligne</span>
+        <span class="badge badge-hybride">Hybride</span>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <svg viewBox="0 0 480 420" class="path-svg">
+
+        <path class="path-line" d="M 60 360 C 60 280, 160 300, 180 220 S 300 140, 300 100 S 400 60, 420 40" fill="none" />
+
+        <g class="milestone" style="--d:0">
+          <circle cx="60" cy="360" r="9" />
+          <text x="82" y="358">Discover</text>
+        </g>
+
+        <g class="milestone" style="--d:1">
+          <circle cx="180" cy="220" r="9" />
+          <text x="202" y="218">Enroll</text>
+        </g>
+
+        <g class="milestone" style="--d:2">
+          <circle cx="300" cy="100" r="9" />
+          <text x="322" y="98">Attend</text>
+        </g>
+
+        <g class="milestone milestone-final" style="--d:3">
+          <circle cx="420" cy="40" r="11" />
+          <text x="322" y="20">Validated</text>
+        </g>
+
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+  <section class="process">
+    <div class="section-head">
+      <span class="section-eyebrow">The Process</span>
+      <h2>Four steps, start to certified</h2>
+    </div>
+
+    <div class="process-grid">
+
+      <div class="process-step">
+        <span class="step-num">01</span>
+        <h3>Browse</h3>
+        <p>Filter formations by theme, mode, or schedule to find the right fit.</p>
+      </div>
+
+      <div class="process-step">
+        <span class="step-num">02</span>
+        <h3>Register</h3>
+        <p>Submit your inscription in a few clicks — no paperwork required.</p>
+      </div>
+
+      <div class="process-step">
+        <span class="step-num">03</span>
+        <h3>Attend</h3>
+        <p>Join in person, online, or a hybrid mix — whatever suits your schedule.</p>
+      </div>
+
+      <div class="process-step">
+        <span class="step-num">04</span>
+        <h3>Get Validated</h3>
+        <p>Track your inscription status from your profile until it's confirmed.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="modes-section">
+    <div class="section-head">
+      <span class="section-eyebrow">Flexible By Design</span>
+      <h2>Train the way that works for you</h2>
+    </div>
+
+    <div class="modes-grid">
+
+      <div class="mode-card">
+        <div class="mode-icon mode-icon-presentiel"><i class="fas fa-chalkboard-teacher"></i></div>
+        <h3>Présentiel</h3>
+        <p>Face-to-face sessions in dedicated training rooms, with direct access to instructors.</p>
+      </div>
+
+      <div class="mode-card">
+        <div class="mode-icon mode-icon-enligne"><i class="fas fa-laptop"></i></div>
+        <h3>En ligne</h3>
+        <p>Fully remote formations you can join from anywhere, on a fixed schedule.</p>
+      </div>
+
+      <div class="mode-card">
+        <div class="mode-icon mode-icon-hybride"><i class="fas fa-people-arrows"></i></div>
+        <h3>Hybride</h3>
+        <p>Mix in-person and remote sessions for the flexibility your calendar needs.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <h2>Ready to map your next skill?</h2>
+    <p>Create an account and register for your first formation in minutes.</p>
+    <a [routerLink]="isAuthenticated ? '/participant-interface/mes-formations' : '/register'" class="btn-solid btn-lg">
+      {{ isAuthenticated ? 'View My Formations' : 'Get Started Free' }}
+    </a>
+  </section>
+
+</div>

@@ -101,70 +101,6 @@ exports.getAllFormations = async (req, res) => {
 };
 
 
-exports.getFormationById = async (req, res) => {
-  try {
-    const formation = await Formation.findById(req.params.id);
-
-    if (!formation) {
-      return res.status(404).json({
-        message: "Formation not found",
-      });
-    }
-
-    res.status(200).json(formation);
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
-  }
-};
-
-
-exports.getMyFormations = async (req, res) => {
-  try {
-    const participantId = req.params.participantId;
-
-    const inscriptions = await Inscription.find({
-      participantId,
-    });
-
-    if (!inscriptions.length) {
-      return res.status(404).json({
-        message: "No inscriptions found",
-      });
-    }
-
-    const formationIds = [
-      ...new Set(
-        inscriptions.map(
-          (inscription) => inscription.formationId
-        )
-      ),
-    ];
-
-    const formations = await Formation.find({
-      _id: { $in: formationIds },
-    });
-
-    const result = inscriptions.map((inscription) => ({
-      ...inscription.toObject(),
-      formation:
-        formations.find(
-          (formation) =>
-            formation._id.toString() ===
-            inscription.formationId
-        ) || null,
-    }));
-
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
-  }
-};
-
-
 exports.updateFormation = async (req, res) => {
   try {
     if (!req.body.creditImpot && !req.body.droitIndividuel && !req.body.droitCollectif) {
@@ -251,48 +187,6 @@ exports.deleteFormation = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Une erreur est survenue lors de la suppression.",
-    });
-  }
-};
-
-
-exports.updateStatus = async (req, res) => {
-  try {
-    const { status } = req.body;
-
-    if (
-      !["Validée", "Refusée", "En Attente"].includes(
-        status
-      )
-    ) {
-      return res.status(400).json({
-        message: "Invalid status",
-      });
-    }
-
-    const formation =
-      await Formation.findById(req.params.id);
-
-    if (!formation) {
-      return res.status(404).json({
-        message: "Formation not found",
-      });
-    }
-
-    formation.status = status;
-
-    formation.history.push({
-      status,
-    });
-
-    await formation.save();
-
-    res.status(200).json(formation);
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      message: "Server error",
     });
   }
 };

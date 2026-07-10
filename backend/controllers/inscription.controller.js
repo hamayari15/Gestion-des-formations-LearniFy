@@ -206,7 +206,7 @@ exports.getInscriptionsByParticipant = async (req, res) => {
 };
 
 
-exports.updateInscription = async (
+exports.updateInscriptionStatus = async (
   req,
   res
 ) => {

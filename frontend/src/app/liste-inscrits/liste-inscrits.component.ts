@@ -21,17 +21,18 @@ export class ListeInscritsComponent implements OnInit {
 
   loading: boolean = false;
   errorMessage: string = '';
+  hasAnyInscriptions: boolean = true;
 
   constructor(private inscriptionService: InscriptionService) {}
 
   ngOnInit(): void {
     this.getInscriptions();
-    this.loading = true;
   }
 
   getInscriptions(): void {
 
     this.errorMessage = '';
+    this.loading = true
 
     this.inscriptionService.getInscriptions(
       this.page,
@@ -47,8 +48,11 @@ export class ListeInscritsComponent implements OnInit {
         this.totalPages = res.data.totalPages;
         this.totalItems = res.data.totalItems;
 
-        this.loading = false;
+        if (!this.search && !this.sort) {
+          this.hasAnyInscriptions = this.totalItems > 0;
+        }
 
+        this.loading = false;
       },
 
       error: () => {

@@ -27,6 +27,7 @@ export class CycleFormationsComponent implements OnInit {
 
   loading: boolean = false;
   errorMessage: string = '';
+  hasAnyFormations: boolean = true;
 
   constructor(
     private formationService: FormationService,
@@ -35,11 +36,12 @@ export class CycleFormationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFormations();
-    this.loading = true
   }
 
   getFormations(): void {
+
     this.errorMessage = '';
+    this.loading = true
 
     this.formationService.getFormations(
       this.page,
@@ -54,6 +56,10 @@ export class CycleFormationsComponent implements OnInit {
 
         this.totalPages = response.data.totalPages;
         this.totalItems = response.data.totalItems;
+
+        if (!this.searchTerm && !this.selectedMode) {
+          this.hasAnyFormations = this.totalItems > 0;
+        }
 
         this.loading = false; 
       },

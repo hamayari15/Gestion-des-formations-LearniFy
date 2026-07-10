@@ -13,43 +13,33 @@
 
       <li class="nav-item">
         <a class="nav-link" routerLink="/" (click)="toggleMenu()">
-          <i class="fas fa-home"></i> Home</a>
+          Home</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/about" (click)="toggleMenu()">
-          <i class="fas fa-info-circle"></i> About</a>
+          About</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="!isLoggedIn">
         <a class="nav-link" routerLink="/privacy" (click)="toggleMenu()">
-          <i class="fas fa-info-circle"></i> Privacy</a>
+          Privacy</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/contact" (click)="toggleMenu()">
-          <i class="fas fa-envelope"></i> Contact Us</a>
+          Contact Us</a>
       </li>
 
       <ng-container *ngIf="isLoggedIn">
         <li class="nav-item">
           <a class="nav-link" routerLink="/participant-interface/mon-profile-participant" routerLinkActive="active-link" (click)="toggleMenu()">
-            <i class="fas fa-user"></i> Mon Profil</a>
+            Mon Profil</a>
         </li>
-
-        <li class="nav-item dropdown">
-          <button class="nav-link dropdown-toggle-btn" (click)="moreOpen = !moreOpen" [attr.aria-expanded]="moreOpen">
-            Plus <i class="fas fa-chevron-down" [class.rotated]="moreOpen"></i>
-          </button>
-          <ul class="more-menu" *ngIf="moreOpen">
-            <li>
-              <a routerLink="/participant-interface/formations-disponibles" routerLinkActive="active-link" (click)="moreOpen = false; toggleMenu()">
-                Formations
-              </a>
-            </li>
-            <li>
-              <a routerLink="/participant-interface/mes-formations" routerLinkActive="active-link" (click)="moreOpen = false; toggleMenu()">
-                Mes formations
-              </a>
-            </li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/participant-interface/formations-disponibles" routerLinkActive="active-link" (click)="toggleMenu()">
+            Formations disponibles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/participant-interface/mes-formations" routerLinkActive="active-link" (click)="toggleMenu()">
+            Inscriptions</a>
         </li>
       </ng-container>
 

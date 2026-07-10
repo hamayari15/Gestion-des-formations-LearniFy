@@ -52,12 +52,5 @@ export class ParticipantService {
   deleteParticipant(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/deleteParticipant/${id}`);
   }
-  
-  checkCurrentPassword(participantId: string, actualPassword: string): Observable<boolean> {
-    return this.http.post<boolean>(`${this.apiUrl}/check-password`, { participantId, actualPassword });
-  }
 
-  updatePassword(participantId: string, passwordData: { actualPassword: string; newPassword: string }): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${participantId}/update-password`, passwordData);
-  }
-}
+};

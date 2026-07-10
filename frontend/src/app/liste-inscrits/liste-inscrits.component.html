@@ -1,6 +1,5 @@
 <div class="container mt-4">
 
-  <!-- HEADER -->
   <div class="page-header">
 
     <div>
@@ -25,10 +24,11 @@
         class="search-input"
         placeholder="Search by theme..."
         [(ngModel)]="search"
+        [disabled]="!!errorMessage || !hasAnyInscriptions"
         (input)="applyFilters()">
 
     </div>
-      <button class="btn-add" (click)="toggleSort()">
+      <button class="btn-sort" (click)="toggleSort()" [disabled]="!!errorMessage || !hasAnyInscriptions">
       <i class="fas fa-sort"></i>
       {{ sort === 'desc' ? 'Newest First' : 'Oldest First' }}
     </button>
@@ -60,7 +60,7 @@
       <span class="spinner-label">Loading formations…</span>
     </div>
 
-    <div *ngIf="!loading && inscriptions.length === 0" class="empty-state">
+    <div *ngIf="!loading && !errorMessage && inscriptions.length === 0" class="empty-state">
       <i class="fas fa-inbox empty-icon"></i>
       <p class="empty-title">No inscriptions found</p>
       <span class="empty-sub">Try adjusting your search or filter</span>

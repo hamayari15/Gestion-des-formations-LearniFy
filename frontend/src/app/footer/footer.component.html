@@ -1,11 +1,53 @@
 <footer class="footer">
   <div class="footer-container">
-    <p>&copy; 2025 Formation Center. All rights reserved.</p>
 
-    <div class="footer-links">
-      <a routerLink="/">Home</a>
-      <a routerLink="/about">About</a>
-      <a routerLink="/privacy">Privacy Policy</a>
+    <div class="footer-main">
+
+      <div class="footer-brand">
+        <h3 class="footer-logo">
+          <i class="fas fa-graduation-cap"></i>
+          Formation Center
+        </h3>
+        <p class="footer-desc">
+          Empowering learners through quality training programs, flexible schedules, and expert instructors.
+        </p>
+
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a routerLink="/">Home</a>
+        <a routerLink="/about">About</a>
+        <a [routerLink]="isAuthenticated ? '/participant-interface/formations-disponibles' : '/login'">Formations</a>
+        <a routerLink="/contact">Contact</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a routerLink="/home">FAQ</a>
+        <a routerLink="/privacy">Privacy Policy</a>
+        <a routerLink="/contact">Terms of Service</a>
+        <a routerLink="/contact">Support</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p><i class="fas fa-map-marker-alt"></i> Tunis, Tunisia</p>
+        <p><i class="fas fa-envelope"></i> contact&#64;formationcenter.com</p>
+        <p><i class="fas fa-phone"></i> +216 12 345 678</p>
+      </div>
+
     </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Formation Center. All rights reserved.</p>
+    </div>
+
   </div>
 </footer>

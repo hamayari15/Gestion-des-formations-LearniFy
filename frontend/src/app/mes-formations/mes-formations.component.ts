@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormationService } from '../core/services/formation.service';
+import { Router } from '@angular/router';
 import { InscriptionService } from '../core/services/incription.service';
 import { UserService } from '../core/services/user.service';
 
@@ -10,61 +9,38 @@ import { UserService } from '../core/services/user.service';
   styleUrls: ['./mes-formations.component.css'],
 })
 export class MesFormationsComponent implements OnInit {
-  theme: string | null = null;
-  numSalle: string | null = null;
-  modeFormation: string | null = null;
-  formations: any[] = [];
   inscriptions: any[] = [];
   participantid: string = '';
 
-  inscriptionStatus: string | null = null;
+  loading: boolean = false;
+  errorMessage: string = '';
 
   constructor(
-    private route: ActivatedRoute,
-    private formationService: FormationService,
     private inscriptionService: InscriptionService,
     private userService: UserService,
     private router: Router
   ) {}
 
   ngOnInit() {
-    this.participantid = this.userService.getUser()._id;
-    this.getFormations();
+    this.participantid = this.userService.getUser().id;
     this.getInscriptions();
   }
 
-  getFormations(): void {
-    this.formationService.getFormationsbyParId(this.participantid).subscribe(
-      (data) => {
-        this.formations = data;
-        console.log('Fetched formations:', this.formations);
-      },
-      (error) => {
-        console.error('Error fetching formations:', error);
-      }
-    );
-  }
-
   getInscriptions(): void {
-    this.inscriptionService.getInscriptions().subscribe(
-      (data) => {
-        this.inscriptions = data;
-        if (this.inscriptions.length > 0) {
-          this.inscriptionStatus = this.inscriptions[0].status;
-        }
-        console.log('Fetched inscriptions:', this.inscriptions);
+    this.loading = true;
+    this.errorMessage = '';
+ 
+    this.inscriptionService.getInscriptionsByParticipant(this.participantid).subscribe({
+      next: (response: any) => {
+        console.log(response)
+        this.inscriptions = response.data.inscriptions;
+        this.loading = false;
       },
-      (error) => {
-        console.error('Error fetching inscriptions:', error);
+      error: (error) => {
+        this.loading = false;
+        this.errorMessage =
+          error.error?.message || 'Erreur lors de la récupération des inscriptions';
       }
-    );
-  }
-
-  gotoformatioenligne() {
-    this.router.navigate(['participant-interface/formations-enligne']);
-  }
-
-  gotoformatioenpresentielle() {
-    this.router.navigate(['participant-interface/formations-presensiel']);
+    });
   }
 }

@@ -1,20 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from '../core/services/auth.service';
-import { Router } from '@angular/router';
-
+import { Component } from '@angular/core';
+import { UserService } from '../core/services/user.service';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css']
+  styleUrls: ['./footer.component.css'],
 })
+export class FooterComponent {
 
-export class FooterComponent implements OnInit {
-  
-  constructor(private authService: AuthService) {}
+  constructor(private userService: UserService) {}
 
-  ngOnInit(): void {
+  get isAuthenticated(): boolean {
+    return this.userService.isAuthenticated();
   }
-
 }
-

@@ -59,7 +59,7 @@
   color: #9ca3af;
 }
 
-.btn-add {
+.btn-sort {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -75,8 +75,29 @@
   white-space: nowrap;
 }
 
-.btn-add:hover {
+.btn-sort:hover {
   background: #144a80;
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
+}
+
+.search-input:disabled,
+.btn-sort:disabled {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+  border-color: #e5e7eb;
+  opacity: 0.8;
+}
+
+.search-input:disabled::placeholder {
+  color: #b0b5bc;
+}
+
+.search-wrap:has(.search-input:disabled) .search-icon {
+  color: #b0b5bc;
 }
 
 .count-bar {

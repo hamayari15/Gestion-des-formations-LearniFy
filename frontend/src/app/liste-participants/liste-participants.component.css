@@ -65,6 +65,23 @@
   color: #9ca3af;
 }
 
+.search-input:disabled,
+.status-select:disabled {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+  border-color: #e5e7eb;
+  opacity: 0.8;
+}
+
+.search-input:disabled::placeholder {
+  color: #b0b5bc;
+}
+
+.search-wrap:has(.search-input:disabled) .search-icon {
+  color: #b0b5bc;
+}
+
 .count-bar {
   display: flex;
   justify-content: space-between;

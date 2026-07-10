@@ -27,6 +27,7 @@
         class="search-input"
         placeholder="Search by participant name..."
         [(ngModel)]="searchTerm"
+        [disabled]="!!errorMessage || !hasAnyParticipants"
         (input)="applyFilters()">
 
     </div>
@@ -34,6 +35,7 @@
     <select
       class="status-select"
       [(ngModel)]="selectedStatus"
+      [disabled]="!!errorMessage || !hasAnyParticipants"
       (change)="applyFilters()">
 
       <option value="">All Status</option>
@@ -75,8 +77,13 @@
 
     </div>
 
-    <div
-      *ngIf="!loading && filteredParticipants.length === 0"
+    <div *ngIf="!loading && !errorMessage && !hasAnyParticipants && filteredParticipants.length === 0" class="empty-state">
+      <i class="fas fa-users empty-icon"></i>
+      <p class="empty-title">No participants yet</p>
+      <span class="empty-sub">Participant accounts will appear here once created.</span>
+    </div>
+
+    <div *ngIf="!loading && !errorMessage && hasAnyParticipants && filteredParticipants.length === 0" class="empty-state"
       class="empty-state">
 
       <i class="fas fa-users empty-icon"></i>
