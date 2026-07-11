@@ -110,15 +110,17 @@
 
         <th style="width:8%">Image</th>
 
-        <th style="width:20%">Full Name</th>
+        <th style="width:18%">Full Name</th>
 
-        <th style="width:10%">Age</th>
+        <th style="width:8%">Age</th>
 
-        <th style="width:12%">Gender</th>
+        <th style="width:10%">Gender</th>
 
         <th style="width:12%">Status</th>
 
         <th style="width:20%">Email</th>
+
+        <th style="width:16%">Created At</th>
 
         <th style="width:12%" class="text-center">
           Actions
@@ -186,11 +188,17 @@
             </span>
             
           </td>
-            <td class="email-cell">
-  
-              {{ participant.email }}
-  
-            </td>
+          <td class="email-cell">
+
+            {{ participant.email }}
+
+          </td>
+
+          <td>
+
+            {{ participant.createdAt | date:'dd/MM/yyyy' }}
+
+          </td>
 
           <td class="text-center">
 

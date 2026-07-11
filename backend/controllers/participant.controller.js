@@ -1,4 +1,5 @@
 const Participant = require("../models/Participant.model");
+const Inscription = require("../models/Inscription.model");
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -312,31 +313,28 @@ exports.updateParticipant = async (req, res) => {
 
 exports.deleteParticipant = async (req, res) => {
   try {
-    const deletedParticipant = await Participant.findByIdAndDelete(req.params.id);
+    const participant = await Participant.findById(req.params.id);
 
-    if (!deletedParticipant) {
-      return res.status(404).json({
-        success: false,
-        message: "Participant introuvable.",
-      });
+    if (!participant) {
+      return res.status(404).json({ success: false, message: "Participant introuvable." });
     }
+
+    await Inscription.deleteMany({ participantId: participant._id });
+    await participant.deleteOne();
 
     return res.status(200).json({
       success: true,
-      message: "Participant supprimé avec succès.",
+      message: "Participant et ses inscriptions supprimés avec succès.",
     });
-
+    
   } catch (error) {
     if (error.name === "CastError") {
-      return res.status(400).json({
-        success: false,
-        message: "Identifiant de participant invalide.",
+      return res.status(400).json({ success: false, 
+        message: "Identifiant de participant invalide." 
       });
     }
-
-    return res.status(500).json({
-      success: false,
-      message: "Une erreur est survenue lors de la suppression.",
+    return res.status(500).json({ 
+      success: false, message: "Une erreur est survenue lors de la suppression." 
     });
   }
 };

@@ -34,9 +34,9 @@
 
         <span
           class="badge status-badge"
-          [class.badge-en-attente]="inscription.Status === 'En attente'"
-          [class.badge-validee]="inscription.Status === 'Validée'"
-          [class.badge-refusee]="inscription.Status === 'Refusée'">
+          [class.badge-en-attente]="inscription.status === 'En attente'"
+          [class.badge-validee]="inscription.status === 'Validée'"
+          [class.badge-refusee]="inscription.status === 'Refusée'">
           {{ inscription.Status }}
         </span>
       </div>

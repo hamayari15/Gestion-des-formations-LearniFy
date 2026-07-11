@@ -40,6 +40,15 @@ exports.addInscription = async (req, res) => {
       service,
       participantId,
       formationId,
+      formationSnapshot: {
+        theme: formation.theme,
+        modeFormation: formation.modeFormation,
+        numSalle: formation.numSalle,
+        periodeDu: formation.periodeDu,
+        periodeA: formation.periodeA,
+        horaireDu: formation.horaireDu,
+        horaireA: formation.horaireA,
+      },
     });
 
     const saved = await inscription.save();
@@ -77,47 +86,42 @@ exports.addInscription = async (req, res) => {
 
 exports.getInscriptions = async (req, res) => {
   try {
-
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 5;
-
-    const search = req.query.search || '';
-    const sort = req.query.sort || 'desc';
-
+    const search = req.query.search || "";
+    const sortDir = req.query.sort === "asc" ? 1 : -1;
     const skip = (page - 1) * limit;
 
-    let query = {};
+    const pipeline = [
+      { $lookup: { from: "formations", localField: "formationId", foreignField: "_id", as: "formationId" } },
+      { $unwind: { path: "$formationId", preserveNullAndEmptyArrays: true } },
+      { $lookup: { from: "participants", localField: "participantId", foreignField: "_id", as: "participantId" } },
+      { $unwind: { path: "$participantId", preserveNullAndEmptyArrays: true } },
+      {
+        $addFields: {
+          effectiveTheme: { $ifNull: ["$formationId.theme", "$formationSnapshot.theme"] },
+        },
+      },
+    ];
 
     if (search) {
-      query.theme = {
-        $regex: search,
-        $options: 'i'
-      };
+      pipeline.push({ $match: { effectiveTheme: { $regex: search, $options: "i" } } });
     }
 
-    const totalItems = await Inscription.countDocuments(query);
+    const countResult = await Inscription.aggregate([...pipeline, { $count: "total" }]);
+    const totalItems = countResult[0]?.total || 0;
 
-    const inscriptions = await Inscription.find(query)
-      .populate("participantId")
-      .populate("formationId")
-        .sort({ createdAt: sort === 'asc' ? 1 : -1 })
-        .skip(skip)
-        .limit(limit);
+    pipeline.push({ $sort: { createdAt: sortDir } }, { $skip: skip }, { $limit: limit });
+    const inscriptions = await Inscription.aggregate(pipeline);
 
     return res.status(200).json({
       success: true,
-      data: {
-        inscriptions,
-        currentPage: page,
-        totalPages: Math.ceil(totalItems / limit),
-        totalItems
-      }
+      data: { inscriptions, currentPage: page, totalPages: Math.ceil(totalItems / limit), totalItems },
     });
-
+    
   } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message
+    return res.status(500).json({ success: false, 
+      message: error.message 
     });
   }
 };
