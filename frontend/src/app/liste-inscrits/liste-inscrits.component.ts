@@ -48,7 +48,7 @@ export class ListeInscritsComponent implements OnInit {
         this.totalPages = res.data.totalPages;
         this.totalItems = res.data.totalItems;
 
-        if (!this.search && !this.sort) {
+        if (!this.search) {
           this.hasAnyInscriptions = this.totalItems > 0;
         }
 
@@ -80,7 +80,6 @@ export class ListeInscritsComponent implements OnInit {
   toggleSort(): void {
     this.sort = this.sort === 'desc' ? 'asc' : 'desc';
     this.getInscriptions();
-    this.loading = false;
   }
 
   nextPage(): void {

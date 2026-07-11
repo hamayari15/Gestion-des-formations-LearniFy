@@ -40,7 +40,7 @@
   </div>
 
   <div class="count-bar">
-    <span class="count-label">
+    <span class="count-label" *ngIf="!errorMessage">
       <i class="fas fa-graduation-cap"></i>
       {{ totalItems }} formation{{ totalItems !== 1 ? 's' : '' }}
     </span>
@@ -59,7 +59,13 @@
       <span class="spinner-label">Loading formations…</span>
     </div>
 
-    <div *ngIf="!loading && !errorMessage && filteredFormations.length === 0" class="empty-state">
+    <div *ngIf="!loading && !errorMessage && !hasAnyFormations && filteredFormations.length === 0" class="empty-state">
+      <i class="fas fa-graduation-cap empty-icon"></i>
+      <p class="empty-title">No formations yet</p>
+      <span class="empty-sub">Once a formation is created, it will appear here.</span>
+    </div>
+
+    <div *ngIf="!loading && !errorMessage && hasAnyFormations && filteredFormations.length === 0" class="empty-state">
       <i class="fas fa-search empty-icon"></i>
       <p class="empty-title">No formations found</p>
       <span class="empty-sub">Try adjusting your search or filter</span>

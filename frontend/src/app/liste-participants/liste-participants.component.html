@@ -48,7 +48,7 @@
 
   <div class="count-bar">
 
-    <span class="count-label">
+    <span class="count-label" *ngIf="!errorMessage">
       <i class="fas fa-users"></i>
       {{ totalItems }}
       participant{{ totalItems !== 1 ? 's' : '' }}
@@ -86,7 +86,7 @@
     <div *ngIf="!loading && !errorMessage && hasAnyParticipants && filteredParticipants.length === 0" class="empty-state"
       class="empty-state">
 
-      <i class="fas fa-users empty-icon"></i>
+      <i class="fas fa-search empty-icon"></i>
 
       <p class="empty-title">
         No participants found

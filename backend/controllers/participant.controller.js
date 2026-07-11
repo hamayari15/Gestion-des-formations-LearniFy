@@ -324,17 +324,19 @@ exports.deleteParticipant = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "Participant et ses inscriptions supprimés avec succès.",
+      message: "Participant supprimée avec succès.",
     });
     
   } catch (error) {
+    console.log(error)
     if (error.name === "CastError") {
       return res.status(400).json({ success: false, 
         message: "Identifiant de participant invalide." 
       });
     }
     return res.status(500).json({ 
-      success: false, message: "Une erreur est survenue lors de la suppression." 
+      success: false, 
+      message: "Une erreur est survenue lors de la suppression." 
     });
   }
 };

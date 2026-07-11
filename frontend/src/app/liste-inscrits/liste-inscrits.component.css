@@ -304,8 +304,8 @@ tbody td {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 20px;
-  gap: 10px;
+  padding: 56px 24px;
+  gap: 14px;
 }
 
 .spinner {
