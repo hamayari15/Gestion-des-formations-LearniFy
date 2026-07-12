@@ -80,10 +80,10 @@ export class UsersGrowthComponent implements OnInit {
   constructor(private participantService: ParticipantService) {}
 
   ngOnInit(): void {
-    this.loadAll();
+    this.loadDashboard();
   }
 
-  loadAll(): void {
+  loadDashboard(): void {
     this.isLoading = true;
     this.errorMessage = '';
 

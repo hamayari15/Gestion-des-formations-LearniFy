@@ -12,17 +12,23 @@
   </div>
 
   <div class="state-panel error-panel" *ngIf="!isLoading && errorMessage">
-    <i class="fas fa-triangle-exclamation"></i>
-    <span>{{ errorMessage }}</span>
+    <div class="state-card">
+      <div class="state-icon icon-error">
+        <i class="fas fa-triangle-exclamation"></i>
+      </div>
+      <h3>Impossible de charger les données</h3>
+      <p>{{ errorMessage }}</p>
+      <button class="state-retry" (click)="loadDashboard()">
+        <i class="fas fa-rotate-right"></i>
+        Réessayer
+      </button>
+    </div>
   </div>
 
   <div class="state-panel empty-panel" *ngIf="!isLoading && !errorMessage && !hasData">
     <i class="fas fa-inbox"></i>
-    <h3>Aucune donnée pour le moment</h3>
-    <p>
-      Commencez par créer une formation ou ajouter un participant
-      pour voir apparaître les statistiques ici.
-    </p>
+      <h3>Aucune donnée pour le moment</h3>
+      <p>Commencez par créer une formation ou ajouter un participant pour voir apparaître les statistiques ici.</p>
   </div>
 
   <ng-container *ngIf="!isLoading && !errorMessage && hasData">

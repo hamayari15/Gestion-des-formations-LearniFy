@@ -11,8 +11,17 @@
   </div>
 
   <div class="state-panel error-panel" *ngIf="!isLoading && errorMessage">
-    <i class="fas fa-triangle-exclamation"></i>
-    <span>{{ errorMessage }}</span>
+    <div class="state-card">
+      <div class="state-icon icon-error">
+        <i class="fas fa-triangle-exclamation"></i>
+      </div>
+      <h3>Impossible de charger les données</h3>
+      <p>{{ errorMessage }}</p>
+      <button class="state-retry" (click)="loadDashboard()">
+        <i class="fas fa-rotate-right"></i>
+        Réessayer
+      </button>
+    </div>
   </div>
 
   <div class="state-panel empty-panel" *ngIf="!isLoading && !errorMessage && !hasData">
@@ -24,7 +33,6 @@
     </p>
   </div>
 
-  <!-- Real content -->
   <div class="stats-grid" *ngIf="!isLoading && !errorMessage && hasData">
 
     <div class="chart-container chart-growth">
