@@ -50,8 +50,13 @@
       </div>
 
       <div class="profile-info">
-
-        <h3 class="section-title">Personal Information</h3>
+        <div class="section-header">
+          <h3 class="section-title">Personal Information</h3>
+            <button class="delete-button" (click)="deleteAccount(participant.id)">
+            <i class="fas fa-trash-alt"></i>
+            Supprimer le compte
+          </button>
+        </div>
 
         <div class="info-grid">
 

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../core/services/user.service';
 import { ParticipantService } from '../core/services/participant.service';
 import { InscriptionService } from '../core/services/incription.service';
+import { AuthService } from '../core/services/auth.service';
 import { environment } from 'src/environments/environment';
-import { UserService } from '../core/services/user.service';
+
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mon-profile-participant',
@@ -29,9 +33,11 @@ export class MonProfileParticipantComponent implements OnInit {
   };
 
   constructor(
+    private userService: UserService,
     private participantService: ParticipantService,
     private inscriptionService: InscriptionService,
-    private userService: UserService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -99,5 +105,44 @@ export class MonProfileParticipantComponent implements OnInit {
     }
 
     return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  }
+
+  deleteAccount(id: string): void {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Supprimer votre compte ?',
+      text: 'Cette action est irréversible.',
+      width: 550,
+      showCancelButton: true,
+      confirmButtonText: 'Supprimer',
+      cancelButtonText: 'Annuler',
+      confirmButtonColor: '#dc2626',
+    }).then((result) => {
+      if (!result.isConfirmed) return;
+
+      this.participantService.deleteParticipant(id).subscribe({
+        next: (response: any) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Compte supprimé',
+            text: response.message,
+            width: 500,
+            timer: 2000,
+            timerProgressBar: true,
+          }).then(() => {
+            this.authService.logout();
+            this.router.navigate(['/login']);
+          });
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Erreur',
+            text: error?.error?.message || 'Une erreur est survenue lors de la suppression.',
+            width: 500,
+          });
+        },
+      });
+    });
   }
 }
