@@ -6,6 +6,14 @@
       <h2 class="page-title">Liste des Inscriptions</h2>
       <p class="page-subtitle">Manage training registrations</p>
     </div>
+
+    <button
+      class="btn-icon btn-refresh"
+      (click)="getInscriptions()"
+      [disabled]="loading"
+      aria-label="Refresh">
+      <i class="fas fa-rotate-right" [class.spinning]="loading"></i>
+    </button>
   </div>
 
     <div *ngIf="errorMessage" class="alert-error">

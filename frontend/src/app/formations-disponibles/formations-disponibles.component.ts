@@ -25,6 +25,7 @@ export class FormationsDisponiblesComponent implements OnInit {
 
   loading = false;
   errorMessage = '';
+  hasAnyFormations: boolean = true;
 
   constructor(
     private formationService: FormationService,
@@ -34,13 +35,13 @@ export class FormationsDisponiblesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loading = true;
     this.getFormations();
   }
 
   getFormations(): void {
 
     this.errorMessage = '';
+    this.loading = true;
 
     this.formationService.getFormations(
       this.page,
@@ -56,6 +57,10 @@ export class FormationsDisponiblesComponent implements OnInit {
 
         this.totalPages = response.data.totalPages;
         this.totalItems = response.data.totalItems;
+
+        if (!this.searchTerm && !this.selectedMode) {
+          this.hasAnyFormations = this.totalItems > 0;
+        }
 
         this.loading = false;
       },

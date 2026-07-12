@@ -5,10 +5,19 @@
       <h2 class="page-title">Liste des Formations</h2>
       <p class="page-subtitle">Manage training sessions and schedules</p>
     </div>
-    <button class="btn-add" (click)="navigateToAddFormation()">
-      <i class="fas fa-plus"></i>
-      Add Formation
-    </button>
+     <div class="header-actions">
+      <button
+        class="btn-icon btn-refresh"
+        (click)="getFormations()"
+        [disabled]="loading"
+        aria-label="Refresh">
+        <i class="fas fa-rotate-right" [class.spinning]="loading"></i>
+      </button>
+      <button class="btn-add" (click)="navigateToAddFormation()">
+        <i class="fas fa-plus"></i>
+        Add Formation
+      </button>
+    </div>
   </div>
 
   <div *ngIf="errorMessage" class="alert-error">
@@ -73,7 +82,7 @@
 
     <table
       class="formations-table"
-      *ngIf="!loading && filteredFormations.length > 0">
+      *ngIf="!loading && filteredFormations.length > 0 && !errorMessage">
 
       <thead>
         <tr>

@@ -9,6 +9,14 @@
       </p>
     </div>
 
+    <button
+      class="btn-icon btn-refresh"
+      (click)="getParticipants()"
+      [disabled]="loading"
+      aria-label="Refresh">
+      <i class="fas fa-rotate-right" [class.spinning]="loading"></i>
+    </button>
+
   </div>
 
   <div *ngIf="errorMessage" class="alert-error">
@@ -99,8 +107,8 @@
     </div>
 
     <table
-      *ngIf="!loading && filteredParticipants.length > 0"
-      class="participants-table">
+    class="participants-table"
+      *ngIf="!loading && filteredParticipants.length > 0 && !errorMessage">
 
       <thead>
 

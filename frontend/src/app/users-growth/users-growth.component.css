@@ -67,10 +67,10 @@
 }
 
 .spinner {
-  width: 24px;
-  height: 24px;
-  border: 2px solid #e2e8f0;
-  border-top-color: #4f46e5;
+  width: 28px;
+  height: 28px;
+  border: 2px solid #e5e7eb;
+  border-top-color: #378add;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
 }

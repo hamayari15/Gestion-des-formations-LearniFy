@@ -1,5 +1,5 @@
 .container {
-  min-height: 100vh;
+  min-height: 90vh;
 }
 
 .page-header {
@@ -20,6 +20,42 @@
   font-size: 0.8125rem;
   color: #6b7280;
   margin: 0;
+}
+
+ 
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 0.5px solid #d1d5db;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  padding: 0;
+}
+ 
+.btn-refresh {
+  width: 34px;
+  height: 34px;
+  color: #185fa5;
+}
+ 
+.btn-refresh:hover:not(:disabled) {
+  background: #e6f1fb;
+  border-color: #b5d4f4;
+}
+ 
+.btn-refresh:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+ 
+.btn-refresh .spinning {
+  animation: spin 0.7s linear infinite;
 }
 
 .filter-row {
@@ -80,6 +116,27 @@
 .mode-select:focus {
   border-color: #378add;
   box-shadow: 0 0 0 3px rgba(55, 138, 221, 0.12);
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
+}
+
+.search-input:disabled,
+.mode-select:disabled {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+  border-color: #e5e7eb;
+  opacity: 0.8;
+}
+
+.search-input:disabled::placeholder {
+  color: #b0b5bc;
+}
+
+.search-wrap:has(.search-input:disabled) .search-icon {
+  color: #b0b5bc;
 }
 
 .count-bar {
