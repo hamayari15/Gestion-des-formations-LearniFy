@@ -19,6 +19,8 @@ export class MonProfileParticipantComponent implements OnInit {
   loadingParticipant = true;
   loadingStats = true;
 
+  errorMessage: string = '';
+
   stats = {
     total: 0,
     valide: 0,
@@ -41,6 +43,7 @@ export class MonProfileParticipantComponent implements OnInit {
 
   fetchParticipant(): void {
     this.loadingParticipant = true;
+    this.errorMessage = '';
 
     this.participantService.getParticipantById(this.id).subscribe({
       next: (data) => {
@@ -49,6 +52,9 @@ export class MonProfileParticipantComponent implements OnInit {
       },
       error: (error) => {
         console.error('Erreur lors de la récupération du participant:', error);
+        this.errorMessage =
+          error.error?.message ||
+          'Impossible de charger les données du profil';
         this.loadingParticipant = false;
       },
     });
@@ -67,6 +73,11 @@ export class MonProfileParticipantComponent implements OnInit {
         this.loadingStats = false;
       },
     });
+  }
+
+  retry(): void {
+    this.fetchParticipant();
+    this.fetchStats();
   }
 
   isParticipantActive(lastLogin: string | Date | null): boolean {

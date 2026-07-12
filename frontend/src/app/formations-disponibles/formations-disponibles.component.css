@@ -416,11 +416,12 @@
 .spinner {
   width: 28px;
   height: 28px;
-  border: 2px solid #e5e7eb;
-  border-top-color: #378add;
+  border: 3px solid #e5e7eb;
+  border-top: 2px solid #378add;
   border-radius: 50%;
-  animation: spin 0.7s linear infinite;
+  animation: spin .7s linear infinite;
 }
+
 
 @keyframes spin {
   to { transform: rotate(360deg); }
