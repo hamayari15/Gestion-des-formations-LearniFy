@@ -7,23 +7,32 @@
     </div>
   </div>
 
-  <div *ngIf="errorMessage" class="alert-error">
-    <i class="fas fa-exclamation-circle"></i>
-    {{ errorMessage }}
-  </div>
-
-  <div *ngIf="loading" class="spinner-wrap">
+  <div class="state-panel" *ngIf="loading">
     <div class="spinner"></div>
-    <span class="spinner-label">Chargement de vos formations…</span>
+    <span>Chargement de vos formations...</span>
   </div>
 
-  <div *ngIf="!loading && !errorMessage && inscriptions.length === 0" class="empty-state">
+  <div class="state-panel error-panel" *ngIf="!loading && errorMessage">
+    <div class="state-card">
+      <div class="state-icon icon-error">
+        <i class="fas fa-triangle-exclamation"></i>
+      </div>
+      <h3>Impossible de charger vos formations</h3>
+      <p>{{ errorMessage }}</p>
+      <button class="state-retry" (click)="getInscriptions()">
+        <i class="fas fa-rotate-right"></i>
+        Réessayer
+      </button>
+    </div>
+  </div>
+
+  <div class="state-panel empty-panel" *ngIf="!loading && !errorMessage && inscriptions.length === 0">
     <i class="fas fa-graduation-cap empty-icon"></i>
-    <p class="empty-title">Aucune inscription pour le moment</p>
-    <span class="empty-sub">Vos formations inscrites apparaîtront ici.</span>
+    <p class="empty-title">No formations yet</p>
+    <span class="empty-sub">Once a formation is created, it will appear here.</span>
   </div>
 
-  <div *ngIf="!loading && !errorMessage && inscriptions.length > 0" class="inscriptions-grid">
+  <div class="inscriptions-grid" *ngIf="!loading && !errorMessage && inscriptions.length > 0">
 
     <div class="inscription-card" *ngFor="let inscription of inscriptions">
 
@@ -37,7 +46,7 @@
           [class.badge-en-attente]="inscription.status === 'En attente'"
           [class.badge-validee]="inscription.status === 'Validée'"
           [class.badge-refusee]="inscription.status === 'Refusée'">
-          {{ inscription.Status }}
+          {{ inscription.status }}
         </span>
       </div>
 
