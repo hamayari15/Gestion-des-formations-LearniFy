@@ -1,0 +1,126 @@
+{
+  "NAVBAR": {
+    "HOME": "Home",
+    "ABOUT": "About",
+    "PRIVACY": "Privacy",
+    "CONTACT": "Contact Us",
+    "MY_PROFILE": "My Profile",
+    "AVAILABLE_TRAININGS": "Available Trainings",
+    "REGISTRATIONS": "Registrations",
+    "GET_STARTED": "Get Started",
+    "LOGOUT": "Logout"
+  },
+
+  "HOME": {
+    "HERO": {
+      "EYEBROW": "Formation Center",
+      "TITLE_1": "Your learning path,",
+      "TITLE_2": "mapped out.",
+      "SUBTITLE": "Browse structured training programs, register in a few clicks, and track every step — from enrollment to validation — in one place.",
+      "START_LEARNING": "Start Learning",
+      "VIEW_FORMATIONS": "View My Formations",
+      "BROWSE_CATALOG": "Browse Catalog"
+    },
+    "TIMELINE": {
+      "DISCOVER": "Discover",
+      "ENROLL": "Enroll",
+      "ATTEND": "Attend",
+      "VALIDATED": "Validated"
+    },
+    "PROCESS": {
+      "EYEBROW": "The Process",
+      "TITLE": "Four steps, start to certified",
+      "STEP1": {
+        "TITLE": "Browse",
+        "DESCRIPTION": "Filter trainings by theme, mode, or schedule to find the right fit."
+      },
+      "STEP2": {
+        "TITLE": "Register",
+        "DESCRIPTION": "Submit your registration in a few clicks — no paperwork required."
+      },
+      "STEP3": {
+        "TITLE": "Attend",
+        "DESCRIPTION": "Join in person, online, or in hybrid mode depending on your schedule."
+      },
+      "STEP4": {
+        "TITLE": "Get Validated",
+        "DESCRIPTION": "Track your registration status from your profile until it is confirmed."
+      }
+    },
+    "FLEXIBLE": {
+      "EYEBROW": "Flexible By Design",
+      "TITLE": "Train the way that works for you"
+    },
+    "MODES": {
+      "PRESENTIEL": "In Person",
+      "PRESENTIEL_DESC": "Face-to-face sessions in dedicated training rooms with direct access to instructors.",
+      "EN_LIGNE": "Online",
+      "EN_LIGNE_DESC": "Fully remote trainings that you can attend from anywhere on a fixed schedule.",
+      "HYBRIDE": "Hybrid",
+      "HYBRIDE_DESC": "Combine in-person and remote sessions for maximum flexibility."
+    },
+    "CTA": {
+      "TITLE": "Ready to map your next skill?",
+      "DESCRIPTION": "Create an account and register for your first training in minutes.",
+      "GET_STARTED": "Get Started Free"
+    }
+  },
+
+  "ABOUT": {
+    "HERO": {
+      "EYEBROW": "About Learnify",
+      "TITLE_1": "Every registration,",
+      "TITLE_2": "fully visible.",
+      "SUBTITLE": "No more wondering if a registration went through. Learnify tracks every formation from submission to validation, so status is always one glance away — for participants and administrators alike."
+    },
+
+    "POINTS": {
+      "STATUS": "Real-time status",
+      "TRACKING": "Automatic tracking",
+      "DASHBOARD": "One dashboard"
+    },
+
+    "STORY": {
+      "EYEBROW": "What We Do",
+      "TEXT": "Every formation on Learnify carries the same structure — a theme, a mode, a schedule — so what you see when browsing is exactly what you get when you show up. Registrations are tracked from submission to validation, with a status that updates automatically instead of living in someone's inbox."
+    },
+
+    "COMPARE": {
+      "EYEBROW": "Before & After",
+      "TITLE": "What changes when you switch",
+      "WITHOUT": "Without Learnify",
+      "WITH": "With Learnify",
+
+      "OLD": {
+        "ONE": "Sign-up sheets scattered across email and paper",
+        "TWO": "No way to confirm if a registration was received",
+        "THREE": "Schedule changes communicated after the fact",
+        "FOUR": "Mode of delivery unclear until session day"
+      },
+
+      "NEW": {
+        "ONE": "One place to browse, register, and track formations",
+        "TWO": "Registration status visible the moment it's submitted",
+        "THREE": "Schedule and room details attached to every formation",
+        "FOUR": "Mode — in person, online, or hybrid — set upfront"
+      }
+    },
+    
+    "FAQ": {
+      "EYEBROW": "Common Questions",
+      "TITLE": "Good to know",
+      "Q1": "How does registration work?",
+      "A1": "Browse formations, pick one that fits your schedule, and submit your registration. You'll see its status update as it's reviewed.",
+
+      "Q2": "What's the difference between the three modes?",
+      "A2": "In person means physical training rooms. Online is fully remote. Hybrid combines both across a formation's sessions.",
+
+      "Q3": "Can I track my registration after registering?",
+      "A3": "Yes — your profile shows every formation you've registered for, along with its current status.",
+
+      "Q4": "Who do I contact if something looks wrong?",
+      "A4": "Reach out through the Contact page and an administrator will follow up directly."
+    }
+  }
+
+}

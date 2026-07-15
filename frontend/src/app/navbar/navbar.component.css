@@ -74,6 +74,25 @@
   color: #111;
 }
 
+.language-switcher{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-left:20px;
+}
+
+.language-switcher img{
+    width:28px;
+    height:20px;
+    cursor:pointer;
+    border-radius:3px;
+    transition:.2s;
+}
+
+.language-switcher img:hover{
+    transform:scale(1.1);
+}
+
 .btn-connexion {
   display: flex;
   align-items: center;

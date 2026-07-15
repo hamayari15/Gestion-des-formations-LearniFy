@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +8,21 @@ import { AuthService } from './core/services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'LearniFy';
 
-  constructor(public authService: AuthService) {}
+  constructor(
+    public authService: AuthService,
+    private translate: TranslateService
+  ) {
+
+    this.translate.addLangs(['en', 'fr']);
+
+    this.translate.setDefaultLang('en');
+
+    const language = localStorage.getItem('language') || 'en';
+
+    this.translate.use(language);
+
+  }
 
 }

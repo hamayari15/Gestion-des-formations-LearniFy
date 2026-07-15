@@ -13,41 +13,57 @@
 
       <li class="nav-item">
         <a class="nav-link" routerLink="/" (click)="toggleMenu()">
-          Home</a>
+          {{ 'NAVBAR.HOME' | translate }}</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/about" (click)="toggleMenu()">
-          About</a>
+           {{ 'NAVBAR.ABOUT' | translate }}</a>
       </li>
       <li class="nav-item" *ngIf="!isLoggedIn">
         <a class="nav-link" routerLink="/privacy" (click)="toggleMenu()">
-          Privacy</a>
+           {{ 'NAVBAR.PRIVACY' | translate }}</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/contact" (click)="toggleMenu()">
-          Contact Us</a>
+          {{ 'NAVBAR.CONTACT_US' | translate }}</a>
       </li>
 
       <ng-container *ngIf="isLoggedIn">
         <li class="nav-item">
           <a class="nav-link" routerLink="/participant-interface/mon-profile-participant" routerLinkActive="active-link" (click)="toggleMenu()">
-            Mon Profil</a>
+            {{ 'NAVBAR.MY_PROFILE' | translate }}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/participant-interface/formations-disponibles" routerLinkActive="active-link" (click)="toggleMenu()">
-            Formations disponibles</a>
+            {{ 'NAVBAR.AVAILABLE_TRAININGS' | translate }}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/participant-interface/mes-formations" routerLinkActive="active-link" (click)="toggleMenu()">
-            Inscriptions</a>
+            {{ 'NAVBAR.REGISTRATIONS' | translate }}</a>
         </li>
       </ng-container>
 
+      <div class="language-switcher">
+
+  <img
+    src="assets/images/fr.png"
+    alt="Français"
+    (click)="changeLanguage('fr')"
+    title="Français">
+
+  <img
+    src="assets/images/en.png"
+    alt="English"
+    (click)="changeLanguage('en')"
+    title="English">
+
+</div>
+
       <li class="nav-item mobile-login">
         <button *ngIf="!isLoggedIn" (click)="navigateToLogin()" class="btn-connexion">
-          <i class="fas fa-sign-in-alt"></i> Get Started</button>
+          <i class="fas fa-sign-in-alt"></i> {{ 'NAVBAR.GET_STARTED' | translate }}</button>
         <button *ngIf="isLoggedIn" (click)="logout()" class="btn-connexion">
-          <i class="fas fa-sign-out-alt"></i> Déconnexion</button>
+          <i class="fas fa-sign-out-alt"></i> {{ 'NAVBAR.LOGOUT' | translate }}</button>
       </li>
 
     </ul>

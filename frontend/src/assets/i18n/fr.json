@@ -1,0 +1,125 @@
+{
+  "NAVBAR": {
+    "HOME": "Accueil",
+    "ABOUT": "À propos",
+    "PRIVACY": "Confidentialité",
+    "CONTACT": "Contactez-nous",
+    "MY_PROFILE": "Mon Profil",
+    "AVAILABLE_TRAININGS": "Formations disponibles",
+    "REGISTRATIONS": "Inscriptions",
+    "GET_STARTED": "Commencer",
+    "LOGOUT": "Déconnexion"
+  },
+
+  "HOME": {
+    "HERO": {
+      "EYEBROW": "Centre de Formation",
+      "TITLE_1": "Votre parcours,",
+      "TITLE_2": "bien tracé.",
+      "SUBTITLE": "Parcourez des formations structurées, inscrivez-vous en quelques clics et suivez chaque étape, de l'inscription jusqu'à la validation, au même endroit.",
+      "START_LEARNING": "Commencer",
+      "VIEW_FORMATIONS": "Voir mes formations",
+      "BROWSE_CATALOG": "Parcourir le catalogue"
+    },
+    "TIMELINE": {
+      "DISCOVER": "Découvrir",
+      "ENROLL": "S'inscrire",
+      "ATTEND": "Participer",
+      "VALIDATED": "Validé"
+    },
+    "PROCESS": {
+      "EYEBROW": "Le processus",
+      "TITLE": "Quatre étapes pour être certifié",
+      "STEP1": {
+        "TITLE": "Parcourir",
+        "DESCRIPTION": "Filtrez les formations par thème, mode ou calendrier afin de trouver celle qui vous convient."
+      },
+      "STEP2": {
+        "TITLE": "S'inscrire",
+        "DESCRIPTION": "Soumettez votre inscription en quelques clics, sans aucune paperasse."
+      },
+      "STEP3": {
+        "TITLE": "Participer",
+        "DESCRIPTION": "Suivez votre formation en présentiel, en ligne ou en mode hybride selon votre disponibilité."
+      },
+      "STEP4": {
+        "TITLE": "Être validé",
+        "DESCRIPTION": "Suivez l'état de votre inscription depuis votre profil jusqu'à sa validation."
+      }
+    },
+    "FLEXIBLE": {
+      "EYEBROW": "Flexible par conception",
+      "TITLE": "Formez-vous à votre manière"
+    },
+    "MODES": {
+      "PRESENTIEL": "Présentiel",
+      "PRESENTIEL_DESC": "Des sessions en salle avec un accès direct aux formateurs.",
+      "EN_LIGNE": "En ligne",
+      "EN_LIGNE_DESC": "Des formations entièrement à distance accessibles où que vous soyez.",
+      "HYBRIDE": "Hybride",
+      "HYBRIDE_DESC": "Combinez les séances en présentiel et à distance pour plus de flexibilité."
+    },
+    "CTA": {
+      "TITLE": "Prêt à développer une nouvelle compétence ?",
+      "DESCRIPTION": "Créez un compte et inscrivez-vous à votre première formation en quelques minutes.",
+      "GET_STARTED": "Commencer gratuitement"
+    }
+  },
+
+  "ABOUT": {
+    "HERO": {
+      "EYEBROW": "À propos de Learnify",
+      "TITLE_1": "Chaque inscription,",
+      "TITLE_2": "entièrement visible.",
+      "SUBTITLE": "Plus besoin de vous demander si une inscription est passée. Learnify suit chaque formation de la soumission jusqu'à la validation, avec un statut accessible en un coup d'œil."
+    },
+
+    "POINTS": {
+      "STATUS": "Statut en temps réel",
+      "TRACKING": "Suivi automatique",
+      "DASHBOARD": "Un seul tableau de bord"
+    },
+
+    "STORY": {
+      "EYEBROW": "Ce que nous faisons",
+      "TEXT": "Chaque formation sur Learnify possède la même structure — un thème, un mode et un planning — afin que ce que vous voyez corresponde exactement à ce que vous aurez. Les inscriptions sont suivies de la soumission jusqu'à la validation."
+    },
+
+    "COMPARE": {
+      "EYEBROW": "Avant & Après",
+      "TITLE": "Ce qui change avec Learnify",
+      "WITHOUT": "Sans Learnify",
+      "WITH": "Avec Learnify",
+
+      "OLD": {
+        "ONE": "Fiches d'inscription dispersées entre emails et papiers",
+        "TWO": "Impossible de confirmer la réception d'une inscription",
+        "THREE": "Les changements de planning communiqués tardivement",
+        "FOUR": "Mode de formation inconnu jusqu'au jour de la session"
+      },
+
+      "NEW": {
+        "ONE": "Un seul endroit pour consulter, s'inscrire et suivre les formations",
+        "TWO": "Statut visible dès l'envoi de l'inscription",
+        "THREE": "Planning et informations associés à chaque formation",
+        "FOUR": "Mode présentiel, en ligne ou hybride défini à l'avance"
+      }
+    },
+
+    "FAQ": {
+      "EYEBROW": "Questions fréquentes",
+      "TITLE": "Bon à savoir",
+      "Q1": "Comment fonctionne l'inscription ?",
+      "A1": "Consultez les formations, choisissez celle qui correspond à votre planning et envoyez votre inscription.",
+
+      "Q2": "Quelle est la différence entre les trois modes ?",
+      "A2": "Le présentiel se déroule dans une salle. L'en ligne est entièrement à distance. L'hybride combine les deux.",
+
+      "Q3": "Puis-je suivre mon inscription après l'envoi ?",
+      "A3": "Oui, votre profil affiche toutes vos formations ainsi que leur statut actuel.",
+
+      "Q4": "Qui contacter en cas de problème ?",
+      "A4": "Contactez-nous via la page Contact et un administrateur vous répondra."
+    }
+  }
+}

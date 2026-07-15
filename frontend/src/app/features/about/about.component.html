@@ -1,140 +1,146 @@
 <div class="home about-page">
-
   <section class="about-hero-section">
-  <div class="about-hero">
+    <div class="about-hero">
+      <span class="hero-eyebrow">{{ "ABOUT.HERO.EYEBROW" | translate }}</span>
+      <h1 class="hero-title">
+        {{ "ABOUT.HERO.TITLE_1" | translate }}<br />
+        <span class="hero-title-accent">{{
+          "ABOUT.HERO.TITLE_2" | translate
+        }}</span>
+      </h1>
+      <p class="hero-sub">
+        {{ "ABOUT.HERO.SUBTITLE" | translate }}
+      </p>
 
-    <span class="hero-eyebrow">About Learnify</span>
-    <h1 class="hero-title">
-      Every inscription,<br>
-      <span class="hero-title-accent">fully visible.</span>
-    </h1>
-    <p class="hero-sub">
-      No more wondering if a registration went through. Learnify tracks
-      every formation from submission to validation, so status is always
-      one glance away — for participants and administrators alike.
-    </p>
+      <div class="hero-modes">
+        <span class="badge badge-presentiel">{{
+          "HOME.MODES.PRESENTIEL" | translate
+        }}</span>
+        <span class="badge badge-enligne">{{
+          "HOME.MODES.EN_LIGNE" | translate
+        }}</span>
+        <span class="badge badge-hybride">{{
+          "HOME.MODES.HYBRIDE" | translate
+        }}</span>
+      </div>
 
-    <div class="hero-modes">
-      <span class="badge badge-presentiel">Présentiel</span>
-      <span class="badge badge-enligne">En ligne</span>
-      <span class="badge badge-hybride">Hybride</span>
+      <div class="hero-points">
+        <div class="hero-point">
+          <i class="fas fa-bolt"></i>
+          <span>{{ "ABOUT.POINTS.STATUS" | translate }}</span>
+        </div>
+        <div class="hero-point">
+          <i class="fas fa-arrows-rotate"></i>
+          <span>{{ "ABOUT.POINTS.TRACKING" | translate }}</span>
+        </div>
+        <div class="hero-point">
+          <i class="fas fa-table-columns"></i>
+          <span>{{ "ABOUT.POINTS.DASHBOARD" | translate }}</span>
+        </div>
+      </div>
     </div>
-
-    <div class="hero-points">
-      <div class="hero-point">
-        <i class="fas fa-bolt"></i>
-        <span>Real-time status</span>
-      </div>
-      <div class="hero-point">
-        <i class="fas fa-arrows-rotate"></i>
-        <span>Automatic tracking</span>
-      </div>
-      <div class="hero-point">
-        <i class="fas fa-table-columns"></i>
-        <span>One dashboard</span>
-      </div>
-    </div>
-
-  </div>
-</section>
+  </section>
 
   <section class="section story-section">
     <div class="story-grid">
-      <span class="section-eyebrow">What We Do</span>
+      <span class="section-eyebrow">{{
+        "ABOUT.STORY.EYEBROW" | translate
+      }}</span>
       <p class="story-text">
-        Every formation on Learnify carries the same structure — a theme, a mode,
-        a schedule — so what you see when browsing is exactly what you get when
-        you show up. Registrations are tracked from
-        <strong>submission</strong> to <strong>validation</strong>, with a status
-        that updates automatically instead of living in someone's inbox.
-        Whether a session runs présentiel in a training room, en ligne from
-        anywhere, or hybride across both, the process behind it stays the same.
+        {{ "ABOUT.STORY.TEXT" | translate }}
       </p>
     </div>
   </section>
 
   <section class="section compare-section">
     <div class="section-head">
-      <span class="section-eyebrow">Before & After</span>
-      <h2>What changes when you switch</h2>
+      <span class="section-eyebrow">{{
+        "ABOUT.COMPARE.EYEBROW" | translate
+      }}</span>
+      <h2>{{ "ABOUT.COMPARE.TITLE" | translate }}</h2>
     </div>
 
     <div class="compare-grid">
-
       <div class="compare-col compare-old">
-        <span class="compare-label">Without Learnify</span>
+        <span class="compare-label">{{
+          "ABOUT.COMPARE.WITHOUT" | translate
+        }}</span>
 
         <div class="compare-row">
           <i class="fas fa-xmark compare-icon"></i>
-          <span>Sign-up sheets scattered across email and paper</span>
+          <span>{{ "ABOUT.COMPARE.OLD.ONE" | translate }}</span>
         </div>
+
         <div class="compare-row">
           <i class="fas fa-xmark compare-icon"></i>
-          <span>No way to confirm if a registration was received</span>
+          <span>{{ "ABOUT.COMPARE.OLD.TWO" | translate }}</span>
         </div>
+
         <div class="compare-row">
           <i class="fas fa-xmark compare-icon"></i>
-          <span>Schedule changes communicated after the fact</span>
+          <span>{{ "ABOUT.COMPARE.OLD.THREE" | translate }}</span>
         </div>
+
         <div class="compare-row">
           <i class="fas fa-xmark compare-icon"></i>
-          <span>Mode of delivery unclear until session day</span>
+          <span>{{ "ABOUT.COMPARE.OLD.FOUR" | translate }}</span>
         </div>
       </div>
 
       <div class="compare-col compare-new">
-        <span class="compare-label">With Learnify</span>
+        <span class="compare-label">{{
+          "ABOUT.COMPARE.WITH" | translate
+        }}</span>
 
         <div class="compare-row">
           <i class="fas fa-check compare-icon"></i>
-          <span>One place to browse, register, and track formations</span>
+          <span>{{ "ABOUT.COMPARE.NEW.ONE" | translate }}</span>
         </div>
+
         <div class="compare-row">
           <i class="fas fa-check compare-icon"></i>
-          <span>Inscription status visible the moment it's submitted</span>
+          <span>{{ "ABOUT.COMPARE.NEW.TWO" | translate }}</span>
         </div>
+
         <div class="compare-row">
           <i class="fas fa-check compare-icon"></i>
-          <span>Schedule and room details attached to every formation</span>
+          <span>{{ "ABOUT.COMPARE.NEW.THREE" | translate }}</span>
         </div>
+
         <div class="compare-row">
           <i class="fas fa-check compare-icon"></i>
-          <span>Mode — présentiel, en ligne, or hybride — set upfront</span>
+          <span>{{ "ABOUT.COMPARE.NEW.FOUR" | translate }}</span>
         </div>
       </div>
-
     </div>
   </section>
 
   <section class="section faq-section">
     <div class="section-head">
-      <span class="section-eyebrow">Common Questions</span>
-      <h2>Good to know</h2>
+      <span class="section-eyebrow">{{ "ABOUT.FAQ.EYEBROW" | translate }}</span>
+      <h2>{{ "ABOUT.FAQ.TITLE" | translate }}</h2>
     </div>
 
     <div class="faq-list">
-
       <details class="faq-item">
-        <summary>How does registration work?</summary>
-        <p>Browse formations, pick one that fits your schedule, and submit your inscription. You'll see its status update as it's reviewed.</p>
+        <summary>{{ "ABOUT.FAQ.Q1" | translate }}</summary>
+        <p>{{ "ABOUT.FAQ.A1" | translate }}</p>
       </details>
 
       <details class="faq-item">
-        <summary>What's the difference between the three modes?</summary>
-        <p>Présentiel means in-person, in a physical training room. En ligne is fully remote. Hybride combines both across a formation's sessions.</p>
+        <summary>{{ "ABOUT.FAQ.Q2" | translate }}</summary>
+        <p>{{ "ABOUT.FAQ.A2" | translate }}</p>
       </details>
 
       <details class="faq-item">
-        <summary>Can I track my inscription after registering?</summary>
-        <p>Yes — your profile shows every formation you've registered for, along with its current status.</p>
+        <summary>{{ "ABOUT.FAQ.Q3" | translate }}</summary>
+        <p>{{ "ABOUT.FAQ.A3" | translate }}</p>
       </details>
 
       <details class="faq-item">
-        <summary>Who do I contact if something looks wrong?</summary>
-        <p>Reach out through the Contact page and an administrator will follow up directly.</p>
+        <summary>{{ "ABOUT.FAQ.Q4" | translate }}</summary>
+        <p>{{ "ABOUT.FAQ.A4" | translate }}</p>
       </details>
-
     </div>
   </section>
-
 </div>
