@@ -1,32 +1,40 @@
 .container {
+  max-width: 900px;
+  margin: 0 auto;
   min-height: 90vh;
 }
 
 .page-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
-}
-
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
+  gap: 10px;
+  margin-bottom: 1.2rem;
 }
 
 .page-title {
-  font-size: 1.125rem;
+  font-size: 1.2rem;
   font-weight: 500;
   color: #111;
-  margin: 0 0 2px;
+  margin: 0;
+  white-space: nowrap;
 }
 
 .page-subtitle {
-  font-size: 0.8125rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
   color: #6b7280;
   margin: 0;
+}
+
+.page-subtitle::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  flex-shrink: 0;
 }
 
 .state-panel {
@@ -145,50 +153,112 @@
   margin: 0;
 }
 
-.inscriptions-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 18px;
+.inscriptions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.inscription-card {
+.inscription-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "theme status"
+    "dates mode"
+    "time salle";
+  row-gap: 16px;
+  column-gap: 24px;
+  align-items: center;
+  min-height: 150px;
   background: #fff;
   border-radius: 16px;
-  padding: 18px;
+  padding: 26px 28px;
   border: 0.5px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
   transition: box-shadow 0.2s, transform 0.15s;
 }
 
-.inscription-card:hover {
+.inscription-row:hover {
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
   transform: translateY(-2px);
 }
 
-.card-top {
+.cell {
   display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.theme-cell {
+  grid-area: theme;
+}
+
+.status-cell {
+  grid-area: status;
+  align-items: flex-end;
+}
+
+.dates-cell {
+  grid-area: dates;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 10px;
+}
+
+.mode-cell {
+  grid-area: mode;
+  align-items: flex-end;
+}
+
+.time-cell {
+  grid-area: time;
+  align-items: flex-start;
+}
+
+.salle-cell {
+  grid-area: salle;
+  align-items: flex-end;
 }
 
 .formation-theme {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #111;
   margin: 0;
   line-height: 1.35;
+  letter-spacing: 0.3px;
+}
+
+.cell-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #9ca3af;
+}
+
+.meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.meta-item i {
+  color: #9ca3af;
+  font-size: 0.85rem;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 5px 12px;
+  gap: 4px;
+  padding: 6px 12px;
   border-radius: 20px;
   font-size: 0.7rem;
-  font-weight: 600;
-  white-space: nowrap;
-  flex-shrink: 0;
+  font-weight: 500;
+  line-height: 1;
 }
 
 .badge-en-attente {
@@ -206,10 +276,6 @@
   color: #b91c1c;
 }
 
-.card-mode {
-  margin-top: 8px;
-}
-
 .badge-presentiel {
   background: #e1f5ee;
   color: #085041;
@@ -225,35 +291,92 @@
   color: #8a4b08;
 }
 
-.card-details {
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 0.5px solid #eef0f2;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.detail-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.8125rem;
+.badge-na {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 600;
   color: #6b7280;
+  background: #f3f4f6;
+  border-radius: 999px;
 }
 
-.detail-icon {
-  width: 14px;
-  text-align: center;
-  flex-shrink: 0;
-  color: #9ca3af;
-  font-size: 0.85rem;
+.badge-mode-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 999px;
+  white-space: nowrap;
 }
 
-@media (max-width: 768px) {
-  .page-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+.badge-mode-note i {
+  font-size: 10px;
+}
+
+.badge-mode-enligne {
+  color: #0c447c;
+  background: #e6f1fb;
+}
+
+.badge-mode-hybride {
+  color: #8a4b08;
+  background: #fff4e5;
+}
+
+@media (max-width: 700px) {
+
+  .inscription-row {
+    row-gap: 12px;
+    column-gap: 14px;
+    padding: 18px;
   }
+
+  .formation-theme {
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    white-space: normal;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .container {
+    padding: 0 12px;
+  }
+
+  .page-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .inscription-row {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 10px;
+    column-gap: 10px;
+    padding: 14px;
+    min-height: unset;
+  }
+
+  .formation-theme {
+    font-size: 0.875rem;
+  }
+
+  .cell-label {
+    font-size: 0.65rem;
+  }
+
+  .meta-item {
+    font-size: 0.75rem;
+  }
+
+  .badge {
+    font-size: 0.65rem;
+    padding: 4px 9px;
+  }
+
 }
