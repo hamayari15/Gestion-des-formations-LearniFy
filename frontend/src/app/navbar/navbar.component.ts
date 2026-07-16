@@ -14,6 +14,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
   menuOpen = false;
 
+  showLanguages = false;
+  currentLanguage = this.translate.currentLang || 'en';
+
   private authSubscription: Subscription = new Subscription();
 
   constructor(private authService: AuthService, private router: Router, private translate: TranslateService) {}
@@ -30,6 +33,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.menuOpen = !this.menuOpen;
   }
 
+  changeLanguage(lang: string) {
+
+    this.translate.use(lang);
+
+    localStorage.setItem('language', lang);
+
+    this.currentLanguage = lang;
+  }
+
   navigateToLogin(): void {
     this.menuOpen = false;
     this.router.navigate(['login']);
@@ -38,11 +50,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   logout(): void {
     this.authService.logout();
     this.router.navigate(['login']);
-  }
-
-  changeLanguage(lang: string) {
-    this.translate.use(lang);
-    localStorage.setItem('language', lang);
   }
 
   ngOnDestroy(): void {

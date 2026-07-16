@@ -6,10 +6,11 @@
       <div class="footer-brand">
         <h3 class="footer-logo">
           <i class="fas fa-graduation-cap"></i>
-          Formation Center
+          {{ 'FOOTER.BRAND.NAME' | translate }}
         </h3>
+
         <p class="footer-desc">
-          Empowering learners through quality training programs, flexible schedules, and expert instructors.
+          {{ 'FOOTER.BRAND.DESCRIPTION' | translate }}
         </p>
 
         <div class="footer-social">
@@ -21,32 +22,54 @@
       </div>
 
       <div class="footer-col">
-        <h4>Quick Links</h4>
-        <a routerLink="/">Home</a>
-        <a routerLink="/about">About</a>
-        <a [routerLink]="isAuthenticated ? '/participant-interface/formations-disponibles' : '/login'">Formations</a>
-        <a routerLink="/contact">Contact</a>
+        <h4>{{ 'FOOTER.QUICK_LINKS.TITLE' | translate }}</h4>
+
+        <a routerLink="/">{{ 'FOOTER.QUICK_LINKS.HOME' | translate }}</a>
+
+        <a routerLink="/about">{{ 'FOOTER.QUICK_LINKS.ABOUT' | translate }}</a>
+
+        <a [routerLink]="isAuthenticated ? '/participant-interface/formations-disponibles' : '/login'">
+          {{ 'FOOTER.QUICK_LINKS.FORMATIONS' | translate }}
+        </a>
+
+        <a routerLink="/contact">{{ 'FOOTER.QUICK_LINKS.CONTACT' | translate }}</a>
       </div>
 
       <div class="footer-col">
-        <h4>Resources</h4>
-        <a routerLink="/home">FAQ</a>
-        <a routerLink="/privacy">Privacy Policy</a>
-        <a routerLink="/contact">Terms of Service</a>
-        <a routerLink="/contact">Support</a>
+        <h4>{{ 'FOOTER.RESOURCES.TITLE' | translate }}</h4>
+
+        <a routerLink="/home">{{ 'FOOTER.RESOURCES.FAQ' | translate }}</a>
+
+        <a routerLink="/privacy">{{ 'FOOTER.RESOURCES.PRIVACY' | translate }}</a>
+
+        <a routerLink="/contact">{{ 'FOOTER.RESOURCES.TERMS' | translate }}</a>
+
+        <a routerLink="/contact">{{ 'FOOTER.RESOURCES.SUPPORT' | translate }}</a>
       </div>
 
       <div class="footer-col">
-        <h4>Contact</h4>
-        <p><i class="fas fa-map-marker-alt"></i> Tunis, Tunisia</p>
-        <p><i class="fas fa-envelope"></i> contact&#64;formationcenter.com</p>
-        <p><i class="fas fa-phone"></i> +216 12 345 678</p>
+        <h4>{{ 'FOOTER.CONTACT.TITLE' | translate }}</h4>
+
+        <p>
+          <i class="fas fa-map-marker-alt"></i>
+          {{ 'FOOTER.CONTACT.ADDRESS' | translate }}
+        </p>
+
+        <p>
+          <i class="fas fa-envelope"></i>
+          contact&#64;formationcenter.com
+        </p>
+
+        <p>
+          <i class="fas fa-phone"></i>
+          +216 12 345 678
+        </p>
       </div>
 
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; 2026 Formation Center. All rights reserved.</p>
+      <p>{{ 'FOOTER.COPYRIGHT' | translate }}</p>
     </div>
 
   </div>

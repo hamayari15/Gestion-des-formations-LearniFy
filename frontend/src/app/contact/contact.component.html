@@ -2,26 +2,50 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
 <div class="container my-5">
-    <h1 class="text-center mb-4">Contact Us</h1>
+    <h1 class="text-center mb-4">{{ 'CONTACT.TITLE' | translate }}</h1>
+
     <div class="row">
         <div class="col-md-6">
             <div class="map-container" id="map"></div>
         </div>
+
         <div class="col-md-6">
             <form>
+
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" required>
+                    <label for="name" class="form-label">{{ 'CONTACT.NAME' | translate }}</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        [placeholder]="'CONTACT.NAME_PLACEHOLDER' | translate"
+                        required>
                 </div>
+
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" required>
+                    <label for="email" class="form-label">{{ 'CONTACT.EMAIL' | translate }}</label>
+                    <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        [placeholder]="'CONTACT.EMAIL_PLACEHOLDER' | translate"
+                        required>
                 </div>
+
                 <div class="mb-3">
-                    <label for="message" class="form-label">Message</label>
-                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                    <label for="message" class="form-label">{{ 'CONTACT.MESSAGE' | translate }}</label>
+                    <textarea
+                        class="form-control"
+                        id="message"
+                        rows="5"
+                        [placeholder]="'CONTACT.MESSAGE_PLACEHOLDER' | translate"
+                        required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+
+                <button type="submit" class="btn btn-primary">
+                    {{ 'CONTACT.SUBMIT' | translate }}
+                </button>
+
             </form>
         </div>
     </div>
@@ -30,7 +54,7 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-      var map = L.map('map').setView([40.730610, -73.935242], 12); // Example coordinates
+      var map = L.map('map').setView([40.730610, -73.935242], 12);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

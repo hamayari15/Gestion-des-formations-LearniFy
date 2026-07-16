@@ -3,7 +3,7 @@
     "HOME": "Accueil",
     "ABOUT": "À propos",
     "PRIVACY": "Confidentialité",
-    "CONTACT": "Contactez-nous",
+    "CONTACT": "Contact",
     "MY_PROFILE": "Mon Profil",
     "AVAILABLE_TRAININGS": "Formations disponibles",
     "REGISTRATIONS": "Inscriptions",
@@ -121,5 +121,93 @@
       "Q4": "Qui contacter en cas de problème ?",
       "A4": "Contactez-nous via la page Contact et un administrateur vous répondra."
     }
+  },
+
+  "PRIVACY": {
+    "TITLE": "Politique de confidentialité",
+    "SUBTITLE": "Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos données personnelles lors de l'utilisation de notre plateforme.",
+
+    "INFORMATION": {
+      "TITLE": "Informations collectées",
+      "DESCRIPTION": "Nous collectons des informations personnelles telles que votre nom, votre adresse e-mail, votre mot de passe chiffré, les informations de votre profil ainsi que votre activité sur la plateforme. Nous pouvons également recueillir des informations techniques comme le type d'appareil, le navigateur et les journaux d'utilisation."
+    },
+
+    "DATA_USAGE": {
+      "TITLE": "Utilisation de vos données",
+      "DESCRIPTION": "Vos données sont utilisées pour créer et gérer votre compte, vous donner accès aux formations, suivre votre progression et améliorer continuellement notre plateforme."
+    },
+
+    "PROTECTION": {
+      "TITLE": "Protection des données",
+      "DESCRIPTION": "Nous utilisons une authentification sécurisée, des mots de passe chiffrés et des bases de données protégées afin de garantir la sécurité de vos informations personnelles. L'accès est strictement réservé aux administrateurs autorisés."
+    },
+
+    "COOKIES": {
+      "TITLE": "Cookies",
+      "DESCRIPTION": "Les cookies nous permettent d'améliorer votre expérience, de mémoriser vos préférences et d'analyser les performances de la plateforme. Vous pouvez les désactiver à tout moment dans les paramètres de votre navigateur."
+    },
+
+    "THIRD_PARTY": {
+      "TITLE": "Services tiers",
+      "DESCRIPTION": "Nous pouvons utiliser des services tiers de confiance pour l'authentification et l'analyse. Ces services respectent des normes strictes en matière de confidentialité et de sécurité."
+    },
+
+    "RIGHTS": {
+      "TITLE": "Vos droits",
+      "DESCRIPTION": "Vous avez le droit d'accéder à vos données personnelles, de les mettre à jour ou de les supprimer. Vous pouvez également demander une copie des informations associées à votre compte."
+    },
+
+    "CONTACT": {
+      "TITLE": "Contact",
+      "DESCRIPTION": "Si vous avez des questions concernant cette politique de confidentialité, vous pouvez contacter notre équipe d'assistance à tout moment."
+    },
+
+    "BACK_HOME": "Retour à l'accueil"
+  },
+
+  "CONTACT": {
+    "TITLE": "Contactez-nous",
+
+    "NAME": "Nom",
+    "NAME_PLACEHOLDER": "Saisissez votre nom complet",
+
+    "EMAIL": "Adresse e-mail",
+    "EMAIL_PLACEHOLDER": "Saisissez votre adresse e-mail",
+
+    "MESSAGE": "Message",
+    "MESSAGE_PLACEHOLDER": "Écrivez votre message ici...",
+
+    "SUBMIT": "Envoyer le message"
+  },
+
+  "FOOTER": {
+    "BRAND": {
+      "NAME": "Centre de Formation",
+      "DESCRIPTION": "Accompagner les apprenants grâce à des formations de qualité, des horaires flexibles et des formateurs expérimentés."
+    },
+
+    "QUICK_LINKS": {
+      "TITLE": "Liens rapides",
+      "HOME": "Accueil",
+      "ABOUT": "À propos",
+      "FORMATIONS": "Formations",
+      "CONTACT": "Contact"
+    },
+
+    "RESOURCES": {
+      "TITLE": "Ressources",
+      "FAQ": "FAQ",
+      "PRIVACY": "Politique de confidentialité",
+      "TERMS": "Conditions d'utilisation",
+      "SUPPORT": "Assistance"
+    },
+
+    "CONTACT": {
+      "TITLE": "Contact",
+      "ADDRESS": "Tunis, Tunisie"
+    },
+
+    "COPYRIGHT": "© 2026 Centre de Formation. Tous droits réservés."
   }
+
 }

@@ -121,6 +121,93 @@
       "Q4": "Who do I contact if something looks wrong?",
       "A4": "Reach out through the Contact page and an administrator will follow up directly."
     }
+  },
+
+  "PRIVACY": {
+    "TITLE": "Privacy Policy",
+    "SUBTITLE": "This Privacy Policy explains how we collect, use, and protect your personal data when using our platform.",
+
+    "INFORMATION": {
+      "TITLE": "Information We Collect",
+      "DESCRIPTION": "We collect personal information such as your name, email address, encrypted password, profile details, and learning activity. We may also collect technical information including your device type, browser, and usage logs."
+    },
+
+    "DATA_USAGE": {
+      "TITLE": "How We Use Your Data",
+      "DESCRIPTION": "Your data is used to create and manage your account, provide access to training programs, monitor your progress, and continuously improve our platform."
+    },
+
+    "PROTECTION": {
+      "TITLE": "Data Protection",
+      "DESCRIPTION": "We use secure authentication, encrypted passwords, and protected databases to safeguard your personal information. Access is limited to authorized administrators only."
+    },
+
+    "COOKIES": {
+      "TITLE": "Cookies",
+      "DESCRIPTION": "Cookies help us improve your experience, remember your preferences, and analyze platform performance. You may disable cookies at any time through your browser settings."
+    },
+
+    "THIRD_PARTY": {
+      "TITLE": "Third-Party Services",
+      "DESCRIPTION": "We may rely on trusted third-party services for authentication and analytics. These providers follow strict privacy and security standards."
+    },
+
+    "RIGHTS": {
+      "TITLE": "Your Rights",
+      "DESCRIPTION": "You have the right to access, update, or delete your personal data. You may also request a copy of the information associated with your account."
+    },
+
+    "CONTACT": {
+      "TITLE": "Contact",
+      "DESCRIPTION": "If you have any questions regarding this Privacy Policy, please contact our support team."
+    },
+
+    "BACK_HOME": "Back To Home"
+  },
+
+  "CONTACT": {
+    "TITLE": "Contact Us",
+
+    "NAME": "Name",
+    "NAME_PLACEHOLDER": "Enter your full name",
+
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "Enter your email address",
+
+    "MESSAGE": "Message",
+    "MESSAGE_PLACEHOLDER": "Write your message here...",
+
+    "SUBMIT": "Send Message"
+  },
+
+  "FOOTER": {
+    "BRAND": {
+      "NAME": "Formation Center",
+      "DESCRIPTION": "Empowering learners through quality training programs, flexible schedules, and expert instructors."
+    },
+
+    "QUICK_LINKS": {
+      "TITLE": "Quick Links",
+      "HOME": "Home",
+      "ABOUT": "About",
+      "FORMATIONS": "Trainings",
+      "CONTACT": "Contact"
+    },
+
+    "RESOURCES": {
+      "TITLE": "Resources",
+      "FAQ": "FAQ",
+      "PRIVACY": "Privacy Policy",
+      "TERMS": "Terms of Service",
+      "SUPPORT": "Support"
+    },
+
+    "CONTACT": {
+      "TITLE": "Contact",
+      "ADDRESS": "Tunis, Tunisia"
+    },
+
+    "COPYRIGHT": "© 2026 Formation Center. All rights reserved."
   }
 
 }

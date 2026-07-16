@@ -46,7 +46,7 @@
 .navbar-nav {
   display: flex;
   align-items: center;
-  gap: 1.8rem;
+  gap: 1.35rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -75,22 +75,78 @@
 }
 
 .language-switcher{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-left:20px;
+  position:relative;
 }
 
-.language-switcher img{
-    width:28px;
-    height:20px;
-    cursor:pointer;
-    border-radius:3px;
-    transition:.2s;
+.language-btn {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:#fff;
+  border:1px solid #E5E7EB;
+  border-radius:10px;
+  padding:6px 10px;
+  cursor:pointer;
+  transition:.25s;
 }
 
-.language-switcher img:hover{
-    transform:scale(1.1);
+.language-btn:hover {
+  border-color:#4F46E5;
+  box-shadow:0 5px 18px rgba(79,70,229,.12);
+}
+
+.language-btn img {
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.language-btn span {
+  font-size:13px;
+  font-weight:600;
+  color:#444;
+}
+
+.language-btn i {
+  font-size:12px;
+  color:#666;
+}
+
+.language-menu {
+  position:absolute;
+  top:110%;
+  right:0;
+  background:#fff;
+  width:150px;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 10px 35px rgba(0,0,0,.12);
+  border:1px solid #eee;
+  z-index:999;
+}
+
+.language-menu button {
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px;
+  background:white;
+  border:none;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.language-menu button:hover {
+  background:#F5F5FF;
+}
+
+.language-menu img {
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  object-fit:cover;
 }
 
 .btn-connexion {
@@ -101,7 +157,7 @@
   color: #fff;
   border: none;
   border-radius: 9px;
-  padding: 9px 18px;
+  padding: 8px 16px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
