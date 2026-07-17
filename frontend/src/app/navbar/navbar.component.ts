@@ -34,11 +34,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   changeLanguage(lang: string) {
-
     this.translate.use(lang);
-
     localStorage.setItem('language', lang);
-
     this.currentLanguage = lang;
   }
 

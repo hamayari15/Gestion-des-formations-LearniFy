@@ -1,24 +1,101 @@
 <div class="admin-layout">
-  <div class="sidebar">
-    <div class="admin-icon">
-      <i class="fas fa-user-shield fa-3x"></i>
+
+  <div class="mobile-topbar">
+    <button class="hamburger-btn" (click)="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </button>
+    <span class="mobile-title">Admin Panel</span>
+  </div>
+
+  <div class="sidebar-overlay" *ngIf="sidebarOpen" (click)="closeSidebar()"></div>
+
+  <div class="sidebar" [class.open]="sidebarOpen">
+
+    <div class="sidebar-top">
+      <div class="admin-badge">
+        <i class="fas fa-user-shield"></i>
+      </div>
+      <span class="admin-label">Admin Panel</span>
+    </div>
+
+    <nav class="sidebar-nav">
+
+      <a routerLink="admin-dashboard" routerLinkActive="active-link" class="link" (click)="closeSidebar()">
+        <i class="fas fa-chart-pie"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <a routerLink="cycle-formations" routerLinkActive="active-link" class="link" (click)="closeSidebar()">
+        <i class="fas fa-sync-alt"></i>
+        <span>Cycle Formation</span>
+      </a>
+
+      <a routerLink="liste-participant" routerLinkActive="active-link" class="link" (click)="closeSidebar()">
+        <i class="fas fa-users"></i>
+        <span>Liste des Participants</span>
+      </a>
+
+      <a routerLink="users-growth" routerLinkActive="active-link" class="link" (click)="closeSidebar()">
+        <i class="fas fa-chart-line"></i>
+        <span>Users Growth</span>
+      </a>
+
+      <a routerLink="liste-inscrits" routerLinkActive="active-link" class="link" (click)="closeSidebar()">
+        <i class="fas fa-user-check"></i>
+        <span>Liste des Inscrits</span>
+      </a>
+
+      <a routerLink="mon-profile-admin" routerLinkActive="active-link" class="link" (click)="closeSidebar()">
+        <i class="fas fa-cog"></i>
+        <span>Settings</span>
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <div class="language-switcher">
+
+        <button class="language-btn" (click)="showLanguages = !showLanguages">
+          <img
+            [src]="currentLanguage === 'fr'
+              ? 'assets/images/fr.png'
+              : 'assets/images/en.png'">
+          <span>{{ currentLanguage.toUpperCase() }}</span>
+          <i class="fas fa-chevron-up"></i>
+        </button>
+
+        <div class="language-menu" *ngIf="showLanguages">
+
+          <button
+            *ngIf="currentLanguage !== 'fr'"
+            (click)="changeLanguage('fr'); showLanguages=false">
+            <img src="assets/images/fr.png">
+            Français
+          </button>
+
+          <button
+            *ngIf="currentLanguage !== 'en'"
+            (click)="changeLanguage('en'); showLanguages=false">
+            <img src="assets/images/en.png">
+            English
+          </button>
+
+        </div>
+
+      </div>
+
+      <button class="logout" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </button>
 
     </div>
-    <a routerLink="admin-dashboard" routerLinkActive="active-link" class="link">
-      📊 Dashboard</a>
-    <a routerLink="cycle-formations" routerLinkActive="active-link" class="link">
-      🔄 Cycle Formation</a>
-    <a routerLink="liste-participant" routerLinkActive="active-link" class="link">
-      👤 Liste des Participants</a>
-    <a routerLink="users-growth" routerLinkActive="active-link" class="link">
-      📈 Users Growth</a>
-    <a routerLink="liste-inscrits" routerLinkActive="active-link" class="link">
-      👤 Liste des Inscrits</a>
-    <a routerLink="mon-profile-admin" routerLinkActive="active-link" class="link">
-      🛠️ Settings</a>
-      <button class="logout" (click)="logout()"> <i class="fas fa-sign-out-alt"></i>Logout</button>
+
   </div>
-   <div class="content">
+
+  <div class="content">
     <router-outlet></router-outlet>
   </div>
+
 </div>

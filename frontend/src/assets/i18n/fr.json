@@ -208,6 +208,227 @@
     },
 
     "COPYRIGHT": "© 2026 Centre de Formation. Tous droits réservés."
-  }
+  },
 
+  "REGISTER": {
+    "TITLE": "Créer votre compte",
+
+    "STEPS": {
+      "PERSONAL": "Informations personnelles",
+      "SECURITY": "Sécurité",
+      "PROFILE": "Profil"
+    },
+
+    "FULL_NAME": "Nom complet",
+    "EMAIL": "E-mail",
+    "PASSWORD": "Mot de passe",
+    "CONFIRM_PASSWORD": "Confirmer le mot de passe",
+    "AGE": "Âge",
+    "GENDER": "Genre",
+    "PROFILE_IMAGE": "Photo de profil",
+
+    "MALE": "Homme",
+    "FEMALE": "Femme",
+
+    "ALREADY_ACCOUNT": "Vous avez déjà un compte ?",
+    "LOGIN": "Se connecter",
+
+    "NEXT": "Suivant",
+    "CHECKING": "Vérification...",
+    "BACK": "Retour",
+    "CONTINUE": "Continuer",
+    "REGISTER": "S'inscrire",
+
+    "ERRORS": {
+      "FULL_NAME_REQUIRED": "Le nom complet est obligatoire",
+      "FULL_NAME_MIN": "Le nom complet doit contenir au moins 3 caractères",
+      "FULL_NAME_MAX": "Le nom complet ne peut pas dépasser 100 caractères",
+
+      "EMAIL_REQUIRED": "L'adresse e-mail est obligatoire",
+      "EMAIL_INVALID": "Veuillez saisir une adresse e-mail valide",
+      "EMAIL_PATTERN": "L'adresse e-mail doit être au format exemple@gmail.com",
+      "EMAIL_EXISTS": "Cette adresse e-mail existe déjà",
+
+      "PASSWORD_REQUIRED": "Le mot de passe est obligatoire",
+      "PASSWORD_MIN": "Le mot de passe doit contenir au moins 6 caractères",
+
+      "CONFIRM_REQUIRED": "La confirmation du mot de passe est obligatoire",
+      "PASSWORD_MISMATCH": "Les mots de passe ne correspondent pas",
+
+      "AGE_REQUIRED": "L'âge est obligatoire",
+      "AGE_MIN": "Vous devez avoir au moins 16 ans",
+      "AGE_MAX": "L'âge ne peut pas dépasser 100 ans",
+
+      "GENDER_REQUIRED": "Le genre est obligatoire"
+    }
+  },
+
+  
+  "ERRORS":{
+    "SERVER_ERROR":"Un erreur au serveur lors de la verificaition du mail"
+  },
+
+  "LOGIN": {
+    "TITLE": "Accédez à votre compte",
+    "EMAIL": "E-mail",
+    "PASSWORD": "Mot de passe",
+    "LOGIN": "Se connecter",
+    "OR": "ou",
+    "CREATE_ACCOUNT": "Créer un compte",
+
+    "ERRORS": {
+      "EMAIL_REQUIRED": "L'adresse e-mail est obligatoire",
+      "EMAIL_INVALID": "Veuillez saisir une adresse e-mail valide",
+      "PASSWORD_REQUIRED": "Le mot de passe est obligatoire",
+      "PASSWORD_MIN": "Le mot de passe doit contenir au moins 6 caractères"
+    }
+  },
+
+  "PROFILE": {
+    "LOADING": "Chargement du profil...",
+    "ERROR_TITLE": "Impossible de charger le profil",
+    "RETRY": "Réessayer",
+
+    "EMPTY_TITLE": "Aucune donnée trouvée",
+    "EMPTY_SUBTITLE": "Nous n'avons trouvé aucune information pour ce profil.",
+
+    "ACTIVE": "Actif",
+    "INACTIVE": "Inactif",
+
+    "PERSONAL_INFORMATION": "Informations personnelles",
+    "DELETE_ACCOUNT": "Supprimer le compte",
+
+    "FULL_NAME": "Nom complet",
+    "AGE": "Âge",
+    "YEARS": "ans",
+    "EMAIL": "Email",
+    "MEMBER_SINCE": "Membre depuis le",
+    "GENDER": "Genre",
+    "LAST_LOGIN": "Dernière connexion",
+
+    "STATS_TITLE": "Statistiques des inscriptions",
+
+    "TOTAL": "Total",
+    "VALIDATED": "Validées",
+    "REJECTED": "Refusées",
+    "PENDING": "En attente"
+  },
+
+  "FORMATIONS_DISPONIBLES": {
+    "TITLE": "Formations disponibles",
+    "SUBTITLE": "Choisissez une formation et inscrivez-vous",
+
+    "SEARCH": "Rechercher par thème...",
+    "ALL_MODES": "Tous les modes",
+
+    "PRESENTIEL": "Présentiel",
+    "ONLINE": "En ligne",
+    "HYBRID": "Hybride",
+
+    "TRAINING": "formation",
+    "TRAININGS": "formations",
+    "AVAILABLE": "disponible(s)",
+
+    "CLOSED": "Clôturée",
+    "CLOSED_DESC": "signifie que la date limite d'inscription est dépassée et qu'elle n'accepte plus de nouveaux participants",
+
+    "CLEAR_FILTERS": "Effacer les filtres",
+
+    "LOADING": "Chargement des formations...",
+
+    "NO_TRAININGS": "Aucune formation disponible",
+    "NO_TRAININGS_DESC": "Lorsqu'une formation sera créée, elle apparaîtra ici.",
+
+    "NOT_FOUND": "Aucune formation trouvée",
+    "NOT_FOUND_DESC": "Essayez de modifier votre recherche ou vos filtres",
+
+    "REGISTER": "S'inscrire",
+    "NA": "N/D",
+
+    "PREVIOUS": "Précédent",
+    "NEXT": "Suivant",
+
+    "TABLE": {
+      "THEME": "Thème",
+      "ROOM": "N° Salle",
+      "MODE": "Mode",
+      "FROM_DATE": "Période Du",
+      "TO_DATE": "Période À",
+      "START_TIME": "Horaire Du",
+      "END_TIME": "Horaire À",
+      "ACTION": "Action"
+    }
+  },
+
+  "INSCRIPTION_DIALOG": {
+    "TITLE": "Inscription à une formation",
+    "SUBTITLE": "Complétez les informations ci-dessous",
+
+    "FORMATION_INFO": "Informations de la formation",
+    "THEME": "Thème",
+    "MODE": "Mode de formation",
+    "ROOM": "Numéro de salle",
+
+    "PARTICIPANT_INFO": "Informations du participant",
+    "FULL_NAME": "Nom complet",
+    "EMAIL": "Email",
+    "COMPANY": "Entreprise",
+    "SERVICE": "Service",
+
+    "REQUIRED_TEXT": "Les champs",
+    "REQUIRED_SUFFIX": "sont obligatoires",
+
+    "CANCEL": "Annuler",
+    "REGISTER": "S'inscrire",
+    "SAVING": "Enregistrement..."
+  },
+
+  "MES_FORMATIONS": {
+    "TITLE": "Mes formations",
+    "SUBTITLE": "Consultez vos inscriptions et leur statut",
+
+    "LOADING": "Chargement de vos formations...",
+    "ERROR_TITLE": "Impossible de charger vos formations",
+    "RETRY": "Réessayer",
+
+    "EMPTY_TITLE": "Aucune inscription pour le moment",
+    "EMPTY_SUBTITLE": "Vos formations inscrites apparaîtront ici.",
+
+    "STATUS": "Statut",
+    "PERIOD": "Période",
+    "MODE": "Mode",
+    "SCHEDULE": "Horaire",
+    "ROOM": "Salle",
+
+    "NA": "N/A"
+  },
+
+  "ADMIN_DASHBOARD": {
+    "TITLE": "Tableau de bord administrateur",
+    "SUBTITLE": "Vue d'ensemble de la plateforme de formations",
+    "LOADING": "Chargement des données...",
+    "ERROR_TITLE": "Impossible de charger les données",
+    "RETRY": "Réessayer",
+    "EMPTY_TITLE": "Aucune donnée pour le moment",
+    "EMPTY_DESC": "Commencez par créer une formation ou ajouter un participant pour voir apparaître les statistiques ici.",
+
+    "TOTAL_TRAININGS": "Total Formations",
+    "TOTAL_REGISTRATIONS": "Total Inscriptions",
+    "TOTAL_PARTICIPANTS": "Total Participants",
+
+    "ONLINE": "En ligne",
+    "HYBRID": "Hybride",
+    "IN_PERSON": "Présentiel",
+
+    "PENDING": "En attente",
+    "APPROVED": "Validées",
+    "REJECTED": "Refusées",
+
+    "ACTIVE": "Actifs",
+    "INACTIVE": "Inactifs",
+
+    "REGISTRATIONS_CHART": "Répartition des inscriptions",
+    "TRAINING_MODES_CHART": "Mode des formations",
+    "TREND_CHART": "Évolution des inscriptions dans le temps"
+  }
 }

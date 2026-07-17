@@ -1,13 +1,13 @@
 <div class="container mt-4">
 
   <div class="page-header">
-    <h2 class="page-title">Mes Formations</h2>
-    <p class="page-subtitle">Consultez vos inscriptions et leur statut</p>
+    <h2 class="page-title">{{ 'MES_FORMATIONS.TITLE' | translate }}</h2>
+    <p class="page-subtitle">{{ 'MES_FORMATIONS.SUBTITLE' | translate }}</p>
   </div>
 
   <div class="state-panel" *ngIf="loading">
     <div class="spinner"></div>
-    <span>Chargement de vos formations...</span>
+    <span>{{ 'MES_FORMATIONS.LOADING' | translate }}</span>
   </div>
 
   <div class="state-panel error-panel" *ngIf="!loading && errorMessage">
@@ -15,19 +15,28 @@
       <div class="state-icon icon-error">
         <i class="fas fa-triangle-exclamation"></i>
       </div>
-      <h3>Impossible de charger vos formations</h3>
+
+      <h3>{{ 'MES_FORMATIONS.ERROR_TITLE' | translate }}</h3>
+
       <p>{{ errorMessage }}</p>
+
       <button class="state-retry" (click)="getInscriptions()">
         <i class="fas fa-rotate-right"></i>
-        Réessayer
+        {{ 'MES_FORMATIONS.RETRY' | translate }}
       </button>
     </div>
   </div>
 
   <div class="state-panel empty-panel" *ngIf="!loading && !errorMessage && inscriptions.length === 0">
     <i class="fas fa-graduation-cap empty-icon"></i>
-    <p class="empty-title">Aucune inscription pour le moment</p>
-    <span class="empty-sub">Vos formations inscrites apparaîtront ici.</span>
+
+    <p class="empty-title">
+      {{ 'MES_FORMATIONS.EMPTY_TITLE' | translate }}
+    </p>
+
+    <span class="empty-sub">
+      {{ 'MES_FORMATIONS.EMPTY_SUBTITLE' | translate }}
+    </span>
   </div>
 
   <div class="inscriptions-list" *ngIf="!loading && !errorMessage && inscriptions.length > 0">
@@ -41,58 +50,97 @@
       </div>
 
       <div class="cell status-cell">
-        <span class="cell-label">Statut</span>
+
+        <span class="cell-label">
+          {{ 'MES_FORMATIONS.STATUS' | translate }}
+        </span>
+
         <span
           class="badge status-badge"
           [class.badge-en-attente]="inscription.status === 'En Attente'"
           [class.badge-validee]="inscription.status === 'Validée'"
           [class.badge-refusee]="inscription.status === 'Refusée'">
+
           {{ inscription.status }}
+
         </span>
+
       </div>
 
       <div class="cell dates-cell">
-        <span class="cell-label">Période</span>
+
+        <span class="cell-label">
+          {{ 'MES_FORMATIONS.PERIOD' | translate }}
+        </span>
+
         <span class="meta-item">
           <i class="fas fa-calendar-alt"></i>
+
           {{ inscription.formationId?.periodeDu | date:'dd/MM/yyyy' }}
           —
           {{ inscription.formationId?.periodeA | date:'dd/MM/yyyy' }}
+
         </span>
+
       </div>
 
       <div class="cell mode-cell">
-        <span class="cell-label">Mode</span>
+
+        <span class="cell-label">
+          {{ 'MES_FORMATIONS.MODE' | translate }}
+        </span>
+
         <span
           class="badge mode-badge"
           [class.badge-presentiel]="inscription.formationId?.modeFormation === 'Présentiel'"
           [class.badge-enligne]="inscription.formationId?.modeFormation === 'En ligne'"
           [class.badge-hybride]="inscription.formationId?.modeFormation === 'Hybride'">
+
           {{ inscription.formationId?.modeFormation }}
+
         </span>
+
       </div>
 
       <div class="cell time-cell">
-        <span class="cell-label">Horaire</span>
+
+        <span class="cell-label">
+          {{ 'MES_FORMATIONS.SCHEDULE' | translate }}
+        </span>
+
         <span class="meta-item">
           <i class="fas fa-clock"></i>
-          {{ inscription.formationId?.horaireDu }} - {{ inscription.formationId?.horaireA }}
+
+          {{ inscription.formationId?.horaireDu }}
+          -
+          {{ inscription.formationId?.horaireA }}
+
         </span>
+
       </div>
 
       <div class="cell salle-cell">
-        <span class="cell-label">Salle</span>
+
+        <span class="cell-label">
+          {{ 'MES_FORMATIONS.ROOM' | translate }}
+        </span>
 
         <span class="meta-item" *ngIf="inscription.formationId?.numSalle">
           <i class="fas fa-door-open"></i>
-          Salle {{ inscription.formationId?.numSalle }}
+
+          {{ 'MES_FORMATIONS.ROOM' | translate }}
+          {{ inscription.formationId?.numSalle }}
+
         </span>
 
-         <span
-            *ngIf="!inscription.formationId?.numSalle && inscription.formationId?.modeFormation !== 'Présentiel'"
-            class="badge-na">
-            N/A
-          </span>
+        <span
+          *ngIf="!inscription.formationId?.numSalle && inscription.formationId?.modeFormation !== 'Présentiel'"
+          class="badge-na">
+
+          {{ 'MES_FORMATIONS.NA' | translate }}
+
+        </span>
+
       </div>
 
     </div>

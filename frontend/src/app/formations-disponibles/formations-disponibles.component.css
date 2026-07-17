@@ -489,8 +489,39 @@
     gap: 12px;
   }
 
+   .mode-select {
+    padding: 7px 10px;
+    font-size: 0.75rem;
+    width: auto;
+    align-self: flex-start;
+  }
+
+  .table-card {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .formations-table {
+    table-layout: auto;
+    min-width: 720px;
+  }
+
   .formations-table thead th,
   .formations-table tbody td {
     padding: 10px 10px;
+    white-space: nowrap;
+  }
+
+  .count-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .cloture-note {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
   }
 }

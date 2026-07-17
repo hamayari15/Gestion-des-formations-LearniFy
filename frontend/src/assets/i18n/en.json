@@ -208,6 +208,223 @@
     },
 
     "COPYRIGHT": "© 2026 Formation Center. All rights reserved."
-  }
+  },
 
+  "REGISTER": {
+    "TITLE": "Create Your Account",
+
+    "STEPS": {
+      "PERSONAL": "Personal Information",
+      "SECURITY": "Security",
+      "PROFILE": "Profile"
+    },
+
+    "FULL_NAME": "Full Name",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "CONFIRM_PASSWORD": "Confirm Password",
+    "AGE": "Age",
+    "GENDER": "Gender",
+    "PROFILE_IMAGE": "Profile Image",
+
+    "MALE": "Male",
+    "FEMALE": "Female",
+
+    "ALREADY_ACCOUNT": "Already have an account?",
+    "LOGIN": "Login",
+
+    "NEXT": "Next",
+    "CHECKING": "Checking...",
+    "BACK": "Back",
+    "CONTINUE": "Continue",
+    "REGISTER": "Register",
+
+    "ERRORS": {
+      "FULL_NAME_REQUIRED": "Full name is required",
+      "FULL_NAME_MIN": "Full name must contain at least 3 characters",
+      "FULL_NAME_MAX": "Full name cannot exceed 100 characters",
+
+      "EMAIL_REQUIRED": "Email is required",
+      "EMAIL_INVALID": "Please enter a valid email address",
+      "EMAIL_PATTERN": "Email must be like example@gmail.com",
+      "EMAIL_EXISTS": "This email already exists",
+
+      "PASSWORD_REQUIRED": "Password is required",
+      "PASSWORD_MIN": "Password must contain at least 6 characters",
+
+      "CONFIRM_REQUIRED": "Confirm password is required",
+      "PASSWORD_MISMATCH": "Passwords do not match",
+
+      "AGE_REQUIRED": "Age is required",
+      "AGE_MIN": "Age must be at least 16",
+      "AGE_MAX": "Age cannot exceed 100",
+
+      "GENDER_REQUIRED": "Gender is required"
+    }
+  },
+  "ERRORS":{
+    "SERVER_ERROR":"Server error while checking email"
+  },
+
+  "LOGIN": {
+    "TITLE": "Access Your Account",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "LOGIN": "Login",
+    "OR": "or",
+    "CREATE_ACCOUNT": "Create an account",
+
+    "ERRORS": {
+      "EMAIL_REQUIRED": "Email is required",
+      "EMAIL_INVALID": "Please enter a valid email address",
+      "PASSWORD_REQUIRED": "Password is required",
+      "PASSWORD_MIN": "Password must be at least 6 characters"
+    }
+  },
+
+  "PROFILE": {
+    "LOADING": "Loading profile...",
+    "ERROR_TITLE": "Unable to load profile",
+    "RETRY": "Retry",
+
+    "EMPTY_TITLE": "No data found",
+    "EMPTY_SUBTITLE": "We couldn't find any information for this profile.",
+
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive",
+
+    "PERSONAL_INFORMATION": "Personal Information",
+    "DELETE_ACCOUNT": "Delete Account",
+
+    "FULL_NAME": "Full Name",
+    "AGE": "Age",
+    "YEARS": "years",
+    "EMAIL": "Email",
+    "MEMBER_SINCE": "Member Since",
+    "GENDER": "Gender",
+    "LAST_LOGIN": "Last Login",
+
+    "STATS_TITLE": "Registration Statistics",
+
+    "TOTAL": "Total",
+    "VALIDATED": "Validated",
+    "REJECTED": "Rejected",
+    "PENDING": "Pending"
+  },
+
+  "FORMATIONS_DISPONIBLES": {
+    "TITLE": "Available Trainings",
+    "SUBTITLE": "Choose a training and register",
+    "SEARCH": "Search by theme...",
+    "ALL_MODES": "All Modes",
+    "PRESENTIEL": "In Person",
+    "ONLINE": "Online",
+    "HYBRID": "Hybrid",
+
+    "TRAINING": "training",
+    "TRAININGS": "trainings",
+    "AVAILABLE": "available",
+
+    "CLOSED": "Closed",
+    "CLOSED_DESC": "means that the registration deadline has passed and it no longer accepts new participants",
+
+    "CLEAR_FILTERS": "Clear filters",
+
+    "LOADING": "Loading trainings...",
+
+    "NO_TRAININGS": "No trainings yet",
+    "NO_TRAININGS_DESC": "Once a training is created, it will appear here.",
+
+    "NOT_FOUND": "No trainings found",
+    "NOT_FOUND_DESC": "Try adjusting your search or filter",
+
+    "REGISTER": "Register",
+    "NA": "N/A",
+
+    "PREVIOUS": "Previous",
+    "NEXT": "Next",
+
+    "TABLE": {
+      "THEME": "Theme",
+      "ROOM": "Room No.",
+      "MODE": "Mode",
+      "FROM_DATE": "From",
+      "TO_DATE": "To",
+      "START_TIME": "Start Time",
+      "END_TIME": "End Time",
+      "ACTION": "Action"
+    }
+  },
+
+  "INSCRIPTION_DIALOG": {
+    "TITLE": "Registration to a training",
+    "SUBTITLE": "Complete the information below",
+
+    "FORMATION_INFO": "Training Information",
+    "THEME": "Theme",
+    "MODE": "Training Mode",
+    "ROOM": "Room Number",
+
+    "PARTICIPANT_INFO": "Participant Information",
+    "FULL_NAME": "Full Name",
+    "EMAIL": "Email",
+    "COMPANY": "Company",
+    "SERVICE": "Department",
+
+    "REQUIRED_TEXT": "Fields marked",
+    "REQUIRED_SUFFIX": "are required",
+
+    "CANCEL": "Cancel",
+    "REGISTER": "Register",
+    "SAVING": "Saving..."
+  },
+
+  "MES_FORMATIONS": {
+    "TITLE": "My Trainings",
+    "SUBTITLE": "View your registrations and their status",
+
+    "LOADING": "Loading your trainings...",
+    "ERROR_TITLE": "Unable to load your trainings",
+    "RETRY": "Retry",
+
+    "EMPTY_TITLE": "No registrations yet",
+    "EMPTY_SUBTITLE": "Your registered trainings will appear here.",
+
+    "STATUS": "Status",
+    "PERIOD": "Period",
+    "MODE": "Mode",
+    "SCHEDULE": "Schedule",
+    "ROOM": "Room",
+
+    "NA": "N/A"
+  },
+
+  "ADMIN_DASHBOARD": {
+    "TITLE": "Admin Dashboard",
+    "SUBTITLE": "Overview of the training platform",
+    "LOADING": "Loading data...",
+    "ERROR_TITLE": "Unable to load data",
+    "RETRY": "Retry",
+    "EMPTY_TITLE": "No data available",
+    "EMPTY_DESC": "Start by creating a training or adding a participant to display statistics here.",
+
+    "TOTAL_TRAININGS": "Total Trainings",
+    "TOTAL_REGISTRATIONS": "Total Registrations",
+    "TOTAL_PARTICIPANTS": "Total Participants",
+
+    "ONLINE": "Online",
+    "HYBRID": "Hybrid",
+    "IN_PERSON": "In Person",
+
+    "PENDING": "Pending",
+    "APPROVED": "Approved",
+    "REJECTED": "Rejected",
+
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive",
+
+    "REGISTRATIONS_CHART": "Registration Distribution",
+    "TRAINING_MODES_CHART": "Training Modes",
+    "TREND_CHART": "Registration Trends Over Time"
+  }
 }

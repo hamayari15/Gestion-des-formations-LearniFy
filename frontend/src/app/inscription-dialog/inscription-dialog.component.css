@@ -235,3 +235,23 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+@media (max-width: 640px) {
+  .dialog {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dialog-body {
+    max-height: none;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .dialog-footer {
+    flex-wrap: nowrap;
+  }
+}

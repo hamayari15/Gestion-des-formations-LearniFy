@@ -1,17 +1,17 @@
 <div class="container mt-4">
-
   <div class="page-header">
     <div>
-      <h2 class="page-title">Liste des Formations Disponibles</h2>
-      <p class="page-subtitle">Choisissez une formation et inscrivez-vous</p>
+      <h2 class="page-title">{{ "FORMATIONS_DISPONIBLES.TITLE" | translate }}</h2>
+      <p class="page-subtitle">{{ "FORMATIONS_DISPONIBLES.SUBTITLE" | translate }}</p>
     </div>
 
     <button
-        class="btn-icon btn-refresh"
-        (click)="getFormations()"
-        [disabled]="loading"
-        aria-label="Refresh">
-        <i class="fas fa-rotate-right" [class.spinning]="loading"></i>
+      class="btn-icon btn-refresh"
+      (click)="getFormations()"
+      [disabled]="loading"
+      aria-label="Refresh"
+    >
+      <i class="fas fa-rotate-right" [class.spinning]="loading"></i>
     </button>
   </div>
 
@@ -21,135 +21,193 @@
   </div>
 
   <div class="filter-row">
-
     <div class="search-wrap">
       <i class="fas fa-search search-icon"></i>
 
       <input
         class="search-input"
         type="text"
-        placeholder="Search by theme..."
+        placeholder="{{ 'FORMATIONS_DISPONIBLES.SEARCH' | translate }}"
         [(ngModel)]="searchTerm"
         [disabled]="!!errorMessage || !hasAnyFormations"
-        (input)="applyFilters()">
+        (input)="applyFilters()"
+      />
     </div>
 
     <select
       class="mode-select"
       [(ngModel)]="selectedMode"
       [disabled]="!!errorMessage || !hasAnyFormations"
-      (change)="applyFilters()">
-
-      <option value="">All Modes</option>
-      <option value="Présentiel">Présentiel</option>
-      <option value="En ligne">En ligne</option>
-      <option value="Hybride">Hybride</option>
-
+      (change)="applyFilters()"
+    >
+      <option value="">{{ "FORMATIONS_DISPONIBLES.ALL_MODES" | translate }}</option>
+      <option value="Présentiel">
+        {{ "FORMATIONS_DISPONIBLES.PRESENTIEL" | translate }}
+      </option>
+      <option value="En ligne">{{ "FORMATIONS_DISPONIBLES.ONLINE" | translate }}</option>
+      <option value="Hybride">{{ "FORMATIONS_DISPONIBLES.HYBRID" | translate }}</option>
     </select>
-
   </div>
 
   <div class="count-bar">
-
     <span class="count-label" *ngIf="!errorMessage">
       <i class="fas fa-graduation-cap"></i>
-      {{ totalItems }} formation{{ totalItems !== 1 ? 's' : '' }} disponible{{ totalItems !== 1 ? 's' : '' }}
+
+      {{ totalItems }}
+
+      {{
+        totalItems !== 1
+          ? ("FORMATIONS_DISPONIBLES.TRAININGS" | translate)
+          : ("FORMATIONS_DISPONIBLES.TRAINING" | translate)
+      }}
+
+      {{ "FORMATIONS_DISPONIBLES.AVAILABLE" | translate }}
     </span>
 
-    <span class="cloture-note" *ngIf="hasAnyFormations && filteredFormations.length > 0">
+    <span
+      class="cloture-note"
+      *ngIf="hasAnyFormations && filteredFormations.length > 0"
+    >
       <i class="fas fa-circle-info"></i>
-      <strong>Clôturée</strong> = signifie que la date limite d'inscription est dépassée et qu'elle n'accepte plus de nouveaux participants
+
+      <strong>{{ "FORMATIONS_DISPONIBLES.CLOSED" | translate }}</strong>
+
+      {{ "FORMATIONS_DISPONIBLES.CLOSED_DESC" | translate }}
     </span>
 
     <button
       *ngIf="searchTerm || selectedMode"
       class="clear-btn"
-      (click)="clearFilters()">
-      Clear filters
+      (click)="clearFilters()"
+    >
+      {{ "FORMATIONS_DISPONIBLES.CLEAR_FILTERS" | translate }}
     </button>
-
   </div>
 
   <div class="table-card">
-
     <div *ngIf="loading" class="spinner-wrap">
       <div class="spinner"></div>
-      <span class="spinner-label">Loading formations...</span>
+
+      <span class="spinner-label">
+        {{ "FORMATIONS_DISPONIBLES.LOADING" | translate }}
+      </span>
     </div>
 
-    <div *ngIf="!loading && !errorMessage && !hasAnyFormations && filteredFormations.length === 0" class="empty-state">
+    <div
+      *ngIf="
+        !loading &&
+        !errorMessage &&
+        !hasAnyFormations &&
+        filteredFormations.length === 0
+      "
+      class="empty-state"
+    >
       <i class="fas fa-graduation-cap empty-icon"></i>
-      <p class="empty-title">No formations yet</p>
-      <span class="empty-sub">Once a formation is created, it will appear here.</span>
+
+      <p class="empty-title">
+        {{ "FORMATIONS_DISPONIBLES.NO_TRAININGS" | translate }}
+      </p>
+
+      <span class="empty-sub">
+        {{ "FORMATIONS_DISPONIBLES.NO_TRAININGS_DESC" | translate }}
+      </span>
     </div>
 
-    <div *ngIf="!loading && !errorMessage && hasAnyFormations && filteredFormations.length === 0" class="empty-state">
+    <div
+      *ngIf="
+        !loading &&
+        !errorMessage &&
+        hasAnyFormations &&
+        filteredFormations.length === 0
+      "
+      class="empty-state"
+    >
       <i class="fas fa-search empty-icon"></i>
-      <p class="empty-title">No formations found</p>
-      <span class="empty-sub">Try adjusting your search or filter</span>
+
+      <p class="empty-title">
+        {{ "FORMATIONS_DISPONIBLES.NOT_FOUND" | translate }}
+      </p>
+
+      <span class="empty-sub">
+        {{ "FORMATIONS_DISPONIBLES.NOT_FOUND_DESC" | translate }}
+      </span>
     </div>
 
     <table
       class="formations-table"
-      *ngIf="!loading && filteredFormations.length && !errorMessage">
-
+      *ngIf="!loading && filteredFormations.length && !errorMessage"
+    >
       <thead>
-
         <tr>
-          <th style="width:20%">Thème</th>
-          <th style="width:9%">N° Salle</th>
-          <th style="width:13%">Mode</th>
-          <th style="width:12%">Période Du</th>
-          <th style="width:12%">Période À</th>
-          <th style="width:10%">Horaire Du</th>
-          <th style="width:10%">Horaire À</th>
-          <th style="width:14%" class="text-center">Action</th>
-        </tr>
+          <th style="width: 20%">
+            {{ "FORMATIONS_DISPONIBLES.TABLE.THEME" | translate }}
+          </th>
 
+          <th style="width: 9%">
+            {{ "FORMATIONS_DISPONIBLES.TABLE.ROOM" | translate }}
+          </th>
+
+          <th style="width: 13%">
+            {{ "FORMATIONS_DISPONIBLES.TABLE.MODE" | translate }}
+          </th>
+
+          <th style="width: 12%">
+            {{ "FORMATIONS_DISPONIBLES.TABLE.FROM_DATE" | translate }}
+          </th>
+
+          <th style="width: 12%">
+            {{ "FORMATIONS_DISPONIBLES.TABLE.TO_DATE" | translate }}
+          </th>
+
+          <th style="width: 10%">
+            {{ "FORMATIONS_DISPONIBLES.TABLE.START_TIME" | translate }}
+          </th>
+
+          <th style="width: 10%">
+            {{ "FORMATIONS_DISPONIBLES.TABLE.END_TIME" | translate }}
+          </th>
+
+          <th style="width: 14%" class="text-center">
+            {{ "FORMATIONS_DISPONIBLES.TABLE.ACTION" | translate }}
+          </th>
+        </tr>
       </thead>
 
       <tbody>
-
         <tr *ngFor="let formation of filteredFormations">
-
           <td class="theme-cell">
             {{ formation.theme }}
           </td>
 
           <td class="salle-cell">
-
             <span *ngIf="formation.numSalle !== null">
               {{ formation.numSalle }}
             </span>
 
-            <span
-              *ngIf="formation.numSalle === null"
-              class="badge-na">
-              N/A
+            <span *ngIf="formation.numSalle === null" class="badge-na">
+              {{ "FORMATIONS_DISPONIBLES.NA" | translate }}
             </span>
-
           </td>
 
           <td>
-
             <span
               class="badge"
-              [class.badge-presentiel]="formation.modeFormation === 'Présentiel'"
+              [class.badge-presentiel]="
+                formation.modeFormation === 'Présentiel'
+              "
               [class.badge-enligne]="formation.modeFormation === 'En ligne'"
-              [class.badge-hybride]="formation.modeFormation === 'Hybride'">
-
+              [class.badge-hybride]="formation.modeFormation === 'Hybride'"
+            >
               {{ formation.modeFormation }}
-
             </span>
-
           </td>
 
           <td class="date-cell">
-            {{ formation.periodeDu | date:'dd/MM/yyyy' }}
+            {{ formation.periodeDu | date: "dd/MM/yyyy" }}
           </td>
 
           <td class="date-cell">
-            {{ formation.periodeA | date:'dd/MM/yyyy' }}
+            {{ formation.periodeA | date: "dd/MM/yyyy" }}
           </td>
 
           <td class="time-cell">
@@ -161,52 +219,50 @@
           </td>
 
           <td class="text-center">
-
             <button
-  class="btn-inscrire"
-  [disabled]="isExpired(formation.periodeDu)"
-  (click)="inscrire(formation)">
-  <i class="fas" [class.fa-lock]="isExpired(formation.periodeDu)" [class.fa-user-plus]="!isExpired(formation.periodeDu)"></i>
-  {{ isExpired(formation.periodeDu) ? 'Clôturée' : "S'inscrire" }}
-</button>
+              class="btn-inscrire"
+              [disabled]="isExpired(formation.periodeDu)"
+              (click)="inscrire(formation)"
+            >
+              <i
+                class="fas"
+                [class.fa-lock]="isExpired(formation.periodeDu)"
+                [class.fa-user-plus]="!isExpired(formation.periodeDu)"
+              >
+              </i>
 
-
+              {{
+                isExpired(formation.periodeDu)
+                  ? ("FORMATIONS_DISPONIBLES.CLOSED" | translate)
+                  : ("FORMATIONS_DISPONIBLES.REGISTER" | translate)
+              }}
+            </button>
           </td>
-
         </tr>
-
       </tbody>
-
     </table>
-
   </div>
 
-  <div
-    class="pagination"
-    *ngIf="totalPages > 1">
-
-    <button
-      class="btn-page"
-      (click)="prevPage()"
-      [disabled]="page === 1">
-      Previous
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button class="btn-page" (click)="prevPage()" [disabled]="page === 1">
+      {{ "FORMATIONS_DISPONIBLES.PREVIOUS" | translate }}
     </button>
 
     <button
       *ngFor="let p of [].constructor(totalPages); let i = index"
       class="btn-page"
       [class.active]="page === i + 1"
-      (click)="goToPage(i + 1)">
+      (click)="goToPage(i + 1)"
+    >
       {{ i + 1 }}
     </button>
 
     <button
       class="btn-page"
       (click)="nextPage()"
-      [disabled]="page === totalPages">
-      Next
+      [disabled]="page === totalPages"
+    >
+      {{ "FORMATIONS_DISPONIBLES.NEXT" | translate }}
     </button>
-
   </div>
-
 </div>

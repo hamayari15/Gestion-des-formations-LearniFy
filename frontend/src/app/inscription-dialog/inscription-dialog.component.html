@@ -1,92 +1,68 @@
 <div class="dialog">
-
   <div class="dialog-header">
-
     <div class="header-left">
-
       <div class="header-icon">
         <i class="ti ti-user-plus"></i>
       </div>
 
       <div>
-        <div class="dialog-title">Inscription à une formation</div>
+        <div class="dialog-title">
+          {{ "INSCRIPTION_DIALOG.TITLE" | translate }}
+        </div>
+
         <div class="dialog-subtitle">
-          Complétez les informations ci-dessous
+          {{ "INSCRIPTION_DIALOG.SUBTITLE" | translate }}
         </div>
       </div>
-
     </div>
 
     <button class="close-btn" (click)="closeDialog()">
       <i class="ti ti-x"></i>
     </button>
-
   </div>
 
   <div class="dialog-body">
-
     <div class="section-label">
-      Informations de la formation
+      {{ "INSCRIPTION_DIALOG.FORMATION_INFO" | translate }}
     </div>
 
     <div class="field">
-
       <div class="field-label">
         <i class="ti ti-book"></i>
-        Thème
+        {{ "INSCRIPTION_DIALOG.THEME" | translate }}
       </div>
 
-      <input
-        class="f-input"
-        type="text"
-        [(ngModel)]="theme"
-        readonly>
-
+      <input class="f-input" type="text" [(ngModel)]="theme" readonly />
     </div>
 
     <div class="field">
-
       <div class="field-label">
         <i class="ti ti-layout-board"></i>
-        Mode de formation
+        {{ "INSCRIPTION_DIALOG.MODE" | translate }}
       </div>
 
-      <input
-        class="f-input"
-        type="text"
-        [(ngModel)]="modeFormation"
-        readonly>
-
+      <input class="f-input" type="text" [(ngModel)]="modeFormation" readonly />
     </div>
 
-    <div
-      class="field"
-      *ngIf="modeFormation === 'Présentiel'">
-
+    <div class="field" *ngIf="modeFormation === 'Présentiel'">
       <div class="field-label">
         <i class="ti ti-door"></i>
-        Numéro de salle
+        {{ "INSCRIPTION_DIALOG.ROOM" | translate }}
       </div>
 
-      <input
-        class="f-input"
-        type="text"
-        [(ngModel)]="numSalle"
-        readonly>
-
+      <input class="f-input" type="text" [(ngModel)]="numSalle" readonly />
     </div>
 
     <div class="divider"></div>
 
     <div class="section-label">
-      Informations du participant
+      {{ "INSCRIPTION_DIALOG.PARTICIPANT_INFO" | translate }}
     </div>
 
     <div class="field">
-
       <div class="field-label">
         <i class="ti ti-user"></i>
-        Nom complet
+        {{ "INSCRIPTION_DIALOG.FULL_NAME" | translate }}
         <span class="required-dot"></span>
       </div>
 
@@ -98,16 +74,15 @@
           type="text"
           [(ngModel)]="fullName"
           readonly
-          placeholder="Nom complet">
+          [placeholder]="'INSCRIPTION_DIALOG.FULL_NAME' | translate"
+        />
       </div>
-
     </div>
 
     <div class="field">
-
       <div class="field-label">
         <i class="ti ti-mail"></i>
-        Email
+        {{ "INSCRIPTION_DIALOG.EMAIL" | translate }}
         <span class="required-dot"></span>
       </div>
 
@@ -119,16 +94,15 @@
           type="email"
           [(ngModel)]="email"
           readonly
-          placeholder="Email">
+          placeholder="Email"
+        />
       </div>
-
     </div>
 
     <div class="field">
-
       <div class="field-label">
         <i class="ti ti-building"></i>
-        Entreprise
+        {{ "INSCRIPTION_DIALOG.COMPANY" | translate }}
         <span class="required-dot"></span>
       </div>
 
@@ -139,16 +113,15 @@
           class="f-input"
           type="text"
           [(ngModel)]="entreprise"
-          placeholder="Entreprise">
+          [placeholder]="'INSCRIPTION_DIALOG.COMPANY' | translate"
+        />
       </div>
-
     </div>
 
     <div class="field">
-
       <div class="field-label">
         <i class="ti ti-briefcase"></i>
-        Service
+        {{ "INSCRIPTION_DIALOG.SERVICE" | translate }}
         <span class="required-dot"></span>
       </div>
 
@@ -159,46 +132,43 @@
           class="f-input"
           type="text"
           [(ngModel)]="service"
-          placeholder="Service">
+          [placeholder]="'INSCRIPTION_DIALOG.SERVICE' | translate"
+        />
       </div>
-
     </div>
-
   </div>
 
   <div class="dialog-footer">
-
     <span class="footer-hint">
       <i class="ti ti-info-circle"></i>
-      Les champs
-      <span style="color:#f43f5e;">•</span>
-      sont obligatoires
+
+      {{ "INSCRIPTION_DIALOG.REQUIRED_TEXT" | translate }}
+
+      <span style="color: #f43f5e">•</span>
+
+      {{ "INSCRIPTION_DIALOG.REQUIRED_SUFFIX" | translate }}
     </span>
 
     <div class="footer-actions">
-
-      <button
-        class="btn-cancel"
-        (click)="closeDialog()">
-
+      <button class="btn-cancel" (click)="closeDialog()">
         <i class="ti ti-x"></i>
-        Annuler
 
+        {{ "INSCRIPTION_DIALOG.CANCEL" | translate }}
       </button>
 
       <button
         class="btn-save"
         [disabled]="!isFormValid() || loading"
-        (click)="addInscription()">
-
+        (click)="addInscription()"
+      >
         <i class="ti ti-device-floppy"></i>
 
-        {{ loading ? 'Enregistrement...' : "S'inscrire" }}
-
+        {{
+          loading
+            ? ("INSCRIPTION_DIALOG.SAVING" | translate)
+            : ("INSCRIPTION_DIALOG.REGISTER" | translate)
+        }}
       </button>
-
     </div>
-
   </div>
-
 </div>

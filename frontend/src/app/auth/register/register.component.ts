@@ -6,6 +6,7 @@ import { AbstractControl, FormBuilder, FormGroup,
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +29,8 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -120,7 +122,7 @@ export class RegisterComponent implements OnInit {
       this.emailChecking = false;
 
       this.snackBar.open(
-        'Server error while checking email',
+        this.translate.instant('ERRORS.SERVER_ERROR'),
         'Close',
         { duration: 3000 }
       );
