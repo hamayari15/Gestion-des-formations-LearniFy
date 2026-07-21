@@ -181,7 +181,7 @@ exports.getInscriptionsByParticipant = async (req, res) => {
     }
 
     const inscriptions = await Inscription.find({ participantId })
-      .populate("formationId", "theme modeFormation periodeDu periodeA horaireDu horaireA numSalle isArchived")
+      .populate("formationId", "theme modeFormation periodeDu periodeA horaireDu horaireA numSalle")
       .sort({ createdAt: -1 });
 
     return res.status(200).json({

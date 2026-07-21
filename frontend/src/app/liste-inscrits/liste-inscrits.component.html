@@ -101,15 +101,15 @@
         <tr *ngFor="let i of inscriptions">
 
           <td class="theme-cell">
-            {{ i.formationId?.theme || i.formationSnapshot?.theme }}
+            {{ i.formationId?.theme }}
             <span *ngIf="!i.formationId" class="badge-na">{{ 'LISTE_INSCRITS.FORMATION_DELETED' | translate }}</span>
           </td>
 
           <td class="salle-cell">
-            <span *ngIf="(i.formationId?.numSalle ?? i.formationSnapshot?.numSalle) !== null">
+            <span *ngIf="i.formationId?.numSalle !== null && i.formationId?.numSalle !== undefined">
               {{ i.formationId?.numSalle ?? i.formationSnapshot?.numSalle }}
             </span>
-            <span *ngIf="(i.formationId?.numSalle ?? i.formationSnapshot?.numSalle) === null" class="badge-na">
+            <span *ngIf="i.formationId?.numSalle === null || i.formationId?.numSalle === undefined" class="badge-na">
               {{ 'LISTE_INSCRITS.NA' | translate }}
             </span>
           </td>

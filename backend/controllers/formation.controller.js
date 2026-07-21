@@ -54,10 +54,18 @@ exports.getAllFormations = async (req, res) => {
 
     const search = req.query.search || "";
     const mode = req.query.mode || "";
+    const status = req.query.status || "active";
 
     const skip = (page - 1) * limit;
 
     let query = {};
+
+    if (status === "active") {
+      query.isArchived = false;
+    } else if (status === "archived") {
+      query.isArchived = true;
+    }
+    // status === "all" → no isArchived filter
 
     if (search) {
       query.theme = {

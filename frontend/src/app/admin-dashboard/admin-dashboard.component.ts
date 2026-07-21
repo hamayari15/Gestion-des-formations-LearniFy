@@ -115,7 +115,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   this.hasError = false;
 
   forkJoin({
-    formations: this.formationService.getFormations(),
+    formations: this.formationService.getFormations(1, 5, '', '', 'all'),
     inscriptions: this.inscriptionService.getInscriptions(),
     participants: this.participantService.getActiveInactiveStats(),
     inscriptionsByStatus: this.dashboardService.getInscriptionsByStatus(),

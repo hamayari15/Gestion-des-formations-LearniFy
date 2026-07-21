@@ -16,19 +16,26 @@ export class FormationService {
     return this.http.post(`${this.apiUrl}/Add`, formation);
   }
 
-  getFormations(page: number = 1, limit: number = 5, search: string = '', mode: string = ''): Observable<any> {
-    return this.http.get(
-      `${this.apiUrl}/getAll`,
-      {
-        params: {
-          page,
-          limit,
-          search,
-          mode
-        }
+  getFormations(
+  page: number = 1,
+  limit: number = 5,
+  search: string = '',
+  mode: string = '',
+  status: 'active' | 'archived' | 'all' = 'active'
+): Observable<any> {
+  return this.http.get(
+    `${this.apiUrl}/getAll`,
+    {
+      params: {
+        page,
+        limit,
+        search,
+        mode,
+        status
       }
-    );
-  }
+    }
+  );
+}
 
   updateFormation(id: string, formation: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/update/${id}`, formation);

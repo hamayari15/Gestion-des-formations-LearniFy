@@ -194,6 +194,15 @@
   grid-area: theme;
 }
 
+.formation-theme {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111;
+  margin: 0;
+  line-height: 1.35;
+  letter-spacing: 0.3px;
+}
+
 .status-cell {
   grid-area: status;
   align-items: flex-end;
@@ -217,15 +226,6 @@
 .salle-cell {
   grid-area: salle;
   align-items: flex-end;
-}
-
-.formation-theme {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #111;
-  margin: 0;
-  line-height: 1.35;
-  letter-spacing: 0.3px;
 }
 
 .cell-label {

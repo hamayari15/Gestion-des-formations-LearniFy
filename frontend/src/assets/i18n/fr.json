@@ -431,8 +431,9 @@
     "MODE": "Mode",
     "SCHEDULE": "Horaire",
     "ROOM": "Salle",
+    "NA": "N/A",
 
-    "NA": "N/A"
+    "ARCHIVED": "Archivée"
   },
 
   "ADMIN_SIDEBAR": {
@@ -517,14 +518,14 @@
     "PREVIOUS": "Précédent",
     "NEXT": "Suivant",
     "ERROR_FALLBACK": "Erreur lors de la récupération des formations",
-    "DELETE_CONFIRM_TITLE": "Supprimer cette formation ?",
-    "DELETE_CONFIRM_TEXT": "Cette action est irréversible.",
-    "DELETE_CONFIRM_BTN": "Supprimer",
-    "DELETE_CANCEL_BTN": "Annuler",
-    "DELETE_SUCCESS_TITLE": "Succès",
-    "DELETE_SUCCESS_TEXT": "La formation a été supprimée avec succès.",
-    "DELETE_ERROR_TITLE": "Erreur",
-    "DELETE_ERROR_FALLBACK": "Une erreur est survenue lors de la suppression."
+    "ARCHIVE_CONFIRM_TITLE": "Archiver cette formation ?",
+    "ARCHIVE_CONFIRM_TEXT": "La formation ne sera plus visible pour les participants.",
+    "ARCHIVE_CONFIRM_BTN": "Archiver",
+    "ARCHIVE_CANCEL_BTN": "Annuler",
+    "ARCHIVE_SUCCESS_TITLE": "Succès",
+    "ARCHIVE_SUCCESS_TEXT": "La formation a été archivée avec succès.",
+    "ARCHIVE_ERROR_TITLE": "Erreur",
+    "ARCHIVE_ERROR_FALLBACK": "Une erreur est survenue lors de l'archivage."
   },
 
   "ADD_FORMATION_DIALOG": {
@@ -695,7 +696,7 @@
     "NO_INSCRIPTIONS_DESC": "Une fois qu'un participant s'inscrit à une formation, son inscription apparaîtra ici.",
     "NOT_FOUND": "Aucune inscription trouvée",
     "NOT_FOUND_DESC": "Essayez d'ajuster votre recherche",
-    "FORMATION_DELETED": "Formation supprimée",
+    "FORMATION_Archived": "Formation archivée",
     "NA": "N/A",
     "STATUS": {
       "EN_ATTENTE": "En attente",

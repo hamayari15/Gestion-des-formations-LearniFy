@@ -324,22 +324,22 @@
   gap: 6px;
 }
 
-.btn-archive {
+.btn-edit {
   color: #185fa5;
 }
 
-.btn-archive:hover {
+.btn-edit:hover {
   background: #e6f1fb;
   border-color: #b5d4f4;
 }
 
-.btn-delete {
-  color: #a32d2d;
+.btn-archive {
+  color: #92400e;
 }
 
-.btn-delete:hover {
-  background: #fcebeb;
-  border-color: #f7c1c1;
+.btn-archive:hover {
+  background: #fef3c7;
+  border-color: #fde68a;
 }
 
 .pagination {

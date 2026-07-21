@@ -49,7 +49,7 @@ export class CycleFormationsComponent implements OnInit {
       this.page,
       this.limit,
       this.searchTerm,
-      this.selectedMode
+      this.selectedMode,
     ).subscribe({
       next: (response: any) => {
         this.formations = response.data.formations;
@@ -142,7 +142,7 @@ export class CycleFormationsComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: this.translate.instant('CYCLE_FORMATIONS.ARCHIVE_CONFIRM_BTN'),
       cancelButtonText: this.translate.instant('CYCLE_FORMATIONS.ARCHIVE_CANCEL_BTN'),
-      confirmButtonColor: '#dc2626',
+      confirmButtonColor: '#d97706',
     }).then((result) => {
       if (!result.isConfirmed) return;
 

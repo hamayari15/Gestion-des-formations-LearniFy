@@ -431,8 +431,9 @@
     "MODE": "Mode",
     "SCHEDULE": "Schedule",
     "ROOM": "Room",
+    "NA": "N/A",
 
-    "NA": "N/A"
+    "ARCHIVED": "Archived"
   },
 
   "ADMIN_SIDEBAR": {
@@ -517,14 +518,14 @@
     "PREVIOUS": "Previous",
     "NEXT": "Next",
     "ERROR_FALLBACK": "Error retrieving trainings",
-    "DELETE_CONFIRM_TITLE": "Delete this training?",
-    "DELETE_CONFIRM_TEXT": "This action cannot be undone.",
-    "DELETE_CONFIRM_BTN": "Delete",
-    "DELETE_CANCEL_BTN": "Cancel",
-    "DELETE_SUCCESS_TITLE": "Success",
-    "DELETE_SUCCESS_TEXT": "The training was successfully deleted.",
-    "DELETE_ERROR_TITLE": "Error",
-    "DELETE_ERROR_FALLBACK": "An error occurred while deleting."
+    "ARCHIVE_CONFIRM_TITLE": "Archive this training?",
+    "ARCHIVE_CONFIRM_TEXT": "This training will no longer be visible to participants.",
+    "ARCHIVE_CONFIRM_BTN": "Archive",
+    "ARCHIVE_CANCEL_BTN": "Cancel",
+    "ARCHIVE_SUCCESS_TITLE": "Success",
+    "ARCHIVE_SUCCESS_TEXT": "The training was successfully archived.",
+    "ARCHIVE_ERROR_TITLE": "Error",
+    "ARCHIVE_ERROR_FALLBACK": "An error occurred while archiving."
   },
 
   "ADD_FORMATION_DIALOG": {
@@ -695,7 +696,7 @@
     "NO_INSCRIPTIONS_DESC": "Once a participant enrolls in a training, their registration will show up here.",
     "NOT_FOUND": "No registrations found",
     "NOT_FOUND_DESC": "Try adjusting your search",
-    "FORMATION_DELETED": "Training deleted",
+    "FORMATION_ARCHIVED": "Training archived",
     "NA": "N/A",
     "STATUS": {
       "EN_ATTENTE": "Pending",

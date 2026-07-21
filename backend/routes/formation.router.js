@@ -10,7 +10,7 @@ router.get("/getAll", formationController.getAllFormations);
 
 router.put("/Update/:id", formationController.updateFormation);
 
-router.patch("/Archive/:id", formationController.deleteFormation);
+router.patch("/Archive/:id", formationController.archiveFormation);
 
 
 module.exports = router;
