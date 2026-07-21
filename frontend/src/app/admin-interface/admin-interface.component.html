@@ -4,7 +4,7 @@
     <button class="hamburger-btn" (click)="toggleSidebar()">
       <i class="fas fa-bars"></i>
     </button>
-    <span class="mobile-title">Admin Panel</span>
+    <span class="mobile-title">{{ 'ADMIN_SIDEBAR.PANEL_TITLE' | translate }}</span>
   </div>
 
   <div class="sidebar-overlay" *ngIf="sidebarOpen" (click)="closeSidebar()"></div>
@@ -15,39 +15,39 @@
       <div class="admin-badge">
         <i class="fas fa-user-shield"></i>
       </div>
-      <span class="admin-label">Admin Panel</span>
+      <span class="admin-label">{{ 'ADMIN_SIDEBAR.PANEL_TITLE' | translate }}</span>
     </div>
 
     <nav class="sidebar-nav">
 
       <a routerLink="admin-dashboard" routerLinkActive="active-link" class="link" (click)="closeSidebar()">
         <i class="fas fa-chart-pie"></i>
-        <span>Dashboard</span>
+        <span>{{ 'ADMIN_SIDEBAR.DASHBOARD' | translate }}</span>
       </a>
 
       <a routerLink="cycle-formations" routerLinkActive="active-link" class="link" (click)="closeSidebar()">
         <i class="fas fa-sync-alt"></i>
-        <span>Cycle Formation</span>
+        <span>{{ 'ADMIN_SIDEBAR.CYCLE_FORMATION' | translate }}</span>
       </a>
 
       <a routerLink="liste-participant" routerLinkActive="active-link" class="link" (click)="closeSidebar()">
         <i class="fas fa-users"></i>
-        <span>Liste des Participants</span>
+        <span>{{ 'ADMIN_SIDEBAR.PARTICIPANTS_LIST' | translate }}</span>
       </a>
 
       <a routerLink="users-growth" routerLinkActive="active-link" class="link" (click)="closeSidebar()">
         <i class="fas fa-chart-line"></i>
-        <span>Users Growth</span>
+        <span>{{ 'ADMIN_SIDEBAR.USERS_GROWTH' | translate }}</span>
       </a>
 
       <a routerLink="liste-inscrits" routerLinkActive="active-link" class="link" (click)="closeSidebar()">
         <i class="fas fa-user-check"></i>
-        <span>Liste des Inscrits</span>
+        <span>{{ 'ADMIN_SIDEBAR.INSCRIPTIONS_LIST' | translate }}</span>
       </a>
 
       <a routerLink="mon-profile-admin" routerLinkActive="active-link" class="link" (click)="closeSidebar()">
         <i class="fas fa-cog"></i>
-        <span>Settings</span>
+        <span>{{ 'ADMIN_SIDEBAR.SETTINGS' | translate }}</span>
       </a>
 
     </nav>
@@ -87,7 +87,7 @@
 
       <button class="logout" (click)="logout()">
         <i class="fas fa-sign-out-alt"></i>
-        <span>Logout</span>
+        <span>{{ 'ADMIN_SIDEBAR.LOGOUT' | translate }}</span>
       </button>
 
     </div>

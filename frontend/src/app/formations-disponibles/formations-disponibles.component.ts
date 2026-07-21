@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 import { FormationService } from '../core/services/formation.service';
 import { UserService } from '../core/services/user.service';
 import { ParticipantService } from '../core/services/participant.service';
@@ -24,14 +25,15 @@ export class FormationsDisponiblesComponent implements OnInit {
   selectedMode = '';
 
   loading = false;
-  errorMessage = '';
+  errorKey = '';
   hasAnyFormations: boolean = true;
 
   constructor(
     private formationService: FormationService,
     private userService: UserService,
     private participantService: ParticipantService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class FormationsDisponiblesComponent implements OnInit {
 
   getFormations(): void {
 
-    this.errorMessage = '';
+    this.errorKey = '';
     this.loading = true;
 
     this.formationService.getFormations(
@@ -69,9 +71,10 @@ export class FormationsDisponiblesComponent implements OnInit {
 
         this.loading = false;
 
-        this.errorMessage =
-          error.error?.message ||
-          'Erreur lors de la récupération des formations';
+        this.errorKey = this.resolveErrorKey(
+          error,
+          'FORMATIONS_DISPONIBLES.ERROR_FALLBACK'
+        );
       }
 
     });
@@ -132,6 +135,17 @@ export class FormationsDisponiblesComponent implements OnInit {
 
   isExpired(periodeDu: string | Date): boolean {
     return new Date() > new Date(periodeDu);
+  }
+
+  private resolveErrorKey(error: any, fallbackKey: string): string {
+    const code = error?.error?.code;
+    if (code) {
+      const key = `BACKEND_ERRORS.${code}`;
+      if (this.translate.instant(key) !== key) {
+        return key;
+      }
+    }
+    return fallbackKey;
   }
 
 }

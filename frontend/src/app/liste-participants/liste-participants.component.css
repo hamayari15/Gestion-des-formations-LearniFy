@@ -403,8 +403,9 @@
 @media (max-width:768px) {
 
   .page-header {
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
+    justify-content: space-between;
     gap: 12px;
   }
 
@@ -412,7 +413,7 @@
     grid-template-columns: 1fr;
   }
 
-  .participants-table {
+  table {
     min-width: 850px;
   }
 

@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { InscriptionService } from '../core/services/incription.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-inscription-dialog',
@@ -26,26 +27,19 @@ export class InscriptionDialogComponent implements OnInit {
   constructor(
     private inscriptionService: InscriptionService,
     private dialogRef: MatDialogRef<InscriptionDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    private translate: TranslateService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) {}
 
   ngOnInit(): void {
     this.formation = this.data?.formation;
     this.participant = this.data?.participant;
 
-    console.log('Formation:', this.formation);
-    console.log('Part:', this.participant);
-
-    // Garde-fou : si les données essentielles manquent, on ferme le dialog
-    // plutôt que de laisser l'utilisateur soumettre un formulaire cassé.
     if (!this.formation?._id || !this.participant?._id) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Erreur',
-        text: 'Données de formation ou de participant manquantes.',
-        confirmButtonColor: '#dc2626',
-      });
+      console.error('Missing formation or participant data');
+
       this.dialogRef.close();
+
       return;
     }
 
@@ -65,6 +59,7 @@ export class InscriptionDialogComponent implements OnInit {
 
   isFormValid(): boolean {
     const emailPattern = /^\S+@\S+\.\S+$/;
+
     return (
       this.fullName.trim().length >= 2 &&
       emailPattern.test(this.email.trim()) &&
@@ -87,33 +82,64 @@ export class InscriptionDialogComponent implements OnInit {
       service: this.service.trim(),
     };
 
-   this.inscriptionService
-    .addInscription(body, this.participant._id, this.formation._id)
-    .subscribe({
-      next: (response) => {
-        this.loading = false;
+    this.inscriptionService
+      .addInscription(body, this.participant._id, this.formation._id)
+      .subscribe({
+        next: (response) => {
+          this.loading = false;
 
-        Swal.fire({
-          icon: 'success',
-          title: 'Succès',
-          text: response.message,
-          width: 500,
-          timer: 2500,
-          timerProgressBar: true,
-        }).then(() => {
-          this.dialogRef.close(true);
-        });
-      },
-      error: (error) => {
-        this.loading = false;
+          Swal.fire({
+            icon: 'success',
 
-        Swal.fire({
-          icon: 'error',
-          title: 'Erreur',
-          text: error.error?.message || 'Une erreur est survenue.',
-          width: 500,
-        });
-      },
-    });
+            title: this.translate.instant('INSCRIPTION_DIALOG.SUCCESS_TITLE'),
+
+            text: this.translate.instant(this.resolveSuccessKey(response)),
+
+            width: 500,
+
+            timer: 2500,
+
+            timerProgressBar: true,
+          }).then(() => {
+            this.dialogRef.close(true);
+          });
+        },
+
+        error: (error) => {
+          this.loading = false;
+
+          Swal.fire({
+            icon: 'error',
+
+            title: this.translate.instant('INSCRIPTION_DIALOG.ERROR_TITLE'),
+
+            text: this.translate.instant(this.resolveErrorKey(error)),
+
+            width: 500,
+          });
+        },
+      });
+  }
+
+  private resolveSuccessKey(response: any): string {
+    const code = response?.code;
+
+    if (code === 'INSCRIPTION_CREATED') {
+      return 'INSCRIPTION_DIALOG.SUCCESS_TEXT';
+    }
+
+    return 'INSCRIPTION_DIALOG.SUCCESS_TEXT';
+  }
+
+  private resolveErrorKey(error: any): string {
+    const code = error?.error?.code;
+
+    switch (code) {
+      case 'ALREADY_REGISTERED':
+        return 'INSCRIPTION_DIALOG.ALREADY_REGISTERED';
+
+      default:
+        return 'INSCRIPTION_DIALOG.ERROR_FALLBACK';
+    }
   }
 }

@@ -11,13 +11,13 @@
     <span>{{ 'ADMIN_DASHBOARD.LOADING' | translate }}</span>
   </div>
 
-  <div class="state-panel error-panel" *ngIf="!isLoading && errorMessage">
+  <div class="state-panel error-panel" *ngIf="!isLoading && hasError">
     <div class="state-card">
       <div class="state-icon icon-error">
         <i class="fas fa-triangle-exclamation"></i>
       </div>
       <h3>{{ 'ADMIN_DASHBOARD.ERROR_TITLE' | translate }}</h3>
-      <p>{{ errorMessage }}</p>
+      <p>{{ 'ADMIN_DASHBOARD.ERROR_DESC' | translate }}</p>
       <button class="state-retry" (click)="loadDashboard()">
         <i class="fas fa-rotate-right"></i>
         {{ 'ADMIN_DASHBOARD.RETRY' | translate }}
@@ -25,13 +25,13 @@
     </div>
   </div>
 
-  <div class="state-panel empty-panel" *ngIf="!isLoading && !errorMessage && !hasData">
+  <div class="state-panel empty-panel" *ngIf="!isLoading && !hasError && !hasData">
     <i class="fas fa-inbox"></i>
     <h3>{{ 'ADMIN_DASHBOARD.EMPTY_TITLE' | translate }}</h3>
     <p>{{ 'ADMIN_DASHBOARD.EMPTY_DESC' | translate }}</p>
   </div>
 
-  <ng-container *ngIf="!isLoading && !errorMessage && hasData">
+  <ng-container *ngIf="!isLoading && !hasError && hasData">
 
     <div class="summary">
 
@@ -167,7 +167,7 @@
           <span>{{ 'ADMIN_DASHBOARD.REGISTRATIONS_CHART' | translate }}</span>
         </div>
 
-        <div class="chart-canvas-wrap">
+        <div class="chart-canvas-wrap" *ngIf="hasBarData; else noBarData">
           <canvas
             baseChart
             [data]="barChartData"
@@ -175,6 +175,13 @@
             [options]="chartOptions">
           </canvas>
         </div>
+
+        <ng-template #noBarData>
+          <div class="chart-empty">
+            <i class="fas fa-chart-bar"></i>
+            <span>{{ 'ADMIN_DASHBOARD.CHART_EMPTY' | translate }}</span>
+          </div>
+        </ng-template>
       </div>
 
       <div class="chart-container chart-pie">
@@ -183,7 +190,7 @@
           <span>{{ 'ADMIN_DASHBOARD.TRAINING_MODES_CHART' | translate }}</span>
         </div>
 
-        <div class="chart-canvas-wrap pie-wrap">
+        <div class="chart-canvas-wrap pie-wrap" *ngIf="hasPieData; else noPieData">
           <canvas
             baseChart
             [data]="pieChartData"
@@ -191,6 +198,13 @@
             [options]="chartOptions">
           </canvas>
         </div>
+
+        <ng-template #noPieData>
+          <div class="chart-empty">
+            <i class="fas fa-chart-pie"></i>
+            <span>{{ 'ADMIN_DASHBOARD.CHART_EMPTY' | translate }}</span>
+          </div>
+        </ng-template>
       </div>
 
       <div class="chart-container chart-line">
@@ -199,7 +213,7 @@
           <span>{{ 'ADMIN_DASHBOARD.TREND_CHART' | translate }}</span>
         </div>
 
-        <div class="chart-canvas-wrap">
+        <div class="chart-canvas-wrap" *ngIf="hasLineData; else noLineData">
           <canvas
             baseChart
             [data]="lineChartData"
@@ -207,6 +221,13 @@
             [options]="chartOptions">
           </canvas>
         </div>
+
+        <ng-template #noLineData>
+          <div class="chart-empty">
+            <i class="fas fa-chart-line"></i>
+            <span>{{ 'ADMIN_DASHBOARD.CHART_EMPTY' | translate }}</span>
+          </div>
+        </ng-template>
       </div>
 
     </div>

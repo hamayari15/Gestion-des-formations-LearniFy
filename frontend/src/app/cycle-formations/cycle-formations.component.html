@@ -2,27 +2,27 @@
 
   <div class="page-header">
     <div>
-      <h2 class="page-title">Liste des Formations</h2>
-      <p class="page-subtitle">Manage training sessions and schedules</p>
+      <h2 class="page-title">{{ 'CYCLE_FORMATIONS.TITLE' | translate }}</h2>
+      <p class="page-subtitle">{{ 'CYCLE_FORMATIONS.SUBTITLE' | translate }}</p>
     </div>
      <div class="header-actions">
       <button
         class="btn-icon btn-refresh"
         (click)="getFormations()"
         [disabled]="loading"
-        aria-label="Refresh">
+        [attr.aria-label]="'CYCLE_FORMATIONS.REFRESH' | translate">
         <i class="fas fa-rotate-right" [class.spinning]="loading"></i>
       </button>
       <button class="btn-add" (click)="navigateToAddFormation()">
         <i class="fas fa-plus"></i>
-        Add Formation
+        {{ 'CYCLE_FORMATIONS.ADD_FORMATION' | translate }}
       </button>
     </div>
   </div>
 
-  <div *ngIf="errorMessage" class="alert-error">
+  <div *ngIf="errorKey" class="alert-error">
     <i class="fas fa-exclamation-circle"></i>
-    {{ errorMessage }}
+    {{ errorKey | translate }}
   </div>
 
   <div class="filter-row">
@@ -31,33 +31,34 @@
       <input
         type="text"
         class="search-input"
-        placeholder="Search by theme..."
+        [placeholder]="'CYCLE_FORMATIONS.SEARCH' | translate"
         [(ngModel)]="searchTerm"
-        [disabled]="!!errorMessage || !hasAnyFormations"
+        [disabled]="!!errorKey || !hasAnyFormations"
         (input)="applyFilters()">
     </div>
     <select
       class="mode-select"
       [(ngModel)]="selectedMode"
-      [disabled]="!!errorMessage || !hasAnyFormations"
+      [disabled]="!!errorKey || !hasAnyFormations"
       (change)="applyFilters()">
-      <option value="">All Modes</option>
-      <option value="Présentiel">Présentiel</option>
-      <option value="En ligne">En ligne</option>
-      <option value="Hybride">Hybride</option>
+      <option value="">{{ 'CYCLE_FORMATIONS.ALL_MODES' | translate }}</option>
+      <option value="Présentiel">{{ 'CYCLE_FORMATIONS.PRESENTIEL' | translate }}</option>
+      <option value="En ligne">{{ 'CYCLE_FORMATIONS.ONLINE' | translate }}</option>
+      <option value="Hybride">{{ 'CYCLE_FORMATIONS.HYBRID' | translate }}</option>
     </select>
   </div>
 
   <div class="count-bar">
-    <span class="count-label" *ngIf="!errorMessage">
+    <span class="count-label" *ngIf="!errorKey">
       <i class="fas fa-graduation-cap"></i>
-      {{ totalItems }} formation{{ totalItems !== 1 ? 's' : '' }}
+      {{ totalItems }}
+      {{ totalItems !== 1 ? ('CYCLE_FORMATIONS.TRAININGS' | translate) : ('CYCLE_FORMATIONS.TRAINING' | translate) }}
     </span>
     <button
       class="clear-btn"
       *ngIf="searchTerm || selectedMode"
       (click)="clearFilters()">
-      Clear filters
+      {{ 'CYCLE_FORMATIONS.CLEAR_FILTERS' | translate }}
     </button>
   </div>
 
@@ -65,35 +66,35 @@
 
     <div *ngIf="loading" class="spinner-wrap">
       <div class="spinner"></div>
-      <span class="spinner-label">Loading formations…</span>
+      <span class="spinner-label">{{ 'CYCLE_FORMATIONS.LOADING' | translate }}</span>
     </div>
 
-    <div *ngIf="!loading && !errorMessage && !hasAnyFormations && filteredFormations.length === 0" class="empty-state">
+    <div *ngIf="!loading && !errorKey && !hasAnyFormations && filteredFormations.length === 0" class="empty-state">
       <i class="fas fa-graduation-cap empty-icon"></i>
-      <p class="empty-title">No formations yet</p>
-      <span class="empty-sub">Once a formation is created, it will appear here.</span>
+      <p class="empty-title">{{ 'CYCLE_FORMATIONS.NO_TRAININGS' | translate }}</p>
+      <span class="empty-sub">{{ 'CYCLE_FORMATIONS.NO_TRAININGS_DESC' | translate }}</span>
     </div>
 
-    <div *ngIf="!loading && !errorMessage && hasAnyFormations && filteredFormations.length === 0" class="empty-state">
+    <div *ngIf="!loading && !errorKey && hasAnyFormations && filteredFormations.length === 0" class="empty-state">
       <i class="fas fa-search empty-icon"></i>
-      <p class="empty-title">No formations found</p>
-      <span class="empty-sub">Try adjusting your search or filter</span>
+      <p class="empty-title">{{ 'CYCLE_FORMATIONS.NOT_FOUND' | translate }}</p>
+      <span class="empty-sub">{{ 'CYCLE_FORMATIONS.NOT_FOUND_DESC' | translate }}</span>
     </div>
 
     <table
       class="formations-table"
-      *ngIf="!loading && filteredFormations.length > 0 && !errorMessage">
+      *ngIf="!loading && filteredFormations.length > 0 && !errorKey">
 
       <thead>
         <tr>
-          <th style="width:20%">Thème</th>
-          <th style="width:10%">N° Salle</th>
-          <th style="width:14%">Mode</th>
-          <th style="width:12%">Période Du</th>
-          <th style="width:12%">Période À</th>
-          <th style="width:10%">Horaire Du</th>
-          <th style="width:10%">Horaire À</th>
-          <th style="width:12%" class="text-center">Actions</th>
+          <th style="width:20%">{{ 'CYCLE_FORMATIONS.TABLE.THEME' | translate }}</th>
+          <th style="width:9%">{{ 'CYCLE_FORMATIONS.TABLE.ROOM' | translate }}</th>
+          <th style="width:13%">{{ 'CYCLE_FORMATIONS.TABLE.MODE' | translate }}</th>
+          <th style="width:12%">{{ 'CYCLE_FORMATIONS.TABLE.FROM_DATE' | translate }}</th>
+          <th style="width:12%">{{ 'CYCLE_FORMATIONS.TABLE.TO_DATE' | translate }}</th>
+          <th style="width:11%">{{ 'CYCLE_FORMATIONS.TABLE.START_TIME' | translate }}</th>
+          <th style="width:10%">{{ 'CYCLE_FORMATIONS.TABLE.END_TIME' | translate }}</th>
+          <th style="width:13%" class="text-center">{{ 'CYCLE_FORMATIONS.TABLE.ACTIONS' | translate }}</th>
         </tr>
       </thead>
 
@@ -108,7 +109,7 @@
             </span>
 
             <span *ngIf="formation.numSalle === null" class="badge-na">
-              N/A
+              {{ 'CYCLE_FORMATIONS.NA' | translate }}
             </span>
           </td>
 
@@ -139,10 +140,10 @@
                 <i class="fas fa-pencil-alt"></i>
               </button>
               <button
-                class="btn-icon btn-delete"
-                (click)="deleteFormation(formation._id)"
-                aria-label="Delete">
-                <i class="fas fa-trash-alt"></i>
+                class="btn-icon btn-archive"
+                (click)="archiveFormation(formation._id)"
+                aria-label="Archive">
+                <i class="fas fa-box-archive"></i>
               </button>
             </div>
           </td>
@@ -160,7 +161,7 @@
     class="btn-page"
     (click)="prevPage()"
     [disabled]="page === 1">
-    Previous
+    {{ 'CYCLE_FORMATIONS.PREVIOUS' | translate }}
   </button>
 
     <button
@@ -175,7 +176,7 @@
     class="btn-page"
     (click)="nextPage()"
     [disabled]="page === totalPages">
-    Next
+    {{ 'CYCLE_FORMATIONS.NEXT' | translate }}
   </button>
 
 </div>

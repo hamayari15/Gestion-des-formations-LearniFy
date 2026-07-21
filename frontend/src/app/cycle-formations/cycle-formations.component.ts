@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormationService } from '../core/services/formation.service';
 import { MatDialog } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 
 import { AddFormationDialogComponent }
@@ -26,12 +27,13 @@ export class CycleFormationsComponent implements OnInit {
   selectedMode: string = '';
 
   loading: boolean = false;
-  errorMessage: string = '';
+  errorKey: string = '';
   hasAnyFormations: boolean = true;
 
   constructor(
     private formationService: FormationService,
     private dialog: MatDialog,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class CycleFormationsComponent implements OnInit {
 
   getFormations(): void {
 
-    this.errorMessage = '';
+    this.errorKey = '';
     this.loading = true
 
     this.formationService.getFormations(
@@ -50,7 +52,6 @@ export class CycleFormationsComponent implements OnInit {
       this.selectedMode
     ).subscribe({
       next: (response: any) => {
-        console.log(response)
         this.formations = response.data.formations;
         this.filteredFormations = response.data.formations;
 
@@ -61,14 +62,15 @@ export class CycleFormationsComponent implements OnInit {
           this.hasAnyFormations = this.totalItems > 0;
         }
 
-        this.loading = false; 
+        this.loading = false;
       },
 
       error: (error) => {
         this.loading = false;
-        this.errorMessage =
-          error.error?.message ||
-          'Erreur lors de la récupération des formations';
+        this.errorKey = this.resolveErrorKey(
+          error,
+          'CYCLE_FORMATIONS.ERROR_FALLBACK'
+        );
       }
     });
   }
@@ -131,25 +133,25 @@ export class CycleFormationsComponent implements OnInit {
     });
   }
 
-  deleteFormation(id: string): void {
+  archiveFormation(id: string): void {
     Swal.fire({
       icon: 'warning',
-      title: 'Supprimer cette formation ?',
-      text: 'Cette action est irréversible.',
+      title: this.translate.instant('CYCLE_FORMATIONS.ARCHIVE_CONFIRM_TITLE'),
+      text: this.translate.instant('CYCLE_FORMATIONS.ARCHIVE_CONFIRM_TEXT'),
       width: 550,
       showCancelButton: true,
-      confirmButtonText: 'Supprimer',
-      cancelButtonText: 'Annuler',
+      confirmButtonText: this.translate.instant('CYCLE_FORMATIONS.ARCHIVE_CONFIRM_BTN'),
+      cancelButtonText: this.translate.instant('CYCLE_FORMATIONS.ARCHIVE_CANCEL_BTN'),
       confirmButtonColor: '#dc2626',
     }).then((result) => {
       if (!result.isConfirmed) return;
 
-      this.formationService.deleteFormation(id).subscribe({
-        next: (response: any) => {
+      this.formationService.archiveFormation(id).subscribe({
+        next: () => {
           Swal.fire({
             icon: 'success',
-            title: 'Succès',
-            text: response.message,
+            title: this.translate.instant('CYCLE_FORMATIONS.ARCHIVE_SUCCESS_TITLE'),
+            text: this.translate.instant('CYCLE_FORMATIONS.ARCHIVE_SUCCESS_TEXT'),
             width: 500,
             timer: 2000,
             timerProgressBar: true,
@@ -160,13 +162,26 @@ export class CycleFormationsComponent implements OnInit {
         error: (error) => {
           Swal.fire({
             icon: 'error',
-            title: 'Erreur',
-            text: error?.error?.message || 'Une erreur est survenue lors de la suppression.',
+            title: this.translate.instant('CYCLE_FORMATIONS.ARCHIVE_ERROR_TITLE'),
+            text: this.translate.instant(
+              this.resolveErrorKey(error, 'CYCLE_FORMATIONS.ARCHIVE_ERROR_FALLBACK')
+            ),
             width: 500,
           });
         },
       });
     });
+    }
+
+  private resolveErrorKey(error: any, fallbackKey: string): string {
+    const code = error?.error?.code;
+    if (code) {
+      const key = `BACKEND_ERRORS.${code}`;
+      if (this.translate.instant(key) !== key) {
+        return key;
+      }
+    }
+    return fallbackKey;
   }
 
 };

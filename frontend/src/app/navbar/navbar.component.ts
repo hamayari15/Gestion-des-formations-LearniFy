@@ -29,6 +29,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     );
   }
 
+  get isParticipant(): boolean {
+    return this.authService.getRole() === 'User';
+  }
+
   toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
   }
@@ -37,6 +41,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.translate.use(lang);
     localStorage.setItem('language', lang);
     this.currentLanguage = lang;
+
+    this.menuOpen = false;
   }
 
   navigateToLogin(): void {

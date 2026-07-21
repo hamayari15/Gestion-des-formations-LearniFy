@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)]],
@@ -33,13 +35,6 @@ export class LoginComponent {
   onSubmit() {
 
     if (this.loginForm.invalid) {
-
-      this.snackBar.open(
-        'Please enter valid email and password',
-        'Close',
-        { duration: 3000 }
-      );
-
       return;
     }
 
@@ -61,49 +56,28 @@ export class LoginComponent {
             '/participant-interface/formations-disponibles'
           ]);
         }
-
       },
 
       error: (err) => {
 
-        if (
-          err.status === 400 ||
-          err.status === 401
-        ) {
+        let key: string;
 
-          this.snackBar.open(
-            err.error?.message,
-            'Close',
-            { duration: 4000 }
-          );
-
+        if (err.status === 400 || err.status === 401) {
+          key = 'LOGIN.ERRORS.INVALID_CREDENTIALS';
+        } else if (err.status === 500 || err.status === 0) {
+          key = 'LOGIN.ERRORS.LOGIN_SERVER_FALLBACK';
+        } else {
+          key = 'LOGIN.ERRORS.LOGIN_GENERIC_FALLBACK';
         }
 
-        else if (err.status === 500) {
-
-          this.snackBar.open(
-            err.error?.message ||
-            'Something went wrong. Please try again later.',
-            'Close',
-            { duration: 4000 }
-          );
-
-        }
-
-        else {
-
-          this.snackBar.open(
-            'Something went wrong',
-            'Close',
-            { duration: 4000 }
-          );
-
-        }
-
+        this.snackBar.open(
+          this.translate.instant(key),
+          this.translate.instant('LOGIN.CLOSE'),
+          { duration: 4000 }
+        );
       }
-
     });
-
+    
   }
 
   get email() {

@@ -54,7 +54,12 @@ const formationSchema = new mongoose.Schema(
       type: String,
       required: [true, "End time is required"],
     },
-    
+
+     isArchived: {
+      type: Boolean,
+      default: false,
+    },
+
   },
   {
     timestamps: true,

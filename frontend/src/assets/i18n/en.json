@@ -211,80 +211,95 @@
   },
 
   "REGISTER": {
-    "TITLE": "Create Your Account",
+    "TITLE": "Create your account",
 
     "STEPS": {
-      "PERSONAL": "Personal Information",
+      "PERSONAL": "Personal information",
       "SECURITY": "Security",
       "PROFILE": "Profile"
     },
 
-    "FULL_NAME": "Full Name",
+    "FULL_NAME": "Full name",
     "EMAIL": "Email",
     "PASSWORD": "Password",
-    "CONFIRM_PASSWORD": "Confirm Password",
+    "CONFIRM_PASSWORD": "Confirm password",
     "AGE": "Age",
     "GENDER": "Gender",
-    "PROFILE_IMAGE": "Profile Image",
+    "PROFILE_IMAGE": "Profile picture",
 
     "MALE": "Male",
     "FEMALE": "Female",
 
     "ALREADY_ACCOUNT": "Already have an account?",
-    "LOGIN": "Login",
+    "LOGIN": "Log in",
 
     "NEXT": "Next",
     "CHECKING": "Checking...",
     "BACK": "Back",
     "CONTINUE": "Continue",
-    "REGISTER": "Register",
+    "REGISTER": "Sign up",
+
+    "SUCCESS": "Account created successfully",
 
     "ERRORS": {
       "FULL_NAME_REQUIRED": "Full name is required",
-      "FULL_NAME_MIN": "Full name must contain at least 3 characters",
+      "FULL_NAME_MIN": "Full name must be at least 3 characters",
       "FULL_NAME_MAX": "Full name cannot exceed 100 characters",
 
-      "EMAIL_REQUIRED": "Email is required",
+      "EMAIL_REQUIRED": "Email address is required",
       "EMAIL_INVALID": "Please enter a valid email address",
-      "EMAIL_PATTERN": "Email must be like example@gmail.com",
-      "EMAIL_EXISTS": "This email already exists",
+      "EMAIL_PATTERN": "Email address must be in the format example@gmail.com",
+      "EMAIL_EXISTS": "This email address already exists",
 
       "PASSWORD_REQUIRED": "Password is required",
-      "PASSWORD_MIN": "Password must contain at least 6 characters",
+      "PASSWORD_MIN": "Password must be at least 6 characters",
 
-      "CONFIRM_REQUIRED": "Confirm password is required",
+      "CONFIRM_REQUIRED": "Password confirmation is required",
       "PASSWORD_MISMATCH": "Passwords do not match",
 
       "AGE_REQUIRED": "Age is required",
-      "AGE_MIN": "Age must be at least 16",
-      "AGE_MAX": "Age cannot exceed 100",
+      "AGE_MIN": "You must be at least 16 years old",
+      "AGE_MAX": "Age cannot exceed 100 years",
 
-      "GENDER_REQUIRED": "Gender is required"
-    }
-  },
-  "ERRORS":{
-    "SERVER_ERROR":"Server error while checking email"
+      "GENDER_REQUIRED": "Gender is required",
+
+      "IMAGE_TYPE": "Only JPG, PNG and WEBP files are allowed",
+      "IMAGE_SIZE": "Maximum image size is 5 MB",
+
+      "EMAIL_CHECK_SERVER_FALLBACK": "Unable to verify the email address. Please try again.",
+      "REGISTER_SERVER_FALLBACK": "Unable to create your account. Please try again.",
+      "REGISTER_GENERIC_FALLBACK": "An error occurred. Please try again."
+    },
+    "CLOSE": "Close"
   },
 
   "LOGIN": {
     "TITLE": "Access Your Account",
     "EMAIL": "Email",
     "PASSWORD": "Password",
-    "LOGIN": "Login",
+    "LOGIN": "Log in",
     "OR": "or",
     "CREATE_ACCOUNT": "Create an account",
 
+    "CLOSE": "Close",
+
     "ERRORS": {
-      "EMAIL_REQUIRED": "Email is required",
+      "EMAIL_REQUIRED": "Email address is required",
       "EMAIL_INVALID": "Please enter a valid email address",
+
       "PASSWORD_REQUIRED": "Password is required",
-      "PASSWORD_MIN": "Password must be at least 6 characters"
+      "PASSWORD_MIN": "Password must be at least 6 characters",
+
+      "INVALID_CREDENTIALS": "Invalid email address or password",
+      "LOGIN_SERVER_FALLBACK": "Unable to sign in. Please try again.",
+      "LOGIN_GENERIC_FALLBACK": "An error occurred. Please try again."
     }
   },
 
   "PROFILE": {
     "LOADING": "Loading profile...",
     "ERROR_TITLE": "Unable to load profile",
+    "ERROR_FALLBACK": "An error occurred while retrieving your profile data",
     "RETRY": "Retry",
 
     "EMPTY_TITLE": "No data found",
@@ -309,12 +324,23 @@
     "TOTAL": "Total",
     "VALIDATED": "Validated",
     "REJECTED": "Rejected",
-    "PENDING": "Pending"
+    "PENDING": "Pending",
+
+    "DELETE_CONFIRM_TITLE": "Delete your account?",
+    "DELETE_CONFIRM_TEXT": "This action cannot be undone.",
+    "DELETE_CONFIRM_BUTTON": "Delete",
+    "DELETE_CANCEL_BUTTON": "Cancel",
+
+    "DELETE_SUCCESS_TITLE": "Account deleted",
+    "DELETE_SUCCESS_TEXT": "Your account has been successfully deleted.",
+
+    "DELETE_ERROR": "An error occurred while deleting your account."
   },
 
   "FORMATIONS_DISPONIBLES": {
     "TITLE": "Available Trainings",
     "SUBTITLE": "Choose a training and register",
+
     "SEARCH": "Search by theme...",
     "ALL_MODES": "All Modes",
     "PRESENTIEL": "In Person",
@@ -331,6 +357,7 @@
     "CLEAR_FILTERS": "Clear filters",
 
     "LOADING": "Loading trainings...",
+    "ERROR_FALLBACK": "An error occurred while retrieving the trainings",
 
     "NO_TRAININGS": "No trainings yet",
     "NO_TRAININGS_DESC": "Once a training is created, it will appear here.",
@@ -357,26 +384,34 @@
   },
 
   "INSCRIPTION_DIALOG": {
-    "TITLE": "Registration to a training",
-    "SUBTITLE": "Complete the information below",
+    "TITLE": "Registration",
+    "SUBTITLE": "Complete the information below to register",
 
-    "FORMATION_INFO": "Training Information",
-    "THEME": "Theme",
-    "MODE": "Training Mode",
-    "ROOM": "Room Number",
+    "FORMATION_INFO": "Training information",
+    "PARTICIPANT_INFO": "Participant information",
 
-    "PARTICIPANT_INFO": "Participant Information",
-    "FULL_NAME": "Full Name",
+    "THEME": "Training theme",
+    "MODE": "Training mode",
+    "ROOM": "Room number",
+
+    "FULL_NAME": "Full name",
     "EMAIL": "Email",
     "COMPANY": "Company",
-    "SERVICE": "Department",
+    "SERVICE": "Service",
 
-    "REQUIRED_TEXT": "Fields marked",
-    "REQUIRED_SUFFIX": "are required",
+    "REQUIRED_TEXT": "Required fields",
+    "REQUIRED_SUFFIX": "must be completed",
 
     "CANCEL": "Cancel",
     "REGISTER": "Register",
-    "SAVING": "Saving..."
+    "SAVING": "Saving...",
+
+    "SUCCESS_TITLE": "Success",
+    "SUCCESS_TEXT": "Your registration has been completed successfully.",
+
+    "ERROR_TITLE": "Error",
+    "ALREADY_REGISTERED": "You are already registered for this training.",
+    "ERROR_FALLBACK": "An error occurred. Please try again."
   },
 
   "MES_FORMATIONS": {
@@ -385,6 +420,7 @@
 
     "LOADING": "Loading your trainings...",
     "ERROR_TITLE": "Unable to load your trainings",
+    "ERROR_FALLBACK": "An error occurred while retrieving your registrations",
     "RETRY": "Retry",
 
     "EMPTY_TITLE": "No registrations yet",
@@ -399,14 +435,27 @@
     "NA": "N/A"
   },
 
+  "ADMIN_SIDEBAR": {
+    "PANEL_TITLE": "Admin Panel",
+    "DASHBOARD": "Dashboard",
+    "CYCLE_FORMATION": "Training Cycle",
+    "PARTICIPANTS_LIST": "Participants List",
+    "USERS_GROWTH": "Users Growth",
+    "INSCRIPTIONS_LIST": "Registrations List",
+    "SETTINGS": "Settings",
+    "LOGOUT": "Logout"
+  },
+
   "ADMIN_DASHBOARD": {
     "TITLE": "Admin Dashboard",
     "SUBTITLE": "Overview of the training platform",
     "LOADING": "Loading data...",
     "ERROR_TITLE": "Unable to load data",
+    "ERROR_DESC": "Error while retrieving the dashboard.",
     "RETRY": "Retry",
     "EMPTY_TITLE": "No data available",
     "EMPTY_DESC": "Start by creating a training or adding a participant to display statistics here.",
+    "CHART_EMPTY": "Not enough data to display yet",
 
     "TOTAL_TRAININGS": "Total Trainings",
     "TOTAL_REGISTRATIONS": "Total Registrations",
@@ -425,6 +474,250 @@
 
     "REGISTRATIONS_CHART": "Registration Distribution",
     "TRAINING_MODES_CHART": "Training Modes",
-    "TREND_CHART": "Registration Trends Over Time"
+    "TREND_CHART": "Registration Trends Over Time",
+
+    "CHART": {
+      "REGISTRATIONS_BY_STATUS": "Registrations by status",
+      "ONLINE": "Online",
+      "HYBRID": "Hybrid",
+      "IN_PERSON": "In Person",
+      "REGISTRATIONS_OVER_TIME": "Registrations over time"
+    }
+  },
+
+  "CYCLE_FORMATIONS": {
+    "TITLE": "Trainings List",
+    "SUBTITLE": "Manage training sessions and schedules",
+    "REFRESH": "Refresh",
+    "ADD_FORMATION": "Add Training",
+    "SEARCH": "Search by theme...",
+    "ALL_MODES": "All Modes",
+    "PRESENTIEL": "In Person",
+    "ONLINE": "Online",
+    "HYBRID": "Hybrid",
+    "TRAINING": "training",
+    "TRAININGS": "trainings",
+    "CLEAR_FILTERS": "Clear filters",
+    "LOADING": "Loading trainings...",
+    "NO_TRAININGS": "No trainings yet",
+    "NO_TRAININGS_DESC": "Once a training is created, it will appear here.",
+    "NOT_FOUND": "No trainings found",
+    "NOT_FOUND_DESC": "Try adjusting your search or filter",
+    "NA": "N/A",
+    "TABLE": {
+      "THEME": "Theme",
+      "ROOM": "Room No.",
+      "MODE": "Mode",
+      "FROM_DATE": "Period From",
+      "TO_DATE": "Period To",
+      "START_TIME": "Start Time",
+      "END_TIME": "End Time",
+      "ACTIONS": "Actions"
+    },
+    "PREVIOUS": "Previous",
+    "NEXT": "Next",
+    "ERROR_FALLBACK": "Error retrieving trainings",
+    "DELETE_CONFIRM_TITLE": "Delete this training?",
+    "DELETE_CONFIRM_TEXT": "This action cannot be undone.",
+    "DELETE_CONFIRM_BTN": "Delete",
+    "DELETE_CANCEL_BTN": "Cancel",
+    "DELETE_SUCCESS_TITLE": "Success",
+    "DELETE_SUCCESS_TEXT": "The training was successfully deleted.",
+    "DELETE_ERROR_TITLE": "Error",
+    "DELETE_ERROR_FALLBACK": "An error occurred while deleting."
+  },
+
+  "ADD_FORMATION_DIALOG": {
+    "TITLE": "Training Cycle",
+    "SUBTITLE": "Add a new training cycle",
+    "FUNDING_MODE": "Funding mode",
+    "TAX_CREDIT": "Tax credit",
+    "INDIVIDUAL_RIGHTS": "Individual drawing rights",
+    "COLLECTIVE_RIGHTS": "Collective drawing rights",
+    "THEME": "Training theme",
+    "THEME_PLACEHOLDER": "E.g: Web development, Cybersecurity…",
+    "MODE": "Training mode",
+    "MODE_PLACEHOLDER": "Select a mode…",
+    "ONLINE": "Online",
+    "PRESENTIEL": "In Person",
+    "HYBRID": "Hybrid",
+    "ROOM_NUMBER": "Room number",
+    "ROOM_PLACEHOLDER": "E.g: 12",
+    "PERIOD": "Period",
+    "START_DATE": "Start date",
+    "END_DATE": "End date",
+    "SCHEDULE": "Schedule",
+    "START_TIME": "Start time",
+    "END_TIME": "End time",
+    "REQUIRED_HINT": "Fields are required",
+    "CANCEL": "Cancel",
+    "SUBMIT": "Save",
+    "SUCCESS_TITLE": "Success",
+    "SUCCESS_TEXT": "The training was successfully added.",
+    "ERROR_TITLE": "Error",
+    "ERROR_FALLBACK": "An error occurred. Please try again."
+  },
+
+  "EDIT_FORMATION_DIALOG": {
+    "TITLE": "Training Cycle",
+    "SUBTITLE": "Edit a training cycle",
+    "FUNDING_MODE": "Funding mode",
+    "TAX_CREDIT": "Tax credit",
+    "INDIVIDUAL_RIGHTS": "Individual drawing rights",
+    "COLLECTIVE_RIGHTS": "Collective drawing rights",
+    "THEME": "Training theme",
+    "THEME_PLACEHOLDER": "E.g: Web development, Cybersecurity…",
+    "MODE": "Training mode",
+    "MODE_PLACEHOLDER": "Select a mode…",
+    "ONLINE": "Online",
+    "PRESENTIEL": "In Person",
+    "HYBRID": "Hybrid",
+    "ROOM_NUMBER": "Room number",
+    "ROOM_PLACEHOLDER": "E.g: 12",
+    "PERIOD": "Period",
+    "START_DATE": "Start date",
+    "END_DATE": "End date",
+    "SCHEDULE": "Schedule",
+    "START_TIME": "Start time",
+    "END_TIME": "End time",
+    "REQUIRED_HINT": "Fields are required",
+    "CANCEL": "Cancel",
+    "SUBMIT": "Update",
+    "SUCCESS_TITLE": "Success",
+    "SUCCESS_TEXT": "The training was successfully updated.",
+    "ERROR_TITLE": "Error",
+    "ERROR_FALLBACK": "An error occurred, Please try again."
+  },
+
+  "LISTE_PARTICIPANTS": {
+    "TITLE": "Participants List",
+    "SUBTITLE": "Manage registered participants",
+    "SEARCH": "Search by participant name...",
+    "ALL_STATUS": "All Status",
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive",
+    "PARTICIPANT": "participant",
+    "PARTICIPANTS": "participants",
+    "CLEAR_FILTERS": "Clear filters",
+    "LOADING": "Loading participants...",
+    "NO_PARTICIPANTS": "No participants yet",
+    "NO_PARTICIPANTS_DESC": "Participant accounts will appear here once created.",
+    "NOT_FOUND": "No participants found",
+    "NOT_FOUND_DESC": "Try adjusting your search or filter",
+    "TABLE": {
+      "NUMBER": "#",
+      "IMAGE": "Image",
+      "FULL_NAME": "Full Name",
+      "AGE": "Age",
+      "GENDER": "Gender",
+      "STATUS": "Status",
+      "EMAIL": "Email",
+      "CREATED_AT": "Created At",
+      "ACTIONS": "Actions"
+    },
+    "PREVIOUS": "Previous",
+    "NEXT": "Next",
+    "ERROR_FALLBACK": "Error retrieving participants",
+    "DELETE_CONFIRM_TITLE": "Delete this participant?",
+    "DELETE_CONFIRM_TEXT": "This action cannot be undone.",
+    "DELETE_CONFIRM_BTN": "Delete",
+    "DELETE_CANCEL_BTN": "Cancel",
+    "DELETE_SUCCESS_TITLE": "Success",
+    "DELETE_SUCCESS_TEXT": "The participant was successfully deleted.",
+    "DELETE_ERROR_TITLE": "Error",
+    "DELETE_ERROR_FALLBACK": "An error occurred while deleting."
+  },
+
+  "EDIT_PARTICIPANT_DIALOG": {
+    "TITLE": "Participant",
+    "SUBTITLE": "Edit participant information",
+    "FULL_NAME": "Full name",
+    "FULL_NAME_PLACEHOLDER": "E.g: Mohamed Ayari",
+    "FULL_NAME_REQUIRED": "Name required",
+    "FULL_NAME_MINLENGTH": "Minimum 3 characters",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "example@mail.com",
+    "EMAIL_REQUIRED": "Email address is required",
+    "EMAIL_INVALID": "Invalid email format",
+    "EMAIL_TAKEN": "This email is already in use",
+    "AGE": "Age",
+    "AGE_PLACEHOLDER": "E.g: 23",
+    "AGE_REQUIRED": "Age required",
+    "AGE_MIN": "Minimum age is 16",
+    "AGE_MAX": "Maximum age is 100",
+    "FOOTER_HINT": "Only edit the fields you need to change",
+    "CANCEL": "Cancel",
+    "SUBMIT": "Update",
+    "SUCCESS_TITLE": "Success",
+    "SUCCESS_TEXT": "The participant was successfully updated.",
+    "ERROR_TITLE": "Error",
+    "ERROR_FALLBACK": "An error occurred, Please try again."
+  },
+
+  "USERS_GROWTH": {
+    "TITLE": "Participants Statistics",
+    "SUBTITLE": "Demographic analysis and registration trends",
+    "LOADING": "Loading data...",
+    "ERROR_TITLE": "Unable to load data",
+    "ERROR_DESC": "Error retrieving participant data.",
+    "RETRY": "Retry",
+    "EMPTY_TITLE": "No data available",
+    "EMPTY_DESC": "Participant statistics will appear here once a participant is added to the platform.",
+    "GROWTH_CHART": "Participant Growth",
+    "AGE_CHART": "Age Distribution",
+    "GENDER_CHART": "Gender Distribution",
+    "DOUGHNUT_CHART": "Overall Distribution",
+    "LINE_CHART": "Trend Over Time",
+    "CHART": {
+      "NEW_PARTICIPANTS": "New participants",
+      "TOTAL_GROWTH": "Total users",
+      "AGE_DISTRIBUTION": "Age distribution",
+      "GENDER_DISTRIBUTION": "Gender distribution",
+      "USERS_STATUS": "Users status",
+      "MALE": "Male",
+      "FEMALE": "Female",
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive"
+    }
+  },
+
+  "LISTE_INSCRITS": {
+    "TITLE": "Registrations List",
+    "SUBTITLE": "Manage training registrations",
+    "SEARCH": "Search by theme...",
+    "SORT_NEWEST": "Newest First",
+    "SORT_OLDEST": "Oldest First",
+    "INSCRIPTION": "registration",
+    "INSCRIPTIONS": "registrations",
+    "CLEAR": "Clear",
+    "LOADING": "Loading registrations...",
+    "NO_INSCRIPTIONS": "No registrations yet",
+    "NO_INSCRIPTIONS_DESC": "Once a participant enrolls in a training, their registration will show up here.",
+    "NOT_FOUND": "No registrations found",
+    "NOT_FOUND_DESC": "Try adjusting your search",
+    "FORMATION_DELETED": "Training deleted",
+    "NA": "N/A",
+    "STATUS": {
+      "EN_ATTENTE": "Pending",
+      "VALIDEE": "Approved",
+      "REFUSEE": "Rejected"
+    },
+    "TABLE": {
+      "THEME": "Theme",
+      "ROOM": "Room No.",
+      "FULL_NAME": "Full Name",
+      "EMAIL": "Email",
+      "COMPANY": "Company",
+      "DEPARTMENT": "Department",
+      "STATUS": "Status",
+      "ACTIONS": "Actions"
+    },
+    "PREVIOUS": "Previous",
+    "NEXT": "Next",
+    "ERROR_FALLBACK": "Error loading registrations",
+    "STATUS_ERROR_TITLE": "Error",
+    "STATUS_ERROR_TEXT": "Status update failed"
   }
+
+
 }

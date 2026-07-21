@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { FormationService } from '../core/services/formation.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-formation-dialog',
@@ -34,6 +35,8 @@ export class EditFormationDialogComponent implements OnInit {
     private formationService: FormationService,
 
     private dialogRef: MatDialogRef<EditFormationDialogComponent>,
+
+    private translate: TranslateService,
 
     @Inject(MAT_DIALOG_DATA) public data: any
 
@@ -175,15 +178,12 @@ export class EditFormationDialogComponent implements OnInit {
 
     };
 
-    console.log('ID:', this.id);
-    console.log('Formation:', formation);
-
     this.formationService.updateFormation(this.id, formation).subscribe({
-      next: (response: any) => {
+      next: () => {
         Swal.fire({
           icon: 'success',
-          title: 'Succès',
-          text: response.message,
+          title: this.translate.instant('EDIT_FORMATION_DIALOG.SUCCESS_TITLE'),
+          text: this.translate.instant('EDIT_FORMATION_DIALOG.SUCCESS_TEXT'),
           width: 500,
           timer: 2500,
           timerProgressBar: true,
@@ -194,8 +194,8 @@ export class EditFormationDialogComponent implements OnInit {
       error: (error) => {
         Swal.fire({
           icon: 'error',
-          title: 'Erreur',
-          text: error?.error.message || 'Une erreur est survenue.',
+          title: this.translate.instant('EDIT_FORMATION_DIALOG.ERROR_TITLE'),
+          text: this.translate.instant(this.resolveErrorKey(error)),
           width: 500,
         });
       },
@@ -204,9 +204,18 @@ export class EditFormationDialogComponent implements OnInit {
   }
 
   closeDialog() {
-
     this.dialogRef.close();
+  }
 
+  private resolveErrorKey(error: any): string {
+    const code = error?.error?.code;
+    if (code) {
+      const key = `BACKEND_ERRORS.${code}`;
+      if (this.translate.instant(key) !== key) {
+        return key;
+      }
+    }
+    return 'EDIT_FORMATION_DIALOG.ERROR_FALLBACK';
   }
 
 }

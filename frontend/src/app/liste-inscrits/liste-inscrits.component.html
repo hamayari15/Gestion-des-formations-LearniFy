@@ -3,8 +3,8 @@
   <div class="page-header">
 
     <div>
-      <h2 class="page-title">Liste des Inscriptions</h2>
-      <p class="page-subtitle">Manage training registrations</p>
+      <h2 class="page-title">{{ 'LISTE_INSCRITS.TITLE' | translate }}</h2>
+      <p class="page-subtitle">{{ 'LISTE_INSCRITS.SUBTITLE' | translate }}</p>
     </div>
 
     <button
@@ -16,9 +16,9 @@
     </button>
   </div>
 
-    <div *ngIf="errorMessage" class="alert-error">
+    <div *ngIf="errorKey" class="alert-error">
       <i class="fas fa-exclamation-circle"></i>
-      {{ errorMessage }}
+      {{ errorKey | translate }}
     </div>
 
   <div class="filter-row">
@@ -30,24 +30,25 @@
       <input
         type="text"
         class="search-input"
-        placeholder="Search by theme..."
+        [placeholder]="'LISTE_INSCRITS.SEARCH' | translate"
         [(ngModel)]="search"
-        [disabled]="!!errorMessage || !hasAnyInscriptions"
+        [disabled]="!!errorKey || !hasAnyInscriptions"
         (input)="applyFilters()">
 
     </div>
-      <button class="btn-sort" (click)="toggleSort()" [disabled]="!!errorMessage || !hasAnyInscriptions">
+      <button class="btn-sort" (click)="toggleSort()" [disabled]="!!errorKey || !hasAnyInscriptions">
       <i class="fas fa-sort"></i>
-      {{ sort === 'desc' ? 'Newest First' : 'Oldest First' }}
+      {{ sort === 'desc' ? ('LISTE_INSCRITS.SORT_NEWEST' | translate) : ('LISTE_INSCRITS.SORT_OLDEST' | translate) }}
     </button>
 
   </div>
 
   <div class="count-bar">
 
-    <span class="count-label" *ngIf="!errorMessage">
+    <span class="count-label" *ngIf="!errorKey">
       <i class="fas fa-list"></i>
-      {{ totalItems }} inscription{{ totalItems !== 1 ? 's' : '' }}
+      {{ totalItems }}
+      {{ totalItems !== 1 ? ('LISTE_INSCRITS.INSCRIPTIONS' | translate) : ('LISTE_INSCRITS.INSCRIPTION' | translate) }}
     </span>
 
     <button
@@ -55,7 +56,7 @@
       class="clear-btn"
       (click)="clearFilters()">
 
-      Clear
+      {{ 'LISTE_INSCRITS.CLEAR' | translate }}
 
     </button>
 
@@ -65,34 +66,34 @@
 
     <div *ngIf="loading" class="spinner-wrap">
       <div class="spinner"></div>
-      <span class="spinner-label">Loading inscriptions...</span>
+      <span class="spinner-label">{{ 'LISTE_INSCRITS.LOADING' | translate }}</span>
     </div>
 
-    <div *ngIf="!loading && !errorMessage && !hasAnyInscriptions && inscriptions.length === 0" class="empty-state">
+    <div *ngIf="!loading && !errorKey && !hasAnyInscriptions && inscriptions.length === 0" class="empty-state">
       <i class="fas fa-list empty-icon"></i>
-      <p class="empty-title">No inscriptions yet</p>
-      <span class="empty-sub">Once a participant enrolls in a formation, their registration will show up here.</span>
+      <p class="empty-title">{{ 'LISTE_INSCRITS.NO_INSCRIPTIONS' | translate }}</p>
+      <span class="empty-sub">{{ 'LISTE_INSCRITS.NO_INSCRIPTIONS_DESC' | translate }}</span>
     </div>
 
-    <div *ngIf="!loading && !errorMessage && hasAnyInscriptions && inscriptions.length === 0" class="empty-state">
+    <div *ngIf="!loading && !errorKey && hasAnyInscriptions && inscriptions.length === 0" class="empty-state">
       <i class="fas fa-search empty-icon"></i>
-      <p class="empty-title">No inscriptions found</p>
-      <span class="empty-sub">Try adjusting your search or filter</span>
+      <p class="empty-title">{{ 'LISTE_INSCRITS.NOT_FOUND' | translate }}</p>
+      <span class="empty-sub">{{ 'LISTE_INSCRITS.NOT_FOUND_DESC' | translate }}</span>
     </div>
 
     <table *ngIf="!loading && inscriptions.length > 0">
 
       <thead>
         <tr>
-          <th style="width:16%">Thème</th>
-          <th style="width:10%">N° Salle</th>
-          <th style="width:15%">Full Name</th>
-          <th style="width:18%">Email</th>
-          <th style="width:11%">Company</th>
-          <th style="width:11%">Service</th>
-          <th style="width:12%">Status</th>
-          <th style="width:10%" class="text-center">Actions</th>
-        </tr>
+     <th style="width:15%">{{ 'LISTE_INSCRITS.TABLE.THEME' | translate }}</th>
+<th style="width:9%">{{ 'LISTE_INSCRITS.TABLE.ROOM' | translate }}</th>
+<th style="width:14%">{{ 'LISTE_INSCRITS.TABLE.FULL_NAME' | translate }}</th>
+<th style="width:17%">{{ 'LISTE_INSCRITS.TABLE.EMAIL' | translate }}</th>
+<th style="width:10%">{{ 'LISTE_INSCRITS.TABLE.COMPANY' | translate }}</th>
+<th style="width:10%">{{ 'LISTE_INSCRITS.TABLE.DEPARTMENT' | translate }}</th>
+<th style="width:11%">{{ 'LISTE_INSCRITS.TABLE.STATUS' | translate }}</th>
+<th style="width:14%" class="text-center">{{ 'LISTE_INSCRITS.TABLE.ACTIONS' | translate }}</th>
+</tr>
       </thead>
 
       <tbody>
@@ -101,7 +102,7 @@
 
           <td class="theme-cell">
             {{ i.formationId?.theme || i.formationSnapshot?.theme }}
-            <span *ngIf="!i.formationId" class="badge-na">Formation supprimée</span>
+            <span *ngIf="!i.formationId" class="badge-na">{{ 'LISTE_INSCRITS.FORMATION_DELETED' | translate }}</span>
           </td>
 
           <td class="salle-cell">
@@ -109,7 +110,7 @@
               {{ i.formationId?.numSalle ?? i.formationSnapshot?.numSalle }}
             </span>
             <span *ngIf="(i.formationId?.numSalle ?? i.formationSnapshot?.numSalle) === null" class="badge-na">
-              N/A
+              {{ 'LISTE_INSCRITS.NA' | translate }}
             </span>
           </td>
 
@@ -128,7 +129,11 @@
               [class.badge-validee]="i.status === 'Validée'"
               [class.badge-refusee]="i.status === 'Refusée'">
 
-              {{ i.status }}
+              {{
+                i.status === 'En Attente' ? ('LISTE_INSCRITS.STATUS.EN_ATTENTE' | translate) :
+                i.status === 'Validée' ? ('LISTE_INSCRITS.STATUS.VALIDEE' | translate) :
+                ('LISTE_INSCRITS.STATUS.REFUSEE' | translate)
+              }}
 
             </span>
           </td>
@@ -168,7 +173,7 @@
   <div class="pagination" *ngIf="totalPages > 1">
 
     <button class="btn-page" (click)="prevPage()" [disabled]="page === 1">
-      Previous
+      {{ 'LISTE_INSCRITS.PREVIOUS' | translate }}
     </button>
 
     <button class="btn-page"
@@ -181,7 +186,7 @@
     </button>
 
     <button class="btn-page" (click)="nextPage()" [disabled]="page === totalPages">
-      Next
+      {{ 'LISTE_INSCRITS.NEXT' | translate }}
     </button>
 
   </div>

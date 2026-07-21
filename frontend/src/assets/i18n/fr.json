@@ -239,6 +239,8 @@
     "CONTINUE": "Continuer",
     "REGISTER": "S'inscrire",
 
+    "SUCCESS": "Compte créé avec succès",
+
     "ERRORS": {
       "FULL_NAME_REQUIRED": "Le nom complet est obligatoire",
       "FULL_NAME_MIN": "Le nom complet doit contenir au moins 3 caractères",
@@ -259,13 +261,16 @@
       "AGE_MIN": "Vous devez avoir au moins 16 ans",
       "AGE_MAX": "L'âge ne peut pas dépasser 100 ans",
 
-      "GENDER_REQUIRED": "Le genre est obligatoire"
-    }
-  },
+      "GENDER_REQUIRED": "Le genre est obligatoire",
 
-  
-  "ERRORS":{
-    "SERVER_ERROR":"Un erreur au serveur lors de la verificaition du mail"
+      "IMAGE_TYPE": "Seuls les fichiers JPG, PNG et WEBP sont autorisés",
+      "IMAGE_SIZE": "La taille maximale de l'image est de 5 Mo",
+
+      "EMAIL_CHECK_SERVER_FALLBACK": "Impossible de vérifier l'adresse e-mail. Veuillez réessayer.",
+      "REGISTER_SERVER_FALLBACK": "Impossible de créer votre compte. Veuillez réessayer.",
+      "REGISTER_GENERIC_FALLBACK": "Une erreur est survenue. Veuillez réessayer."
+    },
+    "CLOSE": "Fermer"
   },
 
   "LOGIN": {
@@ -276,17 +281,25 @@
     "OR": "ou",
     "CREATE_ACCOUNT": "Créer un compte",
 
+    "CLOSE": "Fermer",
+
     "ERRORS": {
       "EMAIL_REQUIRED": "L'adresse e-mail est obligatoire",
       "EMAIL_INVALID": "Veuillez saisir une adresse e-mail valide",
+
       "PASSWORD_REQUIRED": "Le mot de passe est obligatoire",
-      "PASSWORD_MIN": "Le mot de passe doit contenir au moins 6 caractères"
+      "PASSWORD_MIN": "Le mot de passe doit contenir au moins 6 caractères",
+
+      "INVALID_CREDENTIALS": "Adresse e-mail ou mot de passe incorrect",
+      "LOGIN_SERVER_FALLBACK": "Impossible de vous connecter. Veuillez réessayer.",
+      "LOGIN_GENERIC_FALLBACK": "Une erreur est survenue. Veuillez réessayer."
     }
   },
 
   "PROFILE": {
     "LOADING": "Chargement du profil...",
     "ERROR_TITLE": "Impossible de charger le profil",
+    "ERROR_FALLBACK": "Une erreur est survenue lors de la récupération de vos données de profil",
     "RETRY": "Réessayer",
 
     "EMPTY_TITLE": "Aucune donnée trouvée",
@@ -311,7 +324,17 @@
     "TOTAL": "Total",
     "VALIDATED": "Validées",
     "REJECTED": "Refusées",
-    "PENDING": "En attente"
+    "PENDING": "En attente",
+
+    "DELETE_CONFIRM_TITLE": "Supprimer votre compte ?",
+    "DELETE_CONFIRM_TEXT": "Cette action est irréversible.",
+    "DELETE_CONFIRM_BUTTON": "Supprimer",
+    "DELETE_CANCEL_BUTTON": "Annuler",
+
+    "DELETE_SUCCESS_TITLE": "Compte supprimé",
+    "DELETE_SUCCESS_TEXT": "Votre compte a été supprimé avec succès.",
+
+    "DELETE_ERROR": "Une erreur est survenue lors de la suppression de votre compte."
   },
 
   "FORMATIONS_DISPONIBLES": {
@@ -320,7 +343,6 @@
 
     "SEARCH": "Rechercher par thème...",
     "ALL_MODES": "Tous les modes",
-
     "PRESENTIEL": "Présentiel",
     "ONLINE": "En ligne",
     "HYBRID": "Hybride",
@@ -335,6 +357,7 @@
     "CLEAR_FILTERS": "Effacer les filtres",
 
     "LOADING": "Chargement des formations...",
+    "ERROR_FALLBACK": "Erreur lors de la récupération des formations",
 
     "NO_TRAININGS": "Aucune formation disponible",
     "NO_TRAININGS_DESC": "Lorsqu'une formation sera créée, elle apparaîtra ici.",
@@ -361,26 +384,34 @@
   },
 
   "INSCRIPTION_DIALOG": {
-    "TITLE": "Inscription à une formation",
-    "SUBTITLE": "Complétez les informations ci-dessous",
+    "TITLE": "Inscription",
+    "SUBTITLE": "Complétez les informations ci-dessous pour vous inscrire",
 
     "FORMATION_INFO": "Informations de la formation",
-    "THEME": "Thème",
+    "PARTICIPANT_INFO": "Informations du participant",
+
+    "THEME": "Thème de la formation",
     "MODE": "Mode de formation",
     "ROOM": "Numéro de salle",
 
-    "PARTICIPANT_INFO": "Informations du participant",
     "FULL_NAME": "Nom complet",
-    "EMAIL": "Email",
+    "EMAIL": "E-mail",
     "COMPANY": "Entreprise",
     "SERVICE": "Service",
 
     "REQUIRED_TEXT": "Les champs",
-    "REQUIRED_SUFFIX": "sont obligatoires",
+    "REQUIRED_SUFFIX": "doivent être remplis",
 
     "CANCEL": "Annuler",
     "REGISTER": "S'inscrire",
-    "SAVING": "Enregistrement..."
+    "SAVING": "Enregistrement...",
+
+    "SUCCESS_TITLE": "Succès",
+    "SUCCESS_TEXT": "Votre inscription a été effectuée avec succès.",
+
+    "ERROR_TITLE": "Erreur",
+    "ALREADY_REGISTERED": "Vous êtes déjà inscrit à cette formation.",
+    "ERROR_FALLBACK": "Une erreur est survenue. Veuillez réessayer."
   },
 
   "MES_FORMATIONS": {
@@ -389,6 +420,7 @@
 
     "LOADING": "Chargement de vos formations...",
     "ERROR_TITLE": "Impossible de charger vos formations",
+    "ERROR_FALLBACK": "Une erreur est survenue lors de la récupération de vos inscriptions",
     "RETRY": "Réessayer",
 
     "EMPTY_TITLE": "Aucune inscription pour le moment",
@@ -403,14 +435,27 @@
     "NA": "N/A"
   },
 
+  "ADMIN_SIDEBAR": {
+    "PANEL_TITLE": "Panneau Admin",
+    "DASHBOARD": "Tableau de bord",
+    "CYCLE_FORMATION": "Cycle Formation",
+    "PARTICIPANTS_LIST": "Liste des Participants",
+    "USERS_GROWTH": "Croissance des utilisateurs",
+    "INSCRIPTIONS_LIST": "Liste des Inscrits",
+    "SETTINGS": "Paramètres",
+    "LOGOUT": "Déconnexion"
+  },
+
   "ADMIN_DASHBOARD": {
     "TITLE": "Tableau de bord administrateur",
     "SUBTITLE": "Vue d'ensemble de la plateforme de formations",
     "LOADING": "Chargement des données...",
     "ERROR_TITLE": "Impossible de charger les données",
+    "ERROR_DESC": "Erreur lors de la récupération du tableau de bord.",
     "RETRY": "Réessayer",
     "EMPTY_TITLE": "Aucune donnée pour le moment",
     "EMPTY_DESC": "Commencez par créer une formation ou ajouter un participant pour voir apparaître les statistiques ici.",
+    "CHART_EMPTY": "Pas encore assez de données à afficher",
 
     "TOTAL_TRAININGS": "Total Formations",
     "TOTAL_REGISTRATIONS": "Total Inscriptions",
@@ -429,6 +474,250 @@
 
     "REGISTRATIONS_CHART": "Répartition des inscriptions",
     "TRAINING_MODES_CHART": "Mode des formations",
-    "TREND_CHART": "Évolution des inscriptions dans le temps"
+    "TREND_CHART": "Évolution des inscriptions dans le temps",
+
+    "CHART": {
+      "REGISTRATIONS_BY_STATUS": "Inscriptions par statut",
+      "ONLINE": "En ligne",
+      "HYBRID": "Hybride",
+      "IN_PERSON": "Présentiel",
+      "REGISTRATIONS_OVER_TIME": "Inscriptions dans le temps"
+    }
+  },
+
+  "CYCLE_FORMATIONS": {
+    "TITLE": "Liste des Formations",
+    "SUBTITLE": "Gérer les sessions et calendriers de formation",
+    "REFRESH": "Actualiser",
+    "ADD_FORMATION": "Ajouter une formation",
+    "SEARCH": "Rechercher par thème...",
+    "ALL_MODES": "Tous les modes",
+    "PRESENTIEL": "Présentiel",
+    "ONLINE": "En ligne",
+    "HYBRID": "Hybride",
+    "TRAINING": "formation",
+    "TRAININGS": "formations",
+    "CLEAR_FILTERS": "Effacer les filtres",
+    "LOADING": "Chargement des formations...",
+    "NO_TRAININGS": "Aucune formation pour le moment",
+    "NO_TRAININGS_DESC": "Une fois une formation créée, elle apparaîtra ici.",
+    "NOT_FOUND": "Aucune formation trouvée",
+    "NOT_FOUND_DESC": "Essayez d'ajuster votre recherche ou votre filtre",
+    "NA": "N/A",
+    "TABLE": {
+      "THEME": "Thème",
+      "ROOM": "N° Salle",
+      "MODE": "Mode",
+      "FROM_DATE": "Période Du",
+      "TO_DATE": "Période À",
+      "START_TIME": "Horaire Du",
+      "END_TIME": "Horaire À",
+      "ACTIONS": "Actions"
+    },
+    "PREVIOUS": "Précédent",
+    "NEXT": "Suivant",
+    "ERROR_FALLBACK": "Erreur lors de la récupération des formations",
+    "DELETE_CONFIRM_TITLE": "Supprimer cette formation ?",
+    "DELETE_CONFIRM_TEXT": "Cette action est irréversible.",
+    "DELETE_CONFIRM_BTN": "Supprimer",
+    "DELETE_CANCEL_BTN": "Annuler",
+    "DELETE_SUCCESS_TITLE": "Succès",
+    "DELETE_SUCCESS_TEXT": "La formation a été supprimée avec succès.",
+    "DELETE_ERROR_TITLE": "Erreur",
+    "DELETE_ERROR_FALLBACK": "Une erreur est survenue lors de la suppression."
+  },
+
+  "ADD_FORMATION_DIALOG": {
+    "TITLE": "Cycle de Formation",
+    "SUBTITLE": "Ajouter un nouveau cycle de formation",
+    "FUNDING_MODE": "Mode de financement",
+    "TAX_CREDIT": "Crédit d'impôt",
+    "INDIVIDUAL_RIGHTS": "Droits de tirage (individuel)",
+    "COLLECTIVE_RIGHTS": "Droits de tirage (collectif)",
+    "THEME": "Thème de formation",
+    "THEME_PLACEHOLDER": "Ex: Développement web, Cybersécurité…",
+    "MODE": "Mode de formation",
+    "MODE_PLACEHOLDER": "Sélectionner un mode…",
+    "ONLINE": "En ligne",
+    "PRESENTIEL": "Présentiel",
+    "HYBRID": "Hybride",
+    "ROOM_NUMBER": "Numéro de salle",
+    "ROOM_PLACEHOLDER": "Ex: 12",
+    "PERIOD": "Période",
+    "START_DATE": "Date de début",
+    "END_DATE": "Date de fin",
+    "SCHEDULE": "Horaire",
+    "START_TIME": "Heure de début",
+    "END_TIME": "Heure de fin",
+    "REQUIRED_HINT": "Les champs sont obligatoires",
+    "CANCEL": "Annuler",
+    "SUBMIT": "Enregistrer",
+    "SUCCESS_TITLE": "Succès",
+    "SUCCESS_TEXT": "La formation a été ajoutée avec succès.",
+    "ERROR_TITLE": "Erreur",
+    "ERROR_FALLBACK": "Une erreur est survenue. Veuillez réessayer."
+  },
+
+  "EDIT_FORMATION_DIALOG": {
+    "TITLE": "Cycle de Formation",
+    "SUBTITLE": "Modifier un cycle de formation",
+    "FUNDING_MODE": "Mode de financement",
+    "TAX_CREDIT": "Crédit d'impôt",
+    "INDIVIDUAL_RIGHTS": "Droits de tirage (individuel)",
+    "COLLECTIVE_RIGHTS": "Droits de tirage (collectif)",
+    "THEME": "Thème de formation",
+    "THEME_PLACEHOLDER": "Ex: Développement web, Cybersécurité…",
+    "MODE": "Mode de formation",
+    "MODE_PLACEHOLDER": "Sélectionner un mode…",
+    "ONLINE": "En ligne",
+    "PRESENTIEL": "Présentiel",
+    "HYBRID": "Hybride",
+    "ROOM_NUMBER": "Numéro de salle",
+    "ROOM_PLACEHOLDER": "Ex: 12",
+    "PERIOD": "Période",
+    "START_DATE": "Date de début",
+    "END_DATE": "Date de fin",
+    "SCHEDULE": "Horaire",
+    "START_TIME": "Heure de début",
+    "END_TIME": "Heure de fin",
+    "REQUIRED_HINT": "Les champs sont obligatoires",
+    "CANCEL": "Annuler",
+    "SUBMIT": "Modifier",
+    "SUCCESS_TITLE": "Succès",
+    "SUCCESS_TEXT": "La formation a été modifiée avec succès.",
+    "ERROR_TITLE": "Erreur",
+    "ERROR_FALLBACK": "Une erreur est survenue, Veuillez réessayer."
+  },
+
+  "LISTE_PARTICIPANTS": {
+    "TITLE": "Liste des Participants",
+    "SUBTITLE": "Gérer les participants inscrits",
+    "SEARCH": "Rechercher par nom du participant...",
+    "ALL_STATUS": "Tous les statuts",
+    "ACTIVE": "Actif",
+    "INACTIVE": "Inactif",
+    "PARTICIPANT": "participant",
+    "PARTICIPANTS": "participants",
+    "CLEAR_FILTERS": "Effacer les filtres",
+    "LOADING": "Chargement des participants...",
+    "NO_PARTICIPANTS": "Aucun participant pour le moment",
+    "NO_PARTICIPANTS_DESC": "Les comptes participants apparaîtront ici une fois créés.",
+    "NOT_FOUND": "Aucun participant trouvé",
+    "NOT_FOUND_DESC": "Essayez d'ajuster votre recherche ou votre filtre",
+    "TABLE": {
+      "NUMBER": "#",
+      "IMAGE": "Image",
+      "FULL_NAME": "Nom complet",
+      "AGE": "Âge",
+      "GENDER": "Genre",
+      "STATUS": "Statut",
+      "EMAIL": "Email",
+      "CREATED_AT": "Créé le",
+      "ACTIONS": "Actions"
+    },
+    "PREVIOUS": "Précédent",
+    "NEXT": "Suivant",
+    "ERROR_FALLBACK": "Erreur lors de la récupération des participants",
+    "DELETE_CONFIRM_TITLE": "Supprimer ce participant ?",
+    "DELETE_CONFIRM_TEXT": "Cette action est irréversible.",
+    "DELETE_CONFIRM_BTN": "Supprimer",
+    "DELETE_CANCEL_BTN": "Annuler",
+    "DELETE_SUCCESS_TITLE": "Succès",
+    "DELETE_SUCCESS_TEXT": "Le participant a été supprimé avec succès.",
+    "DELETE_ERROR_TITLE": "Erreur",
+    "DELETE_ERROR_FALLBACK": "Une erreur est survenue lors de la suppression."
+  },
+
+  "EDIT_PARTICIPANT_DIALOG": {
+    "TITLE": "Participant",
+    "SUBTITLE": "Modifier les informations du participant",
+    "FULL_NAME": "Nom complet",
+    "FULL_NAME_PLACEHOLDER": "Ex: Mohamed Ayari",
+    "FULL_NAME_REQUIRED": "Nom requis",
+    "FULL_NAME_MINLENGTH": "Minimum 3 caractères",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "exemple@mail.com",
+    "EMAIL_REQUIRED": "L'adresse email est obligatoire",
+    "EMAIL_INVALID": "Format email invalide",
+    "EMAIL_TAKEN": "Cet email est déjà utilisé",
+    "AGE": "Âge",
+    "AGE_PLACEHOLDER": "Ex: 23",
+    "AGE_REQUIRED": "Âge requis",
+    "AGE_MIN": "L'âge minimum est 16 ans",
+    "AGE_MAX": "L'âge maximum est 100 ans",
+    "FOOTER_HINT": "Modifier uniquement les champs nécessaires",
+    "CANCEL": "Annuler",
+    "SUBMIT": "Modifier",
+    "SUCCESS_TITLE": "Succès",
+    "SUCCESS_TEXT": "Le participant a été modifié avec succès.",
+    "ERROR_TITLE": "Erreur",
+    "ERROR_FALLBACK": "Une erreur est survenue, Veuillez réessayer."
+  },
+
+  "USERS_GROWTH": {
+    "TITLE": "Statistiques des participants",
+    "SUBTITLE": "Analyse démographique des inscriptions",
+    "LOADING": "Chargement des données...",
+    "ERROR_TITLE": "Impossible de charger les données",
+    "ERROR_DESC": "Erreur lors de la récupération des données des participants.",
+    "RETRY": "Réessayer",
+    "EMPTY_TITLE": "Aucune donnée pour le moment",
+    "EMPTY_DESC": "Les statistiques des participants apparaîtront ici dès qu'un participant sera ajouté à la plateforme.",
+    "GROWTH_CHART": "Croissance des participants",
+    "AGE_CHART": "Répartition par âge",
+    "GENDER_CHART": "Répartition par genre",
+    "DOUGHNUT_CHART": "Distribution globale",
+    "LINE_CHART": "Évolution dans le temps",
+    "CHART": {
+      "NEW_PARTICIPANTS": "Nouveaux participants",
+      "TOTAL_GROWTH": "Total des utilisateurs",
+      "AGE_DISTRIBUTION": "Répartition par âge",
+      "GENDER_DISTRIBUTION": "Répartition par genre",
+      "USERS_STATUS": "Statut des utilisateurs",
+      "MALE": "Homme",
+      "FEMALE": "Femme",
+      "ACTIVE": "Actif",
+      "INACTIVE": "Inactif"
+    }
+  },
+
+  "LISTE_INSCRITS": {
+    "TITLE": "Liste des Inscriptions",
+    "SUBTITLE": "Gérer les inscriptions aux formations",
+    "SEARCH": "Rechercher par thème...",
+    "SORT_NEWEST": "Plus récent d'abord",
+    "SORT_OLDEST": "Plus ancien d'abord",
+    "INSCRIPTION": "inscription",
+    "INSCRIPTIONS": "inscriptions",
+    "CLEAR": "Effacer",
+    "LOADING": "Chargement des inscriptions...",
+    "NO_INSCRIPTIONS": "Aucune inscription pour le moment",
+    "NO_INSCRIPTIONS_DESC": "Une fois qu'un participant s'inscrit à une formation, son inscription apparaîtra ici.",
+    "NOT_FOUND": "Aucune inscription trouvée",
+    "NOT_FOUND_DESC": "Essayez d'ajuster votre recherche",
+    "FORMATION_DELETED": "Formation supprimée",
+    "NA": "N/A",
+    "STATUS": {
+      "EN_ATTENTE": "En attente",
+      "VALIDEE": "Validée",
+      "REFUSEE": "Refusée"
+    },
+    "TABLE": {
+      "THEME": "Thème",
+      "ROOM": "N° Salle",
+      "FULL_NAME": "Nom complet",
+      "EMAIL": "Email",
+      "COMPANY": "Entreprise",
+      "DEPARTMENT": "Service",
+      "STATUS": "Statut",
+      "ACTIONS": "Actions"
+    },
+    "PREVIOUS": "Précédent",
+    "NEXT": "Suivant",
+    "ERROR_FALLBACK": "Erreur lors du chargement des inscriptions",
+    "STATUS_ERROR_TITLE": "Erreur",
+    "STATUS_ERROR_TEXT": "Échec de la mise à jour du statut"
   }
+
+
 }

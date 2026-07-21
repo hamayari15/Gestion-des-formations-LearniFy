@@ -1,164 +1,173 @@
-
-
-    <div class="dialog">
-    <div class="dialog-header">
-        <div class="header-left">
-          <div class="header-icon"><i class="ti ti-school" aria-hidden="true"></i></div>
-          <div>
-            <div class="dialog-title" id="dialog-title">Cycle de Formation</div>
-            <div class="dialog-subtitle">Modifier un cycle de formation</div>
-          </div>
-        </div>
-        <button class="close-btn" aria-label="Fermer" (click)="closeDialog()">
-          <i class="ti ti-x" aria-hidden="true"></i>
-        </button>
+<div class="dialog">
+  <div class="dialog-header">
+    <div class="header-left">
+      <div class="header-icon"><i class="ti ti-school" aria-hidden="true"></i></div>
+      <div>
+        <div class="dialog-title" id="dialog-title">{{ 'EDIT_FORMATION_DIALOG.TITLE' | translate }}</div>
+        <div class="dialog-subtitle">{{ 'EDIT_FORMATION_DIALOG.SUBTITLE' | translate }}</div>
       </div>
+    </div>
+    <button class="close-btn" [attr.aria-label]="'EDIT_FORMATION_DIALOG.CANCEL' | translate" (click)="closeDialog()">
+      <i class="ti ti-x" aria-hidden="true"></i>
+    </button>
+  </div>
 
-      <div class="dialog-body">
+  <div class="dialog-body">
 
-      <div class="section-label">
-        Mode de financement <span class="required-dot"></span>
-      </div>
-
-<div class="checkbox-group">
-
-  <label
-    class="checkbox-item"
-    [class.checked]="creditImpot"
-    (click)="selectMode('creditImpot')">
-
-    <div class="checkbox-box">
-      <i class="ti ti-check"></i>
+    <div class="section-label">
+      {{ 'EDIT_FORMATION_DIALOG.FUNDING_MODE' | translate }} <span class="required-dot"></span>
     </div>
 
-    <span class="checkbox-text">
-      Crédit d'impôt
-    </span>
+    <div class="checkbox-group">
 
-  </label>
+      <label
+        class="checkbox-item"
+        [class.checked]="creditImpot"
+        (click)="selectMode('creditImpot')">
 
-  <label
-    class="checkbox-item"
-    [class.checked]="droitIndividuel"
-    (click)="selectMode('droitIndividuel')">
-
-    <div class="checkbox-box">
-      <i class="ti ti-check"></i>
-    </div>
-
-    <span class="checkbox-text">
-      Droits de tirage (individuel)
-    </span>
-
-  </label>
-
-  <label
-    class="checkbox-item"
-    [class.checked]="droitCollectif"
-    (click)="selectMode('droitCollectif')">
-
-    <div class="checkbox-box">
-      <i class="ti ti-check"></i>
-    </div>
-
-    <span class="checkbox-text">
-      Droits de tirage (collectif)
-    </span>
-
-  </label>
-
-</div>
-
-        <div class="divider"></div>
-
-        <div class="field">
-          <div class="field-label">
-            <i class="ti ti-book" aria-hidden="true"></i>
-            Thème de formation
-            <span class="required-dot" title="Requis"></span>
-          </div>
-          <div class="input-wrap">
-            <i class="ti ti-search" aria-hidden="true"></i>
-            <input class="f-input" type="text" name="theme"   [(ngModel)]="theme" placeholder="Ex: Développement web, Cybersécurité…" />
-          </div>
+        <div class="checkbox-box">
+          <i class="ti ti-check"></i>
         </div>
 
-        <div class="field">
-          <div class="field-label">
-            <i class="ti ti-layout-board" aria-hidden="true"></i>
-            Mode de formation
-            <span class="required-dot" title="Requis"></span>
-          </div>
-          <select class="f-select" name="modeFormation" [(ngModel)]="modeFormation">
-            <option value="">Sélectionner un mode…</option>
-            <option value="En ligne">En ligne</option>
-            <option value="Présentiel">Présentiel</option>
-            <option value="Hybride">Hybride</option>
-          </select>
-        </div>
-
-        <div class="field" id="salle-field" *ngIf="modeFormation === 'Présentiel'">
-          <div class="field-label">
-            <i class="ti ti-door" aria-hidden="true"></i>
-            Numéro de salle
-            <span class="required-dot" title="Requis"></span>
-          </div>
-          <div class="input-wrap">
-            <i class="ti ti-hash" aria-hidden="true"></i>
-            <input class="f-input" type="number" name="numSalle" [(ngModel)]="numSalle" placeholder="Ex: 12" min="1" />
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="field">
-          <div class="field-label">
-            <i class="ti ti-calendar-event" aria-hidden="true"></i>
-            Période <span class="required-dot" title="Requis"></span>
-          </div>
-          <div class="two-col">
-            <div>
-              <div class="sub-label"><i class="ti ti-arrow-right"></i> Date de début</div>
-              <input class="f-input" type="date" name="periodeDu" [(ngModel)]="periodeDu"/>
-            </div>
-            <div>
-              <div class="sub-label"><i class="ti ti-flag"></i> Date de fin</div>
-              <input class="f-input" type="date" name="periodeA" [(ngModel)]="periodeA" [min]="periodeDu"/>
-            </div>
-          </div>
-        </div>
-
-        <div class="field">
-          <div class="field-label">
-            <i class="ti ti-clock" aria-hidden="true"></i>
-            Horaire <span class="required-dot" title="Requis"></span>
-          </div>
-          <div class="two-col">
-            <div>
-              <div class="sub-label"><i class="ti ti-arrow-right"></i> Heure de début</div>
-              <input class="f-input" type="time" name="horaireDu" [(ngModel)]="horaireDu"/>
-            </div>
-            <div>
-              <div class="sub-label"><i class="ti ti-flag"></i> Heure de fin </div>
-              <input class="f-input" type="time" name="horaireA" [(ngModel)]="horaireA" [min]="horaireDu"/>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="dialog-footer">
-        <span class="footer-hint">
-          <i class="ti ti-info-circle" aria-hidden="true"></i>
-          Les champs <span style="color:#f43f5e;margin:0 2px;">•</span> sont obligatoires
+        <span class="checkbox-text">
+          {{ 'EDIT_FORMATION_DIALOG.TAX_CREDIT' | translate }}
         </span>
-        <div class="footer-actions">
-          <button class="btn-cancel" (click)="closeDialog()">
-            <i class="ti ti-x" aria-hidden="true"></i> Annuler
-          </button>
-          <button class="btn-save" (click)="updateFormation()" [disabled]="!isFormValid() || !hasChanges()">
-            <i class="ti ti-device-floppy" aria-hidden="true"></i> Modifier
-          </button>
+
+      </label>
+
+      <label
+        class="checkbox-item"
+        [class.checked]="droitIndividuel"
+        (click)="selectMode('droitIndividuel')">
+
+        <div class="checkbox-box">
+          <i class="ti ti-check"></i>
+        </div>
+
+        <span class="checkbox-text">
+          {{ 'EDIT_FORMATION_DIALOG.INDIVIDUAL_RIGHTS' | translate }}
+        </span>
+
+      </label>
+
+      <label
+        class="checkbox-item"
+        [class.checked]="droitCollectif"
+        (click)="selectMode('droitCollectif')">
+
+        <div class="checkbox-box">
+          <i class="ti ti-check"></i>
+        </div>
+
+        <span class="checkbox-text">
+          {{ 'EDIT_FORMATION_DIALOG.COLLECTIVE_RIGHTS' | translate }}
+        </span>
+
+      </label>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="field">
+      <div class="field-label">
+        <i class="ti ti-book" aria-hidden="true"></i>
+        {{ 'EDIT_FORMATION_DIALOG.THEME' | translate }}
+        <span class="required-dot" title="Requis"></span>
+      </div>
+      <div class="input-wrap">
+        <i class="ti ti-search" aria-hidden="true"></i>
+        <input
+          class="f-input"
+          type="text"
+          name="theme"
+          [(ngModel)]="theme"
+          [placeholder]="'EDIT_FORMATION_DIALOG.THEME_PLACEHOLDER' | translate" />
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">
+        <i class="ti ti-layout-board" aria-hidden="true"></i>
+        {{ 'EDIT_FORMATION_DIALOG.MODE' | translate }}
+        <span class="required-dot" title="Requis"></span>
+      </div>
+      <select class="f-select" name="modeFormation" [(ngModel)]="modeFormation">
+        <option value="">{{ 'EDIT_FORMATION_DIALOG.MODE_PLACEHOLDER' | translate }}</option>
+        <option value="En ligne">{{ 'EDIT_FORMATION_DIALOG.ONLINE' | translate }}</option>
+        <option value="Présentiel">{{ 'EDIT_FORMATION_DIALOG.PRESENTIEL' | translate }}</option>
+        <option value="Hybride">{{ 'EDIT_FORMATION_DIALOG.HYBRID' | translate }}</option>
+      </select>
+    </div>
+
+    <div class="field" id="salle-field" *ngIf="modeFormation === 'Présentiel'">
+      <div class="field-label">
+        <i class="ti ti-door" aria-hidden="true"></i>
+        {{ 'EDIT_FORMATION_DIALOG.ROOM_NUMBER' | translate }}
+        <span class="required-dot" title="Requis"></span>
+      </div>
+      <div class="input-wrap">
+        <i class="ti ti-hash" aria-hidden="true"></i>
+        <input
+          class="f-input"
+          type="number"
+          name="numSalle"
+          [(ngModel)]="numSalle"
+          [placeholder]="'EDIT_FORMATION_DIALOG.ROOM_PLACEHOLDER' | translate"
+          min="1" />
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="field">
+      <div class="field-label">
+        <i class="ti ti-calendar-event" aria-hidden="true"></i>
+        {{ 'EDIT_FORMATION_DIALOG.PERIOD' | translate }} <span class="required-dot" title="Requis"></span>
+      </div>
+      <div class="two-col">
+        <div>
+          <div class="sub-label"><i class="ti ti-arrow-right"></i> {{ 'EDIT_FORMATION_DIALOG.START_DATE' | translate }}</div>
+          <input class="f-input" type="date" name="periodeDu" [(ngModel)]="periodeDu"/>
+        </div>
+        <div>
+          <div class="sub-label"><i class="ti ti-flag"></i> {{ 'EDIT_FORMATION_DIALOG.END_DATE' | translate }}</div>
+          <input class="f-input" type="date" name="periodeA" [(ngModel)]="periodeA" [min]="periodeDu"/>
         </div>
       </div>
     </div>
+
+    <div class="field">
+      <div class="field-label">
+        <i class="ti ti-clock" aria-hidden="true"></i>
+        {{ 'EDIT_FORMATION_DIALOG.SCHEDULE' | translate }} <span class="required-dot" title="Requis"></span>
+      </div>
+      <div class="two-col">
+        <div>
+          <div class="sub-label"><i class="ti ti-arrow-right"></i> {{ 'EDIT_FORMATION_DIALOG.START_TIME' | translate }}</div>
+          <input class="f-input" type="time" name="horaireDu" [(ngModel)]="horaireDu"/>
+        </div>
+        <div>
+          <div class="sub-label"><i class="ti ti-flag"></i> {{ 'EDIT_FORMATION_DIALOG.END_TIME' | translate }}</div>
+          <input class="f-input" type="time" name="horaireA" [(ngModel)]="horaireA" [min]="horaireDu"/>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dialog-footer">
+    <span class="footer-hint">
+      <i class="ti ti-info-circle" aria-hidden="true"></i>
+      {{ 'EDIT_FORMATION_DIALOG.REQUIRED_HINT' | translate }} <span style="color:#f43f5e;margin:0 2px;">•</span>
+    </span>
+    <div class="footer-actions">
+      <button class="btn-cancel" (click)="closeDialog()">
+        <i class="ti ti-x" aria-hidden="true"></i> {{ 'EDIT_FORMATION_DIALOG.CANCEL' | translate }}
+      </button>
+      <button class="btn-save" (click)="updateFormation()" [disabled]="!isFormValid() || !hasChanges()">
+        <i class="ti ti-device-floppy" aria-hidden="true"></i> {{ 'EDIT_FORMATION_DIALOG.SUBMIT' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

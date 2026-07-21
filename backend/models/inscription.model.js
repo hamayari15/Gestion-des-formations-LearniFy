@@ -15,7 +15,7 @@ const inscriptionSchema = new mongoose.Schema(
       trim: true,
       match: [/^\S+@\S+\.\S+$/, "Please enter a valid email"],
     },
-    
+
     entreprise: {
       type: String,
       required: [true, "Entreprise is required"],
@@ -27,27 +27,17 @@ const inscriptionSchema = new mongoose.Schema(
       required: [true, "Service is required"],
       trim: true,
     },
-    
+
     participantId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Participant",
       required: true,
     },
-    
+
     formationId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Formation",
       required: true,
-    },
-    
-    formationSnapshot: {
-      theme: { type: String },
-      modeFormation: { type: String },
-      numSalle: { type: Number },
-      periodeDu: { type: Date },
-      periodeA: { type: Date },
-      horaireDu: { type: String },
-      horaireA: { type: String },
     },
 
     status: {

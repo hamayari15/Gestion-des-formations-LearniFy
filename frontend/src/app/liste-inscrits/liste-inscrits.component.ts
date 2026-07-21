@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InscriptionService } from '../core/services/incription.service';
+import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -20,10 +21,13 @@ export class ListeInscritsComponent implements OnInit {
   sort: string = 'desc';
 
   loading: boolean = false;
-  errorMessage: string = '';
+  errorKey: string = '';
   hasAnyInscriptions: boolean = true;
 
-  constructor(private inscriptionService: InscriptionService) {}
+  constructor(
+    private inscriptionService: InscriptionService,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit(): void {
     this.getInscriptions();
@@ -31,7 +35,7 @@ export class ListeInscritsComponent implements OnInit {
 
   getInscriptions(): void {
 
-    this.errorMessage = '';
+    this.errorKey = '';
     this.loading = true
 
     this.inscriptionService.getInscriptions(
@@ -55,10 +59,10 @@ export class ListeInscritsComponent implements OnInit {
         this.loading = false;
       },
 
-      error: () => {
+      error: (error) => {
 
         this.loading = false;
-        this.errorMessage = 'Erreur lors du chargement des inscriptions';
+        this.errorKey = this.resolveErrorKey(error, 'LISTE_INSCRITS.ERROR_FALLBACK');
 
       }
 
@@ -113,11 +117,26 @@ export class ListeInscritsComponent implements OnInit {
       },
 
       error: () => {
-        Swal.fire('Error', 'Status update failed', 'error');
+        Swal.fire(
+          this.translate.instant('LISTE_INSCRITS.STATUS_ERROR_TITLE'),
+          this.translate.instant('LISTE_INSCRITS.STATUS_ERROR_TEXT'),
+          'error'
+        );
       }
 
     });
 
+  }
+
+  private resolveErrorKey(error: any, fallbackKey: string): string {
+    const code = error?.error?.code;
+    if (code) {
+      const key = `BACKEND_ERRORS.${code}`;
+      if (this.translate.instant(key) !== key) {
+        return key;
+      }
+    }
+    return fallbackKey;
   }
 
 }

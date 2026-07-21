@@ -1,44 +1,41 @@
 <div class="dashboard-container">
 
   <div class="dashboard-header">
-    <h1>Statistiques des participants</h1>
-    <p class="dashboard-subtitle">Analyse démographique et évolution des inscriptions</p>
+    <h1>{{ 'USERS_GROWTH.TITLE' | translate }}</h1>
+    <p class="dashboard-subtitle">{{ 'USERS_GROWTH.SUBTITLE' | translate }}</p>
   </div>
 
   <div class="state-panel" *ngIf="isLoading">
     <div class="spinner"></div>
-    <span>Chargement des données...</span>
+    <span>{{ 'USERS_GROWTH.LOADING' | translate }}</span>
   </div>
 
-  <div class="state-panel error-panel" *ngIf="!isLoading && errorMessage">
+  <div class="state-panel error-panel" *ngIf="!isLoading && hasError">
     <div class="state-card">
       <div class="state-icon icon-error">
         <i class="fas fa-triangle-exclamation"></i>
       </div>
-      <h3>Impossible de charger les données</h3>
-      <p>{{ errorMessage }}</p>
+      <h3>{{ 'USERS_GROWTH.ERROR_TITLE' | translate }}</h3>
+      <p>{{ 'USERS_GROWTH.ERROR_DESC' | translate }}</p>
       <button class="state-retry" (click)="loadDashboard()">
         <i class="fas fa-rotate-right"></i>
-        Réessayer
+        {{ 'USERS_GROWTH.RETRY' | translate }}
       </button>
     </div>
   </div>
 
-  <div class="state-panel empty-panel" *ngIf="!isLoading && !errorMessage && !hasData">
+  <div class="state-panel empty-panel" *ngIf="!isLoading && !hasError && !hasData">
     <i class="fas fa-inbox"></i>
-    <h3>Aucune donnée pour le moment</h3>
-    <p>
-      Les statistiques des participants apparaîtront ici dès
-      qu'un participant sera ajouté à la plateforme.
-    </p>
+    <h3>{{ 'USERS_GROWTH.EMPTY_TITLE' | translate }}</h3>
+    <p>{{ 'USERS_GROWTH.EMPTY_DESC' | translate }}</p>
   </div>
 
-  <div class="stats-grid" *ngIf="!isLoading && !errorMessage && hasData">
+  <div class="stats-grid" *ngIf="!isLoading && !hasError && hasData">
 
     <div class="chart-container chart-growth">
       <div class="chart-header">
         <i class="fas fa-chart-area"></i>
-        <span>Croissance des participants</span>
+        <span>{{ 'USERS_GROWTH.GROWTH_CHART' | translate }}</span>
       </div>
       <div class="chart-canvas-wrap">
         <canvas id="growthChart"></canvas>
@@ -48,7 +45,7 @@
     <div class="chart-container chart-age">
       <div class="chart-header">
         <i class="fas fa-users-viewfinder"></i>
-        <span>Répartition par âge</span>
+        <span>{{ 'USERS_GROWTH.AGE_CHART' | translate }}</span>
       </div>
       <div class="chart-canvas-wrap pie-wrap">
         <canvas
@@ -63,7 +60,7 @@
     <div class="chart-container chart-gender">
       <div class="chart-header">
         <i class="fas fa-venus-mars"></i>
-        <span>Répartition par genre</span>
+        <span>{{ 'USERS_GROWTH.GENDER_CHART' | translate }}</span>
       </div>
       <div class="chart-canvas-wrap pie-wrap">
         <canvas
@@ -78,7 +75,7 @@
     <div class="chart-container chart-doughnut">
       <div class="chart-header">
         <i class="fas fa-circle-notch"></i>
-        <span>Distribution globale</span>
+        <span>{{ 'USERS_GROWTH.DOUGHNUT_CHART' | translate }}</span>
       </div>
       <div class="chart-canvas-wrap pie-wrap">
         <canvas
@@ -92,7 +89,7 @@
     <div class="chart-container chart-line">
       <div class="chart-header">
         <i class="fas fa-chart-line"></i>
-        <span>Évolution dans le temps</span>
+        <span>{{ 'USERS_GROWTH.LINE_CHART' | translate }}</span>
       </div>
       <div class="chart-canvas-wrap">
         <canvas id="growthLineChart"></canvas>

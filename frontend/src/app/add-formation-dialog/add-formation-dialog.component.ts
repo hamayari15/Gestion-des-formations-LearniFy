@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
 import { FormationService } from '../core/services/formation.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class AddFormationDialogComponent {
 
   constructor(
     private formationService: FormationService,
-    private dialogRef: MatDialogRef<AddFormationDialogComponent>
+    private dialogRef: MatDialogRef<AddFormationDialogComponent>,
+    private translate: TranslateService
   ) {}
 
   selectMode(mode: string) {
@@ -94,11 +96,11 @@ export class AddFormationDialogComponent {
     };
 
     this.formationService.addFormation(formation).subscribe(
-      (response) => {
+      () => {
         Swal.fire({
           icon: 'success',
-          title: 'Succès',
-          text: response.message,
+          title: this.translate.instant('ADD_FORMATION_DIALOG.SUCCESS_TITLE'),
+          text: this.translate.instant('ADD_FORMATION_DIALOG.SUCCESS_TEXT'),
           width: 500,
           timer: 2500,
           timerProgressBar: true,
@@ -109,16 +111,26 @@ export class AddFormationDialogComponent {
       (error) => {
         Swal.fire({
           icon: 'error',
-          title: 'Erreur',
-          text: error?.error.message || 'Une erreur est survenue. Veuillez réessayer.',
+          title: this.translate.instant('ADD_FORMATION_DIALOG.ERROR_TITLE'),
+          text: this.translate.instant(this.resolveErrorKey(error)),
           width: 500,
         });
-        console.error('Error:', error);
       }
     );
   }
 
   closeDialog(){
     this.dialogRef.close();
+  }
+
+  private resolveErrorKey(error: any): string {
+    const code = error?.error?.code;
+    if (code) {
+      const key = `BACKEND_ERRORS.${code}`;
+      if (this.translate.instant(key) !== key) {
+        return key;
+      }
+    }
+    return 'ADD_FORMATION_DIALOG.ERROR_FALLBACK';
   }
 }

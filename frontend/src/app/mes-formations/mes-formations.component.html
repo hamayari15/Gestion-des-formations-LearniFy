@@ -10,7 +10,7 @@
     <span>{{ 'MES_FORMATIONS.LOADING' | translate }}</span>
   </div>
 
-  <div class="state-panel error-panel" *ngIf="!loading && errorMessage">
+  <div class="state-panel error-panel" *ngIf="!loading && errorKey">
     <div class="state-card">
       <div class="state-icon icon-error">
         <i class="fas fa-triangle-exclamation"></i>
@@ -18,7 +18,7 @@
 
       <h3>{{ 'MES_FORMATIONS.ERROR_TITLE' | translate }}</h3>
 
-      <p>{{ errorMessage }}</p>
+      <p>{{ errorKey | translate }}</p>
 
       <button class="state-retry" (click)="getInscriptions()">
         <i class="fas fa-rotate-right"></i>
@@ -27,7 +27,7 @@
     </div>
   </div>
 
-  <div class="state-panel empty-panel" *ngIf="!loading && !errorMessage && inscriptions.length === 0">
+  <div class="state-panel empty-panel" *ngIf="!loading && !errorKey && inscriptions.length === 0">
     <i class="fas fa-graduation-cap empty-icon"></i>
 
     <p class="empty-title">
@@ -39,7 +39,7 @@
     </span>
   </div>
 
-  <div class="inscriptions-list" *ngIf="!loading && !errorMessage && inscriptions.length > 0">
+  <div class="inscriptions-list" *ngIf="!loading && !errorKey && inscriptions.length > 0">
 
     <div class="inscription-row" *ngFor="let inscription of inscriptions">
 

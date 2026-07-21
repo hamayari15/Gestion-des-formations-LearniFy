@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ParticipantService } from '../core/services/participant.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-participant-dialog',
@@ -20,6 +21,7 @@ export class EditParticipantDialogComponent implements OnInit {
     private fb: FormBuilder,
     private participantService: ParticipantService,
     private dialogRef: MatDialogRef<EditParticipantDialogComponent>,
+    private translate: TranslateService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -62,11 +64,11 @@ export class EditParticipantDialogComponent implements OnInit {
     if (!this.participantForm.valid) return;
 
     this.participantService.updateParticipant(this.participantId, this.participantForm.value).subscribe({
-      next: (response: any) => {
+      next: () => {
         Swal.fire({
           icon: 'success',
-          title: 'Succès',
-          text: response.message,
+          title: this.translate.instant('EDIT_PARTICIPANT_DIALOG.SUCCESS_TITLE'),
+          text: this.translate.instant('EDIT_PARTICIPANT_DIALOG.SUCCESS_TEXT'),
           width: 500,
           timer: 2500,
           timerProgressBar: true,
@@ -82,8 +84,8 @@ export class EditParticipantDialogComponent implements OnInit {
 
         Swal.fire({
           icon: 'error',
-          title: 'Erreur',
-          text: error?.error?.message || 'Une erreur est survenue.',
+          title: this.translate.instant('EDIT_PARTICIPANT_DIALOG.ERROR_TITLE'),
+          text: this.translate.instant(this.resolveErrorKey(error)),
           width: 500,
         });
       },
@@ -93,4 +95,16 @@ export class EditParticipantDialogComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close();
   }
+
+  private resolveErrorKey(error: any): string {
+    const code = error?.error?.code;
+    if (code) {
+      const key = `BACKEND_ERRORS.${code}`;
+      if (this.translate.instant(key) !== key) {
+        return key;
+      }
+    }
+    return 'EDIT_PARTICIPANT_DIALOG.ERROR_FALLBACK';
+  }
+
 }

@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-mon-profile-participant',
@@ -23,7 +24,7 @@ export class MonProfileParticipantComponent implements OnInit {
   loadingParticipant = true;
   loadingStats = true;
 
-  errorMessage: string = '';
+  errorKey: string = '';
 
   stats = {
     total: 0,
@@ -37,7 +38,8 @@ export class MonProfileParticipantComponent implements OnInit {
     private participantService: ParticipantService,
     private inscriptionService: InscriptionService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -49,7 +51,7 @@ export class MonProfileParticipantComponent implements OnInit {
 
   fetchParticipant(): void {
     this.loadingParticipant = true;
-    this.errorMessage = '';
+    this.errorKey = '';
 
     this.participantService.getParticipantById(this.id).subscribe({
       next: (data) => {
@@ -58,9 +60,10 @@ export class MonProfileParticipantComponent implements OnInit {
       },
       error: (error) => {
         console.error('Erreur lors de la récupération du participant:', error);
-        this.errorMessage =
-          error.error?.message ||
-          'Impossible de charger les données du profil';
+        this.errorKey = this.resolveErrorKey(
+          error,
+          'PROFILE.ERROR_FALLBACK'
+        );
         this.loadingParticipant = false;
       },
     });
@@ -108,41 +111,102 @@ export class MonProfileParticipantComponent implements OnInit {
   }
 
   deleteAccount(id: string): void {
+
     Swal.fire({
       icon: 'warning',
-      title: 'Supprimer votre compte ?',
-      text: 'Cette action est irréversible.',
+
+      title: this.translate.instant(
+        'PROFILE.DELETE_CONFIRM_TITLE'
+      ),
+
+      text: this.translate.instant(
+        'PROFILE.DELETE_CONFIRM_TEXT'
+      ),
+
       width: 550,
+
       showCancelButton: true,
-      confirmButtonText: 'Supprimer',
-      cancelButtonText: 'Annuler',
+
+      confirmButtonText: this.translate.instant(
+        'PROFILE.DELETE_CONFIRM_BUTTON'
+      ),
+
+      cancelButtonText: this.translate.instant(
+        'PROFILE.DELETE_CANCEL_BUTTON'
+      ),
+
       confirmButtonColor: '#dc2626',
+
     }).then((result) => {
+
       if (!result.isConfirmed) return;
 
+
       this.participantService.deleteParticipant(id).subscribe({
+
         next: (response: any) => {
+
           Swal.fire({
+
             icon: 'success',
-            title: 'Compte supprimé',
-            text: response.message,
+
+            title: this.translate.instant(
+              'PROFILE.DELETE_SUCCESS_TITLE'
+            ),
+
+            text: this.translate.instant(
+              'PROFILE.DELETE_SUCCESS_TEXT'
+            ),
+
             width: 500,
+
             timer: 2000,
+
             timerProgressBar: true,
+
           }).then(() => {
+
             this.authService.logout();
             this.router.navigate(['/login']);
+
           });
+
         },
+
+
         error: (error) => {
+
           Swal.fire({
+
             icon: 'error',
-            title: 'Erreur',
-            text: error?.error?.message || 'Une erreur est survenue lors de la suppression.',
+
+            title: this.translate.instant(
+              'PROFILE.ERROR_TITLE'
+            ),
+
+            text: this.translate.instant(
+              this.resolveErrorKey(error, 'PROFILE.DELETE_ERROR')
+            ),
+
             width: 500,
+
           });
-        },
+
+        }
+
       });
+
     });
+  }
+
+  private resolveErrorKey(error: any, fallbackKey: string): string {
+    const code = error?.error?.code;
+    if (code) {
+      const key = `BACKEND_ERRORS.${code}`;
+      if (this.translate.instant(key) !== key) {
+        return key;
+      }
+    }
+    return fallbackKey;
   }
 }

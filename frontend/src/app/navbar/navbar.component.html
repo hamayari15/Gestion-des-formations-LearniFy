@@ -19,7 +19,7 @@
         <a class="nav-link" routerLink="/about" (click)="toggleMenu()">
            {{ 'NAVBAR.ABOUT' | translate }}</a>
       </li>
-      <li class="nav-item" *ngIf="!isLoggedIn">
+      <li class="nav-item" *ngIf="!isParticipant">
         <a class="nav-link" routerLink="/privacy" (click)="toggleMenu()">
            {{ 'NAVBAR.PRIVACY' | translate }}</a>
       </li>
@@ -28,7 +28,7 @@
           {{ 'NAVBAR.CONTACT' | translate }}</a>
       </li>
 
-      <ng-container *ngIf="isLoggedIn">
+      <ng-container *ngIf="isParticipant">
         <li class="nav-item">
           <a class="nav-link" routerLink="/participant-interface/mon-profile-participant" routerLinkActive="active-link" (click)="toggleMenu()">
             {{ 'NAVBAR.MY_PROFILE' | translate }}</a>

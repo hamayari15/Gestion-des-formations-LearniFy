@@ -54,7 +54,7 @@ exports.addInscription = async (req, res) => {
     const saved = await inscription.save();
 
     res.status(201).json({
-      message: "Votre inscription a été enregistrée.",
+      code: "INSCRIPTION_CREATED",
       inscription: saved,
     });
 
@@ -73,7 +73,7 @@ exports.addInscription = async (req, res) => {
 
     if (error.code === 11000) {
       return res.status(409).json({
-        message: "Vous êtes déjà inscrit à cette formation.",
+        code: "ALREADY_REGISTERED",
       });
     }
 
@@ -94,18 +94,13 @@ exports.getInscriptions = async (req, res) => {
 
     const pipeline = [
       { $lookup: { from: "formations", localField: "formationId", foreignField: "_id", as: "formationId" } },
-      { $unwind: { path: "$formationId", preserveNullAndEmptyArrays: true } },
+      { $unwind: "$formationId" },
       { $lookup: { from: "participants", localField: "participantId", foreignField: "_id", as: "participantId" } },
-      { $unwind: { path: "$participantId", preserveNullAndEmptyArrays: true } },
-      {
-        $addFields: {
-          effectiveTheme: { $ifNull: ["$formationId.theme", "$formationSnapshot.theme"] },
-        },
-      },
+      { $unwind: "$participantId" },
     ];
 
     if (search) {
-      pipeline.push({ $match: { effectiveTheme: { $regex: search, $options: "i" } } });
+      pipeline.push({ $match: { "formationId.theme": { $regex: search, $options: "i" } } });
     }
 
     const countResult = await Inscription.aggregate([...pipeline, { $count: "total" }]);
@@ -118,11 +113,9 @@ exports.getInscriptions = async (req, res) => {
       success: true,
       data: { inscriptions, currentPage: page, totalPages: Math.ceil(totalItems / limit), totalItems },
     });
-    
+
   } catch (error) {
-    return res.status(500).json({ success: false, 
-      message: error.message 
-    });
+    return res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -188,7 +181,7 @@ exports.getInscriptionsByParticipant = async (req, res) => {
     }
 
     const inscriptions = await Inscription.find({ participantId })
-      .populate("formationId", "theme modeFormation periodeDu periodeA horaireDu horaireA numSalle")
+      .populate("formationId", "theme modeFormation periodeDu periodeA horaireDu horaireA numSalle isArchived")
       .sort({ createdAt: -1 });
 
     return res.status(200).json({

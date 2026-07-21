@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ParticipantService } from '../core/services/participant.service';
 import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 
 import { EditParticipantDialogComponent } from '../edit-participant-dialog/edit-participant-dialog.component';
@@ -27,12 +28,13 @@ export class ListeParticipantsComponent implements OnInit {
   selectedStatus: string = '';
 
   loading: boolean = false;
-  errorMessage: string = '';
+  errorKey: string = '';
   hasAnyParticipants: boolean = true;
 
   constructor(
     private participantService: ParticipantService,
     private dialog: MatDialog,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +44,7 @@ export class ListeParticipantsComponent implements OnInit {
   getParticipants(): void {
     
     this.loading = true;
-    this.errorMessage = '';
+    this.errorKey = '';
 
     this.participantService.getParticipants(
       this.page,
@@ -52,7 +54,6 @@ export class ListeParticipantsComponent implements OnInit {
     ).subscribe({
 
       next: (response: any) => {
-
 
         this.participants = response.data.participants;
         this.filteredParticipants = response.data.participants;
@@ -72,9 +73,10 @@ export class ListeParticipantsComponent implements OnInit {
 
         this.loading = false;
 
-        this.errorMessage =
-          error.error?.message ||
-          'Erreur lors de la récupération des participants';
+        this.errorKey = this.resolveErrorKey(
+          error,
+          'LISTE_PARTICIPANTS.ERROR_FALLBACK'
+        );
 
       }
 
@@ -149,22 +151,22 @@ export class ListeParticipantsComponent implements OnInit {
   deleteParticipant(id: string): void {
     Swal.fire({
       icon: 'warning',
-      title: 'Supprimer ce participant ?',
-      text: 'Cette action est irréversible.',
+      title: this.translate.instant('LISTE_PARTICIPANTS.DELETE_CONFIRM_TITLE'),
+      text: this.translate.instant('LISTE_PARTICIPANTS.DELETE_CONFIRM_TEXT'),
       width: 550,
       showCancelButton: true,
-      confirmButtonText: 'Supprimer',
-      cancelButtonText: 'Annuler',
+      confirmButtonText: this.translate.instant('LISTE_PARTICIPANTS.DELETE_CONFIRM_BTN'),
+      cancelButtonText: this.translate.instant('LISTE_PARTICIPANTS.DELETE_CANCEL_BTN'),
       confirmButtonColor: '#dc2626',
     }).then((result) => {
       if (!result.isConfirmed) return;
 
       this.participantService.deleteParticipant(id).subscribe({
-        next: (response: any) => {
+        next: () => {
           Swal.fire({
             icon: 'success',
-            title: 'Succès',
-            text: response.message,
+            title: this.translate.instant('LISTE_PARTICIPANTS.DELETE_SUCCESS_TITLE'),
+            text: this.translate.instant('LISTE_PARTICIPANTS.DELETE_SUCCESS_TEXT'),
             width: 500,
             timer: 2000,
             timerProgressBar: true,
@@ -178,13 +180,26 @@ export class ListeParticipantsComponent implements OnInit {
         error: (error) => {
           Swal.fire({
             icon: 'error',
-            title: 'Erreur',
-            text: error?.error.message || 'Une erreur est survenue lors de la suppression.',
+            title: this.translate.instant('LISTE_PARTICIPANTS.DELETE_ERROR_TITLE'),
+            text: this.translate.instant(
+              this.resolveErrorKey(error, 'LISTE_PARTICIPANTS.DELETE_ERROR_FALLBACK')
+            ),
             width: 500,
           });
         },
       });
     });
+  }
+
+  private resolveErrorKey(error: any, fallbackKey: string): string {
+    const code = error?.error?.code;
+    if (code) {
+      const key = `BACKEND_ERRORS.${code}`;
+      if (this.translate.instant(key) !== key) {
+        return key;
+      }
+    }
+    return fallbackKey;
   }
 
 }

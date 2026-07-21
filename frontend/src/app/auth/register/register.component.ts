@@ -117,13 +117,13 @@ export class RegisterComponent implements OnInit {
 
     },
 
-    error: () => {
+    error: (error) => {
 
       this.emailChecking = false;
 
       this.snackBar.open(
-        this.translate.instant('ERRORS.SERVER_ERROR'),
-        'Close',
+        this.translate.instant(this.resolveErrorKey(error, 'REGISTER.ERRORS.EMAIL_CHECK_SERVER_FALLBACK')),
+        this.translate.instant('REGISTER.CLOSE'),
         { duration: 3000 }
       );
 
@@ -183,14 +183,12 @@ export class RegisterComponent implements OnInit {
     ];
 
     if (!allowedTypes.includes(file.type)) {
-      this.imageError =
-        'Only JPG, PNG and WEBP files are allowed';
+      this.imageError = this.translate.instant('REGISTER.ERRORS.IMAGE_TYPE');
       return;
     }
 
     if (file.size > 5 * 1024 * 1024) {
-      this.imageError =
-        'Maximum image size is 5 MB';
+      this.imageError = this.translate.instant('REGISTER.ERRORS.IMAGE_SIZE');
       return;
     }
 
@@ -243,41 +241,45 @@ export class RegisterComponent implements OnInit {
   }
 
   this.authService.register(formData).subscribe({
-    next: (res) => {
+    next: () => {
        this.snackBar.open(
-        res.message,
+        this.translate.instant('REGISTER.SUCCESS'),
         'Close',
         { duration: 3000 }
       );
       this.router.navigate(['/login']);
     },
 
-    error: (err) => {
-      if (err.status === 409) {
+    error: (error) => {
 
-        this.snackBar.open(
-          err.error?.message,
-          'Close',
-          { duration: 4000 }
-        );
+      let key: string;
 
-      } else if (err.status === 500) {
-
-        this.snackBar.open(
-          err.error?.message || 'Something went wrong, Please try again later.',
-          'Close',
-          { duration: 4000 }
-        );
-
+      if (error.status === 500 || error.status === 0) {
+        key = 'REGISTER.ERRORS.REGISTER_SERVER_FALLBACK';
       } else {
+        key = 'REGISTER.ERRORS.REGISTER_GENERIC_FALLBACK';
+      }
 
-        this.snackBar.open(
-          'Something went wrong',
-          'Close',
-          { duration: 4000 }
-        );
-    }}
+      this.snackBar.open(
+        this.translate.instant(this.resolveErrorKey(error, key)),
+        'Close',
+        { duration: 4000 }
+      );
+    }
   });
+  }
+
+  private resolveErrorKey(error: any, fallbackKey: string): string {
+    
+    const code = error?.error?.code;
+    if (code) {
+      const key = `BACKEND_ERRORS.${code}`;
+      if (this.translate.instant(key) !== key) {
+        return key;
+      }
+    }
+
+    return fallbackKey;
   }
 
   get p() {

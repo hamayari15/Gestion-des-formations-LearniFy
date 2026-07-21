@@ -9,8 +9,8 @@
       </div>
 
       <div>
-        <div class="dialog-title">Participant</div>
-        <div class="dialog-subtitle">Modifier les informations du participant</div>
+        <div class="dialog-title">{{ 'EDIT_PARTICIPANT_DIALOG.TITLE' | translate }}</div>
+        <div class="dialog-subtitle">{{ 'EDIT_PARTICIPANT_DIALOG.SUBTITLE' | translate }}</div>
       </div>
 
     </div>
@@ -26,7 +26,7 @@
     <div class="field">
 
       <div class="field-label">
-        Nom complet
+        {{ 'EDIT_PARTICIPANT_DIALOG.FULL_NAME' | translate }}
         <span class="required-dot"></span>
       </div>
 
@@ -34,52 +34,54 @@
         class="f-input"
         type="text"
         formControlName="fullName"
-        placeholder="Ex: Mohamed Ayari">
-   <small class="error"
-  *ngIf="participantForm.get('fullName')?.touched && participantForm.get('fullName')?.errors?.['required']">
-  Nom requis
-</small>
+        [placeholder]="'EDIT_PARTICIPANT_DIALOG.FULL_NAME_PLACEHOLDER' | translate">
 
-<small class="error"
-  *ngIf="participantForm.get('fullName')?.errors?.['minlength']">
-  Minimum 3 caractères
-</small>
+      <small class="error"
+        *ngIf="participantForm.get('fullName')?.touched && participantForm.get('fullName')?.errors?.['required']">
+        {{ 'EDIT_PARTICIPANT_DIALOG.FULL_NAME_REQUIRED' | translate }}
+      </small>
+
+      <small class="error"
+        *ngIf="participantForm.get('fullName')?.errors?.['minlength']">
+        {{ 'EDIT_PARTICIPANT_DIALOG.FULL_NAME_MINLENGTH' | translate }}
+      </small>
+
     </div>
 
    <div class="field">
 
-  <div class="field-label">
-    Email
-    <span class="required-dot"></span>
-  </div>
+      <div class="field-label">
+        {{ 'EDIT_PARTICIPANT_DIALOG.EMAIL' | translate }}
+        <span class="required-dot"></span>
+      </div>
 
-  <input
-    class="f-input"
-    type="email"
-    formControlName="email"
-    placeholder="exemple@mail.com">
+      <input
+        class="f-input"
+        type="email"
+        formControlName="email"
+        [placeholder]="'EDIT_PARTICIPANT_DIALOG.EMAIL_PLACEHOLDER' | translate">
 
-  <small class="error"
-    *ngIf="participantForm.get('email')?.touched && participantForm.get('email')?.errors?.['required']">
-    L’adresse email est obligatoire
-  </small>
+      <small class="error"
+        *ngIf="participantForm.get('email')?.touched && participantForm.get('email')?.errors?.['required']">
+        {{ 'EDIT_PARTICIPANT_DIALOG.EMAIL_REQUIRED' | translate }}
+      </small>
 
-  <small class="error"
-    *ngIf="participantForm.get('email')?.touched && participantForm.get('email')?.errors?.['email']">
-    Format email invalide
-  </small>
+      <small class="error"
+        *ngIf="participantForm.get('email')?.touched && participantForm.get('email')?.errors?.['email']">
+        {{ 'EDIT_PARTICIPANT_DIALOG.EMAIL_INVALID' | translate }}
+      </small>
 
-  <small class="error"
-    *ngIf="participantForm.get('email')?.errors?.['emailTaken']">
-    Cet email est déjà utilisé
-  </small>
+      <small class="error"
+        *ngIf="participantForm.get('email')?.errors?.['emailTaken']">
+        {{ 'EDIT_PARTICIPANT_DIALOG.EMAIL_TAKEN' | translate }}
+      </small>
 
-</div>
+    </div>
 
     <div class="field">
 
       <div class="field-label">
-        Âge
+        {{ 'EDIT_PARTICIPANT_DIALOG.AGE' | translate }}
         <span class="required-dot"></span>
       </div>
 
@@ -87,21 +89,23 @@
         class="f-input"
         type="number"
         formControlName="age"
-        placeholder="Ex: 23">
-<small class="error"
-  *ngIf="participantForm.get('age')?.touched && participantForm.get('age')?.errors?.['required']">
-  Âge requis
-</small>
+        [placeholder]="'EDIT_PARTICIPANT_DIALOG.AGE_PLACEHOLDER' | translate">
 
-<small class="error"
-  *ngIf="participantForm.get('age')?.errors?.['min']">
-  L'âge minimum est 16 ans
-</small>
+      <small class="error"
+        *ngIf="participantForm.get('age')?.touched && participantForm.get('age')?.errors?.['required']">
+        {{ 'EDIT_PARTICIPANT_DIALOG.AGE_REQUIRED' | translate }}
+      </small>
 
-<small class="error"
-  *ngIf="participantForm.get('age')?.errors?.['max']">
-  L'âge maximum est 100 ans
-</small>
+      <small class="error"
+        *ngIf="participantForm.get('age')?.errors?.['min']">
+        {{ 'EDIT_PARTICIPANT_DIALOG.AGE_MIN' | translate }}
+      </small>
+
+      <small class="error"
+        *ngIf="participantForm.get('age')?.errors?.['max']">
+        {{ 'EDIT_PARTICIPANT_DIALOG.AGE_MAX' | translate }}
+      </small>
+
     </div>
 
   </div>
@@ -109,13 +113,13 @@
   <div class="dialog-footer">
 
     <span class="footer-hint">
-      Modifier uniquement les champs nécessaires
+      {{ 'EDIT_PARTICIPANT_DIALOG.FOOTER_HINT' | translate }}
     </span>
 
     <div class="footer-actions">
 
       <button class="btn-cancel" (click)="closeDialog()">
-        Annuler
+        {{ 'EDIT_PARTICIPANT_DIALOG.CANCEL' | translate }}
       </button>
 
       <button
@@ -123,7 +127,7 @@
         (click)="onSubmit()"
         [disabled]="!isFormValid() || !hasChanges()">
 
-        Modifier
+        {{ 'EDIT_PARTICIPANT_DIALOG.SUBMIT' | translate }}
 
       </button>
 

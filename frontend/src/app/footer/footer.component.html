@@ -28,7 +28,7 @@
 
         <a routerLink="/about">{{ 'FOOTER.QUICK_LINKS.ABOUT' | translate }}</a>
 
-        <a [routerLink]="isAuthenticated ? '/participant-interface/formations-disponibles' : '/login'">
+        <a *ngIf="!isAdmin" [routerLink]="isAuthenticated ? '/participant-interface/formations-disponibles' : '/login'">
           {{ 'FOOTER.QUICK_LINKS.FORMATIONS' | translate }}
         </a>
 

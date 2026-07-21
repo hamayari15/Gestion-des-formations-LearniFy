@@ -160,47 +160,42 @@ exports.updateFormation = async (req, res) => {
 };
 
 
-exports.deleteFormation = async (req, res) => {
+exports.archiveFormation = async (req, res) => {
   try {
     const formation = await Formation.findById(req.params.id);
 
     if (!formation) {
-      return res.status(404).json({ success: false, message: "Formation introuvable." });
+      return res.status(404).json({
+        success: false,
+        message: "Formation introuvable.",
+      });
     }
 
-    await Inscription.updateMany(
-      { formationId: formation._id },
-      {
-        $set: {
-          formationSnapshot: {
-            theme: formation.theme,
-            modeFormation: formation.modeFormation,
-            numSalle: formation.numSalle,
-            periodeDu: formation.periodeDu,
-            periodeA: formation.periodeA,
-            horaireDu: formation.horaireDu,
-            horaireA: formation.horaireA,
-          },
-        },
-      }
-    );
+    if (formation.isArchived) {
+      return res.status(400).json({
+        success: false,
+        message: "Cette formation est déjà archivée.",
+      });
+    }
 
-    await formation.deleteOne();
+    formation.isArchived = true;
+    await formation.save();
 
-    return res.status(200).json({ 
-      success: true, 
-      message: "Formation supprimée avec succès." 
+    return res.status(200).json({
+      success: true,
+      message: "Formation archivée avec succès.",
     });
 
   } catch (error) {
     if (error.name === "CastError") {
-      return res.status(400).json({ 
-        success: false, 
-        message: "Identifiant de formation invalide." 
+      return res.status(400).json({
+        success: false,
+        message: "Identifiant de formation invalide.",
       });
     }
-    return res.status(500).json({ success: false, 
-      message: "Une erreur est survenue lors de la suppression." 
+    return res.status(500).json({
+      success: false,
+      message: "Une erreur est survenue lors de l'archivage.",
     });
   }
 };

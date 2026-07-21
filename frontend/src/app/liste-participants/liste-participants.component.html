@@ -3,9 +3,9 @@
   <div class="page-header">
 
     <div>
-      <h2 class="page-title">Liste des Participants</h2>
+      <h2 class="page-title">{{ 'LISTE_PARTICIPANTS.TITLE' | translate }}</h2>
       <p class="page-subtitle">
-        Manage registered participants
+        {{ 'LISTE_PARTICIPANTS.SUBTITLE' | translate }}
       </p>
     </div>
 
@@ -19,9 +19,9 @@
 
   </div>
 
-  <div *ngIf="errorMessage" class="alert-error">
+  <div *ngIf="errorKey" class="alert-error">
     <i class="fas fa-exclamation-circle"></i>
-    {{ errorMessage }}
+    {{ errorKey | translate }}
   </div>
 
   <div class="filter-row">
@@ -33,9 +33,9 @@
       <input
         type="text"
         class="search-input"
-        placeholder="Search by participant name..."
+        [placeholder]="'LISTE_PARTICIPANTS.SEARCH' | translate"
         [(ngModel)]="searchTerm"
-        [disabled]="!!errorMessage || !hasAnyParticipants"
+        [disabled]="!!errorKey || !hasAnyParticipants"
         (input)="applyFilters()">
 
     </div>
@@ -43,12 +43,12 @@
     <select
       class="status-select"
       [(ngModel)]="selectedStatus"
-      [disabled]="!!errorMessage || !hasAnyParticipants"
+      [disabled]="!!errorKey || !hasAnyParticipants"
       (change)="applyFilters()">
 
-      <option value="">All Status</option>
-      <option value="Actif">Actif</option>
-      <option value="Inactif">Inactif</option>
+      <option value="">{{ 'LISTE_PARTICIPANTS.ALL_STATUS' | translate }}</option>
+      <option value="Actif">{{ 'LISTE_PARTICIPANTS.ACTIVE' | translate }}</option>
+      <option value="Inactif">{{ 'LISTE_PARTICIPANTS.INACTIVE' | translate }}</option>
 
     </select>
 
@@ -56,10 +56,10 @@
 
   <div class="count-bar">
 
-    <span class="count-label" *ngIf="!errorMessage">
+    <span class="count-label" *ngIf="!errorKey">
       <i class="fas fa-users"></i>
       {{ totalItems }}
-      participant{{ totalItems !== 1 ? 's' : '' }}
+      {{ totalItems !== 1 ? ('LISTE_PARTICIPANTS.PARTICIPANTS' | translate) : ('LISTE_PARTICIPANTS.PARTICIPANT' | translate) }}
     </span>
 
     <button
@@ -67,7 +67,7 @@
       class="clear-btn"
       (click)="clearFilters()">
 
-      Clear filters
+      {{ 'LISTE_PARTICIPANTS.CLEAR_FILTERS' | translate }}
 
     </button>
 
@@ -80,59 +80,48 @@
       <div class="spinner"></div>
 
       <span class="spinner-label">
-        Loading participants...
+        {{ 'LISTE_PARTICIPANTS.LOADING' | translate }}
       </span>
 
     </div>
 
-    <div *ngIf="!loading && !errorMessage && !hasAnyParticipants && filteredParticipants.length === 0" class="empty-state">
+    <div *ngIf="!loading && !errorKey && !hasAnyParticipants && filteredParticipants.length === 0" class="empty-state">
       <i class="fas fa-users empty-icon"></i>
-      <p class="empty-title">No participants yet</p>
-      <span class="empty-sub">Participant accounts will appear here once created.</span>
+      <p class="empty-title">{{ 'LISTE_PARTICIPANTS.NO_PARTICIPANTS' | translate }}</p>
+      <span class="empty-sub">{{ 'LISTE_PARTICIPANTS.NO_PARTICIPANTS_DESC' | translate }}</span>
     </div>
 
-    <div *ngIf="!loading && !errorMessage && hasAnyParticipants && filteredParticipants.length === 0" class="empty-state"
-      class="empty-state">
+    <div *ngIf="!loading && !errorKey && hasAnyParticipants && filteredParticipants.length === 0" class="empty-state">
 
       <i class="fas fa-search empty-icon"></i>
 
       <p class="empty-title">
-        No participants found
+        {{ 'LISTE_PARTICIPANTS.NOT_FOUND' | translate }}
       </p>
 
       <span class="empty-sub">
-        Try adjusting your search or filter
+        {{ 'LISTE_PARTICIPANTS.NOT_FOUND_DESC' | translate }}
       </span>
 
     </div>
 
     <table
     class="participants-table"
-      *ngIf="!loading && filteredParticipants.length > 0 && !errorMessage">
+      *ngIf="!loading && filteredParticipants.length > 0 && !errorKey">
 
       <thead>
 
        <tr>
 
-        <th style="width:6%">#</th>
-
-        <th style="width:8%">Image</th>
-
-        <th style="width:18%">Full Name</th>
-
-        <th style="width:8%">Age</th>
-
-        <th style="width:10%">Gender</th>
-
-        <th style="width:12%">Status</th>
-
-        <th style="width:20%">Email</th>
-
-        <th style="width:16%">Created At</th>
-
-        <th style="width:12%" class="text-center">
-          Actions
-        </th>
+        <th style="width:5%">{{ 'LISTE_PARTICIPANTS.TABLE.NUMBER' | translate }}</th>
+        <th style="width:8%">{{ 'LISTE_PARTICIPANTS.TABLE.IMAGE' | translate }}</th>
+        <th style="width:17%">{{ 'LISTE_PARTICIPANTS.TABLE.FULL_NAME' | translate }}</th>
+        <th style="width:6%">{{ 'LISTE_PARTICIPANTS.TABLE.AGE' | translate }}</th>
+        <th style="width:9%">{{ 'LISTE_PARTICIPANTS.TABLE.GENDER' | translate }}</th>
+        <th style="width:11%">{{ 'LISTE_PARTICIPANTS.TABLE.STATUS' | translate }}</th>
+        <th style="width:20%">{{ 'LISTE_PARTICIPANTS.TABLE.EMAIL' | translate }}</th>
+        <th style="width:14%">{{ 'LISTE_PARTICIPANTS.TABLE.CREATED_AT' | translate }}</th>
+        <th style="width:10%" class="text-center">{{ 'LISTE_PARTICIPANTS.TABLE.ACTIONS' | translate }}</th>
 
       </tr>
 
@@ -191,7 +180,7 @@
               [class.badge-active]="participant.status === 'Actif'"
               [class.badge-inactive]="participant.status === 'Inactif'">
               
-              {{ participant.status }}
+              {{ participant.status === 'Actif' ? ('LISTE_PARTICIPANTS.ACTIVE' | translate) : ('LISTE_PARTICIPANTS.INACTIVE' | translate) }}
               
             </span>
             
@@ -251,7 +240,7 @@
       (click)="prevPage()"
       [disabled]="page === 1">
 
-      Previous
+      {{ 'LISTE_PARTICIPANTS.PREVIOUS' | translate }}
 
     </button>
 
@@ -270,7 +259,7 @@
       (click)="nextPage()"
       [disabled]="page === totalPages">
 
-      Next
+      {{ 'LISTE_PARTICIPANTS.NEXT' | translate }}
 
     </button>
 

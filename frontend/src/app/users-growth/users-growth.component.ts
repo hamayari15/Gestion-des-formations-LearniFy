@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription, forkJoin } from 'rxjs';
 import { Chart } from 'chart.js/auto';
 import { ParticipantService } from '../core/services/participant.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-users-growth',
   templateUrl: './users-growth.component.html',
   styleUrls: ['./users-growth.component.css']
 })
-export class UsersGrowthComponent implements OnInit {
+export class UsersGrowthComponent implements OnInit, OnDestroy {
 
   participants: any[] = [];
 
@@ -22,70 +23,48 @@ export class UsersGrowthComponent implements OnInit {
     responsive: true
   };
 
-  ageChartData = {
-    labels: ['18-25', '26-35', '36-45', '46+'],
-    datasets: [
-      {
-        label: 'Age Distribution',
-        data: this.ageData,
-        backgroundColor: [
-          'rgb(52, 141, 201)',
-          'rgb(138, 43, 226)',
-          'rgb(255, 165, 0)',
-          'rgb(99, 188, 104)'
-        ],
-        hoverOffset: 4
-      }
-    ]
-  };
-
-  genderChartData = {
-    labels: ['Male', 'Female'],
-    datasets: [
-      {
-        label: 'Gender Distribution',
-        data: this.genderData,
-        backgroundColor: [
-          'rgb(52, 141, 201)',
-          'rgb(255, 165, 0)'
-        ],
-        hoverOffset: 4
-      }
-    ]
-  };
-
-  doughnutChartData = {
-    labels: ['Actif', 'Inactif'],
-    datasets: [
-      {
-        label: 'Users Status',
-        data: this.activeInactiveData,
-        backgroundColor: [
-          '#22c55e',
-          '#ef4444'
-        ],
-        hoverOffset: 4
-      }
-    ]
-  };
-
+  ageChartData: any;
+  genderChartData: any;
+  doughnutChartData: any;
   doughnutChartType: any = 'doughnut';
 
   lineChart!: Chart;
 
   isLoading = false;
   hasData = false;
-  errorMessage = '';
+  hasError = false;
 
-  constructor(private participantService: ParticipantService) {}
+  private rawGrowthLabels: string[] = [];
+  private rawDailyData: number[] = [];
+  private rawCumulativeData: number[] = [];
+  private langChangeSub!: Subscription;
+
+  constructor(
+    private participantService: ParticipantService,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit(): void {
     this.loadDashboard();
+
+    this.langChangeSub = this.translate.onLangChange.subscribe(() => {
+      if (this.hasData) {
+        this.calculateAgeDistribution();
+        this.calculateGenderDistribution();
+        this.rebuildDoughnutChart();
+        this.createChart(this.rawGrowthLabels, this.rawDailyData);
+        this.createLineChart(this.rawGrowthLabels, this.rawCumulativeData);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.langChangeSub?.unsubscribe();
   }
 
   loadDashboard(): void {
     this.isLoading = true;
-    this.errorMessage = '';
+    this.hasError = false;
 
     forkJoin({
       growth: this.participantService.getParticipantsGrowth(),
@@ -103,11 +82,9 @@ export class UsersGrowthComponent implements OnInit {
 
         this.isLoading = false;
       },
-      error: (error) => {
+      error: () => {
         this.isLoading = false;
-        this.errorMessage =
-          error.error?.message ||
-          'Erreur lors de la récupération des données.';
+        this.hasError = true;
       }
     });
   }
@@ -115,6 +92,9 @@ export class UsersGrowthComponent implements OnInit {
   private handleGrowth(response: any): void {
     const labels = response.data.map((item: any) => item._id);
     const dailyData = response.data.map((item: any) => item.count);
+
+    this.rawGrowthLabels = labels;
+    this.rawDailyData = dailyData;
 
     this.createChart(labels, dailyData);
 
@@ -126,6 +106,8 @@ export class UsersGrowthComponent implements OnInit {
       cumulativeData.push(total);
     });
 
+    this.rawCumulativeData = cumulativeData;
+
     this.createLineChart(labels, cumulativeData);
   }
 
@@ -134,19 +116,22 @@ export class UsersGrowthComponent implements OnInit {
 
     this.calculateAgeDistribution();
     this.calculateGenderDistribution();
-
-    this.ageChartData = { ...this.ageChartData };
-    this.genderChartData = { ...this.genderChartData };
   }
 
   private handleActiveInactive(res: any): void {
     this.activeInactiveData = [res.active, res.inactive];
+    this.rebuildDoughnutChart();
+  }
 
+  private rebuildDoughnutChart(): void {
     this.doughnutChartData = {
-      ...this.doughnutChartData,
+      labels: [
+        this.translate.instant('USERS_GROWTH.CHART.ACTIVE'),
+        this.translate.instant('USERS_GROWTH.CHART.INACTIVE'),
+      ],
       datasets: [
         {
-          label: 'Users Status',
+          label: this.translate.instant('USERS_GROWTH.CHART.USERS_STATUS'),
           data: this.activeInactiveData,
           backgroundColor: [
             '#22c55e',
@@ -166,7 +151,7 @@ export class UsersGrowthComponent implements OnInit {
 
       if (age == null) return;
 
-      if (age >= 18 && age <= 25)
+      if (age >= 16 && age <= 25)
         this.ageData[0]++;
       else if (age >= 26 && age <= 35)
         this.ageData[1]++;
@@ -177,10 +162,10 @@ export class UsersGrowthComponent implements OnInit {
     });
 
     this.ageChartData = {
-      ...this.ageChartData,
+      labels: ['16-25', '26-35', '36-45', '46+'],
       datasets: [
         {
-          label: 'Age Distribution',
+          label: this.translate.instant('USERS_GROWTH.CHART.AGE_DISTRIBUTION'),
           data: this.ageData,
           backgroundColor: [
             'rgb(52, 141, 201)',
@@ -205,10 +190,13 @@ export class UsersGrowthComponent implements OnInit {
     });
 
     this.genderChartData = {
-      ...this.genderChartData,
+      labels: [
+        this.translate.instant('USERS_GROWTH.CHART.MALE'),
+        this.translate.instant('USERS_GROWTH.CHART.FEMALE'),
+      ],
       datasets: [
         {
-          label: 'Gender Distribution',
+          label: this.translate.instant('USERS_GROWTH.CHART.GENDER_DISTRIBUTION'),
           data: this.genderData,
           backgroundColor: [
             'rgb(52, 141, 201)',
@@ -240,7 +228,7 @@ export class UsersGrowthComponent implements OnInit {
           labels,
           datasets: [
             {
-              label: 'Nouveaux participants',
+              label: this.translate.instant('USERS_GROWTH.CHART.NEW_PARTICIPANTS'),
               data,
               backgroundColor: '#518be9',
               borderRadius: 6,
@@ -274,7 +262,7 @@ export class UsersGrowthComponent implements OnInit {
           labels,
           datasets: [
             {
-              label: 'Total Users Growth',
+              label: this.translate.instant('USERS_GROWTH.CHART.TOTAL_GROWTH'),
               data,
               fill: false,
               tension: 0.3

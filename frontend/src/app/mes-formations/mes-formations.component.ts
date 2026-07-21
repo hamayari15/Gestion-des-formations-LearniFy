@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { InscriptionService } from '../core/services/incription.service';
 import { UserService } from '../core/services/user.service';
 
@@ -13,12 +14,13 @@ export class MesFormationsComponent implements OnInit {
   participantid: string = '';
 
   loading: boolean = false;
-  errorMessage: string = '';
+  errorKey: string = '';
 
   constructor(
     private inscriptionService: InscriptionService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -28,19 +30,31 @@ export class MesFormationsComponent implements OnInit {
 
   getInscriptions(): void {
     this.loading = true;
-    this.errorMessage = '';
- 
+    this.errorKey = '';
+
     this.inscriptionService.getInscriptionsByParticipant(this.participantid).subscribe({
       next: (response: any) => {
-        console.log(response)
         this.inscriptions = response.data.inscriptions;
         this.loading = false;
       },
       error: (error) => {
         this.loading = false;
-        this.errorMessage =
-          error.error?.message || 'Erreur lors de la récupération des inscriptions';
+        this.errorKey = this.resolveErrorKey(
+          error,
+          'MES_FORMATIONS.ERROR_FALLBACK'
+        );
       }
     });
+  }
+
+  private resolveErrorKey(error: any, fallbackKey: string): string {
+    const code = error?.error?.code;
+    if (code) {
+      const key = `BACKEND_ERRORS.${code}`;
+      if (this.translate.instant(key) !== key) {
+        return key;
+      }
+    }
+    return fallbackKey;
   }
 }

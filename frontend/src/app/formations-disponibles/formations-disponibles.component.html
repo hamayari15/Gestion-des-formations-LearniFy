@@ -15,9 +15,9 @@
     </button>
   </div>
 
-  <div *ngIf="errorMessage" class="alert-error">
+  <div *ngIf="errorKey" class="alert-error">
     <i class="fas fa-exclamation-circle"></i>
-    {{ errorMessage }}
+    {{ errorKey | translate }}
   </div>
 
   <div class="filter-row">
@@ -29,7 +29,7 @@
         type="text"
         placeholder="{{ 'FORMATIONS_DISPONIBLES.SEARCH' | translate }}"
         [(ngModel)]="searchTerm"
-        [disabled]="!!errorMessage || !hasAnyFormations"
+        [disabled]="!!errorKey || !hasAnyFormations"
         (input)="applyFilters()"
       />
     </div>
@@ -37,7 +37,7 @@
     <select
       class="mode-select"
       [(ngModel)]="selectedMode"
-      [disabled]="!!errorMessage || !hasAnyFormations"
+      [disabled]="!!errorKey || !hasAnyFormations"
       (change)="applyFilters()"
     >
       <option value="">{{ "FORMATIONS_DISPONIBLES.ALL_MODES" | translate }}</option>
@@ -50,7 +50,7 @@
   </div>
 
   <div class="count-bar">
-    <span class="count-label" *ngIf="!errorMessage">
+    <span class="count-label" *ngIf="!errorKey">
       <i class="fas fa-graduation-cap"></i>
 
       {{ totalItems }}
@@ -96,7 +96,7 @@
     <div
       *ngIf="
         !loading &&
-        !errorMessage &&
+        !errorKey &&
         !hasAnyFormations &&
         filteredFormations.length === 0
       "
@@ -116,7 +116,7 @@
     <div
       *ngIf="
         !loading &&
-        !errorMessage &&
+        !errorKey &&
         hasAnyFormations &&
         filteredFormations.length === 0
       "
@@ -135,7 +135,7 @@
 
     <table
       class="formations-table"
-      *ngIf="!loading && filteredFormations.length && !errorMessage"
+      *ngIf="!loading && filteredFormations.length && !errorKey"
     >
       <thead>
         <tr>

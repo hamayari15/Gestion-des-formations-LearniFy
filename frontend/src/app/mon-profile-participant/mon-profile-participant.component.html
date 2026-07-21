@@ -5,7 +5,7 @@
     <span>{{ 'PROFILE.LOADING' | translate }}</span>
   </div>
 
-  <div class="state-panel error-panel" *ngIf="!loadingParticipant && !loadingStats && errorMessage">
+  <div class="state-panel error-panel" *ngIf="!loadingParticipant && !loadingStats && errorKey">
     <div class="state-card">
       <div class="state-icon icon-error">
         <i class="fas fa-triangle-exclamation"></i>
@@ -13,7 +13,7 @@
 
       <h3>{{ 'PROFILE.ERROR_TITLE' | translate }}</h3>
 
-      <p>{{ errorMessage }}</p>
+      <p>{{ errorKey | translate }}</p>
 
       <button class="state-retry" (click)="retry()">
         <i class="fas fa-rotate-right"></i>
@@ -22,13 +22,13 @@
     </div>
   </div>
 
-  <div class="state-panel empty-panel" *ngIf="!loadingParticipant && !loadingStats && !errorMessage && !participant">
+  <div class="state-panel empty-panel" *ngIf="!loadingParticipant && !loadingStats && !errorKey && !participant">
     <i class="fas fa-user-slash"></i>
     <h3>{{ 'PROFILE.EMPTY_TITLE' | translate }}</h3>
     <p>{{ 'PROFILE.EMPTY_SUBTITLE' | translate }}</p>
   </div>
 
-  <ng-container *ngIf="!loadingParticipant && !loadingStats && !errorMessage && participant">
+  <ng-container *ngIf="!loadingParticipant && !loadingStats && !errorKey && participant">
 
     <div class="profile-section">
 

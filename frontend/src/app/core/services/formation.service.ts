@@ -34,7 +34,8 @@ export class FormationService {
     return this.http.put(`${this.apiUrl}/update/${id}`, formation);
   }
 
-  deleteFormation(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/delete/${id}`);
+  archiveFormation(id: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/archive/${id}`, {});
   }
-}
+
+};

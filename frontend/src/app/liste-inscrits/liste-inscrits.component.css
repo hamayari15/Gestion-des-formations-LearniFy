@@ -409,12 +409,19 @@ tbody td {
 
 @media (max-width: 768px) {
 
+  .page-header {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
   .filter-row {
     grid-template-columns: 1fr;
   }
 
   table {
-    min-width: 900px;
+    min-width: 850px;
   }
 
   .table-card {
