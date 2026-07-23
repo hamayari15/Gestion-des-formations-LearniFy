@@ -1,5 +1,6 @@
 .dashboard-container {
   min-height: 100vh;
+  width: 100%;
   padding: 14px;
   background: #f8fafc;
   font-family: 'Inter', -apple-system, sans-serif;

@@ -37,22 +37,28 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.menuOpen = !this.menuOpen;
   }
 
+  closeMenu() {
+    this.menuOpen = false;
+  }
+
   changeLanguage(lang: string) {
     this.translate.use(lang);
     localStorage.setItem('language', lang);
     this.currentLanguage = lang;
 
-    this.menuOpen = false;
+    this.closeMenu();
   }
-
-  navigateToLogin(): void {
-    this.menuOpen = false;
-    this.router.navigate(['login']);
+  
+  navigateToRegister(): void {
+    this.closeMenu();
+    this.router.navigate(['register']);
   }
-
+  
   logout(): void {
     this.authService.logout();
     this.router.navigate(['login']);
+    
+    this.menuOpen = false;
   }
 
   ngOnDestroy(): void {

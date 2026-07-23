@@ -1,5 +1,6 @@
 .container {
   min-height: 90vh;
+  margin: 0 auto;
 }
 
 .page-header {
@@ -479,6 +480,11 @@
 }
 
 @media (max-width: 768px) {
+
+  .container {
+    padding: 6px 20px;
+  }
+  
   .filter-row {
     grid-template-columns: 1fr;
   }

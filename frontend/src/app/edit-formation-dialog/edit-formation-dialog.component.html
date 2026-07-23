@@ -157,10 +157,15 @@
   </div>
 
   <div class="dialog-footer">
-    <span class="footer-hint">
-      <i class="ti ti-info-circle" aria-hidden="true"></i>
-      {{ 'EDIT_FORMATION_DIALOG.REQUIRED_HINT' | translate }} <span style="color:#f43f5e;margin:0 2px;">•</span>
-    </span>
+      <span class="footer-hint">
+  <i class="ti ti-info-circle" aria-hidden="true"></i>
+
+  {{ 'EDIT_FORMATION_DIALOG.REQUIRED_TEXT' | translate }}
+
+  <span style="color:#f43f5e; margin:0 2px;">•</span>
+
+  {{ 'EDIT_FORMATION_DIALOG.REQUIRED_SUFFIX' | translate }}
+</span>
     <div class="footer-actions">
       <button class="btn-cancel" (click)="closeDialog()">
         <i class="ti ti-x" aria-hidden="true"></i> {{ 'EDIT_FORMATION_DIALOG.CANCEL' | translate }}

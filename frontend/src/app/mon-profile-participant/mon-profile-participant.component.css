@@ -341,6 +341,7 @@
 
 }
 
+
 @media (max-width: 900px) {
 
   .profile-page {
@@ -358,11 +359,7 @@
     align-items: center;
   }
 
-  .section-header {
-    width: 100%;
-    text-align: left;
-  }
-
+  .section-header,
   .section-title {
     width: 100%;
     text-align: left;
@@ -375,6 +372,7 @@
   }
 
 }
+
 
 @media (max-width: 600px) {
 
@@ -409,7 +407,7 @@
   }
 
   .stats-section {
-    grid-template-columns: (2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
 

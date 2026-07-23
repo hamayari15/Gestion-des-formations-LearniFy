@@ -523,6 +523,7 @@
     flex-wrap: wrap;
     width: 100%;
     gap: 8px;
+    margin-top: 14px;
   }
 
   .btn-refresh {

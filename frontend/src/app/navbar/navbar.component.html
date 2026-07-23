@@ -83,7 +83,7 @@
 </div>
 
       <li class="nav-item mobile-login">
-        <button *ngIf="!isLoggedIn" (click)="navigateToLogin()" class="btn-connexion">
+        <button *ngIf="!isLoggedIn" (click)="navigateToRegister()" class="btn-connexion">
           <i class="fas fa-sign-in-alt"></i> {{ 'NAVBAR.GET_STARTED' | translate }}</button>
         <button *ngIf="isLoggedIn" (click)="logout()" class="btn-connexion">
           <i class="fas fa-sign-out-alt"></i> {{ 'NAVBAR.LOGOUT' | translate }}</button>

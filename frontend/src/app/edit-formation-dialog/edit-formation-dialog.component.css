@@ -240,3 +240,55 @@
     .btn-save:hover { background: #4338ca; }
     .btn-save:active { transform: scale(0.97); }
     .btn-save .ti { font-size: 15px; }
+
+    @media (max-width: 640px) {
+
+  .dialog {
+    width: 100%;
+    max-height: 80vh;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dialog-header {
+    padding: 18px 16px 16px;
+  }
+
+  .dialog-body {
+    padding: 16px;
+    flex: 1;
+  }
+
+  .dialog-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 14px 16px;
+  }
+
+  .footer-hint {
+    flex-wrap: wrap;
+    line-height: 1.5;
+    font-size: 12px;
+  }
+
+  .footer-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+
+  .btn-save,
+  .btn-cancel {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+}

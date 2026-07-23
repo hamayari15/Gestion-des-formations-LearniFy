@@ -203,3 +203,44 @@ input.ng-valid.ng-touched:not(:placeholder-shown) {
 .btn-save:hover {
   background: #4338ca;
 }
+
+@media (max-width: 640px) {
+
+  .dialog {
+    max-height: 75vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dialog-body {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .dialog-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .footer-hint {
+    justify-content: center;
+    text-align: center;
+    line-height: 1.5;
+    flex-wrap: wrap;
+  }
+
+  .footer-actions {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .btn-save,
+  .btn-cancel {
+    width: 100%;
+    justify-content: center;
+  }
+
+}
