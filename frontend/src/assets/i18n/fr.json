@@ -490,6 +490,9 @@
     "TITLE": "Liste des Formations",
     "SUBTITLE": "Gérer les sessions et calendriers de formation",
     "REFRESH": "Actualiser",
+    "STATUS_ALL": "Tous",
+    "STATUS_ACTIVE": "Actives",
+    "STATUS_ARCHIVED": "Archivées",
     "ADD_FORMATION": "Ajouter une formation",
     "SEARCH": "Rechercher par thème...",
     "ALL_MODES": "Tous les modes",
@@ -525,7 +528,21 @@
     "ARCHIVE_SUCCESS_TITLE": "Succès",
     "ARCHIVE_SUCCESS_TEXT": "La formation a été archivée avec succès.",
     "ARCHIVE_ERROR_TITLE": "Erreur",
-    "ARCHIVE_ERROR_FALLBACK": "Une erreur est survenue lors de l'archivage."
+    "ARCHIVE_ERROR_FALLBACK": "Une erreur est survenue lors de l'archivage.",
+
+    "UNARCHIVE_CONFIRM_TITLE": "Réactiver cette formation ?",
+    "UNARCHIVE_CONFIRM_TEXT": "Cette formation redeviendra visible et ouverte aux inscriptions.",
+    "UNARCHIVE_CONFIRM_BTN": "Réactiver",
+    "UNARCHIVE_CANCEL_BTN": "Annuler",
+    "UNARCHIVE_SUCCESS_TITLE": "Succès",
+    "UNARCHIVE_SUCCESS_TEXT": "La formation a été réactivée avec succès.",
+    "UNARCHIVE_ERROR_TITLE": "Erreur",
+    "UNARCHIVE_ERROR_FALLBACK": "Une erreur est survenue lors de la réactivation.",
+
+    "NO_ACTIVE": "Aucune formation active",
+    "NO_ACTIVE_DESC": "Toutes les formations sont actuellement archivées.",
+    "NO_ARCHIVED": "Aucune formation archivée",
+    "NO_ARCHIVED_DESC": "Les formations archivées apparaîtront ici."
   },
 
   "ADD_FORMATION_DIALOG": {

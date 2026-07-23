@@ -233,6 +233,11 @@ export class RegisterComponent implements OnInit {
     this.profileForm.value.gender
   );
 
+  formData.append(
+    'language',
+    this.translate.currentLang || 'fr'
+  );
+
   if (this.selectedImage) {
     formData.append(
       'image',

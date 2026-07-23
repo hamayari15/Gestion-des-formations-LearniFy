@@ -65,7 +65,6 @@ exports.getAllFormations = async (req, res) => {
     } else if (status === "archived") {
       query.isArchived = true;
     }
-    // status === "all" → no isArchived filter
 
     if (search) {
       query.theme = {
@@ -204,6 +203,47 @@ exports.archiveFormation = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Une erreur est survenue lors de l'archivage.",
+    });
+  }
+};
+
+
+exports.unarchiveFormation = async (req, res) => {
+  try {
+    const formation = await Formation.findById(req.params.id);
+
+    if (!formation) {
+      return res.status(404).json({
+        success: false,
+        message: "Formation introuvable.",
+      });
+    }
+
+    if (!formation.isArchived) {
+      return res.status(400).json({
+        success: false,
+        message: "Cette formation n'est pas archivée.",
+      });
+    }
+
+    formation.isArchived = false;
+    await formation.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Formation réactivée avec succès.",
+    });
+
+  } catch (error) {
+    if (error.name === "CastError") {
+      return res.status(400).json({
+        success: false,
+        message: "Identifiant de formation invalide.",
+      });
+    }
+    return res.status(500).json({
+      success: false,
+      message: "Une erreur est survenue lors de la réactivation.",
     });
   }
 };

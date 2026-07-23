@@ -47,6 +47,12 @@ const participantSchema = new mongoose.Schema(
       type: Date,
       default: null
     },
+
+    language: {
+      type: String,
+      enum: ["fr", "en"],
+      default: "fr",
+    },
   },
   {
     timestamps: true,

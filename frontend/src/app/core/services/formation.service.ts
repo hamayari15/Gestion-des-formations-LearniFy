@@ -45,4 +45,8 @@ export class FormationService {
     return this.http.patch(`${this.apiUrl}/archive/${id}`, {});
   }
 
+  unarchiveFormation(id: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/unarchive/${id}`, {});
+  }
+
 };

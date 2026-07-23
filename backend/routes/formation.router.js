@@ -12,5 +12,7 @@ router.put("/Update/:id", formationController.updateFormation);
 
 router.patch("/Archive/:id", formationController.archiveFormation);
 
+router.patch("/Unarchive/:id", formationController.unarchiveFormation);
+
 
 module.exports = router;

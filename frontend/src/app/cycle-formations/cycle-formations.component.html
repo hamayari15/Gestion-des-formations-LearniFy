@@ -1,24 +1,46 @@
 <div class="container mt-4">
 
+  
   <div class="page-header">
     <div>
       <h2 class="page-title">{{ 'CYCLE_FORMATIONS.TITLE' | translate }}</h2>
       <p class="page-subtitle">{{ 'CYCLE_FORMATIONS.SUBTITLE' | translate }}</p>
     </div>
      <div class="header-actions">
-      <button
-        class="btn-icon btn-refresh"
-        (click)="getFormations()"
-        [disabled]="loading"
-        [attr.aria-label]="'CYCLE_FORMATIONS.REFRESH' | translate">
-        <i class="fas fa-rotate-right" [class.spinning]="loading"></i>
-      </button>
+       <button
+         class="btn-icon btn-refresh"
+         (click)="getFormations()"
+         [disabled]="loading"
+         [attr.aria-label]="'CYCLE_FORMATIONS.REFRESH' | translate">
+         <i class="fas fa-rotate-right" [class.spinning]="loading"></i>
+       </button>
+      <div class="status-toggle">
+        <button
+          class="toggle-btn"
+          [class.active]="statusFilter === 'all'"
+          (click)="setStatusFilter('all')">
+          {{ 'CYCLE_FORMATIONS.STATUS_ALL' | translate }}
+        </button>
+        <button
+          class="toggle-btn"
+          [class.active]="statusFilter === 'active'"
+          (click)="setStatusFilter('active')">
+          {{ 'CYCLE_FORMATIONS.STATUS_ACTIVE' | translate }}
+        </button>
+        <button
+          class="toggle-btn"
+          [class.active]="statusFilter === 'archived'"
+          (click)="setStatusFilter('archived')">
+          {{ 'CYCLE_FORMATIONS.STATUS_ARCHIVED' | translate }}
+        </button>
+      </div>
       <button class="btn-add" (click)="navigateToAddFormation()">
         <i class="fas fa-plus"></i>
         {{ 'CYCLE_FORMATIONS.ADD_FORMATION' | translate }}
       </button>
     </div>
   </div>
+
 
   <div *ngIf="errorKey" class="alert-error">
     <i class="fas fa-exclamation-circle"></i>
@@ -33,13 +55,13 @@
         class="search-input"
         [placeholder]="'CYCLE_FORMATIONS.SEARCH' | translate"
         [(ngModel)]="searchTerm"
-        [disabled]="!!errorKey || !hasAnyFormations"
+        [disabled]="!!errorKey"
         (input)="applyFilters()">
     </div>
     <select
       class="mode-select"
       [(ngModel)]="selectedMode"
-      [disabled]="!!errorKey || !hasAnyFormations"
+      [disabled]="!!errorKey"
       (change)="applyFilters()">
       <option value="">{{ 'CYCLE_FORMATIONS.ALL_MODES' | translate }}</option>
       <option value="Présentiel">{{ 'CYCLE_FORMATIONS.PRESENTIEL' | translate }}</option>
@@ -69,13 +91,25 @@
       <span class="spinner-label">{{ 'CYCLE_FORMATIONS.LOADING' | translate }}</span>
     </div>
 
-    <div *ngIf="!loading && !errorKey && !hasAnyFormations && filteredFormations.length === 0" class="empty-state">
+    <div *ngIf="!loading && !errorKey && filteredFormations.length === 0 && !searchTerm && !selectedMode && statusFilter === 'all'" class="empty-state">
       <i class="fas fa-graduation-cap empty-icon"></i>
       <p class="empty-title">{{ 'CYCLE_FORMATIONS.NO_TRAININGS' | translate }}</p>
       <span class="empty-sub">{{ 'CYCLE_FORMATIONS.NO_TRAININGS_DESC' | translate }}</span>
     </div>
 
-    <div *ngIf="!loading && !errorKey && hasAnyFormations && filteredFormations.length === 0" class="empty-state">
+    <div *ngIf="!loading && !errorKey && filteredFormations.length === 0 && !searchTerm && !selectedMode && statusFilter === 'active'" class="empty-state">
+      <i class="fas fa-circle-check empty-icon"></i>
+      <p class="empty-title">{{ 'CYCLE_FORMATIONS.NO_ACTIVE' | translate }}</p>
+      <span class="empty-sub">{{ 'CYCLE_FORMATIONS.NO_ACTIVE_DESC' | translate }}</span>
+    </div>
+
+    <div *ngIf="!loading && !errorKey && filteredFormations.length === 0 && !searchTerm && !selectedMode && statusFilter === 'archived'" class="empty-state">
+      <i class="fas fa-box-archive empty-icon"></i>
+      <p class="empty-title">{{ 'CYCLE_FORMATIONS.NO_ARCHIVED' | translate }}</p>
+      <span class="empty-sub">{{ 'CYCLE_FORMATIONS.NO_ARCHIVED_DESC' | translate }}</span>
+    </div>
+
+    <div *ngIf="!loading && !errorKey && filteredFormations.length === 0 && (searchTerm || selectedMode)" class="empty-state">
       <i class="fas fa-search empty-icon"></i>
       <p class="empty-title">{{ 'CYCLE_FORMATIONS.NOT_FOUND' | translate }}</p>
       <span class="empty-sub">{{ 'CYCLE_FORMATIONS.NOT_FOUND_DESC' | translate }}</span>
@@ -87,21 +121,23 @@
 
       <thead>
         <tr>
-          <th style="width:20%">{{ 'CYCLE_FORMATIONS.TABLE.THEME' | translate }}</th>
-          <th style="width:9%">{{ 'CYCLE_FORMATIONS.TABLE.ROOM' | translate }}</th>
+          <th style="width:18%">{{ 'CYCLE_FORMATIONS.TABLE.THEME' | translate }}</th>
+          <th style="width:10%">{{ 'CYCLE_FORMATIONS.TABLE.ROOM' | translate }}</th>
           <th style="width:13%">{{ 'CYCLE_FORMATIONS.TABLE.MODE' | translate }}</th>
           <th style="width:12%">{{ 'CYCLE_FORMATIONS.TABLE.FROM_DATE' | translate }}</th>
           <th style="width:12%">{{ 'CYCLE_FORMATIONS.TABLE.TO_DATE' | translate }}</th>
           <th style="width:11%">{{ 'CYCLE_FORMATIONS.TABLE.START_TIME' | translate }}</th>
           <th style="width:10%">{{ 'CYCLE_FORMATIONS.TABLE.END_TIME' | translate }}</th>
-          <th style="width:13%" class="text-center">{{ 'CYCLE_FORMATIONS.TABLE.ACTIONS' | translate }}</th>
+          <th style="width:14%" class="text-center">{{ 'CYCLE_FORMATIONS.TABLE.ACTIONS' | translate }}</th>
         </tr>
       </thead>
 
       <tbody>
         <tr *ngFor="let formation of filteredFormations">
 
-          <td class="theme-cell">{{ formation.theme }}</td>
+          <td class="theme-cell">{{ formation.theme }}
+
+          </td>
 
           <td class="salle-cell">
             <span *ngIf="formation.numSalle !== null">
@@ -113,15 +149,15 @@
             </span>
           </td>
 
-          <td>
-            <span
-              class="badge"
-              [class.badge-presentiel]="formation.modeFormation === 'Présentiel'"
-              [class.badge-enligne]="formation.modeFormation === 'En ligne'"
-              [class.badge-hybride]="formation.modeFormation === 'Hybride'">
-              {{ formation.modeFormation }}
-            </span>
-          </td>
+      <td>
+  <span
+    class="badge"
+    [class.badge-presentiel]="formation.modeFormation === 'Présentiel'"
+    [class.badge-enligne]="formation.modeFormation === 'En ligne'"
+    [class.badge-hybride]="formation.modeFormation === 'Hybride'">
+    {{ getModeLabel(formation.modeFormation) | translate }}
+  </span>
+</td>
 
           <td class="date-cell">{{ formation.periodeDu | date:'dd/MM/yyyy' }}</td>
 
@@ -140,11 +176,20 @@
                 <i class="fas fa-pencil-alt"></i>
               </button>
               <button
+                *ngIf="!formation.isArchived"
                 class="btn-icon btn-archive"
                 (click)="archiveFormation(formation._id)"
                 aria-label="Archive">
                 <i class="fas fa-box-archive"></i>
               </button>
+
+                <button
+      *ngIf="formation.isArchived"
+      class="btn-icon btn-unarchive"
+      (click)="unarchiveFormation(formation._id)"
+      aria-label="Unarchive">
+      <i class="fas fa-rotate-left"></i>
+    </button>
             </div>
           </td>
 

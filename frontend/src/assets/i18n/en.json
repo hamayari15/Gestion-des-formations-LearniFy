@@ -490,6 +490,9 @@
     "TITLE": "Trainings List",
     "SUBTITLE": "Manage training sessions and schedules",
     "REFRESH": "Refresh",
+    "STATUS_ALL": "All",
+    "STATUS_ACTIVE": "Active",
+    "STATUS_ARCHIVED": "Archived",
     "ADD_FORMATION": "Add Training",
     "SEARCH": "Search by theme...",
     "ALL_MODES": "All Modes",
@@ -525,7 +528,21 @@
     "ARCHIVE_SUCCESS_TITLE": "Success",
     "ARCHIVE_SUCCESS_TEXT": "The training was successfully archived.",
     "ARCHIVE_ERROR_TITLE": "Error",
-    "ARCHIVE_ERROR_FALLBACK": "An error occurred while archiving."
+    "ARCHIVE_ERROR_FALLBACK": "An error occurred while archiving.",
+
+    "UNARCHIVE_CONFIRM_TITLE": "Restore this training?",
+    "UNARCHIVE_CONFIRM_TEXT": "This training will become visible and open for registration again.",
+    "UNARCHIVE_CONFIRM_BTN": "Restore",
+    "UNARCHIVE_CANCEL_BTN": "Cancel",
+    "UNARCHIVE_SUCCESS_TITLE": "Success",
+    "UNARCHIVE_SUCCESS_TEXT": "The training was successfully restored.",
+    "UNARCHIVE_ERROR_TITLE": "Error",
+    "UNARCHIVE_ERROR_FALLBACK": "An error occurred while restoring.",
+
+    "NO_ACTIVE": "No active trainings",
+    "NO_ACTIVE_DESC": "All trainings are currently archived.",
+    "NO_ARCHIVED": "No archived trainings",
+    "NO_ARCHIVED_DESC": "Archived trainings will appear here."
   },
 
   "ADD_FORMATION_DIALOG": {

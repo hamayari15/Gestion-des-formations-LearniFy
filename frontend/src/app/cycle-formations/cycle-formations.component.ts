@@ -25,6 +25,7 @@ export class CycleFormationsComponent implements OnInit {
 
   searchTerm = '';
   selectedMode: string = '';
+  statusFilter: 'all' | 'active' | 'archived' = 'all';
 
   loading: boolean = false;
   errorKey: string = '';
@@ -50,6 +51,7 @@ export class CycleFormationsComponent implements OnInit {
       this.limit,
       this.searchTerm,
       this.selectedMode,
+      this.statusFilter
     ).subscribe({
       next: (response: any) => {
         this.formations = response.data.formations;
@@ -73,6 +75,13 @@ export class CycleFormationsComponent implements OnInit {
         );
       }
     });
+  }
+
+  setStatusFilter(status: 'all' | 'active' | 'archived'): void {
+    if (this.statusFilter === status) return;
+    this.statusFilter = status;
+    this.page = 1;
+    this.getFormations();
   }
 
   applyFilters(): void {
@@ -117,6 +126,15 @@ export class CycleFormationsComponent implements OnInit {
         this.getFormations();
       }
     });
+  }
+
+  getModeLabel(mode: string): string {
+    switch (mode) {
+      case 'Présentiel': return 'CYCLE_FORMATIONS.PRESENTIEL';
+      case 'En ligne': return 'CYCLE_FORMATIONS.ONLINE';
+      case 'Hybride': return 'CYCLE_FORMATIONS.HYBRID';
+      default: return mode;
+    }
   }
 
   editFormation(formation: any): void {
@@ -171,7 +189,47 @@ export class CycleFormationsComponent implements OnInit {
         },
       });
     });
-    }
+  }
+
+  unarchiveFormation(id: string): void {
+  Swal.fire({
+    icon: 'question',
+    title: this.translate.instant('CYCLE_FORMATIONS.UNARCHIVE_CONFIRM_TITLE'),
+    text: this.translate.instant('CYCLE_FORMATIONS.UNARCHIVE_CONFIRM_TEXT'),
+    width: 550,
+    showCancelButton: true,
+    confirmButtonText: this.translate.instant('CYCLE_FORMATIONS.UNARCHIVE_CONFIRM_BTN'),
+    cancelButtonText: this.translate.instant('CYCLE_FORMATIONS.UNARCHIVE_CANCEL_BTN'),
+    confirmButtonColor: '#185fa5',
+  }).then((result) => {
+    if (!result.isConfirmed) return;
+
+    this.formationService.unarchiveFormation(id).subscribe({
+      next: () => {
+        Swal.fire({
+          icon: 'success',
+          title: this.translate.instant('CYCLE_FORMATIONS.UNARCHIVE_SUCCESS_TITLE'),
+          text: this.translate.instant('CYCLE_FORMATIONS.UNARCHIVE_SUCCESS_TEXT'),
+          width: 500,
+          timer: 2000,
+          timerProgressBar: true,
+        }).then(() => {
+          this.getFormations();
+        });
+      },
+      error: (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: this.translate.instant('CYCLE_FORMATIONS.UNARCHIVE_ERROR_TITLE'),
+          text: this.translate.instant(
+            this.resolveErrorKey(error, 'CYCLE_FORMATIONS.UNARCHIVE_ERROR_FALLBACK')
+          ),
+          width: 500,
+        });
+      },
+    });
+  });
+}
 
   private resolveErrorKey(error: any, fallbackKey: string): string {
     const code = error?.error?.code;

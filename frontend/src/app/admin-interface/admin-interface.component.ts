@@ -30,6 +30,8 @@ export class AdminInterfaceComponent implements OnInit {
     this.translate.use(lang);
     localStorage.setItem('language', lang);
     this.currentLanguage = lang;
+
+    this.sidebarOpen = false;
   }
 
   logout() {

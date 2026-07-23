@@ -1,5 +1,6 @@
 const Participant = require("../models/Participant.model");
 const Inscription = require("../models/Inscription.model");
+const { sendWelcomeEmail } = require("../utils/mailer");
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -26,6 +27,15 @@ exports.Register = async (req, res) => {
     });
 
     const savedParticipant = await participant.save();
+
+    try {
+      await sendWelcomeEmail(
+        savedParticipant.email, 
+        savedParticipant.fullName, 
+        savedParticipant.language);
+    } catch (mailError) {
+      console.error("Welcome email failed to send:", mailError);
+    }
 
     res.status(201).json({
       message: "Your account has been created successfully.",

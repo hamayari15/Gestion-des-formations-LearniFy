@@ -59,6 +59,41 @@
   animation: spin 0.7s linear infinite;
 }
 
+.status-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  background: #f3f4f6;
+  border: 0.5px solid #d1d5db;
+  border-radius: 9px;
+  gap: 2px;
+}
+
+.toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.toggle-btn:hover:not(.active) {
+  color: #374151;
+}
+
+.toggle-btn.active {
+  background: #185fa5;
+  color: #fff;
+}
+
 .btn-add {
   display: inline-flex;
   align-items: center;
@@ -342,6 +377,15 @@
   border-color: #fde68a;
 }
 
+.btn-unarchive {
+  color: #185fa5;
+}
+
+.btn-unarchive:hover {
+  background: #e6f1fb;
+  border-color: #b5d4f4;
+}
+
 .pagination {
   display: flex;
   justify-content: flex-start;
@@ -475,6 +519,32 @@
     gap: 12px;
   }
 
+  .header-actions {
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .btn-refresh {
+    order: 1;
+  }
+
+  .btn-add {
+    order: 2;
+  }
+
+  .status-toggle {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .toggle-btn {
+    flex: 1;
+    padding: 6px 8px;
+    font-size: 0.7rem;
+  }
+
   .filter-row {
     grid-template-columns: 1fr;
   }
@@ -493,12 +563,12 @@
 
   .formations-table {
     table-layout: auto;
-    min-width: 720px; /* instead of 850px */
+    min-width: 720px;
   }
 
   .formations-table thead th,
   .formations-table tbody td {
-    padding: 10px 10px; /* reduce from 14px */
+    padding: 10px 10px;
     white-space: nowrap;
   }
 
