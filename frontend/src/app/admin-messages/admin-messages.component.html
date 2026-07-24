@@ -1,0 +1,98 @@
+<div class="messages-page">
+  <div class="page-header">
+    <div>
+      <h2 class="page-title">Messages</h2>
+      <p class="page-subtitle">{{ totalCount }} total</p>
+    </div>
+
+    <select class="form-select filter-select" [(ngModel)]="statusFilter" (change)="onFilterChange()">
+      <option value="">All statuses</option>
+      <option value="new">New</option>
+      <option value="read">Read</option>
+      <option value="replied">Replied</option>
+    </select>
+  </div>
+
+  <div class="alert alert-danger" *ngIf="errorMsg">{{ errorMsg }}</div>
+
+  <div class="messages-layout">
+    <!-- List -->
+    <div class="messages-list-panel">
+      <div class="loading-state" *ngIf="loading">
+        <div class="spinner-border spinner-border-sm"></div> Loading...
+      </div>
+
+      <div class="empty-state" *ngIf="!loading && messages.length === 0">
+        No messages found.
+      </div>
+
+      <div
+        class="message-row"
+        *ngFor="let msg of messages; trackBy: trackById"
+        [class.active]="selected?._id === msg._id"
+        [class.unread]="msg.status === 'new'"
+        (click)="view(msg)">
+
+        <div class="row-main">
+          <div class="row-top">
+            <span class="sender-name">{{ msg.name }}</span>
+            <span class="status-badge" [ngClass]="'status-' + msg.status">{{ msg.status }}</span>
+          </div>
+          <div class="sender-email">{{ msg.email }}</div>
+          <div class="preview">{{ msg.message }}</div>
+          <div class="row-date">{{ msg.createdAt | date:'MMM d, y, h:mm a' }}</div>
+        </div>
+
+        <div class="row-actions">
+          <button
+            class="icon-btn"
+            title="Mark as replied"
+            [disabled]="msg.status === 'replied'"
+            (click)="markReplied(msg, $event)">✓</button>
+          <button
+            class="icon-btn danger"
+            title="Delete"
+            (click)="remove(msg, $event)">✕</button>
+        </div>
+      </div>
+
+      <div class="pagination-bar" *ngIf="totalPages > 1">
+        <button class="btn btn-sm btn-outline-secondary" [disabled]="page <= 1" (click)="changePage(-1)">Prev</button>
+        <span>Page {{ page }} / {{ totalPages }}</span>
+        <button class="btn btn-sm btn-outline-secondary" [disabled]="page >= totalPages" (click)="changePage(1)">Next</button>
+      </div>
+    </div>
+
+    <!-- Detail -->
+    <div class="message-detail-panel">
+      <ng-container *ngIf="selected; else noSelection">
+        <div class="detail-header">
+          <div>
+            <h4>{{ selected.name }}</h4>
+            <a [href]="'mailto:' + selected.email" class="detail-email">{{ selected.email }}</a>
+          </div>
+          <span class="status-badge" [ngClass]="'status-' + selected.status">{{ selected.status }}</span>
+        </div>
+
+        <div class="detail-date">{{ selected.createdAt | date:'full' }}</div>
+
+        <hr>
+
+        <p class="detail-body">{{ selected.message }}</p>
+
+        <div class="detail-actions">
+          <a class="btn btn-primary" [href]="'mailto:' + selected.email">Reply by email</a>
+          <button
+            class="btn btn-outline-success"
+            [disabled]="selected.status === 'replied'"
+            (click)="markReplied(selected)">Mark as replied</button>
+          <button class="btn btn-outline-danger" (click)="remove(selected)">Delete</button>
+        </div>
+      </ng-container>
+
+      <ng-template #noSelection>
+        <div class="empty-detail">Select a message to view its details</div>
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -46,6 +46,11 @@
         {{ 'EDIT_PARTICIPANT_DIALOG.FULL_NAME_MINLENGTH' | translate }}
       </small>
 
+      <small class="error"
+        *ngIf="participantForm.get('fullName')?.errors?.['maxlength']">
+        {{ 'EDIT_PARTICIPANT_DIALOG.FULL_NAME_MAXLENGTH' | translate }}
+      </small>
+
     </div>
 
    <div class="field">

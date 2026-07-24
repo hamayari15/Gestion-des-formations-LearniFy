@@ -16,13 +16,15 @@
     const Formation = require("./routes/formation.router");
     const Inscription = require("./routes/inscription.router");   
     const Dashboard = require("./routes/dashboard.router");   
-
-
+    const Message = require("./routes/message.router");   
+    
+    
     app.use('/Admin', AdminRoute);
     app.use('/Participant', Participant);
     app.use('/Formation', Formation);
     app.use('/Inscription', Inscription);
     app.use('/Dashboard', Dashboard);
+    app.use('/Message', Message);
 
     app.use('/uploads', express.static('uploads'));
 

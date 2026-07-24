@@ -17,15 +17,16 @@ import { LoginComponent } from './auth/login/login.component';
 import { FooterComponent } from './footer/footer.component';
 
 import { AdminInterfaceComponent } from './admin-interface/admin-interface.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { CycleFormationsComponent } from './cycle-formations/cycle-formations.component';
 import { AddFormationDialogComponent } from './add-formation-dialog/add-formation-dialog.component';
 import { EditFormationDialogComponent } from './edit-formation-dialog/edit-formation-dialog.component';
 import { ListeParticipantsComponent } from './liste-participants/liste-participants.component';
 import { EditParticipantDialogComponent } from './edit-participant-dialog/edit-participant-dialog.component';
-import { ListeInscritsComponent } from './liste-inscrits/liste-inscrits.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { MonProfileAdminComponent } from './mon-profile-admin/mon-profile-admin.component';
 import { UsersGrowthComponent } from './users-growth/users-growth.component';
+import { ListeInscritsComponent } from './liste-inscrits/liste-inscrits.component';
+import { AdminMessagesComponent } from './admin-messages/admin-messages.component';
+import { MonProfileAdminComponent } from './mon-profile-admin/mon-profile-admin.component';
 
 import { ParticipantInterfaceComponent } from './participant-interface/participant-interface.component';
 import { MonProfileParticipantComponent } from './mon-profile-participant/mon-profile-participant.component';
@@ -55,15 +56,16 @@ const routes: Routes = [
         redirectTo: 'cycle-formation',
         pathMatch: 'full',
       },
-      { path: 'mon-profile-admin', component: MonProfileAdminComponent },
       { path: 'admin-dashboard', component: AdminDashboardComponent },
       { path: 'cycle-formations', component: CycleFormationsComponent },
       { path: 'add-formation-dialog', component: AddFormationDialogComponent },
       { path: 'edit-formation-dialog', component: EditFormationDialogComponent },
       { path: 'liste-participant', component: ListeParticipantsComponent},
       { path: 'edit-participant-dialog', component: EditParticipantDialogComponent},
-      { path: 'liste-inscrits', component: ListeInscritsComponent },
       { path: 'users-growth', component: UsersGrowthComponent },
+      { path: 'liste-inscrits', component: ListeInscritsComponent },
+      { path: 'admin-messages', component: AdminMessagesComponent },
+      { path: 'mon-profile-admin', component: MonProfileAdminComponent },
     ],
   },
 

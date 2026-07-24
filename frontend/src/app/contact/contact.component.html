@@ -1,67 +1,69 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
-<div class="container my-5">
-    <h1 class="text-center mb-4">{{ 'CONTACT.TITLE' | translate }}</h1>
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="map-container" id="map"></div>
-        </div>
-
-        <div class="col-md-6">
-            <form>
-
-                <div class="mb-3">
-                    <label for="name" class="form-label">{{ 'CONTACT.NAME' | translate }}</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="name"
-                        [placeholder]="'CONTACT.NAME_PLACEHOLDER' | translate"
-                        required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="email" class="form-label">{{ 'CONTACT.EMAIL' | translate }}</label>
-                    <input
-                        type="email"
-                        class="form-control"
-                        id="email"
-                        [placeholder]="'CONTACT.EMAIL_PLACEHOLDER' | translate"
-                        required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="message" class="form-label">{{ 'CONTACT.MESSAGE' | translate }}</label>
-                    <textarea
-                        class="form-control"
-                        id="message"
-                        rows="5"
-                        [placeholder]="'CONTACT.MESSAGE_PLACEHOLDER' | translate"
-                        required></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary">
-                    {{ 'CONTACT.SUBMIT' | translate }}
-                </button>
-
-            </form>
-        </div>
+<section class="contact-section">
+  <div class="contact-inner">
+    <div class="contact-header">
+      <h1 class="section-title">{{ 'CONTACT.TITLE' | translate }}</h1>
+      <p class="section-subtitle">{{ 'CONTACT.SUBTITLE' | translate }}</p>
     </div>
-</div>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var map = L.map('map').setView([40.730610, -73.935242], 12);
+    <div class="contact-grid">
+      <div class="map-card">
+        <div #mapContainer class="map-canvas"></div>
+      </div>
 
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(map);
+      <div class="form-card">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
 
-      L.marker([40.730610, -73.935242]).addTo(map)
-        .bindPopup('Your location')
-        .openPopup();
-    });
-</script>
+          <div class="field-group">
+            <label for="name" class="form-label">{{ 'CONTACT.NAME' | translate }}</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              formControlName="name"
+              [class.is-invalid]="f['name'].touched && f['name'].invalid"
+              [placeholder]="'CONTACT.NAME_PLACEHOLDER' | translate">
+            <div class="invalid-feedback" *ngIf="f['name'].touched && f['name'].invalid">
+              {{ 'CONTACT.NAME_ERROR' | translate }}
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="email" class="form-label">{{ 'CONTACT.EMAIL' | translate }}</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              formControlName="email"
+              [class.is-invalid]="f['email'].touched && f['email'].invalid"
+              [placeholder]="'CONTACT.EMAIL_PLACEHOLDER' | translate">
+            <div class="invalid-feedback" *ngIf="f['email'].touched && f['email'].invalid">
+              {{ 'CONTACT.EMAIL_ERROR' | translate }}
+            </div>
+          </div>
+
+          <div class="field-group field-grow">
+            <label for="message" class="form-label">{{ 'CONTACT.MESSAGE' | translate }}</label>
+            <textarea
+              class="form-control textarea-grow"
+              id="message"
+              formControlName="message"
+              [class.is-invalid]="f['message'].touched && f['message'].invalid"
+              [placeholder]="'CONTACT.MESSAGE_PLACEHOLDER' | translate"></textarea>
+            <div class="invalid-feedback" *ngIf="f['message'].touched && f['message'].invalid">
+              {{ 'CONTACT.MESSAGE_ERROR' | translate }}
+            </div>
+          </div>
+
+          <div class="alert alert-danger py-2" *ngIf="errorKey">{{ errorKey }}</div>
+          <div class="alert alert-success py-2" *ngIf="submitted">{{ 'CONTACT.SUCCESS' | translate }}</div>
+
+          <button type="submit" class="btn-submit" [disabled]="form.invalid || submitting">
+            <span *ngIf="!submitting">{{ 'CONTACT.SUBMIT' | translate }}</span>
+            <span *ngIf="submitting" class="spinner-border spinner-border-sm"></span>
+          </button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

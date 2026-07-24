@@ -31,11 +31,10 @@ export class EditParticipantDialogComponent implements OnInit {
 
     this.participantId = participant._id;
 
-    // init form
     this.participantForm = this.fb.group({
       fullName: [
         participant.fullName,
-        [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+        [Validators.required, Validators.minLength(3), Validators.maxLength(100)]
       ],
       email: [
         participant.email,

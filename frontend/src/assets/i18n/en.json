@@ -167,17 +167,19 @@
 
   "CONTACT": {
     "TITLE": "Contact Us",
-
+    "SUBTITLE": "Have a question? Send us a message and we'll get back to you shortly.",
     "NAME": "Name",
     "NAME_PLACEHOLDER": "Enter your full name",
-
-    "EMAIL": "Email",
+    "NAME_ERROR": "Name must be at least 3 characters",
+    "EMAIL": "Email address",
     "EMAIL_PLACEHOLDER": "Enter your email address",
-
+    "EMAIL_ERROR": "Please enter a valid email address",
     "MESSAGE": "Message",
     "MESSAGE_PLACEHOLDER": "Write your message here...",
-
-    "SUBMIT": "Send Message"
+    "MESSAGE_ERROR": "Message must be at least 10 characters",
+    "SUBMIT": "Send message",
+    "SUCCESS": "Your message has been sent successfully!",
+    "ERROR_GENERIC": "Something went wrong. Please try again."
   },
 
   "FOOTER": {
@@ -443,6 +445,7 @@
     "PARTICIPANTS_LIST": "Participants List",
     "USERS_GROWTH": "Users Growth",
     "INSCRIPTIONS_LIST": "Registrations List",
+    "MESSAGES": "Messages",
     "SETTINGS": "Settings",
     "LOGOUT": "Logout"
   },
@@ -655,6 +658,7 @@
     "FULL_NAME_PLACEHOLDER": "E.g: Mohamed Ayari",
     "FULL_NAME_REQUIRED": "Name required",
     "FULL_NAME_MINLENGTH": "Minimum 3 characters",
+    "FULL_NAME_MAXLENGTH": "Maximum 100 characters",
     "EMAIL": "Email",
     "EMAIL_PLACEHOLDER": "example@mail.com",
     "EMAIL_REQUIRED": "Email address is required",

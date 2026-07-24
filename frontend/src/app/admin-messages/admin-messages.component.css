@@ -1,0 +1,197 @@
+.messages-page {
+  padding: 2rem;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+.page-title {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.page-subtitle {
+  color: #6c757d;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.filter-select {
+  width: auto;
+}
+
+.messages-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.messages-list-panel {
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.loading-state, .empty-state, .empty-detail {
+  padding: 2rem;
+  text-align: center;
+  color: #6c757d;
+}
+
+.message-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #f8f9fa;
+  }
+
+  &.active {
+    background: #eef4ff;
+    border-left: 3px solid #0d6efd;
+  }
+
+  &.unread .sender-name {
+    font-weight: 700;
+  }
+}
+
+.row-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.row-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sender-name {
+  font-size: 0.95rem;
+}
+
+.sender-email {
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.preview {
+  font-size: 0.85rem;
+  color: #495057;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 0.25rem;
+}
+
+.row-date {
+  font-size: 0.75rem;
+  color: #adb5bd;
+  margin-top: 0.25rem;
+}
+
+.row-actions {
+  display: flex;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.icon-btn {
+  border: none;
+  background: #f1f3f5;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 0.75rem;
+  cursor: pointer;
+
+  &.danger {
+    color: #dc3545;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.status-badge {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 1rem;
+  font-weight: 600;
+}
+
+.status-new {
+  background: #cfe2ff;
+  color: #084298;
+}
+
+.status-read {
+  background: #e2e3e5;
+  color: #41464b;
+}
+
+.status-replied {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.pagination-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.85rem;
+}
+
+.message-detail-panel {
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  padding: 1.75rem;
+  min-height: 300px;
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.detail-email {
+  font-size: 0.85rem;
+}
+
+.detail-date {
+  font-size: 0.8rem;
+  color: #adb5bd;
+  margin-top: 0.25rem;
+}
+
+.detail-body {
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+.detail-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}

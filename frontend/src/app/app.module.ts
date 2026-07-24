@@ -44,6 +44,7 @@ import { PagenotfoundComponent } from './features/pagenotfound/pagenotfound.comp
 import { FooterComponent } from './footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsersGrowthComponent } from './users-growth/users-growth.component';
+import { AdminMessagesComponent } from './admin-messages/admin-messages.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -77,6 +78,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FooterComponent,
     UsersGrowthComponent,
     CycleFormationsComponent,
+    AdminMessagesComponent,
   ],
   imports: [
     BrowserModule,

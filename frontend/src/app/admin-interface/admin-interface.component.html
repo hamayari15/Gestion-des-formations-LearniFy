@@ -45,8 +45,13 @@
         <span>{{ 'ADMIN_SIDEBAR.INSCRIPTIONS_LIST' | translate }}</span>
       </a>
 
-      <a routerLink="mon-profile-admin" routerLinkActive="active-link" class="link" (click)="closeSidebar()">
+      <a routerLink="admin-messages" routerLinkActive="active-link" class="link" (click)="closeSidebar()">
         <i class="fas fa-cog"></i>
+        <span>{{ 'ADMIN_SIDEBAR.MESSAGES' | translate }}</span>
+      </a>
+
+      <a routerLink="mon-profile-admin" routerLinkActive="active-link" class="link" (click)="closeSidebar()">
+        <i class="fas fa-envelope"></i>
         <span>{{ 'ADMIN_SIDEBAR.SETTINGS' | translate }}</span>
       </a>
 

@@ -167,17 +167,19 @@
 
   "CONTACT": {
     "TITLE": "Contactez-nous",
-
+    "SUBTITLE": "Une question ? Envoyez-nous un message, nous vous répondrons rapidement.",
     "NAME": "Nom",
     "NAME_PLACEHOLDER": "Saisissez votre nom complet",
-
+    "NAME_ERROR": "Le nom doit contenir au moins 3 caractères",
     "EMAIL": "Adresse e-mail",
     "EMAIL_PLACEHOLDER": "Saisissez votre adresse e-mail",
-
+    "EMAIL_ERROR": "Veuillez saisir une adresse e-mail valide",
     "MESSAGE": "Message",
     "MESSAGE_PLACEHOLDER": "Écrivez votre message ici...",
-
-    "SUBMIT": "Envoyer le message"
+    "MESSAGE_ERROR": "Le message doit contenir au moins 10 caractères",
+    "SUBMIT": "Envoyer le message",
+    "SUCCESS": "Votre message a été envoyé avec succès !",
+    "ERROR_GENERIC": "Une erreur s'est produite. Veuillez réessayer."
   },
 
   "FOOTER": {
@@ -443,6 +445,7 @@
     "PARTICIPANTS_LIST": "Liste des Participants",
     "USERS_GROWTH": "Croissance des utilisateurs",
     "INSCRIPTIONS_LIST": "Liste des Inscrits",
+    "MESSAGES": "Messages",
     "SETTINGS": "Paramètres",
     "LOGOUT": "Déconnexion"
   },
@@ -655,6 +658,7 @@
     "FULL_NAME_PLACEHOLDER": "Ex: Mohamed Ayari",
     "FULL_NAME_REQUIRED": "Nom requis",
     "FULL_NAME_MINLENGTH": "Minimum 3 caractères",
+    "FULL_NAME_MAXLENGTH": "Maximum 100 caractères",
     "EMAIL": "Email",
     "EMAIL_PLACEHOLDER": "exemple@mail.com",
     "EMAIL_REQUIRED": "L'adresse email est obligatoire",
