@@ -53,6 +53,10 @@ export class ParticipantService {
     return this.http.put(`${this.apiUrl}/updateParticipant/${id}`, updatedData);
   }
 
+  updatePassword(userId: string, passwordData: { actualPassword: string; newPassword: string }): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${userId}/update-password`, passwordData);
+  }
+
   deleteParticipant(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/deleteParticipant/${id}`);
   }

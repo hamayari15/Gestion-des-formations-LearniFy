@@ -22,6 +22,8 @@ router.get("/getParticipant/:id", participantController.getParticipantById);
 
 router.put("/updateParticipant/:id", participantController.updateParticipant);
 
+router.put("/:id/update-password", adminController.updatePassword);
+
 router.delete("/deleteParticipant/:id", participantController.deleteParticipant);
 
 

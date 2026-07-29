@@ -188,7 +188,7 @@
   padding-bottom: 10px;
   border-bottom: 1px solid #eef0f2;
   gap: 12px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .section-title {
@@ -200,9 +200,6 @@
   margin: 0;
 }
 
-/* ============================================================
-   Header action buttons (Edit / Change Password / Delete)
-   ============================================================ */
 .header-buttons {
   display: flex;
   align-items: center;
@@ -210,7 +207,6 @@
   flex-shrink: 0;
 }
 
-.edit-button,
 .password-button,
 .delete-button {
   display: inline-flex;
@@ -227,30 +223,15 @@
   flex-shrink: 0;
 }
 
-.edit-button {
-  border: 1px solid #c7d2fe;
-  background: #fff;
-  color: #4f46e5;
-}
-
-.edit-button:hover {
-  background: #eef2ff;
-  border-color: #a5b4fc;
-}
-
-.edit-button i {
-  font-size: 0.8125rem;
-}
-
 .password-button {
-  border: 1px solid #bfdbfe;
-  background: #fff;
-  color: #185fa5;
+  border: 1px solid #a5b4fc;
+  background: #f7f9fd;
+  color: #5348cc;
 }
 
 .password-button:hover {
-  background: #e6f1fb;
-  border-color: #93c5fd;
+  background: #f0f3fe;
+  border-color: #818cf8;
 }
 
 .password-button i {
@@ -447,7 +428,6 @@
     width: 100%;
   }
 
-  .edit-button,
   .password-button,
   .delete-button {
     justify-content: center;

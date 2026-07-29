@@ -45,6 +45,7 @@ import { FormationsDisponiblesComponent } from './formations-disponibles/formati
 import { InscriptionDialogComponent } from './inscription-dialog/inscription-dialog.component';
 import { MesFormationsComponent } from './mes-formations/mes-formations.component';
 import { PagenotfoundComponent } from './features/pagenotfound/pagenotfound.component';
+import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -78,6 +79,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     InscriptionDialogComponent,
     MesFormationsComponent,
     PagenotfoundComponent,
+    ChangePasswordDialogComponent,
   ],
   imports: [
     BrowserModule,

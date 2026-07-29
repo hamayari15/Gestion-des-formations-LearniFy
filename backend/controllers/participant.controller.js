@@ -321,37 +321,6 @@ exports.updateParticipant = async (req, res) => {
 };
 
 
-exports.deleteParticipant = async (req, res) => {
-  try {
-    const participant = await Participant.findById(req.params.id);
-
-    if (!participant) {
-      return res.status(404).json({ success: false, message: "Participant introuvable." });
-    }
-
-    await Inscription.deleteMany({ participantId: participant._id });
-    await participant.deleteOne();
-
-    return res.status(200).json({
-      success: true,
-      message: "Participant supprimée avec succès.",
-    });
-    
-  } catch (error) {
-    console.log(error)
-    if (error.name === "CastError") {
-      return res.status(400).json({ success: false, 
-        message: "Identifiant de participant invalide." 
-      });
-    }
-    return res.status(500).json({ 
-      success: false, 
-      message: "Une erreur est survenue lors de la suppression." 
-    });
-  }
-};
-
-
 exports.updatePassword = async (req, res) => {
   try {
     const { id } = req.params;
@@ -397,5 +366,36 @@ exports.updatePassword = async (req, res) => {
   } catch (error) {
     console.error("updatePassword error:", error);
     res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+
+exports.deleteParticipant = async (req, res) => {
+  try {
+    const participant = await Participant.findById(req.params.id);
+
+    if (!participant) {
+      return res.status(404).json({ success: false, message: "Participant introuvable." });
+    }
+
+    await Inscription.deleteMany({ participantId: participant._id });
+    await participant.deleteOne();
+
+    return res.status(200).json({
+      success: true,
+      message: "Participant supprimée avec succès.",
+    });
+    
+  } catch (error) {
+    console.log(error)
+    if (error.name === "CastError") {
+      return res.status(400).json({ success: false, 
+        message: "Identifiant de participant invalide." 
+      });
+    }
+    return res.status(500).json({ 
+      success: false, 
+      message: "Une erreur est survenue lors de la suppression." 
+    });
   }
 };

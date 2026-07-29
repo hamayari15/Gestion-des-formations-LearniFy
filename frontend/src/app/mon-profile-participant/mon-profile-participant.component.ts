@@ -9,6 +9,9 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
+import { MatDialog } from '@angular/material/dialog';
+import { ChangePasswordDialogComponent } from '../change-password-dialog/change-password-dialog.component';
+
 @Component({
   selector: 'app-mon-profile-participant',
   templateUrl: './mon-profile-participant.component.html',
@@ -39,7 +42,8 @@ export class MonProfileParticipantComponent implements OnInit {
     private inscriptionService: InscriptionService,
     private authService: AuthService,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -69,6 +73,20 @@ export class MonProfileParticipantComponent implements OnInit {
     });
   }
 
+  openPasswordDialog(): void {
+    const dialogRef = this.dialog.open(ChangePasswordDialogComponent, {
+      width: '480px',
+      disableClose: true,
+      data: { participantId: this.id },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.fetchParticipant();
+      }
+    });
+  }
+
   fetchStats(): void {
     this.loadingStats = true;
 
@@ -82,14 +100,6 @@ export class MonProfileParticipantComponent implements OnInit {
         this.loadingStats = false;
       },
     });
-  }
-
-  openEditDialog() {
-
-  }
-
-  openPasswordDialog() {
-      
   }
 
   retry(): void {
