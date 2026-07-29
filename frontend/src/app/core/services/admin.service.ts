@@ -16,11 +16,13 @@ export class AdminService {
     return this.http.get<any>(`${this.apiUrl}/getAdmin/${id}`);
   }
 
-  checkCurrentPassword(adminId: string, actualPassword: string): Observable<boolean> {
-    return this.http.post<boolean>(`${this.apiUrl}/check-password`, { adminId, actualPassword });
-  }
-
   updatePassword(adminId: string, passwordData: { actualPassword: string; newPassword: string }): Observable<any> {
     return this.http.put(`${this.apiUrl}/${adminId}/update-password`, passwordData);
+  }
+
+  getLoginHistory(id: string) {
+    return this.http.get<{ entries: any[] }>(
+      `${this.apiUrl}/${id}/login-history`
+    );
   }
 }

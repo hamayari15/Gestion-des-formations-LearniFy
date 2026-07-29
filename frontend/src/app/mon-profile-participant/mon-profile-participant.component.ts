@@ -84,6 +84,14 @@ export class MonProfileParticipantComponent implements OnInit {
     });
   }
 
+  openEditDialog() {
+
+  }
+
+  openPasswordDialog() {
+      
+  }
+
   retry(): void {
     this.fetchParticipant();
     this.fetchStats();
@@ -116,11 +124,11 @@ export class MonProfileParticipantComponent implements OnInit {
       icon: 'warning',
 
       title: this.translate.instant(
-        'PROFILE.DELETE_CONFIRM_TITLE'
+        'USER-PROFILE.DELETE_CONFIRM_TITLE'
       ),
 
       text: this.translate.instant(
-        'PROFILE.DELETE_CONFIRM_TEXT'
+        'USER-PROFILE.DELETE_CONFIRM_TEXT'
       ),
 
       width: 550,
@@ -128,11 +136,11 @@ export class MonProfileParticipantComponent implements OnInit {
       showCancelButton: true,
 
       confirmButtonText: this.translate.instant(
-        'PROFILE.DELETE_CONFIRM_BUTTON'
+        'USER-PROFILE.DELETE_CONFIRM_BUTTON'
       ),
 
       cancelButtonText: this.translate.instant(
-        'PROFILE.DELETE_CANCEL_BUTTON'
+        'USER-PROFILE.DELETE_CANCEL_BUTTON'
       ),
 
       confirmButtonColor: '#dc2626',
@@ -151,11 +159,11 @@ export class MonProfileParticipantComponent implements OnInit {
             icon: 'success',
 
             title: this.translate.instant(
-              'PROFILE.DELETE_SUCCESS_TITLE'
+              'USER-PROFILE.DELETE_SUCCESS_TITLE'
             ),
 
             text: this.translate.instant(
-              'PROFILE.DELETE_SUCCESS_TEXT'
+              'USER-PROFILE.DELETE_SUCCESS_TEXT'
             ),
 
             width: 500,
@@ -181,11 +189,11 @@ export class MonProfileParticipantComponent implements OnInit {
             icon: 'error',
 
             title: this.translate.instant(
-              'PROFILE.ERROR_TITLE'
+              'USER-PROFILE.ERROR_TITLE'
             ),
 
             text: this.translate.instant(
-              this.resolveErrorKey(error, 'PROFILE.DELETE_ERROR')
+              this.resolveErrorKey(error, 'USER-PROFILE.DELETE_ERROR')
             ),
 
             width: 500,

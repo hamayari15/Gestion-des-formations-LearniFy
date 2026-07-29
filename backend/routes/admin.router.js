@@ -10,9 +10,9 @@ router.post("/Login", adminController.Login);
 
 router.get("/getAdmin/:id", adminController.getAdminById);
 
-router.post("/Check-Password", adminController.checkPassword);
-
 router.put("/:id/update-password", adminController.updatePassword);
+
+router.get("/:id/login-history", adminController.getLoginHistory);
 
 
 module.exports = router;

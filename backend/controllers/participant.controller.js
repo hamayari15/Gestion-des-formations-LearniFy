@@ -350,3 +350,52 @@ exports.deleteParticipant = async (req, res) => {
     });
   }
 };
+
+
+exports.updatePassword = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid participant id" });
+    }
+
+    const { actualPassword, newPassword } = req.body;
+
+    if (!actualPassword || !newPassword) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({
+        message: "New password must be at least 6 characters",
+      });
+    }
+
+    if (newPassword === actualPassword) {
+      return res.status(400).json({
+        message: "New password must be different from the current password",
+      });
+    }
+
+    const participant = await Participant.findById(id);
+
+    if (!participant) {
+      return res.status(404).json({ message: "Participant not found" });
+    }
+
+    const isMatch = await bcrypt.compare(actualPassword, participant.password);
+
+    if (!isMatch) {
+      return res.status(400).json({ message: "Current password is incorrect" });
+    }
+
+    participant.password = await bcrypt.hash(newPassword, 10);
+    await participant.save();
+
+    res.status(200).json({ message: "Password updated successfully" });
+  } catch (error) {
+    console.error("updatePassword error:", error);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};

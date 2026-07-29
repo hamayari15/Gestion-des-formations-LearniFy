@@ -4,7 +4,7 @@ import { MessageService, Message } from '../core/services/message.service';
 @Component({
   selector: 'app-admin-messages',
   templateUrl: './admin-messages.component.html',
-  styleUrls: ['./admin-messages.component.scss']
+  styleUrls: ['./admin-messages.component.css']
 })
 export class AdminMessagesComponent implements OnInit {
   messages: Message[] = [];
@@ -17,7 +17,10 @@ export class AdminMessagesComponent implements OnInit {
   totalCount = 0;
 
   statusFilter = '';
+  searchTerm = '';
   selected: Message | null = null;
+
+  showDetailMobile = false;
 
   constructor(private messageService: MessageService) {}
 
@@ -43,15 +46,32 @@ export class AdminMessagesComponent implements OnInit {
     });
   }
 
+  get filteredMessages(): Message[] {
+    const term = this.searchTerm.trim().toLowerCase();
+    if (!term) return this.messages;
+    return this.messages.filter(
+      (m) =>
+        m.name.toLowerCase().includes(term) ||
+        m.email.toLowerCase().includes(term) ||
+        m.message.toLowerCase().includes(term)
+    );
+  }
+
+  get newCount(): number {
+    return this.messages.filter((m) => m.status === 'new').length;
+  }
+
   onFilterChange(): void {
     this.page = 1;
+    this.selected = null;
+    this.showDetailMobile = false;
     this.load();
   }
 
   view(msg: Message): void {
     this.selected = msg;
+    this.showDetailMobile = true;
 
-    // auto mark as read the first time it's opened
     if (msg.status === 'new') {
       this.messageService.updateStatus(msg._id, 'read').subscribe({
         next: () => (msg.status = 'read'),
@@ -59,14 +79,15 @@ export class AdminMessagesComponent implements OnInit {
     }
   }
 
-  closeDetail(): void {
-    this.selected = null;
+  backToList(): void {
+    this.showDetailMobile = false;
   }
 
   markReplied(msg: Message, event?: Event): void {
     event?.stopPropagation();
     this.messageService.updateStatus(msg._id, 'replied').subscribe({
       next: () => (msg.status = 'replied'),
+      error: (err) => (this.errorMsg = err?.error?.message || 'Failed to update status'),
     });
   }
 
@@ -78,7 +99,10 @@ export class AdminMessagesComponent implements OnInit {
       next: () => {
         this.messages = this.messages.filter((m) => m._id !== msg._id);
         this.totalCount--;
-        if (this.selected?._id === msg._id) this.selected = null;
+        if (this.selected?._id === msg._id) {
+          this.selected = null;
+          this.showDetailMobile = false;
+        }
       },
       error: (err) => (this.errorMsg = err?.error?.message || 'Failed to delete message'),
     });
@@ -88,6 +112,8 @@ export class AdminMessagesComponent implements OnInit {
     const next = this.page + delta;
     if (next < 1 || next > this.totalPages) return;
     this.page = next;
+    this.selected = null;
+    this.showDetailMobile = false;
     this.load();
   }
 

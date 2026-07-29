@@ -298,7 +298,7 @@
     }
   },
 
-  "PROFILE": {
+  "USER-PROFILE": {
     "LOADING": "Loading profile...",
     "ERROR_TITLE": "Unable to load profile",
     "ERROR_FALLBACK": "An error occurred while retrieving your profile data",
@@ -741,7 +741,56 @@
     "ERROR_FALLBACK": "An error occurred while loading the registrations.",
     "STATUS_ERROR_TITLE": "Error",
     "STATUS_ERROR_TEXT": "Status update failed"
-  }
+  },
 
+  "ADMIN-PROFILE": {
+    "TITLE": "My Profile",
+    "SUBTITLE": "Manage your account details and security settings",
+    "LOADING": "Loading profile...",
+    "ERROR_TITLE": "Unable to load profile",
+    "ERROR_FALLBACK": "An error occurred while retrieving your profile",
+    "RETRY": "Retry",
+    "ROLE": "Administrator",
+    "MEMBER_SINCE": "Member since",
+    "SECURITY": {
+      "TITLE": "Security",
+      "HINT": "Update your password to keep your account secure."
+    },
+    "SESSIONS": {
+      "TITLE": "Recent Logins",
+      "HINT": "A history of the most recent sign-ins to your account.",
+      "EMPTY": "No login history available yet.",
+      "LAST_LOGIN": "Last login",
+      "TOTAL_LOGINS": "Total logins",
+      "DEVICE": "Device",
+      "IP": "IP address",
+      "DATE": "Date"
+    },
+    "FIELDS": {
+      "FULLNAME": "Full name",
+      "EMAIL": "Email",
+      "CURRENT": "Current password",
+      "NEW": "New password",
+      "CONFIRM": "Confirm new password"
+    },
+    "ACTIONS": {
+      "UPDATE": "Update password"
+    },
+    "SUCCESS": {
+      "TITLE": "Success",
+      "PASSWORD_UPDATED": "Your password has been updated successfully."
+    },
+    "ERRORS": {
+      "FIX_FIELDS": "Please fix the highlighted fields before continuing.",
+      "MISMATCH": "Passwords do not match.",
+      "TOO_SHORT": "Password must be at least 6 characters.",
+      "SAME_PASSWORD": "New password must be different from the current one.",
+      "WRONG_CURRENT_PASSWORD": "Current password is incorrect.",
+      "GENERIC": "Something went wrong. Please try again."
+    },
+    "A11Y": {
+      "TOGGLE_VISIBILITY": "Show or hide password"
+    }
+  }
 
 }

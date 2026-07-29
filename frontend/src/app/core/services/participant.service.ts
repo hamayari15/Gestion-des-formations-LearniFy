@@ -12,9 +12,13 @@ export class ParticipantService {
 
   constructor(private http: HttpClient) {}
 
+  getLoginHistory(id: string) {
+    return this.http.get<any[]>(`${this.apiUrl}/${id}/login-history`);
+  }
+
   getParticipants(
     page: number = 1,
-    limit: number = 5,
+    limit: number = 4,
     search: string = '',
     status: string = ''
   ): Observable<any> {

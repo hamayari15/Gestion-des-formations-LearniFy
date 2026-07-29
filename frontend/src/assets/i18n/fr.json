@@ -298,7 +298,7 @@
     }
   },
 
-  "PROFILE": {
+  "USER-PROFILE": {
     "LOADING": "Chargement du profil...",
     "ERROR_TITLE": "Impossible de charger le profil",
     "ERROR_FALLBACK": "Une erreur est survenue lors de la récupération de vos données de profil",
@@ -741,7 +741,54 @@
     "ERROR_FALLBACK": "Une erreur s'est produite lors du chargement des inscriptions.",
     "STATUS_ERROR_TITLE": "Erreur",
     "STATUS_ERROR_TEXT": "Échec de la mise à jour du statut"
-  }
+  },
 
+  "ADMIN-PROFILE": {
+    "TITLE": "Mon profil",
+    "SUBTITLE": "Gérez les informations de votre compte et vos paramètres de sécurité",
+    "LOADING": "Chargement du profil...",
+    "ERROR_TITLE": "Impossible de charger le profil",
+    "ERROR_FALLBACK": "Une erreur est survenue lors de la récupération de votre profil",
+    "RETRY": "Réessayer",
+    "ROLE": "Administrateur",
+    "MEMBER_SINCE": "Membre depuis",
+    "SECURITY": {
+      "TITLE": "Sécurité",
+      "HINT": "Mettez à jour votre mot de passe pour sécuriser votre compte."
+    },
+    "SESSIONS": {
+      "TITLE": "Connexions récentes",
+      "HINT": "Historique des dernières connexions à votre compte.",
+      "EMPTY": "Aucun historique de connexion disponible pour le moment.",
+      "DEVICE": "Appareil",
+      "IP": "Adresse IP",
+      "DATE": "Date"
+    },
+    "FIELDS": {
+      "FULLNAME": "Nom complet",
+      "EMAIL": "E-mail",
+      "CURRENT": "Mot de passe actuel",
+      "NEW": "Nouveau mot de passe",
+      "CONFIRM": "Confirmer le nouveau mot de passe"
+    },
+    "ACTIONS": {
+      "UPDATE": "Mettre à jour le mot de passe"
+    },
+    "SUCCESS": {
+      "TITLE": "Succès",
+      "PASSWORD_UPDATED": "Votre mot de passe a été mis à jour avec succès."
+    },
+    "ERRORS": {
+      "FIX_FIELDS": "Veuillez corriger les champs en surbrillance avant de continuer.",
+      "MISMATCH": "Les mots de passe ne correspondent pas.",
+      "TOO_SHORT": "Le mot de passe doit contenir au moins 6 caractères.",
+      "SAME_PASSWORD": "Le nouveau mot de passe doit être différent du mot de passe actuel.",
+      "WRONG_CURRENT_PASSWORD": "Le mot de passe actuel est incorrect.",
+      "GENERIC": "Une erreur est survenue. Veuillez réessayer."
+    },
+    "A11Y": {
+      "TOGGLE_VISIBILITY": "Afficher ou masquer le mot de passe"
+    }
+  }
 
 }

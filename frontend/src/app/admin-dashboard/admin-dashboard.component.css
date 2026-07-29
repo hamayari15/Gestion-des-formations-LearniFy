@@ -1,7 +1,7 @@
 .dashboard-container {
   min-height: 100vh;
   width: 100%;
-  padding: 14px;
+  padding: 6px 14px;
   background: #f8fafc;
   font-family: 'Inter', -apple-system, sans-serif;
   display: flex;
@@ -20,9 +20,9 @@
 }
 
 .dashboard-header h1 {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #2a2a2a;
   margin: 0;
   white-space: nowrap;
   letter-spacing: 0.1px;
@@ -167,8 +167,8 @@
 .summary {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: 14px;
+  margin-bottom: 14px;
 }
 
 .card {
@@ -222,7 +222,7 @@
 .card-value {
   font-size: 1.4rem;
   font-weight: 700;
-  color: rgb(96, 96, 96);
+  color: rgb(70, 70, 70);
 }
 
 .stat-list {
@@ -278,7 +278,7 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 320px auto;
-  gap: 18px;
+  gap: 16px;
 }
 
 .chart-bar  { grid-column: 1; grid-row: 1; }
@@ -352,8 +352,8 @@
 
 @media (max-width: 768px) {
 
-.dashboard-container {
-    padding: 16px;
+  .dashboard-container {
+    padding: 16px 14px;
   }
 
   .dashboard-header {

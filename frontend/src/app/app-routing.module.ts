@@ -26,7 +26,7 @@ import { EditParticipantDialogComponent } from './edit-participant-dialog/edit-p
 import { UsersGrowthComponent } from './users-growth/users-growth.component';
 import { ListeInscritsComponent } from './liste-inscrits/liste-inscrits.component';
 import { AdminMessagesComponent } from './admin-messages/admin-messages.component';
-import { MonProfileAdminComponent } from './mon-profile-admin/mon-profile-admin.component';
+import { AdminProfileSettingsComponent } from './admin-profile-settings/admin-profile-settings.component';
 
 import { ParticipantInterfaceComponent } from './participant-interface/participant-interface.component';
 import { MonProfileParticipantComponent } from './mon-profile-participant/mon-profile-participant.component';
@@ -65,7 +65,7 @@ const routes: Routes = [
       { path: 'users-growth', component: UsersGrowthComponent },
       { path: 'liste-inscrits', component: ListeInscritsComponent },
       { path: 'admin-messages', component: AdminMessagesComponent },
-      { path: 'mon-profile-admin', component: MonProfileAdminComponent },
+      { path: 'admin-profile-settings', component: AdminProfileSettingsComponent },
     ],
   },
 

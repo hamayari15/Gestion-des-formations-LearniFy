@@ -20,7 +20,7 @@ export class ListeParticipantsComponent implements OnInit {
   filteredParticipants: any[] = [];
 
   page: number = 1;
-  limit: number = 5;
+  limit: number = 4;
   totalPages: number = 0;
   totalItems: number = 0;
 

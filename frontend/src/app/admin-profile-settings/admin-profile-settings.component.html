@@ -1,0 +1,353 @@
+<div class="settings-page">
+  <div class="spinner-wrap" *ngIf="loadingProfile">
+    <div class="spinner"></div>
+    <span class="spinner-label">{{ "ADMIN-PROFILE.LOADING" | translate }}</span>
+  </div>
+
+  <div class="state-panel error-panel" *ngIf="!loadingProfile && profileError">
+    <div class="state-card">
+      <div class="state-icon icon-error">
+        <i class="fas fa-triangle-exclamation"></i>
+      </div>
+
+      <h3>{{ "ADMIN-PROFILE.ERROR_TITLE" | translate }}</h3>
+
+      <p>{{ "ADMIN-PROFILE.ERROR_FALLBACK" | translate }}</p>
+
+      <button class="state-retry" (click)="retryLoad()">
+        <i class="fas fa-rotate-right"></i>
+        {{ "ADMIN-PROFILE.RETRY" | translate }}
+      </button>
+    </div>
+  </div>
+
+  <ng-container *ngIf="!loadingProfile && !profileError && admin">
+    <header class="page-header">
+      <h1>{{ "ADMIN-PROFILE.TITLE" | translate }}</h1>
+      <p class="subtitle">{{ "ADMIN-PROFILE.SUBTITLE" | translate }}</p>
+    </header>
+
+    <div class="cards-grid">
+      <section class="card profile-card">
+        <div class="avatar">{{ initials }}</div>
+        <h2>{{ "ADMIN-PROFILE.ROLE" | translate }}</h2>
+        <p class="profile-email">{{ admin.email }}</p>
+
+        <dl class="profile-meta" *ngIf="admin.createdAt">
+          <div class="meta-row">
+            <dt>{{ "ADMIN-PROFILE.MEMBER_SINCE" | translate }}</dt>
+            <dd>{{ admin.createdAt | date: "mediumDate" }}</dd>
+          </div>
+          <div class="meta-row" *ngIf="!loadingHistory">
+            <dt>{{ "ADMIN-PROFILE.SESSIONS.LAST_LOGIN" | translate }}</dt>
+            <dd>
+              {{ lastLoginAt ? (lastLoginAt | date: "MMM d, HH:mm") : "—" }}
+            </dd>
+          </div>
+        </dl>
+
+        <div
+          class="login-history"
+          *ngIf="!loadingHistory && loginHistory.length"
+        >
+          <h3>{{ "ADMIN-PROFILE.SESSIONS.TITLE" | translate }}</h3>
+          <p class="section-hint">
+            {{ "ADMIN-PROFILE.SESSIONS.HINT" | translate }}
+          </p>
+          <ul>
+            <li *ngFor="let entry of loginHistory">
+              <span class="device">{{ entry.device }}</span>
+              <span class="ip">{{ entry.ip }}</span>
+              <span class="date">{{ entry.loginAt | date: "medium" }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="login-history-empty"
+          *ngIf="!loadingHistory && !loginHistory.length"
+        >
+          {{ "ADMIN-PROFILE.SESSIONS.EMPTY" | translate }}
+        </div>
+      </section>
+
+      <section class="card settings-card">
+        <h2>{{ "ADMIN-PROFILE.SECURITY.TITLE" | translate }}</h2>
+        <p class="section-hint">
+          {{ "ADMIN-PROFILE.SECURITY.HINT" | translate }}
+        </p>
+
+        <form (ngSubmit)="updatePassword()" #passwordForm="ngForm" novalidate>
+          <div class="field">
+            <label for="actualPassword">{{
+              "ADMIN-PROFILE.FIELDS.CURRENT" | translate
+            }}</label>
+            <div class="input-wrap">
+              <input
+                [type]="showActualPassword ? 'text' : 'password'"
+                id="actualPassword"
+                name="actualPassword"
+                [(ngModel)]="form.actualPassword"
+                autocomplete="current-password"
+                required
+              />
+              <button
+                type="button"
+                class="toggle-visibility"
+                (click)="showActualPassword = !showActualPassword"
+                [attr.aria-label]="
+                  'ADMIN-PROFILE.A11Y.TOGGLE_VISIBILITY' | translate
+                "
+              >
+                <svg
+                  *ngIf="!showActualPassword"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="3"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  />
+                </svg>
+                <svg
+                  *ngIf="showActualPassword"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="3"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  />
+                  <line
+                    x1="3"
+                    y1="21"
+                    x2="21"
+                    y2="3"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="newPassword">{{
+              "ADMIN-PROFILE.FIELDS.NEW" | translate
+            }}</label>
+            <div class="input-wrap">
+              <input
+                [type]="showNewPassword ? 'text' : 'password'"
+                id="newPassword"
+                name="newPassword"
+                [(ngModel)]="form.newPassword"
+                autocomplete="new-password"
+                required
+              />
+              <button
+                type="button"
+                class="toggle-visibility"
+                (click)="showNewPassword = !showNewPassword"
+                [attr.aria-label]="
+                  'ADMIN-PROFILE.A11Y.TOGGLE_VISIBILITY' | translate
+                "
+              >
+                <svg
+                  *ngIf="!showNewPassword"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="3"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  />
+                </svg>
+                <svg
+                  *ngIf="showNewPassword"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="3"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  />
+                  <line
+                    x1="3"
+                    y1="21"
+                    x2="21"
+                    y2="3"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+            </div>
+            <p class="field-error" *ngIf="newPasswordTooShort">
+              {{ "ADMIN-PROFILE.ERRORS.TOO_SHORT" | translate }}
+            </p>
+            <p class="field-error" *ngIf="samePassword">
+              {{ "ADMIN-PROFILE.ERRORS.SAME_PASSWORD" | translate }}
+            </p>
+          </div>
+
+          <div class="field">
+            <label for="confirmNewPassword">{{
+              "ADMIN-PROFILE.FIELDS.CONFIRM" | translate
+            }}</label>
+            <div class="input-wrap">
+              <input
+                [type]="showConfirmPassword ? 'text' : 'password'"
+                id="confirmNewPassword"
+                name="confirmNewPassword"
+                [(ngModel)]="form.confirmNewPassword"
+                autocomplete="new-password"
+                required
+              />
+              <button
+                type="button"
+                class="toggle-visibility"
+                (click)="showConfirmPassword = !showConfirmPassword"
+                [attr.aria-label]="
+                  'ADMIN-PROFILE.A11Y.TOGGLE_VISIBILITY' | translate
+                "
+              >
+                <svg
+                  *ngIf="!showConfirmPassword"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="3"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  />
+                </svg>
+                <svg
+                  *ngIf="showConfirmPassword"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="3"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  />
+                  <line
+                    x1="3"
+                    y1="21"
+                    x2="21"
+                    y2="3"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+            </div>
+            <p class="field-error" *ngIf="passwordsMismatch">
+              {{ "ADMIN-PROFILE.ERRORS.MISMATCH" | translate }}
+            </p>
+          </div>
+
+          <div class="form-message">
+            <p class="banner error" *ngIf="errorMsgKey">
+              <span>{{ errorMsgKey | translate }}</span>
+              <button
+                type="button"
+                class="banner-close"
+                (click)="dismissError()"
+                [attr.aria-label]="'ADMIN-PROFILE.A11Y.DISMISS' | translate"
+              >
+                &times;
+              </button>
+            </p>
+            <p class="banner success" *ngIf="successMsgKey">
+              <span>{{ successMsgKey | translate }}</span>
+              <button
+                type="button"
+                class="banner-close"
+                (click)="dismissSuccess()"
+                [attr.aria-label]="'ADMIN-PROFILE.A11Y.DISMISS' | translate"
+              >
+                &times;
+              </button>
+            </p>
+          </div>
+
+          <button type="submit" class="btn primary" [disabled]="submitting">
+            <span *ngIf="!submitting">{{
+              "ADMIN-PROFILE.ACTIONS.UPDATE" | translate
+            }}</span>
+            <span *ngIf="submitting" class="spinner"></span>
+          </button>
+        </form>
+      </section>
+    </div>
+  </ng-container>
+</div>

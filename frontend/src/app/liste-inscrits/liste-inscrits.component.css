@@ -290,6 +290,7 @@ tbody td {
 
 .pagination {
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
   gap: 4px;
@@ -408,6 +409,10 @@ tbody td {
 }
 
 @media (max-width: 768px) {
+
+  .container {
+    padding: 0 14px;
+  }
 
   .page-header {
     flex-direction: row;

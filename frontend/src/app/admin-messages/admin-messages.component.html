@@ -1,97 +1,149 @@
 <div class="messages-page">
+
+  <!-- Header -->
   <div class="page-header">
-    <div>
+    <div class="header-text">
       <h2 class="page-title">Messages</h2>
-      <p class="page-subtitle">{{ totalCount }} total</p>
+      <p class="page-subtitle">
+        {{ totalCount }} total
+        <span class="new-badge" *ngIf="newCount > 0">{{ newCount }} new</span>
+      </p>
     </div>
 
-    <select class="form-select filter-select" [(ngModel)]="statusFilter" (change)="onFilterChange()">
-      <option value="">All statuses</option>
-      <option value="new">New</option>
-      <option value="read">Read</option>
-      <option value="replied">Replied</option>
-    </select>
+    <div class="header-controls">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          placeholder="Search messages..."
+          class="search-input">
+      </div>
+
+      <select class="status-select" [(ngModel)]="statusFilter" (change)="onFilterChange()">
+        <option value="">All statuses</option>
+        <option value="new">New</option>
+        <option value="read">Read</option>
+        <option value="replied">Replied</option>
+      </select>
+    </div>
   </div>
 
-  <div class="alert alert-danger" *ngIf="errorMsg">{{ errorMsg }}</div>
+  <div class="alert-banner error" *ngIf="errorMsg">
+    <i class="fas fa-exclamation-circle"></i> {{ errorMsg }}
+  </div>
 
-  <div class="messages-layout">
-    <!-- List -->
-    <div class="messages-list-panel">
-      <div class="loading-state" *ngIf="loading">
-        <div class="spinner-border spinner-border-sm"></div> Loading...
+  <!-- Body -->
+  <div class="messages-layout" [class.detail-active]="showDetailMobile">
+
+    <!-- List panel -->
+    <div class="list-panel">
+
+      <div class="state-box" *ngIf="loading">
+        <div class="spinner"></div>
+        <span>Loading messages...</span>
       </div>
 
-      <div class="empty-state" *ngIf="!loading && messages.length === 0">
-        No messages found.
+      <div class="state-box" *ngIf="!loading && filteredMessages.length === 0">
+        <i class="fas fa-inbox empty-icon"></i>
+        <span>No messages found</span>
       </div>
 
-      <div
-        class="message-row"
-        *ngFor="let msg of messages; trackBy: trackById"
-        [class.active]="selected?._id === msg._id"
-        [class.unread]="msg.status === 'new'"
-        (click)="view(msg)">
+      <div class="message-list" *ngIf="!loading && filteredMessages.length > 0">
+        <div
+          class="message-row"
+          *ngFor="let msg of filteredMessages; trackBy: trackById"
+          [class.active]="selected?._id === msg._id"
+          [class.unread]="msg.status === 'new'"
+          (click)="view(msg)">
 
-        <div class="row-main">
-          <div class="row-top">
-            <span class="sender-name">{{ msg.name }}</span>
-            <span class="status-badge" [ngClass]="'status-' + msg.status">{{ msg.status }}</span>
+          <div class="avatar">{{ msg.name.charAt(0).toUpperCase() }}</div>
+
+          <div class="row-content">
+            <div class="row-top">
+              <span class="sender-name">{{ msg.name }}</span>
+              <span class="row-date">{{ msg.createdAt | date:'MMM d' }}</span>
+            </div>
+            <div class="sender-email">{{ msg.email }}</div>
+            <div class="preview">{{ msg.message }}</div>
+            <span class="status-pill" [ngClass]="'status-' + msg.status">{{ msg.status }}</span>
           </div>
-          <div class="sender-email">{{ msg.email }}</div>
-          <div class="preview">{{ msg.message }}</div>
-          <div class="row-date">{{ msg.createdAt | date:'MMM d, y, h:mm a' }}</div>
-        </div>
 
-        <div class="row-actions">
-          <button
-            class="icon-btn"
-            title="Mark as replied"
-            [disabled]="msg.status === 'replied'"
-            (click)="markReplied(msg, $event)">✓</button>
-          <button
-            class="icon-btn danger"
-            title="Delete"
-            (click)="remove(msg, $event)">✕</button>
+          <div class="row-actions">
+            <button
+              class="icon-btn success"
+              title="Mark as replied"
+              [disabled]="msg.status === 'replied'"
+              (click)="markReplied(msg, $event)">
+              <i class="fas fa-check"></i>
+            </button>
+            <button
+              class="icon-btn danger"
+              title="Delete"
+              (click)="remove(msg, $event)">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
         </div>
       </div>
 
       <div class="pagination-bar" *ngIf="totalPages > 1">
-        <button class="btn btn-sm btn-outline-secondary" [disabled]="page <= 1" (click)="changePage(-1)">Prev</button>
-        <span>Page {{ page }} / {{ totalPages }}</span>
-        <button class="btn btn-sm btn-outline-secondary" [disabled]="page >= totalPages" (click)="changePage(1)">Next</button>
+        <button class="page-btn" [disabled]="page <= 1" (click)="changePage(-1)">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <span class="page-info">Page {{ page }} of {{ totalPages }}</span>
+        <button class="page-btn" [disabled]="page >= totalPages" (click)="changePage(1)">
+          <i class="fas fa-chevron-right"></i>
+        </button>
       </div>
     </div>
 
-    <!-- Detail -->
-    <div class="message-detail-panel">
+    <!-- Detail panel -->
+    <div class="detail-panel">
       <ng-container *ngIf="selected; else noSelection">
+
+        <button class="back-btn" (click)="backToList()">
+          <i class="fas fa-arrow-left"></i> Back to list
+        </button>
+
         <div class="detail-header">
-          <div>
-            <h4>{{ selected.name }}</h4>
+          <div class="detail-avatar">{{ selected.name.charAt(0).toUpperCase() }}</div>
+          <div class="detail-identity">
+            <h3>{{ selected.name }}</h3>
             <a [href]="'mailto:' + selected.email" class="detail-email">{{ selected.email }}</a>
           </div>
-          <span class="status-badge" [ngClass]="'status-' + selected.status">{{ selected.status }}</span>
+          <span class="status-pill" [ngClass]="'status-' + selected.status">{{ selected.status }}</span>
         </div>
 
-        <div class="detail-date">{{ selected.createdAt | date:'full' }}</div>
+        <div class="detail-date">
+          <i class="far fa-clock"></i> {{ selected.createdAt | date:'EEEE, MMMM d, y - h:mm a' }}
+        </div>
 
-        <hr>
-
-        <p class="detail-body">{{ selected.message }}</p>
+        <div class="detail-body-box">
+          <p class="detail-body">{{ selected.message }}</p>
+        </div>
 
         <div class="detail-actions">
-          <a class="btn btn-primary" [href]="'mailto:' + selected.email">Reply by email</a>
+          <a class="action-btn primary" [href]="'mailto:' + selected.email">
+            <i class="fas fa-reply"></i> Reply by email
+          </a>
           <button
-            class="btn btn-outline-success"
+            class="action-btn success"
             [disabled]="selected.status === 'replied'"
-            (click)="markReplied(selected)">Mark as replied</button>
-          <button class="btn btn-outline-danger" (click)="remove(selected)">Delete</button>
+            (click)="markReplied(selected)">
+            <i class="fas fa-check"></i> Mark as replied
+          </button>
+          <button class="action-btn danger" (click)="remove(selected)">
+            <i class="fas fa-trash"></i> Delete
+          </button>
         </div>
       </ng-container>
 
       <ng-template #noSelection>
-        <div class="empty-detail">Select a message to view its details</div>
+        <div class="state-box empty-detail">
+          <i class="far fa-envelope-open empty-icon"></i>
+          <span>Select a message to view details</span>
+        </div>
       </ng-template>
     </div>
   </div>

@@ -54,7 +54,7 @@
             </div>
           </div>
 
-          <div class="alert alert-danger py-2" *ngIf="errorKey">{{ errorKey }}</div>
+          <div class="alert alert-danger py-2" *ngIf="errorKey">{{ errorKey | translate }}</div>
           <div class="alert alert-success py-2" *ngIf="submitted">{{ 'CONTACT.SUCCESS' | translate }}</div>
 
           <button type="submit" class="btn-submit" [disabled]="form.invalid || submitting">
