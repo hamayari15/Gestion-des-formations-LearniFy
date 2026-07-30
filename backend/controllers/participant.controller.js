@@ -5,6 +5,8 @@ const { sendWelcomeEmail } = require("../utils/mailer");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const mongoose = require("mongoose");
+
 
 exports.Register = async (req, res) => {
   try {

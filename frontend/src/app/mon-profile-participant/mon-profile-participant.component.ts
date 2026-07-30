@@ -18,7 +18,6 @@ import { ChangePasswordDialogComponent } from '../change-password-dialog/change-
   styleUrls: ['./mon-profile-participant.component.css'],
 })
 export class MonProfileParticipantComponent implements OnInit {
-
   environment = environment;
 
   participant: any;
@@ -43,7 +42,7 @@ export class MonProfileParticipantComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private translate: TranslateService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -64,10 +63,7 @@ export class MonProfileParticipantComponent implements OnInit {
       },
       error: (error) => {
         console.error('Erreur lors de la récupération du participant:', error);
-        this.errorKey = this.resolveErrorKey(
-          error,
-          'PROFILE.ERROR_FALLBACK'
-        );
+        this.errorKey = this.resolveErrorKey(error, 'PROFILE.ERROR_FALLBACK');
         this.loadingParticipant = false;
       },
     });
@@ -129,91 +125,63 @@ export class MonProfileParticipantComponent implements OnInit {
   }
 
   deleteAccount(id: string): void {
-
     Swal.fire({
       icon: 'warning',
 
-      title: this.translate.instant(
-        'USER-PROFILE.DELETE_CONFIRM_TITLE'
-      ),
+      title: this.translate.instant('USER-PROFILE.DELETE_CONFIRM_TITLE'),
 
-      text: this.translate.instant(
-        'USER-PROFILE.DELETE_CONFIRM_TEXT'
-      ),
+      text: this.translate.instant('USER-PROFILE.DELETE_CONFIRM_TEXT'),
 
       width: 550,
 
       showCancelButton: true,
 
       confirmButtonText: this.translate.instant(
-        'USER-PROFILE.DELETE_CONFIRM_BUTTON'
+        'USER-PROFILE.DELETE_CONFIRM_BUTTON',
       ),
 
       cancelButtonText: this.translate.instant(
-        'USER-PROFILE.DELETE_CANCEL_BUTTON'
+        'USER-PROFILE.DELETE_CANCEL_BUTTON',
       ),
 
       confirmButtonColor: '#dc2626',
-
     }).then((result) => {
-
       if (!result.isConfirmed) return;
 
-
       this.participantService.deleteParticipant(id).subscribe({
-
         next: (response: any) => {
-
           Swal.fire({
-
             icon: 'success',
 
-            title: this.translate.instant(
-              'USER-PROFILE.DELETE_SUCCESS_TITLE'
-            ),
+            title: this.translate.instant('USER-PROFILE.DELETE_SUCCESS_TITLE'),
 
-            text: this.translate.instant(
-              'USER-PROFILE.DELETE_SUCCESS_TEXT'
-            ),
+            text: this.translate.instant('USER-PROFILE.DELETE_SUCCESS_TEXT'),
 
             width: 500,
 
             timer: 2000,
 
             timerProgressBar: true,
-
           }).then(() => {
-
             this.authService.logout();
             this.router.navigate(['/login']);
-
           });
-
         },
 
-
         error: (error) => {
-
           Swal.fire({
-
             icon: 'error',
 
-            title: this.translate.instant(
-              'USER-PROFILE.ERROR_TITLE'
-            ),
+            title: this.translate.instant('USER-PROFILE.ERROR_TITLE'),
 
             text: this.translate.instant(
-              this.resolveErrorKey(error, 'USER-PROFILE.DELETE_ERROR')
+              this.resolveErrorKey(error, 'USER-PROFILE.DELETE_ERROR'),
             ),
 
             width: 500,
-
           });
-
-        }
-
+        },
       });
-
     });
   }
 

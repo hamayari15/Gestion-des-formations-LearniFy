@@ -340,6 +340,42 @@
     "DELETE_ERROR": "An error occurred while deleting your account."
   },
 
+  "CHANGE_PASSWORD_DIALOG": {
+    "TITLE": "Change Password",
+    "SUBTITLE": "Update your account password",
+
+    "FIELDS": {
+      "CURRENT": "Current Password",
+      "NEW": "New Password",
+      "CONFIRM": "Confirm New Password"
+    },
+
+    "ACTIONS": {
+      "UPDATE": "Update",
+      "CANCEL": "Cancel"
+    },
+
+    "A11Y": {
+      "TOGGLE_VISIBILITY": "Show or hide password"
+    },
+
+    "ERRORS": {
+      "FIX_FIELDS": "Please correct the highlighted fields before continuing.",
+      "TOO_SHORT": "Password must be at least 6 characters long.",
+      "SAME_PASSWORD": "The new password must be different from the current password.",
+      "MISMATCH": "Passwords do not match.",
+      "WRONG_CURRENT_PASSWORD": "The current password is incorrect."
+    },
+
+    "FOOTER_HINT": "Make sure your new password is secure.",
+
+    "SUCCESS_TITLE": "Password Updated",
+    "SUCCESS_TEXT": "Your password has been updated successfully.",
+
+    "ERROR_TITLE": "Unable to Update Password",
+    "ERROR_FALLBACK": "An unexpected error occurred. Please try again."
+  },
+
   "FORMATIONS_DISPONIBLES": {
     "TITLE": "Available Trainings",
     "SUBTITLE": "Choose a training and register",
@@ -430,13 +466,19 @@
     "EMPTY_SUBTITLE": "Your registered trainings will appear here.",
 
     "STATUS": "Status",
+    "PENDING": "Pending",
+    "APPROVED": "Approved",
+    "REJECTED": "Rejected",
+
     "PERIOD": "Period",
     "MODE": "Mode",
+    "PRESENTIEL": "In Person",
+    "ONLINE": "Online",
+    "HYBRID": "Hybrid",
+
     "SCHEDULE": "Schedule",
     "ROOM": "Room",
-    "NA": "N/A",
-
-    "ARCHIVED": "Archived"
+    "NA": "N/A"
   },
 
   "ADMIN_SIDEBAR": {

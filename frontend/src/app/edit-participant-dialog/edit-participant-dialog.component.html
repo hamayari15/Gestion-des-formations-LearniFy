@@ -124,7 +124,7 @@
     <div class="footer-actions">
 
       <button class="btn-cancel" (click)="closeDialog()">
-        {{ 'EDIT_PARTICIPANT_DIALOG.CANCEL' | translate }}
+        <i class="ti ti-x" aria-hidden="true"></i> {{ 'EDIT_PARTICIPANT_DIALOG.CANCEL' | translate }}
       </button>
 
       <button
@@ -132,7 +132,7 @@
         (click)="onSubmit()"
         [disabled]="!isFormValid() || !hasChanges()">
 
-        {{ 'EDIT_PARTICIPANT_DIALOG.SUBMIT' | translate }}
+        <i class="ti ti-pencil-check" aria-hidden="true"></i> {{ 'EDIT_PARTICIPANT_DIALOG.SUBMIT' | translate }}
 
       </button>
 

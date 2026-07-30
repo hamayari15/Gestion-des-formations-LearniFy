@@ -81,6 +81,15 @@ export class FormationsDisponiblesComponent implements OnInit {
 
   }
 
+  getModeLabel(mode: string): string {
+    switch (mode) {
+      case 'Présentiel': return 'FORMATIONS_DISPONIBLES.PRESENTIEL';
+      case 'En ligne': return 'FORMATIONS_DISPONIBLES.ONLINE';
+      case 'Hybride': return 'FORMATIONS_DISPONIBLES.HYBRID';
+      default: return mode;
+    }
+  }
+
   applyFilters(): void {
     this.page = 1;
     this.getFormations();

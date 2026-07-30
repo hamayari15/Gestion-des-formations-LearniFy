@@ -340,6 +340,42 @@
     "DELETE_ERROR": "Une erreur est survenue lors de la suppression de votre compte."
   },
 
+  "CHANGE_PASSWORD_DIALOG": {
+    "TITLE": "Changer le mot de passe",
+    "SUBTITLE": "Mettez à jour le mot de passe de votre compte",
+
+    "FIELDS": {
+      "CURRENT": "Mot de passe actuel",
+      "NEW": "Nouveau mot de passe",
+      "CONFIRM": "Confirmer le nouveau mot de passe"
+    },
+
+    "ACTIONS": {
+      "UPDATE": "Mettre à jour",
+      "CANCEL": "Annuler"
+    },
+
+    "A11Y": {
+      "TOGGLE_VISIBILITY": "Afficher ou masquer le mot de passe"
+    },
+
+    "ERRORS": {
+      "FIX_FIELDS": "Veuillez corriger les champs avant de continuer.",
+      "TOO_SHORT": "Le mot de passe doit contenir au moins 6 caractères.",
+      "SAME_PASSWORD": "Le nouveau mot de passe doit être différent du mot de passe actuel.",
+      "MISMATCH": "Les mots de passe ne correspondent pas.",
+      "WRONG_CURRENT_PASSWORD": "Le mot de passe actuel est incorrect."
+    },
+
+    "FOOTER_HINT": "Assurez-vous que votre nouveau mot de passe est sécurisé.",
+
+    "SUCCESS_TITLE": "Mot de passe modifié",
+    "SUCCESS_TEXT": "Votre mot de passe a été mis à jour avec succès.",
+
+    "ERROR_TITLE": "Impossible de modifier le mot de passe",
+    "ERROR_FALLBACK": "Une erreur inattendue est survenue. Veuillez réessayer."
+  },
+
   "FORMATIONS_DISPONIBLES": {
     "TITLE": "Formations disponibles",
     "SUBTITLE": "Choisissez une formation et inscrivez-vous",
@@ -426,17 +462,23 @@
     "ERROR_FALLBACK": "Une erreur est survenue lors de la récupération de vos inscriptions",
     "RETRY": "Réessayer",
 
-    "EMPTY_TITLE": "Aucune inscription pour le moment",
+    "EMPTY_TITLE": "Aucune inscription",
     "EMPTY_SUBTITLE": "Vos formations inscrites apparaîtront ici.",
 
     "STATUS": "Statut",
+    "PENDING": "En attente",
+    "APPROVED": "Validée",
+    "REJECTED": "Refusée",
+
     "PERIOD": "Période",
     "MODE": "Mode",
+    "PRESENTIEL": "Présentiel",
+    "ONLINE": "En ligne",
+    "HYBRID": "Hybride",
+
     "SCHEDULE": "Horaire",
     "ROOM": "Salle",
-    "NA": "N/A",
-
-    "ARCHIVED": "Archivée"
+    "NA": "N/A"
   },
 
   "ADMIN_SIDEBAR": {

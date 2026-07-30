@@ -59,7 +59,7 @@ exports.Login = async (req, res) => {
     const device = `${ua.browser.name || "Unknown browser"} on ${ua.os.name || "Unknown OS"}`;
 
     await LoginHistory.create({
-      account: adm._id,
+      admin: adm._id,
       ip: req.ip,
       userAgent: req.headers["user-agent"],
       device,

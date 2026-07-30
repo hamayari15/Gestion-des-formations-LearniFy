@@ -47,6 +47,38 @@ export class MesFormationsComponent implements OnInit {
     });
   }
 
+  getStatusLabel(status: string): string {
+    switch (status) {
+      case 'En Attente':
+        return 'MES_FORMATIONS.PENDING';
+
+      case 'Validée':
+        return 'MES_FORMATIONS.APPROVED';
+
+      case 'Refusée':
+        return 'MES_FORMATIONS.REJECTED';
+
+      default:
+        return status;
+    }
+  }
+
+  getModeLabel(mode: string): string {
+    switch (mode) {
+      case 'Présentiel':
+        return 'MES_FORMATIONS.PRESENTIEL';
+
+      case 'En ligne':
+        return 'MES_FORMATIONS.ONLINE';
+
+      case 'Hybride':
+        return 'MES_FORMATIONS.HYBRID';
+
+      default:
+        return mode;
+    }
+  }
+
   private resolveErrorKey(error: any, fallbackKey: string): string {
     const code = error?.error?.code;
     if (code) {

@@ -61,7 +61,7 @@
           [class.badge-validee]="inscription.status === 'Validée'"
           [class.badge-refusee]="inscription.status === 'Refusée'">
 
-          {{ inscription.status }}
+          {{ getStatusLabel(inscription.status) | translate }}
 
         </span>
 
@@ -84,23 +84,23 @@
 
       </div>
 
-      <div class="cell mode-cell">
+     <div class="cell mode-cell">
 
-        <span class="cell-label">
-          {{ 'MES_FORMATIONS.MODE' | translate }}
-        </span>
+  <span class="cell-label">
+    {{ 'MES_FORMATIONS.MODE' | translate }}
+  </span>
 
-        <span
-          class="badge mode-badge"
-          [class.badge-presentiel]="inscription.formationId?.modeFormation === 'Présentiel'"
-          [class.badge-enligne]="inscription.formationId?.modeFormation === 'En ligne'"
-          [class.badge-hybride]="inscription.formationId?.modeFormation === 'Hybride'">
+  <span
+    class="badge mode-badge"
+    [class.badge-presentiel]="inscription.formationId?.modeFormation === 'Présentiel'"
+    [class.badge-enligne]="inscription.formationId?.modeFormation === 'En ligne'"
+    [class.badge-hybride]="inscription.formationId?.modeFormation === 'Hybride'">
 
-          {{ inscription.formationId?.modeFormation }}
+    {{ getModeLabel(inscription.formationId?.modeFormation) | translate }}
 
-        </span>
+  </span>
 
-      </div>
+</div>
 
       <div class="cell time-cell">
 

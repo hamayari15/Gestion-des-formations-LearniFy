@@ -218,24 +218,20 @@
   font-weight: 600;
   letter-spacing: 0.3px;
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition: background 0.2s ease, border-color 0.2s ease;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .password-button {
-  border: 1px solid #a5b4fc;
-  background: #f7f9fd;
-  color: #5348cc;
+  border: 1px solid #cbd7fb;
+  background: #f8faff;
+  color: #6366f1;
 }
 
 .password-button:hover {
-  background: #f0f3fe;
-  border-color: #818cf8;
-}
-
-.password-button i {
-  font-size: 0.8125rem;
+  background: #f0f4ff;
+  border-color: #c3cfff;
 }
 
 .delete-button {

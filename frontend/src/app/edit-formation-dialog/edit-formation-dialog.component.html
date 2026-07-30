@@ -170,8 +170,9 @@
       <button class="btn-cancel" (click)="closeDialog()">
         <i class="ti ti-x" aria-hidden="true"></i> {{ 'EDIT_FORMATION_DIALOG.CANCEL' | translate }}
       </button>
-      <button class="btn-save" (click)="updateFormation()" [disabled]="!isFormValid() || !hasChanges()">
-        <i class="ti ti-device-floppy" aria-hidden="true"></i> {{ 'EDIT_FORMATION_DIALOG.SUBMIT' | translate }}
+      <button class="btn-save"  (click)="updateFormation()" [disabled]="!isFormValid() || !hasChanges()">
+          <i class="ti ti-pencil-check" aria-hidden="true"></i>
+ {{ 'EDIT_FORMATION_DIALOG.SUBMIT' | translate }}
       </button>
     </div>
   </div>

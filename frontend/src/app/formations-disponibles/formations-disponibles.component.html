@@ -198,7 +198,7 @@
               [class.badge-enligne]="formation.modeFormation === 'En ligne'"
               [class.badge-hybride]="formation.modeFormation === 'Hybride'"
             >
-              {{ formation.modeFormation }}
+              {{ getModeLabel(formation.modeFormation) | translate }}
             </span>
           </td>
 
