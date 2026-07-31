@@ -1,4 +1,10 @@
 <div class="settings-page">
+
+  <header class="page-header">
+    <h1>{{ "ADMIN-PROFILE.TITLE" | translate }}</h1>
+    <p class="subtitle">{{ "ADMIN-PROFILE.SUBTITLE" | translate }}</p>
+  </header>
+
   <div class="spinner-wrap" *ngIf="loadingProfile">
     <div class="spinner"></div>
     <span class="spinner-label">{{ "ADMIN-PROFILE.LOADING" | translate }}</span>
@@ -22,11 +28,6 @@
   </div>
 
   <ng-container *ngIf="!loadingProfile && !profileError && admin">
-    <header class="page-header">
-      <h1>{{ "ADMIN-PROFILE.TITLE" | translate }}</h1>
-      <p class="subtitle">{{ "ADMIN-PROFILE.SUBTITLE" | translate }}</p>
-    </header>
-
     <div class="cards-grid">
       <section class="card profile-card">
         <div class="avatar">{{ initials }}</div>

@@ -27,6 +27,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.isLoggedIn = loggedIn;
       }
     );
+    
+    this.currentLanguage = localStorage.getItem('userLanguage') || 'en';
   }
 
   get isParticipant(): boolean {
@@ -43,7 +45,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   changeLanguage(lang: string) {
     this.translate.use(lang);
-    localStorage.setItem('language', lang);
+    localStorage.setItem('userLanguage', lang);
     this.currentLanguage = lang;
 
     this.closeMenu();

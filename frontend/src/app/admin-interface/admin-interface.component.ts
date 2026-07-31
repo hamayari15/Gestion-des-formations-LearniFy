@@ -16,7 +16,9 @@ export class AdminInterfaceComponent implements OnInit {
   currentLanguage = this.translate.currentLang || 'en';
   sidebarOpen = false;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentLanguage = localStorage.getItem('adminLanguage') || 'en';
+  }
 
   toggleSidebar(): void {
     this.sidebarOpen = !this.sidebarOpen;
@@ -28,9 +30,8 @@ export class AdminInterfaceComponent implements OnInit {
 
   changeLanguage(lang: string) {
     this.translate.use(lang);
-    localStorage.setItem('language', lang);
+    localStorage.setItem('adminLanguage', lang);
     this.currentLanguage = lang;
-
     this.sidebarOpen = false;
   }
 

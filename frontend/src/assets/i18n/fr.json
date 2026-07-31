@@ -336,7 +336,7 @@
 
     "DELETE_SUCCESS_TITLE": "Compte supprimé",
     "DELETE_SUCCESS_TEXT": "Votre compte a été supprimé avec succès.",
-
+    
     "DELETE_ERROR": "Une erreur est survenue lors de la suppression de votre compte."
   },
 
@@ -405,7 +405,7 @@
     "NOT_FOUND_DESC": "Essayez de modifier votre recherche ou vos filtres",
 
     "REGISTER": "S'inscrire",
-    "NA": "N/D",
+    "NA": "N/A",
 
     "PREVIOUS": "Précédent",
     "NEXT": "Suivant",

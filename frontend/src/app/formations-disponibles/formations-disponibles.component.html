@@ -184,7 +184,7 @@
               {{ formation.numSalle }}
             </span>
 
-            <span *ngIf="formation.numSalle === null" class="badge-na">
+            <span *ngIf="formation.numSalle === null || formation.numSalle === undefined" class="badge-na">
               {{ "FORMATIONS_DISPONIBLES.NA" | translate }}
             </span>
           </td>
