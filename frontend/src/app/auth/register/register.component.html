@@ -228,12 +228,20 @@
           {{ imageError }}
         </div>
 
-        <div *ngIf="imagePreview">
+        <div *ngIf="imagePreview" class="image-preview-wrapper">
           <img
             [src]="imagePreview"
             width="180"
             height="180"
             style="object-fit:cover;border-radius:10px;">
+
+          <button
+            type="button"
+            class="remove-image-btn"
+            (click)="removeImage()"
+            [attr.aria-label]="'REGISTER.REMOVE_IMAGE' | translate">
+            <i class="fas fa-times"></i>
+          </button>
         </div>
 
         <div class="mt-3">

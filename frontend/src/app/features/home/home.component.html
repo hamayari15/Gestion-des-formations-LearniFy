@@ -125,12 +125,14 @@
   </div>
 </section>
 
-<section class="cta-banner">
-  <h2>{{ 'HOME.CTA.TITLE' | translate }}</h2>
-  <p>{{ 'HOME.CTA.DESCRIPTION' | translate }}</p>
-  <a [routerLink]="isAuthenticated ? '/participant-interface/mes-formations' : '/register'" class="btn-solid btn-lg">
-    {{ isAuthenticated ? ('HOME.HERO.VIEW_FORMATIONS' | translate) : ('HOME.CTA.GET_STARTED' | translate) }}
-  </a>
-</section>
+<div class="cta-section">
+  <section class="cta-banner">
+    <h2>{{ 'HOME.CTA.TITLE' | translate }}</h2>
+    <p>{{ 'HOME.CTA.DESCRIPTION' | translate }}</p>
+    <a [routerLink]="isAuthenticated ? '/participant-interface/mes-formations' : '/register'" class="btn-solid btn-lg">
+      {{ isAuthenticated ? ('HOME.HERO.VIEW_FORMATIONS' | translate) : ('HOME.CTA.GET_STARTED' | translate) }}
+    </a>
+  </section>
+</div>
 
 </div>

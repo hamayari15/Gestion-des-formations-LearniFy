@@ -204,6 +204,17 @@ export class RegisterComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+  removeImage(): void {
+    this.selectedImage = null;
+    this.imagePreview = null;
+    this.imageError = null;
+
+    const fileInput = document.querySelector<HTMLInputElement>('input[type="file"]');
+    if (fileInput) {
+      fileInput.value = '';
+    }
+  }
+
   register(): void {
 
   const formData = new FormData();
