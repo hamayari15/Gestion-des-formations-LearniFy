@@ -18,6 +18,8 @@ const formationSchema = new mongoose.Schema(
       required: function () {
         return this.modeFormation === "Présentiel";
       },
+      min: 1,
+      max: 100,
     },
 
     creditImpot: {

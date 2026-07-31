@@ -109,7 +109,7 @@ export class EditFormationDialogComponent implements OnInit {
      (
         this.modeFormation !== 'Présentiel'
         ||
-        (this.numSalle !== null && this.numSalle > 0)
+        (this.numSalle !== null && this.numSalle >= 1 && this.numSalle <= 100)
       )
 
     );

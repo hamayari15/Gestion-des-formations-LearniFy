@@ -180,6 +180,14 @@
 
     #salle-field { display: block; }
 
+    .error-text {
+      display: block;
+      margin-top: 6px;
+      color: #dc2626;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
     .dialog-footer {
       position: sticky;
       bottom: 0;

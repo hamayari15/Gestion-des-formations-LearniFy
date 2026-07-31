@@ -26,8 +26,8 @@ export class ContactComponent implements AfterViewInit, OnDestroy {
   @ViewChild('mapContainer', { static: true }) mapContainer!: ElementRef;
 
   private map?: L.Map;
-  readonly coords: L.LatLngTuple = [40.73061, -73.935242];
-
+  readonly coords: L.LatLngTuple = [36.81225, 10.166917];
+  
   form: FormGroup;
   submitting = false;
   submitted = false;
@@ -51,9 +51,10 @@ export class ContactComponent implements AfterViewInit, OnDestroy {
   }
 
   private initMap(): void {
+    
     if (this.map) return;
 
-    this.map = L.map(this.mapContainer.nativeElement).setView(this.coords, 13);
+    this.map = L.map(this.mapContainer.nativeElement).setView(this.coords, 16);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution:
@@ -61,7 +62,17 @@ export class ContactComponent implements AfterViewInit, OnDestroy {
       maxZoom: 19,
     }).addTo(this.map);
 
-    L.marker(this.coords).addTo(this.map).bindPopup('Our office').openPopup();
+    const marker = L.circleMarker(this.coords, {
+      radius: 10,
+      color: '#185FA5',
+      fillColor: '#185FA5',
+      fillOpacity: 0.9,
+      weight: 3,
+    }).addTo(this.map);
+
+    this.translate.get('CONTACT.MAP_POPUP').subscribe((text: string) => {
+      marker.bindPopup(text).openPopup();
+    });
 
     setTimeout(() => this.map?.invalidateSize(), 150);
   }

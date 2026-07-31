@@ -36,12 +36,13 @@ exports.getAllMessages = async (req, res) => {
 
     const filter = status ? { status } : {};
 
-    const [messages, total] = await Promise.all([
+    const [messages, total, newCount] = await Promise.all([
       Message.find(filter)
         .sort({ createdAt: -1 })
         .skip((page - 1) * limit)
         .limit(limit),
       Message.countDocuments(filter),
+      Message.countDocuments({ status: "new" }),
     ]);
 
     return res.status(200).json({
@@ -52,6 +53,7 @@ exports.getAllMessages = async (req, res) => {
         page,
         pages: Math.ceil(total / limit),
       },
+      newCount,
     });
   } catch (err) {
     console.error(err);

@@ -114,8 +114,15 @@
           name="numSalle"
           [(ngModel)]="numSalle"
           [placeholder]="'EDIT_FORMATION_DIALOG.ROOM_PLACEHOLDER' | translate"
-          min="1" />
+          min="1" 
+          max="100"/>
       </div>
+
+      <small
+        class="error-text"
+        *ngIf="numSalle !== null && (numSalle < 1 || numSalle > 100)">
+        {{ 'EDIT_FORMATION_DIALOG.ROOM_ERROR' | translate }}
+      </small>
     </div>
 
     <div class="divider"></div>

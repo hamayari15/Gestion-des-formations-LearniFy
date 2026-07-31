@@ -22,6 +22,7 @@ export interface MessagesResponse {
   success: boolean;
   data: Message[];
   pagination: { total: number; page: number; pages: number };
+  newCount: number;
 }
 
 @Injectable({ providedIn: 'root' })

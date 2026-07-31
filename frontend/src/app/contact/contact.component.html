@@ -1,8 +1,8 @@
 <section class="contact-section">
   <div class="contact-inner">
     <div class="contact-header">
-      <h1 class="section-title">{{ 'CONTACT.TITLE' | translate }}</h1>
-      <p class="section-subtitle">{{ 'CONTACT.SUBTITLE' | translate }}</p>
+      <h1 class="section-title">{{ "CONTACT.TITLE" | translate }}</h1>
+      <p class="section-subtitle">{{ "CONTACT.SUBTITLE" | translate }}</p>
     </div>
 
     <div class="contact-grid">
@@ -12,56 +12,86 @@
 
       <div class="form-card">
         <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-
           <div class="field-group">
-            <label for="name" class="form-label">{{ 'CONTACT.NAME' | translate }}</label>
+            <label for="name" class="form-label">{{
+              "CONTACT.NAME" | translate
+            }}</label>
             <input
               type="text"
               class="form-control"
               id="name"
               formControlName="name"
               [class.is-invalid]="f['name'].touched && f['name'].invalid"
-              [placeholder]="'CONTACT.NAME_PLACEHOLDER' | translate">
-            <div class="invalid-feedback" *ngIf="f['name'].touched && f['name'].invalid">
-              {{ 'CONTACT.NAME_ERROR' | translate }}
+              [placeholder]="'CONTACT.NAME_PLACEHOLDER' | translate"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="f['name'].touched && f['name'].invalid"
+            >
+              {{ "CONTACT.NAME_ERROR" | translate }}
             </div>
           </div>
 
           <div class="field-group">
-            <label for="email" class="form-label">{{ 'CONTACT.EMAIL' | translate }}</label>
+            <label for="email" class="form-label">{{
+              "CONTACT.EMAIL" | translate
+            }}</label>
             <input
               type="email"
               class="form-control"
               id="email"
               formControlName="email"
               [class.is-invalid]="f['email'].touched && f['email'].invalid"
-              [placeholder]="'CONTACT.EMAIL_PLACEHOLDER' | translate">
-            <div class="invalid-feedback" *ngIf="f['email'].touched && f['email'].invalid">
-              {{ 'CONTACT.EMAIL_ERROR' | translate }}
+              [placeholder]="'CONTACT.EMAIL_PLACEHOLDER' | translate"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="f['email'].touched && f['email'].invalid"
+            >
+              {{ "CONTACT.EMAIL_ERROR" | translate }}
             </div>
           </div>
 
           <div class="field-group field-grow">
-            <label for="message" class="form-label">{{ 'CONTACT.MESSAGE' | translate }}</label>
+            <label for="message" class="form-label">{{
+              "CONTACT.MESSAGE" | translate
+            }}</label>
             <textarea
               class="form-control textarea-grow"
               id="message"
               formControlName="message"
               [class.is-invalid]="f['message'].touched && f['message'].invalid"
-              [placeholder]="'CONTACT.MESSAGE_PLACEHOLDER' | translate"></textarea>
-            <div class="invalid-feedback" *ngIf="f['message'].touched && f['message'].invalid">
-              {{ 'CONTACT.MESSAGE_ERROR' | translate }}
+              [placeholder]="'CONTACT.MESSAGE_PLACEHOLDER' | translate"
+            ></textarea>
+            <div
+              class="invalid-feedback"
+              *ngIf="f['message'].touched && f['message'].invalid"
+            >
+              {{ "CONTACT.MESSAGE_ERROR" | translate }}
             </div>
           </div>
 
-          <div class="alert alert-danger py-2" *ngIf="errorKey">{{ errorKey | translate }}</div>
-          <div class="alert alert-success py-2" *ngIf="submitted">{{ 'CONTACT.SUCCESS' | translate }}</div>
+          <div class="alert alert-danger py-2" *ngIf="errorKey">
+            {{ errorKey | translate }}
+          </div>
+          <div class="alert alert-danger py-2" *ngIf="serverErrorMsg">
+            {{ serverErrorMsg }}
+          </div>
+          <div class="alert alert-success py-2" *ngIf="submitted">
+            {{ "CONTACT.SUCCESS" | translate }}
+          </div>
 
-          <button type="submit" class="btn-submit" [disabled]="form.invalid || submitting">
-            <span *ngIf="!submitting">{{ 'CONTACT.SUBMIT' | translate }}</span>
-            <span *ngIf="submitting" class="spinner-border spinner-border-sm"></span>
+          <button
+            type="submit"
+            class="btn-submit"
+            [disabled]="form.invalid || submitting"
+          >
+            <span *ngIf="!submitting">{{ "CONTACT.SUBMIT" | translate }}</span>
+            <span
+              *ngIf="submitting"
+              class="spinner-border spinner-border-sm"
+            ></span>
           </button>
-
         </form>
       </div>
     </div>

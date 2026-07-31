@@ -168,6 +168,7 @@
   "CONTACT": {
     "TITLE": "Contactez-nous",
     "SUBTITLE": "Une question ? Envoyez-nous un message, nous vous répondrons rapidement.",
+    "MAP_POPUP": "CNI, Bab Laassal, Tunis",
     "NAME": "Nom",
     "NAME_PLACEHOLDER": "Saisissez votre nom complet",
     "NAME_ERROR": "Le nom doit contenir au moins 3 caractères",
@@ -607,6 +608,7 @@
     "HYBRID": "Hybride",
     "ROOM_NUMBER": "Numéro de salle",
     "ROOM_PLACEHOLDER": "Ex: 12",
+    "ROOM_ERROR": "Le numéro de salle doit être compris entre 1 et 100.",
     "PERIOD": "Période",
     "START_DATE": "Date de début",
     "END_DATE": "Date de fin",
@@ -639,6 +641,7 @@
     "HYBRID": "Hybride",
     "ROOM_NUMBER": "Numéro de salle",
     "ROOM_PLACEHOLDER": "Ex: 12",
+    "ROOM_ERROR": "Le numéro de salle doit être compris entre 1 et 100.",
     "PERIOD": "Période",
     "START_DATE": "Date de début",
     "END_DATE": "Date de fin",

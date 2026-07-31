@@ -15,6 +15,7 @@ export class AdminMessagesComponent implements OnInit {
   limit = 20;
   totalPages = 1;
   totalCount = 0;
+  newCount = 0;
 
   statusFilter = '';
   searchTerm = '';
@@ -28,38 +29,24 @@ export class AdminMessagesComponent implements OnInit {
     this.load();
   }
 
-  load(): void {
-    this.loading = true;
-    this.errorMsg = '';
+ load(): void {
+  this.loading = true;
+  this.errorMsg = '';
 
-    this.messageService.getAll(this.page, this.limit, this.statusFilter || undefined).subscribe({
-      next: (res) => {
-        this.messages = res.data;
-        this.totalPages = res.pagination.pages;
-        this.totalCount = res.pagination.total;
-        this.loading = false;
-      },
-      error: (err) => {
-        this.errorMsg = err?.error?.message || 'Failed to load messages';
-        this.loading = false;
-      }
-    });
-  }
-
-  get filteredMessages(): Message[] {
-    const term = this.searchTerm.trim().toLowerCase();
-    if (!term) return this.messages;
-    return this.messages.filter(
-      (m) =>
-        m.name.toLowerCase().includes(term) ||
-        m.email.toLowerCase().includes(term) ||
-        m.message.toLowerCase().includes(term)
-    );
-  }
-
-  get newCount(): number {
-    return this.messages.filter((m) => m.status === 'new').length;
-  }
+  this.messageService.getAll(this.page, this.limit, this.statusFilter || undefined).subscribe({
+    next: (res) => {
+      this.messages = res.data;
+      this.totalPages = res.pagination.pages;
+      this.totalCount = res.pagination.total;
+      this.newCount = res.newCount;
+      this.loading = false;
+    },
+    error: (err) => {
+      this.errorMsg = err?.error?.message || 'Failed to load messages';
+      this.loading = false;
+    }
+  });
+}
 
   onFilterChange(): void {
     this.page = 1;
@@ -68,16 +55,30 @@ export class AdminMessagesComponent implements OnInit {
     this.load();
   }
 
-  view(msg: Message): void {
-    this.selected = msg;
-    this.showDetailMobile = true;
+  get filteredMessages(): Message[] {
+  const term = this.searchTerm.trim().toLowerCase();
+  if (!term) return this.messages;
+  return this.messages.filter(
+    (m) =>
+      m.name.toLowerCase().includes(term) ||
+      m.email.toLowerCase().includes(term) ||
+      m.message.toLowerCase().includes(term)
+  );
+}
 
-    if (msg.status === 'new') {
-      this.messageService.updateStatus(msg._id, 'read').subscribe({
-        next: () => (msg.status = 'read'),
-      });
-    }
+view(msg: Message): void {
+  this.selected = msg;
+  this.showDetailMobile = true;
+
+  if (msg.status === 'new') {
+    this.messageService.updateStatus(msg._id, 'read').subscribe({
+      next: () => {
+        msg.status = 'read';
+        this.newCount = Math.max(0, this.newCount - 1);
+      },
+    });
   }
+}
 
   backToList(): void {
     this.showDetailMobile = false;
