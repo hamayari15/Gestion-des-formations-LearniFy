@@ -30,7 +30,6 @@ const { UAParser } = require("ua-parser-js");
 
 
 exports.Login = async (req, res) => {
-    console.log('LOGIN HIT', new Date().toISOString(), req.ip);
 
   try {
     const data = req.body;

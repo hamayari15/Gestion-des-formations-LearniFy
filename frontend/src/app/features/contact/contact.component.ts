@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as L from 'leaflet';
-import { MessageService } from '../core/services/message.service';
+import { MessageService } from '../../core/services/message.service';
 import { TranslateService } from '@ngx-translate/core';
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;

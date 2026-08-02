@@ -1,100 +1,112 @@
-# Plateforme de Gestion des Formations
+# Training Management Platform
 
-Application web de gestion de cycles de formation, d'inscriptions, de participants et de statistiques, avec back-office administrateur complet.
+A fully responsive web application for managing training cycles, registrations, participants, and analytics, with a full admin back-office.
 
-## 📸 Aperçu
+## 📸 Screenshots
 
-<!-- Ajoutez vos captures d'écran ici, par exemple : -->
-<!-- ![Dashboard](docs/images/dashboard.png) -->
-<!-- ![Liste des formations](docs/images/formations.png) -->
 
-## 🛠️ Stack technique
+
+## 🛠️ Tech Stack
 
 **Frontend**
 - Angular 16
-- ng2-charts / Chart.js (visualisation de données)
-- ngx-translate (internationalisation FR/EN)
-- SweetAlert2 (confirmations et alertes)
-- Font Awesome (icônes)
+- Angular Material (UI components)
+- Angular Reactive Forms
+- Chart.js / ng2-charts (data visualization)
+- ngx-translate (English/French internationalization)
+- SweetAlert2 (alerts and confirmations)
+- Font Awesome (icons)
 
 **Backend**
-- Node.js 18
-- Express
-- MongoDB avec Mongoose
-- JWT (authentification)
-- bcrypt (hachage des mots de passe)
-- Multer (upload d'images)
+- Node.js 18 (Express.js)
+- MongoDB with Mongoose
+- JWT (authentication)
+- bcrypt (password hashing)
+- Multer (image uploads)
+- Nodemailer (welcome emails)
+- dotenv (environment variable management)
 
-## ✨ Fonctionnalités
+## ✨ Features
 
-### Espace Administrateur
-- **Tableau de bord** : statistiques globales (formations, inscriptions, participants) avec graphiques (barres, camembert, courbe)
-- **Cycle de formations** : création, édition, archivage/désarchivage, recherche, filtres par mode (En ligne / Présentiel / Hybride) et par statut, pagination
-- **Liste des inscrits** : validation/refus des inscriptions, recherche, tri
-- **Croissance des utilisateurs** : répartition par âge, par genre, statut actif/inactif, courbe de croissance
-- **Messages de contact** : consultation, marquage comme lu/répondu, suppression avec confirmation, réponse par e-mail
+### Public Pages
+- Home page
+- About page
+- contact page
+- Privacy policy page
+- footer page
 
-### Espace Participant
-- Inscription et connexion (JWT)
-- Consultation des formations disponibles
-- Inscription aux formations
+### Authentication
+- User registration
+- User/ Admin login (JWT-based)
 
-### Général
-- Interface multilingue (Français / Anglais)
-- Interface responsive (desktop et mobile)
-- Emails automatiques (email de bienvenue à l'inscription)
+### Admin Panel
+- **Dashboard**: overview statistics with charts (trainings, registrations, participants)
+- **Users Growth**: participant growth over time, age and gender distribution, active/inactive status
+- **Formations Management**: full CRUD (create, archive/unarchive), search, filters, and pagination
+- **Participants Management**: edit and delete participant accounts
+- **Registrations Management**: review and validate/reject participant registrations
+- **Profile Settings**: basic admin profile management, including password change
+- **Contact Messages**: view messages, mark as read/replied, delete, and reply directly by email
 
-## 🚀 Installation et démarrage
+### Participant Space
+- **Profile**: personal information and registration statistics, with options to change password and delete account
+- **Available Formations**: browse and register for open training sessions
+- **My Registrations**: view all personal registration history and statuses
 
-### Prérequis
+
+## 🚀 Getting Started
+
+### Prerequisites
 - Node.js 18+
-- MongoDB (local ou distant, ex. MongoDB Atlas)
+- MongoDB (local instance or a cloud database like MongoDB Atlas)
 - npm
 
-### 1. Cloner le dépôt
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<votre-utilisateur>/<nom-du-repo>.git
-cd <nom-du-repo>
+git clone https://github.com/hamaayari15/gestion-des-formations-LearniFy.git
+cd gestion-des-formations-LearniFy
 ```
 
-### 2. Configurer le backend
+### 2. Backend setup
 
 ```bash
 cd backend
 npm install
 ```
 
-Créez un fichier `.env` à la racine du dossier `backend`, en vous basant sur `.env.example` :
+### 3. Environment variables
+
+Create a `.env` file inside the `backend` folder with the following variables:
 
 ```
-MONGO_URI=mongodb://localhost:27017/nom_de_la_base
-JWT_SECRET=votre_secret_jwt
-MAIL_HOST=smtp.example.com
-MAIL_PORT=587
-MAIL_USER=votre_email
-MAIL_PASS=votre_mot_de_passe
 PORT=3000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USER=your_email
+MAIL_PASS=your_email_app_password
+
+# Development
+CLIENT_URL=http://localhost:4200
+
+# Production
+# CLIENT_URL=https://your-domain.com
 ```
 
-(Optionnel) Peupler la base de données avec des données de test :
+### 4. Start the backend server
 
 ```bash
-node seeders/seed.js
-node seeders/seed-formations.js
+node server.js
 ```
 
-Démarrer le serveur backend :
+The API will be available at `http://localhost:3000`.
 
-```bash
-npm start
-```
+### 5. Frontend setup
 
-Le backend est accessible sur `http://localhost:3000`.
-
-### 3. Configurer le frontend
-
-Dans un nouveau terminal :
+In a new terminal:
 
 ```bash
 cd frontend
@@ -102,35 +114,79 @@ npm install
 ng serve
 ```
 
-L'application est accessible sur `http://localhost:4200`.
+The app will be available at `http://localhost:4200`.
 
-## 📁 Structure du projet
+### 6. Create an admin account
+
+Admin accounts are not created through the public registration form. Instead, run the dedicated script:
+
+```bash
+cd backend
+node createAdmin.js
+```
+
+
+### 📁 Project Structure
 
 ```
-.
+gestion-des-formations-LearniFy/
 ├── backend/
+│   ├── config/              # database connection logic
 │   ├── controllers/
 │   ├── models/
 │   ├── routes/
 │   ├── middlewares/
-│   ├── seeders/
-│   ├── uploads/        (non versionné, contient les images utilisateurs)
-│   └── .env             (non versionné)
+│   ├── utils/              # mailer, helpers
+│   ├── uploads/             # not tracked in git
+│   ├── createAdmin.js
+│   ├── server.js
+│   └── .env                 # not tracked in git
 │
 └── frontend/
     └── src/
         └── app/
+            ├── features/
+            │   ├── home/
+            │   ├── about/
+            │   ├── privacy/
+            │   ├── contact/
+            │   └── pagenotfound/
+            │
+            ├── auth/
+            │   ├── login/
+            │   └── register/
+            │
+            ├── navbar/
+            ├── footer/
+            │
+            ├── admin-interface/
             ├── admin-dashboard/
             ├── cycle-formations/
-            ├── liste-inscrits/
+            ├── add-formation-dialog/
+            ├── edit-formation-dialog/
+            ├── liste-participants/
+            ├── edit-participant-dialog/
             ├── users-growth/
+            ├── liste-inscrits/
             ├── admin-messages/
-            └── core/
-                └── services/
+            ├── admin-profile-settings/
+            │
+            ├── participant-interface/
+            ├── mon-profile-participant/
+            ├── change-password-dialog/
+            ├── formations-disponibles/
+            ├── inscription-dialog/
+            ├── mes-formations/
+            │
+            ├── core/
+            │   ├── guards/
+            │   └── services/
+            │
+            ├── app-routing.module.ts
+            └── app.module.ts
 ```
 
-## 🌍 Traductions
 
-Les fichiers de traduction se trouvent dans `frontend/src/assets/i18n/` :
-- `en.json`
-- `fr.json`
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).

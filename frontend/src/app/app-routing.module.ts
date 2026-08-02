@@ -11,7 +11,7 @@ import { ParticipantChildrensGuard } from './core/guards/participant-childrens.g
 import { HomeComponent } from './features/home/home.component';
 import { AboutComponent } from './features/about/about.component';
 import { PrivacyComponent } from './features/privacy/privacy.component';
-import { ContactComponent } from './contact/contact.component';
+import { ContactComponent } from './features/contact/contact.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { FooterComponent } from './footer/footer.component';
