@@ -1,0 +1,38 @@
+# Dependencies
+backend/node_modules/
+frontend/node_modules/
+
+# Environment variables
+backend/.env
+backend/.env.local
+backend/.env.*.local
+
+# User uploaded files (images, documents, etc.)
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Backend build folders
+backend/dist/
+backend/build/
+
+# Angular cache
+frontend/.angular/
+
+# Angular build output
+frontend/dist/
+
+# TypeScript incremental build info
+frontend/*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+logs/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
