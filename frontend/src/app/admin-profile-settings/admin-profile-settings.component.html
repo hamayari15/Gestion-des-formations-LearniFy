@@ -160,24 +160,21 @@
               "ADMIN-PROFILE.FIELDS.NEW" | translate
             }}</label>
             <div class="input-wrap">
-              <input
-                [type]="showNewPassword ? 'text' : 'password'"
+              <input [type]="showNewPassword ? 'text' : 'password'"
                 id="newPassword"
                 name="newPassword"
                 [(ngModel)]="form.newPassword"
                 autocomplete="new-password"
                 required
               />
-              <button
-                type="button"
+              <button type="button"
                 class="toggle-visibility"
                 (click)="showNewPassword = !showNewPassword"
                 [attr.aria-label]="
                   'ADMIN-PROFILE.A11Y.TOGGLE_VISIBILITY' | translate
                 "
               >
-                <svg
-                  *ngIf="!showNewPassword"
+                <svg *ngIf="!showNewPassword"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -197,8 +194,7 @@
                     stroke-width="1.8"
                   />
                 </svg>
-                <svg
-                  *ngIf="showNewPassword"
+                <svg *ngIf="showNewPassword"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -239,27 +235,23 @@
 
           <div class="field">
             <label for="confirmNewPassword">{{
-              "ADMIN-PROFILE.FIELDS.CONFIRM" | translate
-            }}</label>
+              "ADMIN-PROFILE.FIELDS.CONFIRM" | translate}}</label>
             <div class="input-wrap">
-              <input
-                [type]="showConfirmPassword ? 'text' : 'password'"
+              <input [type]="showConfirmPassword ? 'text' : 'password'"
                 id="confirmNewPassword"
                 name="confirmNewPassword"
                 [(ngModel)]="form.confirmNewPassword"
                 autocomplete="new-password"
                 required
               />
-              <button
-                type="button"
+              <button type="button"
                 class="toggle-visibility"
                 (click)="showConfirmPassword = !showConfirmPassword"
                 [attr.aria-label]="
                   'ADMIN-PROFILE.A11Y.TOGGLE_VISIBILITY' | translate
                 "
               >
-                <svg
-                  *ngIf="!showConfirmPassword"
+                <svg *ngIf="!showConfirmPassword"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -279,8 +271,7 @@
                     stroke-width="1.8"
                   />
                 </svg>
-                <svg
-                  *ngIf="showConfirmPassword"
+                <svg *ngIf="showConfirmPassword"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -319,8 +310,7 @@
           <div class="form-message">
             <p class="banner error" *ngIf="errorMsgKey">
               <span>{{ errorMsgKey | translate }}</span>
-              <button
-                type="button"
+              <button type="button"
                 class="banner-close"
                 (click)="dismissError()"
                 [attr.aria-label]="'ADMIN-PROFILE.A11Y.DISMISS' | translate"
@@ -330,8 +320,7 @@
             </p>
             <p class="banner success" *ngIf="successMsgKey">
               <span>{{ successMsgKey | translate }}</span>
-              <button
-                type="button"
+              <button type="button"
                 class="banner-close"
                 (click)="dismissSuccess()"
                 [attr.aria-label]="'ADMIN-PROFILE.A11Y.DISMISS' | translate"
@@ -343,8 +332,7 @@
 
           <button type="submit" class="btn primary" [disabled]="submitting">
             <span *ngIf="!submitting">{{
-              "ADMIN-PROFILE.ACTIONS.UPDATE" | translate
-            }}</span>
+              "ADMIN-PROFILE.ACTIONS.UPDATE" | translate}}</span>
             <span *ngIf="submitting" class="spinner"></span>
           </button>
         </form>

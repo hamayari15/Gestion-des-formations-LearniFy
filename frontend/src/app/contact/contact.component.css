@@ -136,10 +136,32 @@
   opacity: 1;
 }
 
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.banner-close {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  color: inherit;
+  opacity: 0.6;
+  transition: opacity 0.15s ease;
+}
+
+.banner-close:hover {
+  opacity: 1;
+}
+
 @media (max-width: 900px) {
   .contact-section {
-    height: auto;
-    overflow: visible;
+    padding: 14px 16px 24px;
   }
   .contact-grid {
     grid-template-columns: 1fr;

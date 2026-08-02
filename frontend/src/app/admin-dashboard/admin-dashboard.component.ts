@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef} from '@angular/core';
 import { Subscription, forkJoin } from 'rxjs';
 import { FormationService } from '../core/services/formation.service';
 import { InscriptionService } from '../core/services/incription.service';
@@ -13,6 +13,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./admin-dashboard.component.css'],
 })
 export class AdminDashboardComponent implements OnInit, OnDestroy {
+
+  @ViewChild('lineScrollInner') lineScrollInner?: ElementRef<HTMLElement>;
 
   isLoading: boolean = true;
   hasData: boolean = false;
@@ -52,8 +54,14 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'bottom',
-        labels: { boxWidth: 10, font: { size: 11 } },
+        position: 'top',
+        align: 'center',
+        labels: {
+          boxWidth: 35,
+          boxHeight: 8,
+          padding: 10,
+          font: { size: 11 },
+        },
       },
     },
   };
@@ -265,8 +273,34 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
         },
       ],
     };
+
+    this.adjustLineChartWidth(labels);
   }
 
+  private adjustLineChartWidth(labels: string[]): void {
+    setTimeout(() => {
+      const wrapper = this.lineScrollInner?.nativeElement;
+      if (!wrapper) return;
+
+      const isMobile = window.innerWidth <= 768;
+
+      if (isMobile) {
+        const outerWrap = wrapper.parentElement as HTMLElement;
+        const naturalWidth = outerWrap?.clientWidth || 0;
+        const minPxPerDay = 75;
+        const neededWidth = labels.length * minPxPerDay;
+
+        if (neededWidth > naturalWidth) {
+          wrapper.style.width = `${neededWidth}px`;
+        } else {
+          wrapper.style.removeProperty('width');
+        }
+      } else {
+        wrapper.style.removeProperty('width');
+      }
+    }, 0);
+  }
+  
   private getStatusPercent(data: any[], status: string, total: number): number {
     if (!total) return 0;
     const item = data.find((x) => x._id === status);
@@ -278,4 +312,5 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     const item = data.find((x) => x._id === key);
     return item ? Math.round((item.count / total) * 100) : 0;
   }
+
 }

@@ -51,7 +51,7 @@ export class ContactComponent implements AfterViewInit, OnDestroy {
   }
 
   private initMap(): void {
-    
+
     if (this.map) return;
 
     this.map = L.map(this.mapContainer.nativeElement).setView(this.coords, 16);
@@ -112,5 +112,14 @@ export class ContactComponent implements AfterViewInit, OnDestroy {
         }
       },
     });
+  }
+
+  dismissError(): void {
+    this.errorKey = '';
+    this.serverErrorMsg = '';
+  }
+
+  dismissSuccess(): void {
+    this.submitted = false;
   }
 }

@@ -164,18 +164,18 @@
 
 .stats-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 320px auto 280px;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: 320px 300px 280px;
   gap: 14px;
   flex: 1;
   min-height: 0;
 }
 
-.chart-growth   { grid-column: 1 / span 3; grid-row: 1; }
-.chart-age      { grid-column: 1; grid-row: 2; }
-.chart-gender   { grid-column: 2; grid-row: 2; }
-.chart-doughnut { grid-column: 3; grid-row: 2; }
-.chart-line     { grid-column: 1 / span 3; grid-row: 3; }
+.chart-growth   { grid-column: 1 / span 10; grid-row: 1; min-width: 0; }
+.chart-age      { grid-column: 1 / span 5;  grid-row: 2; }
+.chart-gender   { grid-column: 6 / span 5;  grid-row: 2; }
+.chart-line     { grid-column: 1 / span 7;  grid-row: 3; min-width: 0; }
+.chart-doughnut { grid-column: 8 / span 3;  grid-row: 3; }
 
 .chart-container {
   background: #fff;
@@ -216,10 +216,26 @@
   min-height: 0;
 }
 
+.chart-growth .chart-canvas-wrap,
+.chart-line .chart-canvas-wrap {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  min-width: 0;
+}
+
+.chart-scroll-inner {
+  position: relative;
+  height: 100%;
+}
+
 .pie-wrap {
-  max-width: 220px;
   margin: 0 auto;
   width: 100%;
+}
+
+.chart-doughnut .pie-wrap {
+  max-width: 190px;
 }
 
 @media (max-width: 768px) {
@@ -230,6 +246,7 @@
   .dashboard-header {
     flex-direction: column;
     align-items: flex-start;
+    margin-bottom: 16px;
     gap: 6px;
   }
 
@@ -243,41 +260,35 @@
   }
 
   .stats-grid {
-    grid-template-columns: repeat(3, minmax(280px, 1fr));
-    grid-template-rows: 280px auto minmax(280px, auto);
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
     gap: 12px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 4px;
   }
 
-  .chart-growth {
-    grid-column: 1 / span 3;
-    grid-row: 1;
-  }
-
-  .chart-age {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  .chart-gender {
-    grid-column: 2;
-    grid-row: 2;
-  }
-
+  .chart-growth,
+  .chart-age,
+  .chart-gender,
+  .chart-line,
   .chart-doughnut {
-    grid-column: 3;
-    grid-row: 2;
+    grid-column: 1;
+    grid-row: auto;
   }
 
-  .chart-line {
-    grid-column: 1 / span 3;
-    grid-row: 3;
-  }
+  .chart-growth { order: 1; }
+  .chart-age { order: 2; }
+  .chart-gender { order: 3; }
+  .chart-line { order: 4; }
+  .chart-doughnut { order: 5; }
 
+  .chart-growth .chart-canvas-wrap,
   .chart-line .chart-canvas-wrap {
-    min-height: 220px;
+    min-height: 240px;
+  }
+
+  .chart-age .chart-canvas-wrap,
+  .chart-gender .chart-canvas-wrap,
+  .chart-doughnut .chart-canvas-wrap {
+    min-height: 260px;
   }
 
   .chart-container {
@@ -290,7 +301,11 @@
   }
 
   .pie-wrap {
-    max-width: 260px;
+    max-width: 250px;
     margin: 0 auto;
+  }
+
+  .chart-doughnut .pie-wrap {
+    max-width: 280px;
   }
 }

@@ -214,12 +214,14 @@
         </div>
 
         <div class="chart-canvas-wrap" *ngIf="hasLineData; else noLineData">
-          <canvas
-            baseChart
-            [data]="lineChartData"
-            [type]="lineChartType"
-            [options]="chartOptions">
-          </canvas>
+          <div class="chart-scroll-inner" #lineScrollInner>
+            <canvas
+              baseChart
+              [data]="lineChartData"
+              [type]="lineChartType"
+              [options]="chartOptions">
+            </canvas>
+          </div>
         </div>
 
         <ng-template #noLineData>

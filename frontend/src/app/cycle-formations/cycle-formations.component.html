@@ -54,13 +54,13 @@
         class="search-input"
         [placeholder]="'CYCLE_FORMATIONS.SEARCH' | translate"
         [(ngModel)]="searchTerm"
-        [disabled]="!!errorKey"
+        [disabled]="!!errorKey || !hasAnyFormations"
         (input)="applyFilters()">
     </div>
     <select
       class="mode-select"
       [(ngModel)]="selectedMode"
-      [disabled]="!!errorKey"
+      [disabled]="!!errorKey || !hasAnyFormations"
       (change)="applyFilters()">
       <option value="">{{ 'CYCLE_FORMATIONS.ALL_MODES' | translate }}</option>
       <option value="Présentiel">{{ 'CYCLE_FORMATIONS.PRESENTIEL' | translate }}</option>

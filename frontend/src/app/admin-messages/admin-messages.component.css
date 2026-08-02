@@ -12,10 +12,10 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
-.page-title { font-size: 24px; font-weight: 700; margin: 0; }
+.page-title { font-size: 20px; font-weight: 700; margin: 0; }
 
 .page-subtitle {
   font-size: 14px;
@@ -75,10 +75,24 @@
 
 .messages-layout {
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: 460px 1fr;
   gap: 20px;
-  align-items: start; /* was implicit "stretch" — this is the key change */
+  align-items: start;
 }
+
+.messages-layout.empty-state {
+  align-items: stretch;
+}
+
+.messages-layout.empty-state .list-panel {
+  max-height: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.messages-layout.empty-state .list-panel .state-box {
+  flex: 1;
+} 
 
 .list-panel {
   overflow-y: auto;
@@ -110,7 +124,7 @@
 
 .message-row:hover { background: #f9fafb; }
 .message-row.active { background: #eaf2fb; }
-.message-row.unread .sender-name { font-weight: 700; }
+.message-row.active:hover { background: #e3edf9; }
 
 .avatar {
   width: 38px;
@@ -131,7 +145,37 @@
 .row-top {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   font-size: 14px;
+  gap: 10px;
+}
+
+.row-top-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.row-top-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.row-top-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.row-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .row-date { color: #98a2b3; font-size: 12px; }
@@ -143,7 +187,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-bottom: 6px;
+  margin: 14px 12px;
 }
 
 .status-pill {
@@ -159,24 +203,29 @@
 .status-read { background: #f2f4f7; color: #475467; }
 .status-replied { background: #ecfdf3; color: #1FA971; }
 
-.row-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
 .icon-btn {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
   border: none;
   border-radius: 8px;
   background: #f9fafb;
   cursor: pointer;
   transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn.danger {
+  color: #b42318;
+}
+
+.icon-btn.danger:hover {
+  background: #fef3f2;
 }
 
 .icon-btn.success:hover { background: #ecfdf3; color: #1FA971; }
-.icon-btn.danger:hover { background: #fef3f2; color: #b42318; }
 .icon-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .pagination-bar {
@@ -200,7 +249,7 @@
 .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .page-info { font-size: 13px; color: #667085; }
 
-.detail-panel { padding: 24px; }
+.detail-panel { padding: 22px; }
 
 .back-btn {
   display: none;
@@ -214,16 +263,43 @@
 
 .detail-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 14px;
   margin-bottom: 6px;
+}
+
+.detail-identity-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.detail-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.detail-top-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.detail-top-row h3 {
+  margin: 0;
+  font-size: 18px;
 }
 
 .detail-avatar {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: #185FA5;
+  background: orange;
   color: #fff;
   display: flex;
   align-items: center;
@@ -244,11 +320,11 @@
 .detail-body-box {
   background: #f9fafb;
   border-radius: 12px;
-  padding: 18px;
-  margin-bottom: 20px;
+  padding: 14px;
+  margin-bottom: 12px;
 }
 
-.detail-body { font-size: 14.5px; line-height: 1.7; color: #344054; margin: 0; }
+.detail-body { font-size: 14.5px; line-height: 1.6; color: #344054; margin: 0; }
 
 .detail-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
@@ -276,7 +352,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 60px 20px;
+  padding: 70px 20px;
   color: #98a2b3;
   font-size: 14px;
 }
@@ -284,10 +360,10 @@
 .empty-icon { font-size: 32px; }
 
 .spinner {
-  width: 22px;
-  height: 22px;
-  border: 3px solid #eaecf0;
-  border-top-color: #185FA5;
+  width: 24px;
+  height: 24px;
+  border: 3px solid #e5e7eb;
+  border-top: 2px solid #378add;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
 }

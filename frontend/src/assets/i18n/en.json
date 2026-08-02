@@ -489,7 +489,7 @@
     "PARTICIPANTS_LIST": "Participants List",
     "USERS_GROWTH": "Users Growth",
     "INSCRIPTIONS_LIST": "Registrations List",
-    "MESSAGES": "Messages",
+    "MESSAGES": "Contact Messages",
     "SETTINGS": "Settings",
     "LOGOUT": "Logout"
   },
@@ -787,6 +787,34 @@
     "ERROR_FALLBACK": "An error occurred while loading the registrations.",
     "STATUS_ERROR_TITLE": "Error",
     "STATUS_ERROR_TEXT": "Status update failed"
+  },
+
+  "ADMIN_MESSAGES": {
+    "TITLE": "Messages",
+    "TOTAL": "total",
+    "NEW": "new",
+    "SEARCH_PLACEHOLDER": "Search messages...",
+    "ALL_STATUSES": "All statuses",
+    "STATUS_NEW": "New",
+    "STATUS_READ": "Read",
+    "STATUS_REPLIED": "Replied",
+    "LOADING": "Loading messages...",
+    "NO_MESSAGES": "No messages found",
+    "MARK_REPLIED": "Mark as replied",
+    "DELETE": "Delete",
+    "PAGE_INFO": "Page {{page}} of {{total}}",
+    "BACK_TO_LIST": "Back to list",
+    "REPLY_BY_EMAIL": "Reply by email",
+    "SELECT_MESSAGE": "Select a message to view details",
+    "DELETE_CONFIRM_TITLE": "Delete this message?",
+    "DELETE_CONFIRM_TEXT": "This will permanently delete the message from {{name}}. This action cannot be undone.",
+    "DELETE_CONFIRM_BTN": "Yes, delete",
+    "DELETE_CANCEL_BTN": "Cancel",
+    "DELETE_SUCCESS_TITLE": "Deleted",
+    "DELETE_SUCCESS_TEXT": "The message has been deleted successfully.",
+    "ERROR_LOAD": "Failed to load messages",
+    "ERROR_UPDATE_STATUS": "Failed to update status",
+    "ERROR_DELETE": "Failed to delete message"
   },
 
   "ADMIN-PROFILE": {

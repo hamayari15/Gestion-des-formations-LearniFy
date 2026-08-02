@@ -20,7 +20,20 @@ export class UsersGrowthComponent implements OnInit, OnDestroy {
   chartType: any = 'pie';
 
   chartOptions = {
-    responsive: true
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top' as const,
+        align: 'center' as const,
+        labels: {
+          boxWidth: 40,
+          boxHeight: 10,
+          padding: 10,
+          font: { size: 11 },
+        },
+      },
+    },
   };
 
   ageChartData: any;
@@ -68,7 +81,7 @@ export class UsersGrowthComponent implements OnInit, OnDestroy {
 
     forkJoin({
       growth: this.participantService.getParticipantsGrowth(),
-      participants: this.participantService.getParticipants(),
+      participants: this.participantService.getParticipants(1, 1000),
       activeInactive: this.participantService.getActiveInactiveStats(),
     }).subscribe({
       next: (res: any) => {
@@ -208,18 +221,35 @@ export class UsersGrowthComponent implements OnInit, OnDestroy {
     };
   }
 
-  createChart(labels: string[], data: number[]) {
+createChart(labels: string[], data: number[]) {
     setTimeout(() => {
       const canvas = document.getElementById('growthChart') as HTMLCanvasElement;
+      const scrollInner = document.getElementById('growthScrollInner') as HTMLElement;
 
-      if (!canvas) {
+      if (!canvas || !scrollInner) {
         console.error('Canvas not found');
         return;
       }
-
       const existingChart = Chart.getChart(canvas);
       if (existingChart) {
         existingChart.destroy();
+      }
+
+      const isMobile = window.innerWidth <= 768;
+
+      if (isMobile) {
+        const outerWrap = scrollInner.parentElement as HTMLElement;
+        const naturalWidth = outerWrap?.clientWidth || 0;
+        const minPxPerDay = 75;
+        const neededWidth = labels.length * minPxPerDay;
+
+        if (neededWidth > naturalWidth) {
+          scrollInner.style.width = `${neededWidth}px`;
+        } else {
+          scrollInner.style.removeProperty('width');
+        }
+      } else {
+        scrollInner.style.removeProperty('width');
       }
 
       new Chart(canvas, {
@@ -246,14 +276,32 @@ export class UsersGrowthComponent implements OnInit, OnDestroy {
   createLineChart(labels: string[], data: number[]) {
     setTimeout(() => {
       const canvas = document.getElementById('growthLineChart') as HTMLCanvasElement;
+      const scrollInner = document.getElementById('lineScrollInner') as HTMLElement;
 
-      if (!canvas) {
+      if (!canvas || !scrollInner) {
         return;
       }
 
       const existingChart = Chart.getChart(canvas);
       if (existingChart) {
         existingChart.destroy();
+      }
+
+      const isMobile = window.innerWidth <= 768;
+
+      if (isMobile) {
+        const outerWrap = scrollInner.parentElement as HTMLElement;
+        const naturalWidth = outerWrap?.clientWidth || 0;
+        const minPxPerDay = 75;
+        const neededWidth = labels.length * minPxPerDay;
+
+        if (neededWidth > naturalWidth) {
+          scrollInner.style.width = `${neededWidth}px`;
+        } else {
+          scrollInner.style.removeProperty('width');
+        }
+      } else {
+        scrollInner.style.removeProperty('width');
       }
 
       new Chart(canvas, {
@@ -276,4 +324,5 @@ export class UsersGrowthComponent implements OnInit, OnDestroy {
       });
     }, 0);
   }
+
 }

@@ -16,16 +16,12 @@
             <label for="name" class="form-label">{{
               "CONTACT.NAME" | translate
             }}</label>
-            <input
-              type="text"
-              class="form-control"
-              id="name"
+            <input type="text" class="form-control" id="name"
               formControlName="name"
               [class.is-invalid]="f['name'].touched && f['name'].invalid"
               [placeholder]="'CONTACT.NAME_PLACEHOLDER' | translate"
             />
-            <div
-              class="invalid-feedback"
+            <div class="invalid-feedback"
               *ngIf="f['name'].touched && f['name'].invalid"
             >
               {{ "CONTACT.NAME_ERROR" | translate }}
@@ -36,16 +32,14 @@
             <label for="email" class="form-label">{{
               "CONTACT.EMAIL" | translate
             }}</label>
-            <input
-              type="email"
+            <input type="email"
               class="form-control"
               id="email"
               formControlName="email"
               [class.is-invalid]="f['email'].touched && f['email'].invalid"
               [placeholder]="'CONTACT.EMAIL_PLACEHOLDER' | translate"
             />
-            <div
-              class="invalid-feedback"
+            <div class="invalid-feedback"
               *ngIf="f['email'].touched && f['email'].invalid"
             >
               {{ "CONTACT.EMAIL_ERROR" | translate }}
@@ -56,8 +50,7 @@
             <label for="message" class="form-label">{{
               "CONTACT.MESSAGE" | translate
             }}</label>
-            <textarea
-              class="form-control textarea-grow"
+            <textarea class="form-control textarea-grow"
               id="message"
               formControlName="message"
               [class.is-invalid]="f['message'].touched && f['message'].invalid"
@@ -73,12 +66,36 @@
 
           <div class="alert alert-danger py-2" *ngIf="errorKey">
             {{ errorKey | translate }}
+            <button type="button"
+              class="banner-close"
+              (click)="dismissError()"
+              [attr.aria-label]="'ADMIN-PROFILE.A11Y.DISMISS' | translate"
+            >
+              &times;
+            </button>
           </div>
+
           <div class="alert alert-danger py-2" *ngIf="serverErrorMsg">
             {{ serverErrorMsg }}
+            <button type="button"
+              class="banner-close"
+              (click)="dismissError()"
+              [attr.aria-label]="'ADMIN-PROFILE.A11Y.DISMISS' | translate"
+            >
+              &times;
+            </button>
           </div>
+
           <div class="alert alert-success py-2" *ngIf="submitted">
             {{ "CONTACT.SUCCESS" | translate }}
+            <button
+              type="button"
+              class="banner-close"
+              (click)="dismissSuccess()"
+              [attr.aria-label]="'ADMIN-PROFILE.A11Y.DISMISS' | translate"
+            >
+              &times;
+            </button>
           </div>
 
           <button

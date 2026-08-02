@@ -489,7 +489,7 @@
     "PARTICIPANTS_LIST": "Liste des Participants",
     "USERS_GROWTH": "Croissance des utilisateurs",
     "INSCRIPTIONS_LIST": "Liste des Inscrits",
-    "MESSAGES": "Messages",
+    "MESSAGES": "Messages de Contact",
     "SETTINGS": "Paramètres",
     "LOGOUT": "Déconnexion"
   },
@@ -787,6 +787,34 @@
     "ERROR_FALLBACK": "Une erreur s'est produite lors du chargement des inscriptions.",
     "STATUS_ERROR_TITLE": "Erreur",
     "STATUS_ERROR_TEXT": "Échec de la mise à jour du statut"
+  },
+
+  "ADMIN_MESSAGES": {
+    "TITLE": "Messages",
+    "TOTAL": "au total",
+    "NEW": "nouveau(x)",
+    "SEARCH_PLACEHOLDER": "Rechercher des messages...",
+    "ALL_STATUSES": "Tous les statuts",
+    "STATUS_NEW": "Nouveau",
+    "STATUS_READ": "Lu",
+    "STATUS_REPLIED": "Répondu",
+    "LOADING": "Chargement des messages...",
+    "NO_MESSAGES": "Aucun message trouvé",
+    "MARK_REPLIED": "Marquer comme répondu",
+    "DELETE": "Supprimer",
+    "PAGE_INFO": "Page {{page}} sur {{total}}",
+    "BACK_TO_LIST": "Retour à la liste",
+    "REPLY_BY_EMAIL": "Répondre par e-mail",
+    "SELECT_MESSAGE": "Sélectionnez un message pour voir les détails",
+    "DELETE_CONFIRM_TITLE": "Supprimer ce message ?",
+    "DELETE_CONFIRM_TEXT": "Le message de {{name}} sera définitivement supprimé. Cette action est irréversible.",
+    "DELETE_CONFIRM_BTN": "Oui, supprimer",
+    "DELETE_CANCEL_BTN": "Annuler",
+    "DELETE_SUCCESS_TITLE": "Supprimé",
+    "DELETE_SUCCESS_TEXT": "Le message a été supprimé avec succès.",
+    "ERROR_LOAD": "Échec du chargement des messages",
+    "ERROR_UPDATE_STATUS": "Échec de la mise à jour du statut",
+    "ERROR_DELETE": "Échec de la suppression du message"
   },
 
   "ADMIN-PROFILE": {

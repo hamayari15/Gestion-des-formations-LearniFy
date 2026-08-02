@@ -38,13 +38,15 @@
         <span>{{ 'USERS_GROWTH.GROWTH_CHART' | translate }}</span>
       </div>
       <div class="chart-canvas-wrap">
-        <canvas id="growthChart"></canvas>
+        <div class="chart-scroll-inner" id="growthScrollInner">
+          <canvas id="growthChart"></canvas>
+        </div>
       </div>
     </div>
 
     <div class="chart-container chart-age">
       <div class="chart-header">
-        <i class="fas fa-users-viewfinder"></i>
+        <i class="fas fa-birthday-cake"></i>
         <span>{{ 'USERS_GROWTH.AGE_CHART' | translate }}</span>
       </div>
       <div class="chart-canvas-wrap pie-wrap">
@@ -72,6 +74,18 @@
       </div>
     </div>
 
+    <div class="chart-container chart-line">
+      <div class="chart-header">
+        <i class="fas fa-chart-line"></i>
+        <span>{{ 'USERS_GROWTH.LINE_CHART' | translate }}</span>
+      </div>
+      <div class="chart-canvas-wrap">
+        <div class="chart-scroll-inner" id="lineScrollInner">
+          <canvas id="growthLineChart"></canvas>
+        </div>
+      </div>
+    </div>
+
     <div class="chart-container chart-doughnut">
       <div class="chart-header">
         <i class="fas fa-circle-notch"></i>
@@ -81,18 +95,9 @@
         <canvas
           baseChart
           [data]="doughnutChartData"
+          [options]="chartOptions"
           [type]="doughnutChartType">
         </canvas>
-      </div>
-    </div>
-
-    <div class="chart-container chart-line">
-      <div class="chart-header">
-        <i class="fas fa-chart-line"></i>
-        <span>{{ 'USERS_GROWTH.LINE_CHART' | translate }}</span>
-      </div>
-      <div class="chart-canvas-wrap">
-        <canvas id="growthLineChart"></canvas>
       </div>
     </div>
 
