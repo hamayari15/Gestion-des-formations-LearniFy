@@ -2,18 +2,20 @@
 
 A fully responsive web application for managing training cycles, registrations, participants, and analytics, with a full admin back-office.
 
-## 📸 Screenshots
+## 🖼️ Preview
+
+A quick look at the app.
 
 ![Main Dashboard](docs/images/mainDashboard.png)
-![Main Dashboard 2](docs/images/mainDashboard2.png)
 ![Liste Formations](docs/images/cycleFormations.png)
-![Liste Inscrits](docs/images/listInscrits.png)
+![Main Dashboard 2](docs/images/mainDashboard2.png)
 ![Users Growth](docs/images/usersGrowth.png)
-![Users Growth 2](docs/images/usersGrowth2.png)
-![Users Growth 2](docs/images/usersGrowth2.png)
 ![User Profile](docs/images/userProfile.png)
 
-
+![Home Page](docs/images/homePage.png)
+![Login](docs/images/Login.png)
+![Side Bar](docs/images/sideBar.png)
+![User Profile 2](docs/images/userProfile2.png)
 
 ## 🛠️ Tech Stack
 
