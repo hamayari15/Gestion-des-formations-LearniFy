@@ -12,10 +12,18 @@ A quick look at the app.
 ![Users Growth](docs/images/usersGrowth.png)
 ![User Profile](docs/images/userProfile.png)
 
-![Home Page](docs/images/homePage.png)
-![Login](docs/images/Login.png)
-![Side Bar](docs/images/sideBar.png)
-![User Profile 2](docs/images/userProfile2.png)
+<table>
+  <tr>
+    <td><img src="docs/images/homePage.png" width="220"></td>
+    <td><img src="docs/images/Login.png" width="220"></td>
+    <td><img src="docs/images/mainDashboard3.png" width="220"></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/sideBar.png" width="220"></td>
+    <td><img src="docs/images/userProfile2.png" width="220"></td>
+    <td><img src="docs/images/cycleFormations2.png" width="220"></td>
+  </tr>
+</table>
 
 ## 🛠️ Tech Stack
 
