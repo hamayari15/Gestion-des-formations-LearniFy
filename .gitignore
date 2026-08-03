@@ -22,7 +22,7 @@ frontend/.angular/
 frontend/dist/
 
 # TypeScript incremental build info
-frontend/*.tsbuildinfo
+frontend/**/*.tsbuildinfo
 
 # Logs
 *.log

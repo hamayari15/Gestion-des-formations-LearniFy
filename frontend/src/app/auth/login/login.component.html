@@ -10,8 +10,7 @@
       <input
         matInput
         type="email"
-        formControlName="email"
-      />
+        formControlName="email"/>
 
       <mat-error *ngIf="email?.hasError('required')">
         {{ 'LOGIN.ERRORS.EMAIL_REQUIRED' | translate }}
@@ -29,8 +28,7 @@
       <input
         matInput
         [type]="isPasswordVisible ? 'text' : 'password'"
-        formControlName="password"
-      />
+        formControlName="password"/>
 
       <button
         mat-icon-button
@@ -73,7 +71,7 @@
       routerLink="/register">
       {{ 'LOGIN.CREATE_ACCOUNT' | translate }}
     </button>
-
+    
   </form>
 
 </mat-card>

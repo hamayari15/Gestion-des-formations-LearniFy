@@ -100,7 +100,6 @@
       </div>
     </div>
 
-    <!-- Detail panel -->
     <div class="detail-panel">
       <ng-container *ngIf="selected; else noSelection">
 
@@ -117,7 +116,6 @@
 
               <div class="detail-top-right">
                 <span class="status-pill" [ngClass]="'status-' + selected.status">{{ getStatusLabel(selected.status) | translate }}</span>
-
                 <button
                   class="icon-btn danger"
                   [title]="'ADMIN_MESSAGES.DELETE' | translate"

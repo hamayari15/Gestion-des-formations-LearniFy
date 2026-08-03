@@ -19,7 +19,6 @@
     </div>
 
     <nav class="sidebar-nav">
-
       <a routerLink="admin-dashboard" routerLinkActive="active-link" class="link" (click)="closeSidebar()">
         <i class="fas fa-chart-pie"></i>
         <span>{{ 'ADMIN_SIDEBAR.DASHBOARD' | translate }}</span>
@@ -54,13 +53,11 @@
         <i class="fas fa-cog"></i>
         <span>{{ 'ADMIN_SIDEBAR.SETTINGS' | translate }}</span>
       </a>
-
     </nav>
 
     <div class="sidebar-bottom">
 
       <div class="language-switcher">
-
         <button class="language-btn" (click)="showLanguages = !showLanguages">
           <img
             [src]="currentLanguage === 'fr'
@@ -87,7 +84,6 @@
           </button>
 
         </div>
-
       </div>
 
       <button class="logout" (click)="logout()">
@@ -96,7 +92,6 @@
       </button>
 
     </div>
-
   </div>
 
   <div class="content">

@@ -4,7 +4,7 @@ A fully responsive web application for managing training cycles, registrations, 
 
 ## 📸 Screenshots
 
-
+![Main Dashboard](docs/images/mainDashboard.png)
 
 ## 🛠️ Tech Stack
 
